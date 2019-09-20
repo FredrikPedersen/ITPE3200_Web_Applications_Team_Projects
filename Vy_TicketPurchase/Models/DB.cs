@@ -9,7 +9,7 @@ namespace Vy_TicketPurchase.Models
 {
     public class DB : DbContext
     {
-        public DB() : base("name=Bestilling")
+        public DB() : base("name = Ticket")
         {
             Database.CreateIfNotExists();
             //Database.SetInitializer(new DBInit());
