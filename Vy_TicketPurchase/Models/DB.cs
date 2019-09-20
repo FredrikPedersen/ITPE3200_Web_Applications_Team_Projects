@@ -12,11 +12,12 @@ namespace Vy_TicketPurchase.Models
         public DB() : base("name = Ticket")
         {
             Database.CreateIfNotExists();
-            //Database.SetInitializer(new DBInit());
-            //for å sette inn forhåndslaget data?, krever en DBInit klasse
+            Database.SetInitializer(new DBInit());
         }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Route> Routes { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
