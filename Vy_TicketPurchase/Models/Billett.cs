@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Vy_TicketPurchase.Models
 {
-    public class Billett
+    public class Ticket
     {
-        public String strekning { get; set; }
-        public String tidspunkt { get; set; }
+        public String distance { get; set; }
+        public String time { get; set; }
 
     }
 }
