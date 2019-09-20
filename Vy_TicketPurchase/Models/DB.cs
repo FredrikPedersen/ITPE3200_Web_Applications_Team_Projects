@@ -15,7 +15,8 @@ namespace Vy_TicketPurchase.Models
             //Database.SetInitializer(new DBInit());
             //for å sette inn forhåndslaget data?, krever en DBInit klasse
         }
-        public DbSet<Ticket> Billetter { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

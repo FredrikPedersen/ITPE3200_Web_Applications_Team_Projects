@@ -5,13 +5,10 @@ using System.Web;
 
 namespace Vy_TicketPurchase.Models
 {
-    public class Ticket
+    public class Customer
     {
         public int id { get; set; }
-        public Route route { get; set; }
-
-        public Customer customer { get; set; }
-        public String time { get; set; }
-
+        public String name { get; set; }
+        public String phonenumber { get; set; }
     }
 }
