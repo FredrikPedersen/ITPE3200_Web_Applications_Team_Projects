@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\DBInit.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\DB.cs" />
