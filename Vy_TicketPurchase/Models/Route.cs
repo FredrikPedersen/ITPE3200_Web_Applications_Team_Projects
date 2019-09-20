@@ -11,6 +11,6 @@ namespace Vy_TicketPurchase.Models
         public String startlocation { get; set; }
         public String stoplocation { get; set; }
         public double price { get; set; }
-        public String travelTime { get; set; }
+        public int travelTimeMinutes { get; set; }
     }
 }
