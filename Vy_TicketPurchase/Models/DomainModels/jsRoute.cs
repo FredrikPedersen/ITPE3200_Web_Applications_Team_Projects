@@ -1,8 +1,8 @@
 ﻿namespace Vy_TicketPurchase.Models.DomainModels
 {
-    public class jsRoute
+    public class JsRoute
     {
-        public int id { get; set; }
-        public string routeName { get; set; }
+        public int Id { get; set; }
+        public string RouteName { get; set; }
     }
 }

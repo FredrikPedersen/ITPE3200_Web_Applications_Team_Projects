@@ -1,34 +1,33 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 
-namespace Vy_TicketPurchase.Models
+namespace Vy_TicketPurchase.Models.DBModels
 {
-    public class DBInit : DropCreateDatabaseAlways<DB>
+    public class DBInit : DropCreateDatabaseAlways<DatabaseContext>
     {
-        protected override void Seed(DB context)
+        protected override void Seed(DatabaseContext context)
         {
             var route1 = new Route()
             {
-                startlocation = "Oslo S",
-                stoplocation = "Lillestrøm",
-                price = 30,
-                travelTimeMinutes = 15,
+                Startlocation = "Oslo S",
+                Stoplocation = "Lillestrøm",
+                Price = 30,
+                TravelTimeMinutes = 15,
             };
 
             var route2 = new Route()
             {
-                startlocation = "Trondheim",
-                stoplocation = "Oslo S",
-                price = 1500,
-                travelTimeMinutes = 320,
+                Startlocation = "Trondheim",
+                Stoplocation = "Oslo S",
+                Price = 1500,
+                TravelTimeMinutes = 320,
             };
             
             var route3 = new Route()
             {
-                startlocation = "Bergen",
-                stoplocation = "Oslo S",
-                price = 900,
-                travelTimeMinutes = 180,
+                Startlocation = "Bergen",
+                Stoplocation = "Oslo S",
+                Price = 900,
+                TravelTimeMinutes = 180,
             };
             
             context.Routes.Add(route1);

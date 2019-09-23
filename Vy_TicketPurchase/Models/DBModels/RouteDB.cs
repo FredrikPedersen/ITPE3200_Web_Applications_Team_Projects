@@ -2,22 +2,22 @@
 using System.Linq;
 using Vy_TicketPurchase.Models.DomainModels;
 
-namespace Vy_TicketPurchase.Models
+namespace Vy_TicketPurchase.Models.DBModels
 {
     public class RouteDB
     {
         
-        DB db = new DB();
+        private DatabaseContext databaseContext = new DatabaseContext();
 
         public List<DomainRoute> GetAllRoutes()
         {
-            List<DomainRoute> allRoutes = db.Routes.Select(r => new DomainRoute()
+            List<DomainRoute> allRoutes = databaseContext.Routes.Select(r => new DomainRoute()
             {
-                id = r.id,
-                startlocation = r.startlocation,
-                stoplocation = r.stoplocation,
-                price = r.price,
-                travelTimeMinutes = r.travelTimeMinutes
+                Id = r.Id,
+                Startlocation = r.Startlocation,
+                Stoplocation = r.Stoplocation,
+                Price = r.Price,
+                TravelTimeMinutes = r.TravelTimeMinutes
             }).ToList();
             return allRoutes;
         }

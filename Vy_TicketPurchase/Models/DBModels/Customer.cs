@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace Vy_TicketPurchase.Models
+namespace Vy_TicketPurchase.Models.DBModels
 {
     public class Customer
     {
-        public int id { get; set; }
-        public String name { get; set; }
-        public String phonenumber { get; set; }
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Phonenumber { get; set; }
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace Vy_TicketPurchase.Models
+namespace Vy_TicketPurchase.Models.DBModels
 {
     public class Ticket
     {
-        public int id { get; set; }
-        public Route route { get; set; }
+        public int Id { get; set; }
+        public Route Route { get; set; }
 
-        public Customer customer { get; set; }
-        public String time { get; set; }
+        public Customer Customer { get; set; }
+        public String Time { get; set; }
 
     }
 }

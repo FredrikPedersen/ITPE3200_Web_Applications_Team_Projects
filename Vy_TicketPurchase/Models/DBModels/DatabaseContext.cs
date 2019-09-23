@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Web;
 
-namespace Vy_TicketPurchase.Models
+namespace Vy_TicketPurchase.Models.DBModels
 {
-    public class DB : DbContext
+    public class DatabaseContext : DbContext
     {
-        public DB() : base("name = Ticket")
+        public DatabaseContext() : base("name = Ticket")
         {
             Database.CreateIfNotExists();
             Database.SetInitializer(new DBInit());

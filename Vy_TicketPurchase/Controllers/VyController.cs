@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Vy_TicketPurchase.Models;
+using Vy_TicketPurchase.Models.DBModels;
 using Vy_TicketPurchase.Models.DomainModels;
 
 namespace Vy_TicketPurchase.Controllers
@@ -23,12 +24,12 @@ namespace Vy_TicketPurchase.Controllers
             var db = new RouteDB();
             List<DomainRoute> allRoutes = db.GetAllRoutes();
             
-            var dropdownDisplayRoute = new List<jsRoute>();
+            var dropdownDisplayRoute = new List<JsRoute>();
             foreach (DomainRoute dr in allRoutes)
             {
-                var oneRoute = new jsRoute();
-                oneRoute.id = dr.id;
-                oneRoute.routeName = dr.startlocation + " - " + dr.stoplocation;
+                var oneRoute = new JsRoute();
+                oneRoute.Id = dr.Id;
+                oneRoute.RouteName = dr.Startlocation + " - " + dr.Stoplocation;
                 dropdownDisplayRoute.Add(oneRoute);
             }
 

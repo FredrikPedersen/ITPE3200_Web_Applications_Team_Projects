@@ -13,7 +13,7 @@
 function ShowDropdown(jsRoutes) {
     var outString = "";
     for (var i in jsRoutes) {
-        outString += "<option value='" + jsRoutes[i].id + "'>" + jsRoutes[i].routeName+"</option>";
+        outString += "<option value='" + jsRoutes[i].Id + "'>" + jsRoutes[i].RouteName+"</option>";
     }
     $("#routes").append(outString);
 }

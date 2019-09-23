@@ -130,13 +130,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBModels\Customer.cs" />
-    <Compile Include="Models\DBModels\DB.cs" />
+    <Compile Include="Models\DBModels\DatabaseContext.cs" />
     <Compile Include="Models\DBModels\DBInit.cs" />
     <Compile Include="Models\DBModels\Route.cs" />
     <Compile Include="Models\DBModels\RouteDB.cs" />
     <Compile Include="Models\DBModels\Ticket.cs" />
     <Compile Include="Models\DomainModels\DomainRoute.cs" />
-    <Compile Include="Models\DomainModels\jsRoute.cs" />
+    <Compile Include="Models\DomainModels\JsRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
