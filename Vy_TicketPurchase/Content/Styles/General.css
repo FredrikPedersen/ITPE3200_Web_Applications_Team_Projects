@@ -1,0 +1,29 @@
+﻿/* Styles for all views. Some of these may be done better using bootstrap-classes, look into that if we get the time */
+/* Most of the styles in this document is added to make the project more visually pleasing while work is in progress */
+
+.leftEdgeElement {
+    margin-right: 0.1em;
+}
+
+.centerElement {
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+}
+
+#timeDateButtonsContainer {
+    margin-bottom: 0.5em;
+}
+
+#confirmBtn {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+p {
+    font-weight: bold;
+}
+
+select {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
