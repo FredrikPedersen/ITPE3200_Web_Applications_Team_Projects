@@ -19,7 +19,7 @@ namespace Vy_TicketPurchase.Controllers
             return View();
         }
 
-        public string GetAllRoutes()
+        public string GetAllRoutes() //Method called by JQuery script
         {
             var db = new RouteDB();
             List<DomainRoute> allRoutes = db.GetAllRoutes();

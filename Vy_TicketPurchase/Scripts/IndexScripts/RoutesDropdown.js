@@ -6,7 +6,7 @@
         ShowDropdown(jsRoute);
     },
     error: function() {
-        alert("Something something handle this later") //TODO Handle this later
+        alert("Something went wrong when trying to load Routes from the database") //TODO find a better way to handle this
     }
 });
 
