@@ -22,7 +22,7 @@
         <select name="PizzaType" class="form-control">
             <option value="Strekning 1">Strekning 1</option>
             <option value="Strekning 2">Strekning 2</option>
-            <option value="Streknig 3">P 3</option>
+            <option value="Streknig 3">Strekning 3</option>
         </select>
     </div>
 </div>
@@ -31,17 +31,14 @@
     <div class="form-group">
         @Html.LabelFor(model => model.time, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-           <button class="btn btn-default">Nå</button>
-            <button class="btn btn-default">Avgang</button>
-            <button class="btn btn-default">Ankomst</button>
+            @Html.EditorFor(model => model.time, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.time, "", new { @class = "text-danger" })
         </div>
-     
-            
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Neste" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 </div>
