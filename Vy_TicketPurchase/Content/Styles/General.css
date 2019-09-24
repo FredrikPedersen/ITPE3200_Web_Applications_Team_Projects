@@ -10,11 +10,11 @@
     margin-right: 0.1em;
 }
 
-#timeDateButtonsContainer {
-    margin-bottom: 0.5em;
+#datetimeContainer {
+    margin-bottom: 1em;
 }
 
-#confirmBtn {
+#buttonContainer {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -24,6 +24,6 @@ p {
 }
 
 select {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     margin-top: 0.5em;
 }
