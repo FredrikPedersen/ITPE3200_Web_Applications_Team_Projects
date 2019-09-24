@@ -14,12 +14,27 @@ namespace Vy_TicketPurchase.Models.DBModels
             List<DomainRoute> allRoutes = databaseContext.Routes.Select(r => new DomainRoute()
             {
                 Id = r.Id,
-                Startlocation = r.Startlocation,
-                Stoplocation = r.Stoplocation,
+                StartLocation = r.Startlocation,
+                StopLocation = r.Stoplocation,
                 Price = r.Price,
                 TravelTimeMinutes = r.TravelTimeMinutes
             }).ToList();
             return allRoutes;
+        }
+        
+        public DomainRoute GetOneRoute(int id)
+        {
+            Route routeFromDb = databaseContext.Routes.Find(id);
+
+            var aRoute = new DomainRoute()
+            {
+                Id = routeFromDb.Id,
+                StartLocation = routeFromDb.Startlocation,
+                StopLocation = routeFromDb.Stoplocation,
+                Price = routeFromDb.Price,
+                TravelTimeMinutes = routeFromDb.TravelTimeMinutes,
+            };
+            return aRoute;
         }
     }
 }
