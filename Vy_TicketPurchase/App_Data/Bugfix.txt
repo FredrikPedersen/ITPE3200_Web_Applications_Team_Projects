@@ -1,0 +1,2 @@
+Got a bug in Rider where the App_Data folder isn't automatically genereted.
+Leaving this file here as a temporary bugfix to make sure the folder isn't removed from the repo. 
