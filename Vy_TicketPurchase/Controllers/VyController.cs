@@ -29,12 +29,21 @@ namespace Vy_TicketPurchase.Controllers
             {
                 var oneRoute = new JsRoute();
                 oneRoute.Id = dr.Id;
-                oneRoute.RouteName = dr.Startlocation + " - " + dr.Stoplocation;
+                oneRoute.RouteName = dr.StartLocation + " - " + dr.StopLocation;
                 dropdownDisplayRoute.Add(oneRoute);
             }
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(dropdownDisplayRoute);
+            return json;
+        }
+        
+        public string GetRouteInfo(int id)
+        {
+            var db = new RouteDB();
+            DomainRoute domainRoute = db.GetOneRoute(id);
+            var jsonSerializer = new JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(domainRoute);
             return json;
         }
     }
