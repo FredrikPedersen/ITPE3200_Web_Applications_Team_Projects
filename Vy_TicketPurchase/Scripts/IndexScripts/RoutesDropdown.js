@@ -15,7 +15,6 @@
     
     //Whenever the selected item in the routes dropdown is changed, get and display info about selected route
     $("#routes").change(function () {
-        alert("Change function is called");
         var id = $(this).val();
         $.ajax({
             url: '/Vy/GetRouteInfo/' + id,
