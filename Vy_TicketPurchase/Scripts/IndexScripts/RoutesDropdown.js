@@ -33,8 +33,8 @@
     $("#travelNowBtn").click(function () {
         var test = $('routes').find('option:selected');
         alert(test);
-    })
-}); */
+    })*/ 
+});
 
 //Iterates through all jsRoute-objects and puts their Routenames in as options in  a dropdown
 function FillDropdown(jsRoutes) {
@@ -47,7 +47,6 @@ function FillDropdown(jsRoutes) {
 
 //Formats info from passed route and displays it in the view
 function ShowInfo(route) {
-    var outString = "Travel time: " + route.TravelTimeMinutes + "m. Price: "
-        + route.Price + "NOK";
+    var outString = "Travel time: " + route.TravelTimeMinutes + "m. Price: " + route.Price + "NOK";
     $("#showInfo").html(outString);
 }
