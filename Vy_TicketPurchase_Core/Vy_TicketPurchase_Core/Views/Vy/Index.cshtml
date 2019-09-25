@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div id="dropDown">
+        <select id="routes"></select>
+    </div>
+    <div id="showInfo"></div>
+    
+    
+    <p id="travelText">When do you want to travel?</p>
+
+    <div id="datetimeContainer">
+        <input id="datePicker" type="date" name="travelDay">
+        <input id="timePicker" type="time" name="travelTime">
+        <button class="centerElement" id="confirmBtn">Confirm</button>
+    </div>
+    
+    <div id="buttonContainer">
+        <button class="leftEdgeElement" id="travelNowBtn">I want to travel now</button>
+    </div>
+}
+
+
