@@ -29,11 +29,12 @@
         });
     });
     
+/*  THIS IS NOT FINISHED.   
     $("#travelNowBtn").click(function () {
         var test = $('routes').find('option:selected');
         alert(test);
     })
-});
+}); */
 
 //Iterates through all jsRoute-objects and puts their Routenames in as options in  a dropdown
 function FillDropdown(jsRoutes) {
