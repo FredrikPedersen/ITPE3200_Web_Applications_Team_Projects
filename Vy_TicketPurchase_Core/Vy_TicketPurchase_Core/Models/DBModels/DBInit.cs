@@ -1,37 +1,52 @@
-﻿namespace Vy_TicketPurchase_Core.Models.DBModels
-{
-    public class DBInit //TODO This class needs to be completly rewritten!
-    {
-       /* protected override void Seed(DatabaseContext context)
-        {
-            var route1 = new Route()
-            {
-                Startlocation = "Oslo S",
-                Stoplocation = "Lillestrøm",
-                Price = 30,
-                TravelTimeMinutes = 15,
-            };
+﻿using System;
+using System.IO;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
-            var route2 = new Route()
+namespace Vy_TicketPurchase_Core.Models.DBModels
+{
+    public class DbInit
+    {
+        public static void Initialize(IServiceScope serviceScope)
+        {
+            Console.WriteLine("DBINIT'S INITIALIZE IS BEING CALLED");
+            var dbContext = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            dbContext.Database.EnsureCreated();
+
+            Console.WriteLine("PRINTING ROUTES.ANY " + dbContext.Routes.Any());
+            if (!dbContext.Routes.Any())
             {
-                Startlocation = "Trondheim",
-                Stoplocation = "Oslo S",
-                Price = 1500,
-                TravelTimeMinutes = 320,
-            };
-            
-            var route3 = new Route()
+                seedRoutes(dbContext);
+            }
+        }
+
+        private static void seedRoutes(DatabaseContext dbContext)
+        {
+            Console.WriteLine("SEEDROUTES IS BEING CALLED!");
+            using (var reader = new StreamReader(@".\Models\DBModels\SeedData\routes.csv"))
             {
-                Startlocation = "Bergen",
-                Stoplocation = "Oslo S",
-                Price = 900,
-                TravelTimeMinutes = 180,
-            };
-            
-            context.Routes.Add(route1);
-            context.Routes.Add(route2);
-            context.Routes.Add(route3);
-            base.Seed(context);
-        } */
+                var count = 10;
+                while (count > 0 && !reader.EndOfStream)
+                {
+                    count--;
+                    var line = reader.ReadLine();
+                    if (line != null)
+                    {
+                        var columns = line.Split("|");
+                        var aRoute = new Route
+                        {
+                            Startlocation = columns[0],
+                            Stoplocation = columns[1],
+                            TravelTimeMinutes = Int32.Parse(columns[2]),
+                            Price = Double.Parse(columns[3])
+                        };
+
+                        dbContext.Add(aRoute);
+                        Console.WriteLine("HERE IS THE ROUTE: " + aRoute.ToString());
+                    }
+                }
+            }
+            dbContext.SaveChanges();
+        }
     }
 }

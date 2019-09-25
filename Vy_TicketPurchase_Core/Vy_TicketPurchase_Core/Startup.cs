@@ -36,7 +36,7 @@ namespace Vy_TicketPurchase_Core
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=Kunde;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=RouteDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
         }
@@ -62,6 +62,17 @@ namespace Vy_TicketPurchase_Core
                     name: "default",
                     template: "{controller=Vy}/{action=Index}/{id?}");
             });
+            
+            InitializeMigrations(app);
+        }
+
+        private static void InitializeMigrations(IApplicationBuilder app)
+        {
+            Console.WriteLine("INITIALIZE MIGRATIONS IS BEING CALLED");
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                DbInit.Initialize(serviceScope);
+            }
         }
     }
 }
