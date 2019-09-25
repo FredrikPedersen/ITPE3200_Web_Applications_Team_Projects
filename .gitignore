@@ -95,8 +95,8 @@ _[Ss]cripts
 **/.idea/**/*.iml
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
-Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide
 
-Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-shm
-
-Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-wal
+/Vy_TicketPurchase/.vs/Vy_TicketPurchase/config/applicationhost.config
+/Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide
+/Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-shm
+/Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-wal
