@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Vy_TicketPurchase_Core.Business.Routes;
 using Vy_TicketPurchase_Core.Models.DBModels;
 
 namespace Vy_TicketPurchase_Core
@@ -34,6 +35,7 @@ namespace Vy_TicketPurchase_Core
             
             var connection = @"Server=(localdb)\mssqllocaldb;Database=RouteDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+            services.AddScoped<RouteService>();
 
             services.AddMvc();
 
