@@ -34,8 +34,5 @@ namespace Vy_TicketPurchase_Core.Controllers.Testing
 
             return routes;
         }
-
-        
-        
     }
 }
