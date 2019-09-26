@@ -6,8 +6,8 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
         
-        public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Route> Routes { get; set; }
+        public DbSet<DbTicket> Tickets { get; set; }
+        public DbSet<DbCustomer> Customers { get; set; }
+        public DbSet<DbRoute> Routes { get; set; }
     }
 }

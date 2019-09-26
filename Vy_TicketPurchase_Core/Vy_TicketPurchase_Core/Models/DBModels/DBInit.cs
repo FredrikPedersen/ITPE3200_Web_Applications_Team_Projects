@@ -30,7 +30,7 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                     if (line != null)
                     {
                         var columns = line.Split("|");
-                        var aRoute = new Route
+                        var aRoute = new DbRoute
                         {
                             StartLocation = columns[0],
                             StopLocation = columns[1],

@@ -1,6 +1,6 @@
 ﻿namespace Vy_TicketPurchase_Core.Models.DBModels
 {
-    public class Route
+    public class DbRoute
     {
         public int Id { get; set; }
         public string StartLocation { get; set; }
