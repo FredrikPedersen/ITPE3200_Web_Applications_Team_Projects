@@ -27,6 +27,10 @@
         <button class="leftEdgeElement" id="travelNowBtn">I want to travel now</button>
     </div>
     
+    <!-- THIS IS USED FOR NAVIGATING TO A TESTING VIEW. DO NOT REMOVE! -->
+    <!-- The testing View and Controller is ignored, so create your own if you need it. Move this to a footer if it messes up the design further down the line -->
+    @Html.ActionLink("TO THE TESTING!", "Testing", "Testing", new { area = "" }, new { @class = "navbar-brand" })
+
     <!-- For å passere data mellom views, legg en form for input inne i en form-tag. Input-taget må ha et name (ikke class eller id). Form taggen må ha method satt til Post, og action satt til det neste viewet. Inne i formen har du en button med type submit. For å få tak i disse variablene igjen må man opprette variabler i Razor syntaks hvor man f.eks setter String email = request["Name-til-kolonnen"]. Hvis de skal leve lengre enn til et view må de lagres i en sesjonsvariabel eller i en database -->
 }
 
