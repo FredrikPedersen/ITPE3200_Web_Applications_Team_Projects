@@ -1,5 +1,4 @@
-﻿<!-- NB! DO NOT ACTUALLY USE BUSINESS MODELS HERE! USE VIEW MODELS! This is for science -->
-@model List<Vy_TicketPurchase_Core.Services.Routes.Models.ServiceModelRoute> 
+﻿@model Vy_TicketPurchase_Core.Models.ViewModels.IndexModel
 
 @{
     ViewBag.Title = "Testing";
@@ -10,12 +9,11 @@
 
 <h1>This is the testing area! For Science.</h1>
 
-@foreach (var route in Model)
+@foreach (var route in Model.Routes)
 {
     <p>
-        @route.StartLocation
-        @route.StopLocation
-        @route.Price
-        @route.TravelTimeMinutes
+        @route.StartLocation - @route.StopLocation <br />
+        Travel time: @route.TravelTimeMinutes <br />
+        Price @route.Price <br />
     </p>
 }
