@@ -1,6 +1,6 @@
-﻿namespace Vy_TicketPurchase_Core.Business.Routes.Models
+﻿namespace Vy_TicketPurchase_Core.Services.Routes.Models
 {
-    public class BusinessRoute
+    public class ServiceModelRoute
     {
         public int Id { get; set; }
         public string StartLocation { get; set; }

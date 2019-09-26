@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vy_TicketPurchase_Core.Business.Routes.Models;
 using Vy_TicketPurchase_Core.Models.DBModels;
+using Vy_TicketPurchase_Core.Services.Routes.Models;
 
-namespace Vy_TicketPurchase_Core.Business.Routes
+namespace Vy_TicketPurchase_Core.Services.Routes
 {
     public class RouteService
     {
@@ -14,14 +14,14 @@ namespace Vy_TicketPurchase_Core.Business.Routes
             _databaseContext = dbContext;
         }
 
-        public BusinessRoute GetRouteById(int id)
+        public ServiceModelRoute GetRouteById(int id)
         {
-            return DbToBusinessRoute(_databaseContext.Routes.FirstOrDefault(r => r.Id == id));
+            return DbToServiceRoute(_databaseContext.Routes.FirstOrDefault(r => r.Id == id));
         }
         
-        public List<BusinessRoute> GetAllRoutes()
+        public List<ServiceModelRoute> GetAllRoutes()
         {
-            return _databaseContext.Routes.Select(r => new BusinessRoute
+            return _databaseContext.Routes.Select(r => new ServiceModelRoute
             {
                 Id = r.Id,
                 StartLocation = r.StartLocation,
@@ -31,9 +31,9 @@ namespace Vy_TicketPurchase_Core.Business.Routes
             }).ToList();
         }
 
-        private BusinessRoute DbToBusinessRoute(DbRoute dbRoute)
+        private ServiceModelRoute DbToServiceRoute(DbRoute dbRoute)
         {
-            return new BusinessRoute
+            return new ServiceModelRoute
             {
                 Id = dbRoute.Id,
                 StartLocation = dbRoute.StartLocation,
