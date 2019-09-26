@@ -24,10 +24,7 @@ bin/
 obj/
 TestResults/
 Vy_TicketPurchase_Core/Vy_TicketPurchase_Core/Views/Testing/
-<<<<<<< HEAD
-=======
 Vy_TicketPurchase_Core/Vy_TicketPurchase_Core/Controllers/Testing/
->>>>>>> FredrikWorkBranchHome
 
 # Web publish log 
 *.Publish.xml
