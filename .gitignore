@@ -1,4 +1,3 @@
-
 # compiled source
 *.com
 *.class
@@ -24,6 +23,7 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
+Vy_TicketPurchase_Core/Vy_TicketPurchase_Core/Views/Testing/
 
 # Web publish log 
 *.Publish.xml
@@ -96,6 +96,7 @@ _[Ss]cripts
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 
+#Specific files
 /Vy_TicketPurchase/.vs/Vy_TicketPurchase/config/applicationhost.config
 /Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide
 /Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-shm
