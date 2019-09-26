@@ -23,8 +23,6 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
-Vy_TicketPurchase_Core/Vy_TicketPurchase_Core/Views/Testing/
-Vy_TicketPurchase_Core/Vy_TicketPurchase_Core/Controllers/Testing/
 
 # Web publish log 
 *.Publish.xml
