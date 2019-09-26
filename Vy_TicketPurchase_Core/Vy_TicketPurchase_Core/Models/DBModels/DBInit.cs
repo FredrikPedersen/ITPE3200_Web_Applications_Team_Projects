@@ -18,19 +18,19 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             }
         }
 
+        //Reads csv file with routes and adds them to the dbcontext
         private static void seedRoutes(DatabaseContext dbContext)
         {
             using (var reader = new StreamReader(@".\Models\DBModels\SeedData\routes.csv"))
             {
-                var count = 10;
-                while (count > 0 && !reader.EndOfStream)
+                
+                while (!reader.EndOfStream)
                 {
-                    count--;
                     var line = reader.ReadLine();
                     if (line != null)
                     {
                         var columns = line.Split("|");
-                        var aRoute = new DbRoute
+                        var routeFromFile = new DbRoute
                         {
                             StartLocation = columns[0],
                             StopLocation = columns[1],
@@ -38,7 +38,7 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                             Price = Double.Parse(columns[3])
                         };
 
-                        dbContext.Add(aRoute);
+                        dbContext.Add(routeFromFile);
                     }
                 }
             }
