@@ -2,7 +2,7 @@
 
 namespace Vy_TicketPurchase_Core.Models.DBModels
 {
-    public class Customer
+    public class DbCustomer
     {
         public int Id { get; set; }
         public String Name { get; set; }

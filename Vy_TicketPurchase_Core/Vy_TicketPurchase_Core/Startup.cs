@@ -20,9 +20,7 @@ namespace Vy_TicketPurchase_Core
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration {
-            get;
-        }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,11 +31,11 @@ namespace Vy_TicketPurchase_Core
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
             var connection = @"Server=(localdb)\mssqllocaldb;Database=RouteDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+
+            services.AddMvc();
 
         }
 
@@ -68,7 +66,6 @@ namespace Vy_TicketPurchase_Core
 
         private static void InitializeMigrations(IApplicationBuilder app)
         {
-            Console.WriteLine("INITIALIZE MIGRATIONS IS BEING CALLED");
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 DbInit.Initialize(serviceScope);
