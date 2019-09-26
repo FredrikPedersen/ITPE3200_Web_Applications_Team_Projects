@@ -11,7 +11,6 @@ namespace Vy_TicketPurchase_Core.Controllers
         // GET: Vy
         public ActionResult Index() 
         {
-            Console.WriteLine("THE CONTROLLER IS BEING CALLED");
             return View();
         }
     }

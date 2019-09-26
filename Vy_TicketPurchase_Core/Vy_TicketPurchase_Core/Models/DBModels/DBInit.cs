@@ -9,11 +9,9 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
     {
         public static void Initialize(IServiceScope serviceScope)
         {
-            Console.WriteLine("DBINIT'S INITIALIZE IS BEING CALLED");
             var dbContext = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
             dbContext.Database.EnsureCreated();
-
-            Console.WriteLine("PRINTING ROUTES.ANY " + dbContext.Routes.Any());
+            
             if (!dbContext.Routes.Any())
             {
                 seedRoutes(dbContext);
@@ -22,7 +20,6 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
 
         private static void seedRoutes(DatabaseContext dbContext)
         {
-            Console.WriteLine("SEEDROUTES IS BEING CALLED!");
             using (var reader = new StreamReader(@".\Models\DBModels\SeedData\routes.csv"))
             {
                 var count = 10;
@@ -42,7 +39,6 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                         };
 
                         dbContext.Add(aRoute);
-                        Console.WriteLine("HERE IS THE ROUTE: " + aRoute.ToString());
                     }
                 }
             }
