@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Vy_TicketPurchase_Core.Business.Routes;
-using Vy_TicketPurchase_Core.Business.Routes.Models;
+using Vy_TicketPurchase_Core.Services.Routes;
+using Vy_TicketPurchase_Core.Services.Routes.Models;
 
 namespace Vy_TicketPurchase_Core.Controllers.Testing
 {
@@ -22,9 +22,9 @@ namespace Vy_TicketPurchase_Core.Controllers.Testing
             return View(routes);
         }
 
-        private List<BusinessRoute> GetRouteFromId(List<Int32> routeIds)
+        private List<ServiceModelRoute> GetRouteFromId(List<Int32> routeIds)
         {
-            List<BusinessRoute> routes = new List<BusinessRoute>();
+            List<ServiceModelRoute> routes = new List<ServiceModelRoute>();
             foreach (var routeId in routeIds)
             {
                 var route = _routeService.GetRouteById(routeId);

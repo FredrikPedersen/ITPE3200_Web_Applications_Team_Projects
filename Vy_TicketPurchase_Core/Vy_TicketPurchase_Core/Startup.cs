@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Vy_TicketPurchase_Core.Business.Routes;
 using Vy_TicketPurchase_Core.Models.DBModels;
+using Vy_TicketPurchase_Core.Services.Routes;
 
 namespace Vy_TicketPurchase_Core
 {
