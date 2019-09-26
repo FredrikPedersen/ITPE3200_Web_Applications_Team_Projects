@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Folder Include="Models\DBModels\SeedData" />
+    <Folder Include="wwwroot\images" />
   </ItemGroup>
 
 </Project>
