@@ -1,4 +1,5 @@
-﻿@model TModel
+﻿<!-- NB! DO NOT ACTUALLY USE BUSINESS MODELS HERE! USE VIEW MODELS! This is for science -->
+@model List<Vy_TicketPurchase_Core.Business.Routes.Models.BusinessRoute> 
 
 @{
     ViewBag.Title = "Testing";
@@ -6,13 +7,14 @@
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <title>Testing</title>
-</head>
-<body>
-<div>
-    <h1>This is the testing view. For Science.</h1>
-</div>
-</body>
-</html>
+<h1>This is the testing area! For Science.</h1>
+
+@foreach (var route in Model)
+{
+    <p>
+        @route.StartLocation
+        @route.StopLocation
+        @route.Price
+        @route.TravelTimeMinutes
+    </p>
+}
