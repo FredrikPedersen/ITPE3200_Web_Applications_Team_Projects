@@ -14,10 +14,10 @@ body {
 
 .responsiveImage {
     width: 100%;
-    max-width: 6em;
+    max-width: 15em;
     height: auto;
 }
 
 .bodyMargin {
-    padding-top: 1em;
+    padding-top: 10em;
 }
