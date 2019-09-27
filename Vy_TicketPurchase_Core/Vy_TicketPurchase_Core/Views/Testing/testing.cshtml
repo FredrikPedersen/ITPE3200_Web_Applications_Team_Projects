@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Testing";
     Layout = "_Layout";
+    var count = 0;
 }
 
 <!DOCTYPE html>
@@ -11,6 +12,7 @@
 
 @foreach (var station in Model.Stations)
 {
-    @station.Id <br/>
+    count++;
     @station.StationName <br/>
 }
+    @count

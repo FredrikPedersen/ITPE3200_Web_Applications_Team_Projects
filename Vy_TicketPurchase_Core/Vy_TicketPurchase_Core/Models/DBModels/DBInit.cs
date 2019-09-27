@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,31 +13,35 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             var dbContext = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
             dbContext.Database.EnsureCreated();
             
-            if (!dbContext.Stations.Any())
+           if (!dbContext.Stations.Any())
             {
-                seedRoutes(dbContext);
-            }
+                seedStations(dbContext);
+            } 
         }
 
-        //Reads csv file with routes and adds them to the dbcontext
-        private static void seedRoutes(DatabaseContext dbContext)
+        //Reads csv file with stations and adds them to the dbcontext
+        private static void seedStations(DatabaseContext dbContext)
         {
-            using (var reader = new StreamReader(@".\Models\DBModels\SeedData\routes.csv"))
+            using (var reader = new StreamReader(@".\Models\DBModels\SeedData\stations.csv"))
             {
-                
+                var stationSet = new HashSet<string>();
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     if (line != null)
                     {
-                        var columns = line.Split("|");
-                        var routeFromFile = new DbStation
-                        {
-                            StationName = columns[0],
-                        };
-
-                        dbContext.Add(routeFromFile);
+                        var columns = line.Split(",");
+                        stationSet.Add(columns[2]);
                     }
+                }
+
+                foreach (var stationName in stationSet)
+                {
+                    var stationFromFile = new DbStation
+                    {
+                        StationName = stationName
+                    };
+                    dbContext.Add(stationFromFile);
                 }
             }
             dbContext.SaveChanges();
