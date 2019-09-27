@@ -12,7 +12,7 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             var dbContext = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
             dbContext.Database.EnsureCreated();
             
-            if (!dbContext.Routes.Any())
+            if (!dbContext.Stations.Any())
             {
                 seedRoutes(dbContext);
             }
@@ -30,12 +30,9 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                     if (line != null)
                     {
                         var columns = line.Split("|");
-                        var routeFromFile = new DbRoute
+                        var routeFromFile = new DbStation
                         {
-                            StartLocation = columns[0],
-                            StopLocation = columns[1],
-                            TravelTimeMinutes = Int32.Parse(columns[2]),
-                            Price = Double.Parse(columns[3])
+                            StationName = columns[0],
                         };
 
                         dbContext.Add(routeFromFile);

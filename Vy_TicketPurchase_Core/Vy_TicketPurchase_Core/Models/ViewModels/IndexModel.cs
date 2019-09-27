@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Vy_TicketPurchase_Core.Services.Routes.Models;
+using Vy_TicketPurchase_Core.Services.Stations.Models;
 
 namespace Vy_TicketPurchase_Core.Models.ViewModels
 {
     public class IndexModel
     {
-        public List<ServiceModelRoute> Routes { get; set; }
+        public List<ServiceModelStation> Stations { get; set; }
         
     }
 }

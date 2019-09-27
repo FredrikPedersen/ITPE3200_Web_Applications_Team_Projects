@@ -9,11 +9,6 @@
 
 <h1>This is the testing area! For Science.</h1>
 
-@foreach (var route in Model.Routes)
+@foreach (var route in Model.Stations)
 {
-    <p>
-        @route.StartLocation - @route.StopLocation <br />
-        Travel time: @route.TravelTimeMinutes <br />
-        Price @route.Price <br />
-    </p>
 }

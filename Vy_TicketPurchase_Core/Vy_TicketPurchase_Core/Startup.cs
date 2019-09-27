@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Routes;
+using Vy_TicketPurchase_Core.Services.Stations;
 using Vy_TicketPurchase_Core.Services.Tickets;
 
 namespace Vy_TicketPurchase_Core
@@ -36,7 +31,7 @@ namespace Vy_TicketPurchase_Core
             
             var connection = @"Server=(localdb)\mssqllocaldb;Database=RouteDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<RouteService>();
+            services.AddScoped<StationService>();
             services.AddScoped<TicketService>();
 
             services.AddMvc();
