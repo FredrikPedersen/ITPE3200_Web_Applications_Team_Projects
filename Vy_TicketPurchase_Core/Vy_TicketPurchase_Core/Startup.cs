@@ -29,7 +29,7 @@ namespace Vy_TicketPurchase_Core
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=RouteDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=StationDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
             services.AddScoped<StationService>();
             services.AddScoped<TicketService>();
