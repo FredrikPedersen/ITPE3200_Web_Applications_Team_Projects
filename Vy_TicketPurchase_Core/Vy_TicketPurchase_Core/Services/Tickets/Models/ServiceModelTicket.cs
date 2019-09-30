@@ -9,9 +9,10 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
     {
         [Key]
         public int Id { get; set; }
-        public DbStation FromStation { get; set; }
-        public DbStation ToStation { get; set; }
+        public string FromStation { get; set; }
+        public string ToStation { get; set; }
         public DateTime ValidFrom { get; set; }
-        public DbCustomer Customer { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerNumber { get; set; }
     }
 }
