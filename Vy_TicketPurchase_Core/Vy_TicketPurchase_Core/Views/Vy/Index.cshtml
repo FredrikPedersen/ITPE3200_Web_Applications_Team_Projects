@@ -1,4 +1,5 @@
-﻿@model  Vy_TicketPurchase_Core.Services.Tickets.Models.ServiceModelTicket
+﻿@using Vy_TicketPurchase_Core.Controllers.Testing
+@model  Vy_TicketPurchase_Core.Services.Tickets.Models.ServiceModelTicket
 
 @{
     ViewBag.Title = "Index";
@@ -69,6 +70,7 @@
 
 
 <!-- THIS IS USED FOR NAVIGATING TO THE TESTING VIEW! DO NOT REMOVE! Move to a footer or something if it gets in the way of the design -->
-@Html.ActionLink("TO THE TESTING", "Testing", "Testing", new { area = "" }, new { @class = "navbar-brand" })
+@Html.ActionLink("TO THE INDEX TESTING!", "IndexTesting", "IndexModelTesting", new { area = "" }, new { @class = "navbar-brand" })
+@Html.ActionLink("TO THE LIST TESTING!", "ListTesting", "ListModelTesting", new { area = ""}, new { @class = "navbar-brand"})
 
 <!-- For å passere data mellom views, legg en form for input inne i en form-tag. Input-taget må ha et name (ikke class eller id). Form taggen må ha method satt til Post, og action satt til det neste viewet. Inne i formen har du en button med type submit. For å få tak i disse variablene igjen må man opprette variabler i Razor syntaks hvor man f.eks setter String email = request["Name-til-kolonnen"]. Hvis de skal leve lengre enn til et view må de lagres i en sesjonsvariabel eller i en database -->

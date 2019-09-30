@@ -1,0 +1,16 @@
+﻿@model Vy_TicketPurchase_Core.Models.ViewModels.ListModel
+
+@{
+    ViewBag.Title = "List Testing";
+    Layout = "_Layout";
+}
+
+<h1>This is the testing area for the IndexModel! For Science.</h1>
+
+@foreach (var ticket in Model.Tickets)
+{
+    @ticket.Customer
+    @ticket.FromStation
+    @ticket.ToStation
+    @ticket.ValidFrom
+}

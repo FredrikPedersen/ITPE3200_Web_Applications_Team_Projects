@@ -1,18 +1,13 @@
 ﻿@model Vy_TicketPurchase_Core.Models.ViewModels.IndexModel
 
 @{
-    ViewBag.Title = "Testing";
+    ViewBag.Title = "Index Testing";
     Layout = "_Layout";
-    var count = 0;
 }
 
-<!DOCTYPE html>
-
-<h1>This is the testing area! For Science.</h1>
+<h1>This is the testing area for the IndexModel! For Science.</h1>
 
 @foreach (var station in Model.Stations)
 {
-    count++;
     @station.StationName <br/>
 }
-    @count

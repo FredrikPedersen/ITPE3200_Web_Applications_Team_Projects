@@ -4,17 +4,17 @@ using Vy_TicketPurchase_Core.Services.Stations;
 
 namespace Vy_TicketPurchase_Core.Controllers.Testing
 {
-    public class TestingController : Controller
+    public class IndexModelTestingController : Controller
     {
 
         private readonly StationService _stationService;
 
-        public TestingController(StationService stationService)
+        public IndexModelTestingController(StationService stationService)
         {
             _stationService = stationService;
         }
         
-        public ActionResult Testing()
+        public ActionResult IndexTesting()
         {
             var model = new IndexModel {Stations = _stationService.GetAllStations()};
 
