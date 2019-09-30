@@ -27,7 +27,6 @@ namespace Vy_TicketPurchase_Core.Controllers
                 DbCustomer = customer
             };
             //her kommer kode for å legge inn i databasen
-            //må opprette eget customer og ticketobjekt før det lagres i databasen
             return RedirectToAction("ListView"); //må lage listeview
         }
     }
