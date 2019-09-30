@@ -5,12 +5,14 @@
     Layout = "_Layout";
 }
 
-<h1>This is the testing area for the IndexModel! For Science.</h1>
+<h1>This is the testing area for the ListModel! For Science.</h1>
 
 @foreach (var ticket in Model.Tickets)
 {
-    @ticket.Customer
-    @ticket.FromStation
-    @ticket.ToStation
-    @ticket.ValidFrom
+    <p>
+    @ticket.FromStation - @ticket.ToStation <br/>
+    Navn: @ticket.CustomerName <br/>
+    Telfonnummer: @ticket.CustomerNumber <br/>
+    Gyldig fra: @ticket.ValidFrom <br/>
+    </p>                  
 }
