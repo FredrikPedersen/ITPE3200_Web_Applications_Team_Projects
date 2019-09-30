@@ -20,9 +20,10 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
             return _databaseContext.Tickets.Select(t => new ServiceModelTicket
             {
                 Id = t.Id,
-                FromStation = t.DbFromStation,
-                ToStation = t.DbToStation,
-                Customer = t.DbCustomer,
+                FromStation = t.DbFromStation.StationName,
+                ToStation = t.DbToStation.StationName,
+                CustomerName = t.DbCustomer.Name,
+                CustomerNumber = t.DbCustomer.Phonenumber,
                 ValidFrom = t.ValidFrom
             }).ToList();
         }
