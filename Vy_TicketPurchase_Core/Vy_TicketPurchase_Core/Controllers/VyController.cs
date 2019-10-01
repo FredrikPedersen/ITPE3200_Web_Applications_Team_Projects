@@ -8,6 +8,7 @@ namespace Vy_TicketPurchase_Core.Controllers
 {
     public class VyController : Controller
     {
+      
 
         // GET: Vy
         public ActionResult Index() 
@@ -15,10 +16,9 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(ServiceModelTicket ticket) //kommer inn i metoden, men vet ikke hva slags objekt som må være her, kanskje lage et nytt med alle attributtene?
+        public ActionResult Index(ServiceModelTicket ticket) 
         {
-           
-            //her kommer kode for å legge inn i databasen
+            //if (TicketService.saveTicket(ticket)){success} else{failed};
             return RedirectToAction("List","List"); //må lage listeview
         }
     }
