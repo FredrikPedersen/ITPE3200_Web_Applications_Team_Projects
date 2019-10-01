@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Models.DBModels;
+using Vy_TicketPurchase_Core.Services.Tickets.Models;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {
@@ -14,7 +15,7 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Services.Tickets.Models.ServiceModelTicket ticket) //kommer inn i metoden, men vet ikke hva slags objekt som må være her, kanskje lage et nytt med alle attributtene?
+        public ActionResult Index(ServiceModelTicket ticket) //kommer inn i metoden, men vet ikke hva slags objekt som må være her, kanskje lage et nytt med alle attributtene?
         {
             DbCustomer customer = new DbCustomer {
                 Name = ticket.CustomerName,
@@ -27,7 +28,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                 DbCustomer = customer
             };
             //her kommer kode for å legge inn i databasen
-            return RedirectToAction("ListView"); //må lage listeview
+            return RedirectToAction("List","List"); //må lage listeview
         }
     }
 }
