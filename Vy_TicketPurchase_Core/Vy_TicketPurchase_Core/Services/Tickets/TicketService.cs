@@ -27,5 +27,8 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 ValidFrom = t.ValidFrom
             }).ToList();
         }
+        public void saveTicket(ServiceModelTicket ticket) {
+          
+        }
     }
 }

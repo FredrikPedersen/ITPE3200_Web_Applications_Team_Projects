@@ -17,16 +17,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket) //kommer inn i metoden, men vet ikke hva slags objekt som må være her, kanskje lage et nytt med alle attributtene?
         {
-            DbCustomer customer = new DbCustomer {
-                Name = ticket.CustomerName,
-                Phonenumber = ticket.CustomerNumber
-            };
-            DbTicket newTicket = new DbTicket
-            {
-                //stasjon til og fra objekt
-                ValidFrom = ticket.ValidFrom,
-                DbCustomer = customer
-            };
+           
             //her kommer kode for å legge inn i databasen
             return RedirectToAction("List","List"); //må lage listeview
         }
