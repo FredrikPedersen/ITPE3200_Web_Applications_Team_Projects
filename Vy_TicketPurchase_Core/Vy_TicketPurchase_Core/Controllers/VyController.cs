@@ -32,7 +32,7 @@ namespace Vy_TicketPurchase_Core.Controllers
 
       
         public JsonResult Autocomplete(string input)
-        {
+       {
             return Json(stationService.ServiceAutocomplete(input));
         }
 
