@@ -21,3 +21,11 @@ body {
 .bodyMargin {
     padding-top: 10em;
 }
+
+.ticket {
+    width: 100%;
+    max-width: 20em;
+    height: auto;
+    padding: 20px;
+    background-color: rgba(220,220,220,.5)
+}
