@@ -8,8 +8,8 @@ namespace Vy_TicketPurchase_Core.Controllers
 {
     public class VyController : Controller
     {
-      
-
+        private readonly Services.Stations.StationService stationService;
+        private readonly Services.Tickets.TicketService ticketService;
         // GET: Vy
         public ActionResult Index() 
         {
@@ -18,8 +18,15 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket) 
         {
-            //if (TicketService.saveTicket(ticket)){success} else{failed};
+            ticketService.saveTicket(ticket);
             return RedirectToAction("List","List"); //må lage listeview
         }
+
+      
+        public JsonResult Autocomplete(string input)
+        {
+            return Json(stationService.ServiceAutocomplete(input));
+        }
+
     }
 }
