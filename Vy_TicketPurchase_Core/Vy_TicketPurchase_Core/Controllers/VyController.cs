@@ -19,12 +19,12 @@ namespace Vy_TicketPurchase_Core.Controllers
         public ActionResult Index(ServiceModelTicket ticket) 
         {
             ticketService.saveTicket(ticket);
-            return RedirectToAction("List","List"); //må lage listeview
+            return RedirectToAction("List", "List");
         }
 
       
         public JsonResult Autocomplete(string input)
-        {
+       {
             return Json(stationService.ServiceAutocomplete(input));
         }
 
