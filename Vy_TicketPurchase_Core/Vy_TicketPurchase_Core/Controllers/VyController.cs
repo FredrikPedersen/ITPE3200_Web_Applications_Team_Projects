@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Models.DBModels;
+using Vy_TicketPurchase_Core.Services.Stations;
 using Vy_TicketPurchase_Core.Services.Tickets;
 using Vy_TicketPurchase_Core.Services.Tickets.Models;
 
@@ -9,13 +10,14 @@ namespace Vy_TicketPurchase_Core.Controllers
 {
     public class VyController : Controller
     {
-        private readonly Services.Stations.StationService stationService; //TODO Instantiate these
+        private readonly StationService _stationService; //TODO Instantiate these
 
         private readonly TicketService _ticketService;
 
-        public VyController(TicketService ticketService)
+        public VyController(TicketService ticketService, StationService stationService)
         {
             _ticketService = ticketService;
+            _stationService = stationService;
         }
         // GET: Vy
         public ActionResult Index() 
@@ -33,7 +35,7 @@ namespace Vy_TicketPurchase_Core.Controllers
       
         public JsonResult Autocomplete(string input)
        {
-            return Json(stationService.ServiceAutocomplete(input));
+            return Json(_stationService.ServiceAutocomplete(input));
         }
 
     }
