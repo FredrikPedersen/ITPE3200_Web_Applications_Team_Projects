@@ -40,15 +40,15 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 DbCustomer = customer
             };
             try
-                {
+            {
                 _databaseContext.Tickets.Add(newTicket);
                 _databaseContext.SaveChanges();
-                    return true;
-                }
+                return true;
+            }
             catch
-                {
-                    return false;
-                }
+            {
+                return false;
+            }
            
         }
     }
