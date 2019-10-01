@@ -1,11 +1,5 @@
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
-  "libraries": [
-    {
-      "library": "jqueryui@1.12.1", 
-      "destination": "wwwroot/lib/jquery-ui-1.12.1/"
-    }
-   
-  ]
+  "libraries": []
 }
