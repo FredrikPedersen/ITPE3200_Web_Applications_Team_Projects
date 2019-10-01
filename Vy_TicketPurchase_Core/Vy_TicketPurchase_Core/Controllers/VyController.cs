@@ -2,34 +2,31 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Stations;
 using Vy_TicketPurchase_Core.Services.Tickets.Models;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {
     public class VyController : Controller
     {
+        private readonly Services.Stations.StationService stationService;
+        private readonly Services.Tickets.TicketService ticketService;
         // GET: Vy
         public ActionResult Index() 
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Index(ServiceModelTicket ticket) //kommer inn i metoden, men vet ikke hva slags objekt som må være her, kanskje lage et nytt med alle attributtene?
+        public ActionResult Index(ServiceModelTicket ticket) 
         {
-            DbCustomer customer = new DbCustomer {
-                Name = ticket.CustomerName,
-                Phonenumber = ticket.CustomerNumber
-            };
-            DbTicket newTicket = new DbTicket
-            {
-                //stasjon til og fra objekt
-                ValidFrom = ticket.ValidFrom,
-                DbCustomer = customer
-            };
-            
-            //her kommer kode for å legge inn i databasen
+            ticketService.saveTicket(ticket);
             return RedirectToAction("List","List"); //må lage listeview
         }
+
+      
+        public JsonResult Autocomplete(string input)
+        {
+            return Json(stationService.ServiceAutocomplete(input));
+        }
+
     }
 }
