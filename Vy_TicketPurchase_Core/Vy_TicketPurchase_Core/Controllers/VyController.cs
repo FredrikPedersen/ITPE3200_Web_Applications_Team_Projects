@@ -8,7 +8,7 @@ namespace Vy_TicketPurchase_Core.Controllers
 {
     public class VyController : Controller
     {
-        private readonly Services.Stations.StationService stationService;
+        private readonly Services.Stations.StationService stationService; //TODO Instantiate these
         private readonly Services.Tickets.TicketService ticketService;
         // GET: Vy
         public ActionResult Index() 

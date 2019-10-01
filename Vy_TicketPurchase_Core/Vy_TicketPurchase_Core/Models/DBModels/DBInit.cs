@@ -62,14 +62,8 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                     Name = "Per Kåre Ostepop",
                     Phonenumber = "87356783"
                 },
-                DbFromStation = new DbStation
-                {
-                    StationName = "Lillestrøm"
-                },
-                DbToStation = new DbStation
-                {
-                    StationName = "Oslo S"
-                },
+                FromStation = "Lillestrøm",
+                ToStation = "Oslo S",
                 ValidFrom = new DateTime(2019, 11, 02, 12, 05, 00)
             };
             
@@ -80,14 +74,8 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                     Name = "Julie Z Nilsen ",
                     Phonenumber = "99106201"
                 },
-                DbFromStation = new DbStation
-                {
-                    StationName = "Eidsvoll"
-                },
-                DbToStation = new DbStation
-                {
-                    StationName = "Lysaker"
-                },
+                FromStation = "Eidsvoll",
+                ToStation ="Lysaker",
                 ValidFrom = new DateTime(2018, 01, 15, 17, 47, 00)
             };
             dbContext.Add(ticket1);
