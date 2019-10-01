@@ -7,8 +7,8 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
     {
         [Key]
         public int Id { get; set; }
-        public DbStation DbFromStation { get; set; }
-        public DbStation DbToStation { get; set; }
+        public string FromStation { get; set; }
+        public string ToStation { get; set; }
         public DateTime ValidFrom { get; set; }
         public DbCustomer DbCustomer { get; set; }
     }
