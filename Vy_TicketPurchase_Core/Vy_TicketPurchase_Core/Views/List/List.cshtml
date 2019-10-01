@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Vy_TicketPurchase_Core.Services.Tickets.Models.ServiceModelTicket>
+﻿@model List<Vy_TicketPurchase_Core.Services.Tickets.Models.ServiceModelTicket>
 
 @{
     ViewData["Title"] = "View";
@@ -14,19 +14,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FromStation)
+               Fra:
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToStation)
+               Til:
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ValidFrom)
+               Reisetid:
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerName)
+                Navn:
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerNumber)
+                Telefonnummer:
             </th>
             <th></th>
         </tr>

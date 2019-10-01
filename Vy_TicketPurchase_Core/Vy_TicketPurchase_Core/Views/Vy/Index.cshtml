@@ -1,29 +1,9 @@
 ﻿@model Vy_TicketPurchase_Core.Services.Tickets.Models.ServiceModelTicket
 
 @{
-    ViewBag.Title = "TestCreateView";
+    ViewBag.Title = "Index";
     Layout = "_Layout";
 }
-<script>
-    $(document).ready(function () {
-        $(".autocomplete").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "/Vy/Autocomplete",
-                    type: "POST",
-                    datatype: "json",
-                    data: { input: request.term },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: item, value: item };
-                        }))
-
-                    }
-                })
-            },
-        });
-    })
-</script>
 
 <h2>Registrer billett</h2>
 
