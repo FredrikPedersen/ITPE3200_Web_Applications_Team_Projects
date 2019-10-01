@@ -27,7 +27,7 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 ValidFrom = t.ValidFrom
             }).ToList();
         }
-        public bool saveTicket(ServiceModelTicket ticket) {
+        public bool SaveTicket(ServiceModelTicket ticket) {
             DbCustomer customer = new DbCustomer
             {
                 Name = ticket.CustomerName,
@@ -35,7 +35,8 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
             };
             DbTicket newTicket = new DbTicket
             {
-                //stasjon til og fra objekt
+                FromStation = ticket.FromStation,
+                ToStation = ticket.ToStation,
                 ValidFrom = ticket.ValidFrom,
                 DbCustomer = customer
             };
