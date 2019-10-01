@@ -23,8 +23,21 @@ body {
     padding-top: 10em;
 }
 
+<<<<<<< HEAD
 .navbarElement {
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     font-size: 2em;
+=======
+.ticket {
+    width: 100%;
+    max-width: 20em;
+    height: auto;
+    padding: 20px;
+    background-color: rgba(220,220,220,.5)
+}
+
+.autocomplete {
+
+>>>>>>> master
 }

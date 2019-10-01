@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using Vy_TicketPurchase_Core.Models.DBModels;
 using Vy_TicketPurchase_Core.Services.Stations.Models;
@@ -36,5 +37,16 @@ namespace Vy_TicketPurchase_Core.Services.Stations
                 StationName = dbStation.StationName,
             };
         }
+        [HttpPost]
+        public List<string> ServiceAutocomplete(string input)
+        {
+            using (_databaseContext)
+            {
+                var result = (from station in _databaseContext.Stations where station.StationName.Contains(input) select station.StationName).ToList();
+                return result;
+            }
+        }
+
+
     }
 }
