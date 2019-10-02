@@ -19,8 +19,11 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
         [DisplayName("Pris")]
         public int Price { get; set; }
         
-        [DisplayName("Avreise")]
-        public DateTime ValidFrom { get; set; }
+        [DisplayName("Avreise Dato")]
+        public DateTime ValidFromDate { get; set; }
+        
+        [DisplayName("Avreise Tid")]
+        public DateTime ValidFromTime { get; set; }
         
         [DisplayName("Fullt navn")]
         public string CustomerName { get; set; }
