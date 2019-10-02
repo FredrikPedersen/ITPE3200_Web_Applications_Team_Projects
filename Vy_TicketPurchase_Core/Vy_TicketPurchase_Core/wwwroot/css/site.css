@@ -31,7 +31,7 @@ body {
 
 .ticket {
     width: 100%;
-    max-width: 20em;
+    max-width: 25em;
     height: auto;
     padding: 20px;
     background-color: rgba(220,220,220,.5)
