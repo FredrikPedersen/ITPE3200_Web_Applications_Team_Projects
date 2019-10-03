@@ -19,14 +19,11 @@
         <div class="ticket">
             
             <div>
-                <label>Fra: </label>
-                @Html.DisplayFor(model => ticket.FromStation)
-
-                <label>Til: </label>
-                @Html.DisplayFor(model => ticket.ToStation) <br/>
+                <label>Reise: </label>
+                @Html.DisplayFor(model => ticket.FromStation) - @Html.DisplayFor(model => ticket.ToStation) <br/>
 
                 <label>Gyldig Fra: </label>
-                @Html.DisplayFor(model => ticket.ValidFrom) <br/>
+                @Html.DisplayFor(model => ticket.ValidFromDate) @Html.DisplayFor(model => ticket.ValidFromTime) <br/>
 
                 <label>Navn: </label>
                 @Html.DisplayFor(model => ticket.CustomerName) <br/>

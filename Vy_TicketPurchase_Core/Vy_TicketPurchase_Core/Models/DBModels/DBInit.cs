@@ -64,7 +64,8 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                 },
                 FromStation = "Lillestrøm",
                 ToStation = "Oslo S",
-                ValidFrom = new DateTime(2019, 11, 02, 12, 05, 00)
+                ValidFrom = new DateTime(2019, 11, 02, 12, 05, 00),
+                Price = randomPrice()
             };
             
             var ticket2 = new DbTicket
@@ -76,11 +77,18 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                 },
                 FromStation = "Eidsvoll",
                 ToStation ="Lysaker",
-                ValidFrom = new DateTime(2018, 01, 15, 17, 47, 00)
+                ValidFrom = new DateTime(2018, 01, 15, 17, 47, 00),
+                Price = randomPrice()
             };
             dbContext.Add(ticket1);
             dbContext.Add(ticket2);
             dbContext.SaveChanges();
+        }
+
+        private static int randomPrice()
+        {
+            Random rnd = new Random();
+            return rnd.Next(39, 500);
         }
     }
 }

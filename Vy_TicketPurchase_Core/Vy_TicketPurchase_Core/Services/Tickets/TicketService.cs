@@ -25,21 +25,26 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 ToStation = t.ToStation,
                 CustomerName = t.DbCustomer.Name,
                 CustomerNumber = t.DbCustomer.Phonenumber,
-                ValidFrom = t.ValidFrom
+                ValidFromDate = t.ValidFrom.ToShortDateString(),
+                ValidFromTime = t.ValidFrom.ToShortTimeString(),
+                Price = t.Price
             }).ToList();
         }
+        
         public bool SaveTicket(ServiceModelTicket ticket) {
             DbCustomer customer = new DbCustomer
             {
                 Name = ticket.CustomerName,
                 Phonenumber = ticket.CustomerNumber
             };
+            
             DbTicket newTicket = new DbTicket
             {
                 FromStation = ticket.FromStation,
                 ToStation = ticket.ToStation,
-                ValidFrom = ticket.ValidFrom,
-                DbCustomer = customer
+                ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
+                DbCustomer = customer,
+                Price = 139 //TODO FIND OUT WHERE AND HOW TO RANDOMIZE THIS LATER
             };
             try
             {
