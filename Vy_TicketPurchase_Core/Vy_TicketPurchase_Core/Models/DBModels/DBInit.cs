@@ -87,21 +87,12 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             dbContext.SaveChanges();
         }
 
-        private List<DbStation> stations;
-
         private static void seedTrainLines(DatabaseContext dbContext)
         {
-            var line1 = new DbTrainLine
-            {
-                //Lage linjeobjekter, putte stasjoner inn i en linje, sette pris på linjen
-            };
-            var line2 = new DbTrainLine
-            {
-                //Lage linjeobjekter, putte stasjoner inn i en linje, sette pris på linjen
-            };
-            dbContext.Add(line1);
-            dbContext.Add(line2);
-            dbContext.SaveChanges();
+            //add lineobjects from file
+            //dbContext.Add(line1);
+            //dbContext.Add(line2);
+            //dbContext.SaveChanges();
         }
     }
 }
