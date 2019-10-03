@@ -17,8 +17,15 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
         [DisplayName("Til")]
         public string ToStation { get; set; }
         [Required(ErrorMessage = "Dato må velges")]
-        [DisplayName("Avreise")]
-        public DateTime ValidFrom { get; set; }
+        [DisplayName("Avreise dato")]
+        [DataType(DataType.Date)]
+        public string ValidFromDate { get; set; }
+        [Required(ErrorMessage = "Tid må velges")]
+        [DisplayName("Avreise tid")]
+        [DataType(DataType.Time)]
+        public string ValidFromTime { get; set; }
+        [DisplayName("Pris")]
+        public int Price { get; set; }
         [Required(ErrorMessage ="Navn må fylles ut")]
         [DisplayName("Fullt navn")]
         public string CustomerName { get; set; }
