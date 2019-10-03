@@ -13,6 +13,6 @@ function checkInput(e) {
     if(fromInput === toInput) {
         e.preventDefault();
         errMsg.classList.add('error');
-        errMsg.innerHTML = "Du har valgt samme fra og til stasjon"
+        errMsg.innerHTML = "Du må velge to forskjellige stasjoner!"
     }
 }
