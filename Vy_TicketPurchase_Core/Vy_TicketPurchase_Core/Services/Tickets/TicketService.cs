@@ -44,7 +44,7 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 ToStation = ticket.ToStation,
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
                 DbCustomer = customer,
-                Price = 139 //TODO FIND OUT WHERE AND HOW TO RANDOMIZE THIS LATER
+                Price = randomPrice()
             };
             try
             {
@@ -63,6 +63,12 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
         {
             String DateAndTime = date + " " + time;
             return Convert.ToDateTime(DateAndTime);
+        }
+        
+        private static int randomPrice()
+        {
+            Random rnd = new Random();
+            return rnd.Next(39, 500);
         }
     }
 }

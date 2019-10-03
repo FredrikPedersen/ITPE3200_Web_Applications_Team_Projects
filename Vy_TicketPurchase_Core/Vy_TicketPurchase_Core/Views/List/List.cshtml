@@ -24,9 +24,13 @@
 
                 <label>Gyldig Fra: </label>
                 @Html.DisplayFor(model => ticket.ValidFromDate) @Html.DisplayFor(model => ticket.ValidFromTime) <br/>
-
+                
+                <label>Pris: </label>
+                @Html.DisplayFor(model => ticket.Price),- <br/>
+                
                 <label>Navn: </label>
                 @Html.DisplayFor(model => ticket.CustomerName) <br/>
+                
                 <label>Tlf Nummer: </label>
                 @Html.DisplayFor(model => ticket.CustomerNumber)
             </div>
