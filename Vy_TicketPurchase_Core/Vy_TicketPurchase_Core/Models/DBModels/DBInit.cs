@@ -89,6 +89,11 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             dbContext.SaveChanges();
         }
 
+        private static void seedTrainLines(DatabaseContext dbContext)
+        {
+            
+        }
+
         private static int randomPrice()
         {
             Random rnd = new Random();
