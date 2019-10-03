@@ -15,8 +15,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             _ticketService = ticketService;
         }
-
-        // GET
+        
         public IActionResult List()
         {
             var model = new ListModel
