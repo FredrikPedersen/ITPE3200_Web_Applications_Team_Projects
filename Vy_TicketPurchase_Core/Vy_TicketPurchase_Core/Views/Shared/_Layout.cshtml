@@ -7,6 +7,8 @@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
@@ -54,12 +56,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href='@Url.Action("Index", "Vy")' class="navbar-left">
-                    <img src="https://2a09a7cckyu1ah6b11o5h4j1-wpengine.netdna-ssl.com/no/wp-content/uploads/sites/5/2019/08/vy-382x226.png" class="responsiveImage"/>
+                    <img src="https://2a09a7cckyu1ah6b11o5h4j1-wpengine.netdna-ssl.com/no/wp-content/uploads/sites/5/2019/08/vy-382x226.png" class="responsiveImage" />
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Billettliste", "List", "List", new { tom = "" }, new {@class="navbarElement"})</li>
+                    <li>@Html.ActionLink("Billettliste", "List", "List", new { tom = "" }, new { @class = "navbarElement" })</li>
                 </ul>
             </div>
         </div>
@@ -72,11 +74,10 @@
         <hr />
         <footer>
             <p>&copy; 2019 - Martina Førre, Fredrik Pedersen, Nikita Petrovs</p>
-                @Html.ActionLink("TO THE INDEX TESTING!", "IndexTesting", "IndexModelTesting", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("TO THE LIST TESTING!", "ListTesting", "ListModelTesting", new { area = ""}, new { @class = "navbar-brand"})
+            @Html.ActionLink("TO THE INDEX TESTING!", "IndexTesting", "IndexModelTesting", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("TO THE LIST TESTING!", "ListTesting", "ListModelTesting", new { area = "" }, new { @class = "navbar-brand" })
         </footer>
     </div>
-
 
     @RenderSection("Scripts", required: false)
 </body>

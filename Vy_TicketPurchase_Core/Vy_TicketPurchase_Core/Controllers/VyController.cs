@@ -28,8 +28,17 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket) 
         {
+<<<<<<< HEAD
             _ticketService.SaveTicket(ticket);
             return RedirectToAction("List","List");
+=======
+            if (ModelState.IsValid)
+            {
+                _ticketService.SaveTicket(ticket);
+                return RedirectToAction("List", "List"); //må lage listeview
+            }
+            return View();
+>>>>>>> origin/MartinaBrack
         }
 
         public JsonResult Autocomplete(string input)

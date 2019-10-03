@@ -22,6 +22,10 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             {
                 SeedTickets(dbContext);
             }
+            if (!dbContext.TrainLines.Any())
+            {
+                seedTrainLines(dbContext);
+            }
         }
 
         //Reads csv file with stations and adds them to the dbcontext
@@ -67,7 +71,7 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                 ValidFrom = new DateTime(2019, 11, 02, 12, 05, 00),
                 Price = randomPrice()
             };
-            
+
             var ticket2 = new DbTicket
             {
                 DbCustomer = new DbCustomer
