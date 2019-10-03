@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Vy_TicketPurchase_Core.Models.DBModels;
 using Vy_TicketPurchase_Core.Services.Stations.Models;
@@ -51,6 +52,12 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 return false;
             }
            
+        }
+
+        public DateTime StringsToDateTime(String date, String time)
+        {
+            String DateAndTime = date + " " + time;
+            return Convert.ToDateTime(DateAndTime);
         }
     }
 }
