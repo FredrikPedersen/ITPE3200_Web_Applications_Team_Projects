@@ -13,11 +13,6 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             var dbContext = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
             dbContext.Database.EnsureCreated();
 
-            if (!dbContext.Stations.Any())
-            {
-                seedStations(dbContext);
-            }
-
             if (!dbContext.Tickets.Any())
             {
                 SeedTickets(dbContext);
@@ -29,31 +24,22 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
         }
 
         //Reads csv file with stations and adds them to the dbcontext
-        private static void seedStations(DatabaseContext dbContext)
+        private static List<DbStation> seedStations(DatabaseContext dbContext, string stations)
         {
-            using (var reader = new StreamReader(@".\Models\DBModels\SeedData\stations.csv"))
-            {
-                var stationSet = new HashSet<string>(); //Using a HashSet so prevent duplicate Stations in the database
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    if (line != null) //Parse through the CSV-file and add all stations to stationSet
-                    {
-                        var columns = line.Split(",");
-                        stationSet.Add(columns[2]); //The station names are located in the 3rd column in the downloaded file
-                    }
-                }
+            var stationNames = stations.Split(",");
+            List<DbStation> staionList = new List<DbStation>();
 
-                foreach (var stationName in stationSet) //Create a new station object from each station in the set, then add them to the dbContext
+            foreach (var stationName in stationNames)
+            {
+                var stationFromFile = new DbStation
                 {
-                    var stationFromFile = new DbStation
-                    {
-                        StationName = stationName
-                    };
-                    dbContext.Add(stationFromFile);
-                }
+                    StationName = stationName
+                };
+                dbContext.Add(stationFromFile);
+                staionList.Add(stationFromFile);
             }
             dbContext.SaveChanges();
+            return staionList;
         }
 
         //Method used for seeding some hardcoded example tickets to the database. Used for testing functionality, to be removed later.
@@ -91,8 +77,26 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
 
         private static void seedTrainLines(DatabaseContext dbContext)
         {
-            
-        }
+            using (var reader = new StreamReader(@".\Models\DBModels\SeedData\lines.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    
+                    var line = reader.ReadLine();
+                    if (line != null) //Parse through the CSV-file and add all stations to stationSet
+                    {
+                        var columns = line.Split("|");
+                        DbTrainLine lineFromFile = new DbTrainLine
+                        {
+                            Name = columns[0],
+                            Stations = seedStations(dbContext, columns[1])
+                        };
+                        dbContext.Add(lineFromFile);
+                    }
+                }
+            }
+            dbContext.SaveChanges();
+            }
 
         private static int randomPrice()
         {
