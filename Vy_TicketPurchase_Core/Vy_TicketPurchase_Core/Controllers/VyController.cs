@@ -28,8 +28,12 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket) 
         {
-            _ticketService.SaveTicket(ticket);
-            return RedirectToAction("List","List"); //må lage listeview
+            if (ModelState.IsValid)
+            {
+                _ticketService.SaveTicket(ticket);
+                return RedirectToAction("List", "List"); //må lage listeview
+            }
+            return View();
         }
 
       

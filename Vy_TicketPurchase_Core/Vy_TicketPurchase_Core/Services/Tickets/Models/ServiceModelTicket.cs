@@ -16,8 +16,9 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
         [Required(ErrorMessage = "Tilstajon må velges")]
         [DisplayName("Til")]
         public string ToStation { get; set; }
-        [Required(ErrorMessage = "Dato må velges")]
         [DisplayName("Avreise")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime ValidFrom { get; set; }
         [Required(ErrorMessage ="Navn må fylles ut")]
         [DisplayName("Fullt navn")]
