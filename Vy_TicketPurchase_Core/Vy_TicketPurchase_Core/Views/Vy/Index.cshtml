@@ -7,6 +7,8 @@
 
 <h2>Registrer billett</h2>
 
+<h4 id="test-err"></h4>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,7 +20,7 @@
         <div class="form-group" >
             @Html.LabelFor(model => model.Ticket.FromStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.FromStation, new { htmlAttributes = new { @class = "form-control autocomplete" } })
+                @Html.EditorFor(model => model.Ticket.FromStation, new { htmlAttributes = new { @class = "form-control autocomplete", id = "from" } })
                 @Html.ValidationMessageFor(model => model.Ticket.FromStation, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,15 +28,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ticket.ToStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.ToStation, new { htmlAttributes = new { @class = "form-control autocomplete" } })
+                @Html.EditorFor(model => model.Ticket.ToStation, new { htmlAttributes = new { @class = "form-control autocomplete", id = "to"}})
                 @Html.ValidationMessageFor(model => model.Ticket.ToStation, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Ticket.ValidFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ticket.ValidFrom.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.ValidFrom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ticket.ValidFrom, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Ticket.ValidFrom.Date, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Ticket.ValidFrom.Date, "", new {@class = "text-danger"})
             </div>
         </div>
 
@@ -57,8 +59,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Bestill" class="btn btn-primary" />
+                <input id="btn-submit" type="submit" value="Bestill" class="btn btn-primary" />
             </div>
         </div>
     </div>
+
 }
+
+<script src="~/js/index.js"></script>
