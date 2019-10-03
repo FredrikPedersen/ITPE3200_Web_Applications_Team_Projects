@@ -22,6 +22,10 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
             {
                 SeedTickets(dbContext);
             }
+            if (!dbContext.TrainLines.Any())
+            {
+                seedTrainLines(dbContext);
+            }
         }
 
         //Reads csv file with stations and adds them to the dbcontext
@@ -66,7 +70,7 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                 ToStation = "Oslo S",
                 ValidFrom = new DateTime(2019, 11, 02, 12, 05, 00)
             };
-            
+
             var ticket2 = new DbTicket
             {
                 DbCustomer = new DbCustomer
@@ -75,11 +79,28 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                     Phonenumber = "99106201"
                 },
                 FromStation = "Eidsvoll",
-                ToStation ="Lysaker",
+                ToStation = "Lysaker",
                 ValidFrom = new DateTime(2018, 01, 15, 17, 47, 00)
             };
             dbContext.Add(ticket1);
             dbContext.Add(ticket2);
+            dbContext.SaveChanges();
+        }
+
+        private List<DbStation> stations;
+
+        private static void seedTrainLines(DatabaseContext dbContext)
+        {
+            var line1 = new DbTrainLine
+            {
+                //Lage linjeobjekter, putte stasjoner inn i en linje, sette pris på linjen
+            };
+            var line2 = new DbTrainLine
+            {
+                //Lage linjeobjekter, putte stasjoner inn i en linje, sette pris på linjen
+            };
+            dbContext.Add(line1);
+            dbContext.Add(line2);
             dbContext.SaveChanges();
         }
     }
