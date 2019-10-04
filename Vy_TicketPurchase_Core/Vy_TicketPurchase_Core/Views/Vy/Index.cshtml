@@ -18,18 +18,18 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
-        <hr/>
+
+        <hr />
         <div id="hide-div" class="hidden">
             <button type="button">X</button>
         </div>
-        
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Ticket.FromStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.ValidationMessageFor(m => m.Stations)
-                @Html.EditorFor(model => model.Ticket.FromStation, new { htmlAttributes = new { placeholder="Hvor vil du reise fra?", @class = "form-control autocomplete", id = "from" } })
+                @Html.EditorFor(model => model.Ticket.FromStation, new { htmlAttributes = new { placeholder = "Hvor vil du reise fra?", @class = "form-control autocomplete", id = "from" } })
                 @Html.ValidationMessageFor(model => model.Ticket.FromStation, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ticket.ToStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.ToStation, new { htmlAttributes = new { placeholder="Hvor vil du reise til?", @class = "form-control toautocomplete", id = "to"}})
+                @Html.EditorFor(model => model.Ticket.ToStation, new { htmlAttributes = new { placeholder = "Hvor vil du reise til?", @class = "form-control toautocomplete", id = "to" } })
                 @Html.ValidationMessageFor(model => model.Ticket.ToStation, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -45,16 +45,16 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Ticket.ValidFromDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Ticket.ValidFromDate, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Ticket.ValidFromDate, "", new {@class = "text-danger"})
+                    @Html.EditorFor(model => model.Ticket.ValidFromDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ticket.ValidFromDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-        
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Ticket.ValidFromTime, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Ticket.ValidFromTime, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Ticket.ValidFromTime, "", new {@class = "text-danger"})
+                    @Html.EditorFor(model => model.Ticket.ValidFromTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ticket.ValidFromTime, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
                     @Html.ValidationMessageFor(model => model.Ticket.CustomerGivenName, "", new { @class = "text-danger" })
                 </div>
             </div>
-        
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Ticket.CustomerLastName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -73,7 +73,7 @@
                     @Html.ValidationMessageFor(model => model.Ticket.CustomerLastName, "", new { @class = "text-danger" })
                 </div>
             </div>
-        
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Ticket.CustomerNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -81,7 +81,6 @@
                     @Html.ValidationMessageFor(model => model.Ticket.CustomerNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
-
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
