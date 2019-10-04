@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vy_TicketPurchase_Core.Models.DBModels;
+using Vy_TicketPurchase_Core.Services.Tickets.Models;
 
 namespace Vy_TicketPurchase_Core.Services.Stations
 {
@@ -15,10 +16,11 @@ namespace Vy_TicketPurchase_Core.Services.Stations
             _databaseContext = dbContext;
         }
 
-        public List<DbTrainLine> GetAllLines()
+        public List<ServiceModelTrainLine> GetAllLines()
         {
-            return _databaseContext.TrainLines.Select(s => new DbTrainLine
+            return _databaseContext.TrainLines.Select(s => new ServiceModelTrainLine
             {
+                Name = s.Name,
                 Stations = s.Stations
             }).ToList();
         }

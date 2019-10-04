@@ -28,14 +28,14 @@ namespace Vy_TicketPurchase_Core
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             var connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
             services.AddScoped<StationService>();
             services.AddScoped<TicketService>();
+            services.AddScoped<LineService>();
 
             services.AddMvc();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +59,7 @@ namespace Vy_TicketPurchase_Core
                     name: "default",
                     template: "{controller=Vy}/{action=Index}/{id?}");
             });
-            
+
             InitializeMigrations(app);
         }
 

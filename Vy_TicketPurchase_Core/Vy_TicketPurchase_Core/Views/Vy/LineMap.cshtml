@@ -1,0 +1,38 @@
+﻿@model Vy_TicketPurchase_Core.Models.ViewModels.ListLineModel
+
+@{
+    ViewData["Title"] = "LineMap";
+    Layout = "_Layout";
+}
+
+<h2>Linjekart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Linjenavn
+            </th>
+            <th>
+                Stoppesteder
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.trainlines)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                <td>
+                    @foreach (var station in item.Stations)
+                    {
+                        <p>
+                            @Html.DisplayFor(modelItem => station.StationName)
+                        </p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

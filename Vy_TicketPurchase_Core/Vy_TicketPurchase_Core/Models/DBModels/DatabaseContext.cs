@@ -13,5 +13,6 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
         public DbSet<DbCustomer> Customers { get; set; }
         public DbSet<DbStation> Stations { get; set; }
         public DbSet<DbTrainLine> TrainLines { get; set; }
+        public DbSet<Vy_TicketPurchase_Core.Services.Tickets.Models.ServiceModelTrainLine> ServiceModelTrainLine { get; set; }
     }
 }
