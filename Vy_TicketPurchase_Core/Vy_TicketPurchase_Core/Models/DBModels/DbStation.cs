@@ -4,8 +4,10 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
 {
     public class DbStation
     {
-        [Key]
+        [Key] 
         public int Id { get; set; }
         public string StationName { get; set; }
+
+        public virtual DbTrainLine TrainLine { get; set; }
     }
 }
