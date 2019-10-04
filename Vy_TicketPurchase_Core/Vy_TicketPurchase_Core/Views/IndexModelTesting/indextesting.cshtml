@@ -10,7 +10,8 @@
 @foreach (var station in Model.Stations)
 {
     <p>
-    @station.TrainLine.Id. @station.StationName
+        @station.TrainLine.Name 
+        @station.StationName #@station.NumberOnLine
     </p>
                          
 }
