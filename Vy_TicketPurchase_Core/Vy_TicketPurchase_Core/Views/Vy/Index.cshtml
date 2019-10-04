@@ -9,7 +9,7 @@
     <script src="~/js/index.js" type="text/javascript"></script>
 }
 
-<p class="h1 text-center py-4">Bestill Billett</p>
+<h2>Registrer billett</h2>
 
 <h4 id="test-err"></h4>
 
@@ -26,11 +26,11 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Ticket.FromStation, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Ticket.FromStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.ValidationMessageFor(m => m.Stations)
-                @Html.EditorFor(model => model.Ticket.FromStation, new {htmlAttributes = new {@class = "form-control autocomplete", id = "from"}})
-                @Html.ValidationMessageFor(model => model.Ticket.FromStation, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.Ticket.FromStation, new { htmlAttributes = new { @class = "form-control autocomplete", id = "from" } })
+                @Html.ValidationMessageFor(model => model.Ticket.FromStation, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -84,13 +84,10 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-warning">Bestill <span class="glyphicon glyphicon-send"></span></button>
+                    <input id="btn-submit" type="submit" value="Bestill" class="btn btn-primary" />
                 </div>
             </div>
         </div>
     </div>
-    
- 
-    
-                    
+
 }
