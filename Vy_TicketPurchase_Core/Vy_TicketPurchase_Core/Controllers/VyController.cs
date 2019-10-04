@@ -35,18 +35,17 @@ namespace Vy_TicketPurchase_Core.Controllers
             }
             return View();
         }
-
+        
+        //Calls autocomplete method for "From" text box in Index View
         public JsonResult Autocomplete(string input)
         {
             return Json(_stationService.ServiceAutocomplete(input));
         }
         
-        public JsonResult AutocompleteTo(string input, string id)
+        //Calls autocomplete method for "To" text box in Index View
+        public JsonResult AutocompleteTo(string input, string fromStation)
         {
-            
-            return Json(_stationService.ServiceAutocompleteTo(input, id));
+            return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
         }
-
-
     }
 }

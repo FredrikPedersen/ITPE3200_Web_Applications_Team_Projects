@@ -40,6 +40,8 @@ namespace Vy_TicketPurchase_Core.Services.Stations
                 TrainLine = dbStation.TrainLine
             };
         }
+        
+        //Method that gets information for the "From" text box in the Index View
         [HttpPost]
         public List<string> ServiceAutocomplete(string input)
         {
@@ -49,35 +51,28 @@ namespace Vy_TicketPurchase_Core.Services.Stations
                 return result;
             }
         }
-        
+        //Method that gets information for the "To" text box in the Index View depending on content of the "From" text box
         [HttpPost]
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {
             var lineList = (from station in _databaseContext.Stations
                 where station.StationName == fromStation
                 select station.TrainLine.Id).ToList();
-            var fromStationId = (from station in _databaseContext.Stations
-                where station.StationName == fromStation
-                select station.TrainLine.Id).FirstOrDefault();
-            
-            var result1 = new List<string>();
+
+            var result = new List<string>();
             
             foreach (var line in lineList)
             {
                 var tempList = new List<string>(from station in _databaseContext.Stations where station.StationName.Contains(input) && station.TrainLine.Id == line select station.StationName).Distinct().ToList();
                 foreach (var value in tempList)
                 {
-                    result1.Add(value);
+                    if (!(result.Contains(value)))
+                    {
+                        result.Add(value);
+                    }
                 }
             }
-            
-            
-
-           
-
-            var result = (from station in _databaseContext.Stations where station.StationName.Contains(input) && station.TrainLine.Id == fromStationId select station.StationName).Distinct().ToList();
-
-           return result1;
+            return result;
         }
 
         
