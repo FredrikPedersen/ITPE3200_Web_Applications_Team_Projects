@@ -22,8 +22,7 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
                 seedTrainLines(dbContext);
             }
         }
-
-        //Reads csv file with stations and adds them to the dbcontext
+        
         private static List<DbStation> seedStations(DatabaseContext dbContext, string stations)
         {
             var stationNames = stations.Split(",");
