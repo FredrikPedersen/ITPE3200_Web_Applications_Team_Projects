@@ -16,4 +16,8 @@
     <Folder Include="wwwroot\images" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\ListModelTesting\listtesting.cshtml" />
+  </ItemGroup>
+
 </Project>

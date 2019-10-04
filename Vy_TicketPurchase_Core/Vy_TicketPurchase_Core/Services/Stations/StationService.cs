@@ -25,6 +25,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
             return _databaseContext.Stations.Select(s => new ServiceModelStation
             {
                 Id = s.Id,
+                NumberOnLine = s.NumberOnLine,
                 StationName = s.StationName,
                 TrainLine = s.TrainLine
             }).ToList();
@@ -35,6 +36,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
             return new ServiceModelStation
             {
                 Id = dbStation.Id,
+                NumberOnLine = dbStation.NumberOnLine,
                 StationName = dbStation.StationName,
                 TrainLine = dbStation.TrainLine
             };
@@ -44,7 +46,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
         {
             using (_databaseContext)
             {
-                var result = (from station in _databaseContext.Stations where station.StationName.Contains(input) select station.StationName).ToList();
+                var result = (from station in _databaseContext.Stations where station.StationName.Contains(input) && station.TrainLine.Id == 1 select station.StationName).Distinct().ToList();
                 return result;
             }
         }

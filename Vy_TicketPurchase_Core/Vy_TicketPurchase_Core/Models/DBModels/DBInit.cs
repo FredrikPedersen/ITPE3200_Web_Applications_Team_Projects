@@ -27,13 +27,16 @@ namespace Vy_TicketPurchase_Core.Models.DBModels
         {
             var stationNames = stations.Split(",");
             List<DbStation> staionList = new List<DbStation>();
+            int stationCounter = 1;
 
             foreach (var stationName in stationNames)
             {
                 var stationFromFile = new DbStation
                 {
-                    StationName = stationName
+                    StationName = stationName,
+                    NumberOnLine = stationCounter
                 };
+                stationCounter++;
                 dbContext.Add(stationFromFile);
                 staionList.Add(stationFromFile);
             }

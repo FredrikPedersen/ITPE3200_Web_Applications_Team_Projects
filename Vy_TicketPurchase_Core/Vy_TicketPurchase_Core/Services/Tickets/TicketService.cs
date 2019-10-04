@@ -44,7 +44,7 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 ToStation = ticket.ToStation,
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
                 DbCustomer = customer,
-                Price = randomPrice()
+                Price = calculatePrice()
             };
             try
             {
@@ -65,10 +65,9 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
             return Convert.ToDateTime(DateAndTime);
         }
         
-        private static int randomPrice()
+        private static int calculatePrice()
         {
-            Random rnd = new Random();
-            return rnd.Next(39, 500);
+            return 0; //TODO Fill out this logic
         }
     }
 }
