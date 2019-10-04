@@ -26,6 +26,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
             {
                 Id = s.Id,
                 StationName = s.StationName,
+                TrainLine = s.TrainLine
             }).ToList();
         }
 
@@ -35,6 +36,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
             {
                 Id = dbStation.Id,
                 StationName = dbStation.StationName,
+                TrainLine = dbStation.TrainLine
             };
         }
         [HttpPost]

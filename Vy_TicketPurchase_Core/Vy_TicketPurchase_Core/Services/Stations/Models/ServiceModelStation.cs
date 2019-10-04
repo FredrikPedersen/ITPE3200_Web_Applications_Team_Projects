@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Vy_TicketPurchase_Core.Models.DBModels;
 
 namespace Vy_TicketPurchase_Core.Services.Stations.Models
 {
@@ -7,5 +8,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations.Models
         [Key]
         public int Id { get; set; }
         public string StationName { get; set; }
+        
+        public virtual DbTrainLine TrainLine { get; set; }
     }
 }

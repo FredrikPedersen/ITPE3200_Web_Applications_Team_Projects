@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Vy_TicketPurchase_Core.Models.DBModels;
 using Vy_TicketPurchase_Core.Services.Stations.Models;
@@ -24,21 +25,26 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 ToStation = t.ToStation,
                 CustomerName = t.DbCustomer.Name,
                 CustomerNumber = t.DbCustomer.Phonenumber,
-                ValidFrom = t.ValidFrom
+                ValidFromDate = t.ValidFrom.ToShortDateString(),
+                ValidFromTime = t.ValidFrom.ToShortTimeString(),
+                Price = t.Price
             }).ToList();
         }
+        
         public bool SaveTicket(ServiceModelTicket ticket) {
             DbCustomer customer = new DbCustomer
             {
                 Name = ticket.CustomerName,
                 Phonenumber = ticket.CustomerNumber
             };
+            
             DbTicket newTicket = new DbTicket
             {
                 FromStation = ticket.FromStation,
                 ToStation = ticket.ToStation,
-                ValidFrom = ticket.ValidFrom,
-                DbCustomer = customer
+                ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
+                DbCustomer = customer,
+                Price = randomPrice()
             };
             try
             {
@@ -51,6 +57,18 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 return false;
             }
            
+        }
+
+        public DateTime StringsToDateTime(String date, String time)
+        {
+            String DateAndTime = date + " " + time;
+            return Convert.ToDateTime(DateAndTime);
+        }
+        
+        private static int randomPrice()
+        {
+            Random rnd = new Random();
+            return rnd.Next(39, 500);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Vy_TicketPurchase_Core.Controllers
 {
     public class VyController : Controller
     {
-        private readonly StationService _stationService; //TODO Instantiate these
+        private readonly StationService _stationService;
 
         private readonly TicketService _ticketService;
 
@@ -19,7 +19,7 @@ namespace Vy_TicketPurchase_Core.Controllers
             _ticketService = ticketService;
             _stationService = stationService;
         }
-        // GET: Vy
+        
         public ActionResult Index() 
         {
             return View();
@@ -27,18 +27,17 @@ namespace Vy_TicketPurchase_Core.Controllers
         
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket) 
-        {
+        { 
             if (ModelState.IsValid)
             {
                 _ticketService.SaveTicket(ticket);
-                return RedirectToAction("List", "List"); //må lage listeview
+                return RedirectToAction("List", "List");
             }
             return View();
         }
 
-      
         public JsonResult Autocomplete(string input)
-       {
+        {
             return Json(_stationService.ServiceAutocomplete(input));
         }
 
