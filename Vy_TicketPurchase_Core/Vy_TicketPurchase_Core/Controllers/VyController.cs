@@ -40,6 +40,13 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             return Json(_stationService.ServiceAutocomplete(input));
         }
+        
+        public JsonResult AutocompleteTo(string input, string from)
+        {
+            
+            return Json(_stationService.ServiceAutocompleteTo(input, from));
+        }
+
 
     }
 }

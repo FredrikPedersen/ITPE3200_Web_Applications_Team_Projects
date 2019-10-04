@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ticket.ToStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.ToStation, new { htmlAttributes = new { @class = "form-control autocomplete", id = "to"}})
+                @Html.EditorFor(model => model.Ticket.ToStation, new { htmlAttributes = new { @class = "form-control toautocomplete", id = "to"}})
                 @Html.ValidationMessageFor(model => model.Ticket.ToStation, "", new { @class = "text-danger" })
             </div>
         </div>
