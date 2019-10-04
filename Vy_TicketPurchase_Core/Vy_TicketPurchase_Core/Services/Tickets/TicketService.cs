@@ -23,7 +23,8 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
                 Id = t.Id,
                 FromStation = t.FromStation,
                 ToStation = t.ToStation,
-                CustomerName = t.DbCustomer.Name,
+                CustomerGivenName = SeparateGivenName(t.DbCustomer.Name),
+                CustomerLastName = SeparateLastName(t.DbCustomer.Name),
                 CustomerNumber = t.DbCustomer.Phonenumber,
                 ValidFromDate = t.ValidFrom.ToShortDateString(),
                 ValidFromTime = t.ValidFrom.ToShortTimeString(),
@@ -34,7 +35,7 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
         public bool SaveTicket(ServiceModelTicket ticket) {
             DbCustomer customer = new DbCustomer
             {
-                Name = ticket.CustomerName,
+                Name = ticket.CustomerGivenName + " " + ticket.CustomerLastName,
                 Phonenumber = ticket.CustomerNumber
             };
             
@@ -59,15 +60,27 @@ namespace Vy_TicketPurchase_Core.Services.Tickets
            
         }
 
-        public DateTime StringsToDateTime(String date, String time)
+        private static DateTime StringsToDateTime(String date, String time)
         {
-            String DateAndTime = date + " " + time;
+            var DateAndTime = date + " " + time;
             return Convert.ToDateTime(DateAndTime);
         }
-        
+
+        private static string SeparateGivenName(string name)
+        {
+            var nameSplit = name.Split(" ");
+            return nameSplit[0];
+        }
+
+        private string SeparateLastName(string name)
+        {
+            var nameSplit = name.Split(" ");
+            return nameSplit[nameSplit.Length-1];
+            
+        }
         private static int randomPrice()
         {
-            Random rnd = new Random();
+            var rnd = new Random();
             return rnd.Next(39, 500);
         }
     }

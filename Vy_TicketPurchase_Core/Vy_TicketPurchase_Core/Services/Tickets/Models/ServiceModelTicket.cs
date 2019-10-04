@@ -33,8 +33,12 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
         public int Price { get; set; }
         
         [Required(ErrorMessage ="Navn må fylles ut")]
-        [DisplayName("Fullt navn")]
-        public string CustomerName { get; set; }
+        [DisplayName("Fornavn")]
+        public string CustomerGivenName { get; set; }
+        
+        [Required(ErrorMessage ="Navn må fylles ut")]
+        [DisplayName("Etternavn")]
+        public string CustomerLastName { get; set; }
 
         [RegularExpression(@"[0-9]{8}", ErrorMessage = "Telefonnummer må inneholde 8 siffer")]
         [Required(ErrorMessage = "Telefonnummer må oppgis")]
