@@ -19,7 +19,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
         {
             return _databaseContext.TrainLines.Select(s => new DbTrainLine
             {
-                Stations = s.Stations,
+                Stations = s.Stations
             }).ToList();
         }
 
