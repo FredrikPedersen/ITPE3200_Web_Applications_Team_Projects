@@ -50,7 +50,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                     return RedirectToAction("List", "List");
                 }
             }
-            //kode som viser feilmelding her
+            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke");
             return View();
         }
 
