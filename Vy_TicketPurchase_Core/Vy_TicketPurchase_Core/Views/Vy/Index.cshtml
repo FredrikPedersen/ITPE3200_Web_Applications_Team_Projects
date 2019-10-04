@@ -9,7 +9,7 @@
     <script src="~/js/index.js" type="text/javascript"></script>
 }
 
-<h2>Registrer billett</h2>
+<p class="h1 py-4">Bestill Billett</p>
 
 <h4 id="test-err"></h4>
 
@@ -84,10 +84,10 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input id="btn-submit" type="submit" value="Bestill" class="btn btn-primary" />
+                    <span class="glyphicon glyphicon-send  hidden"><input id="btn-submit" type="submit" value="Bestill" class="btn btn-primary"></span> <!-- DO NOT REMOVE! For some reason the JavaScript stops working if this is removed. I don't know why -->
+                    <button type="submit" class="btn btn-warning">Bestill <span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
         </div>
     </div>
-
 }
