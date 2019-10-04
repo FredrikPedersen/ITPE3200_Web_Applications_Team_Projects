@@ -18,8 +18,12 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
-        <hr />
+        
+        <hr/>
+        <div id="hide-div" class="hidden">
+            <button type="button">X</button>
+        </div>
+        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group" >
             @Html.LabelFor(model => model.Ticket.FromStation, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -36,50 +40,52 @@
                 @Html.ValidationMessageFor(model => model.Ticket.ToStation, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ticket.ValidFromDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.ValidFromDate, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Ticket.ValidFromDate, "", new {@class = "text-danger"})
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ticket.ValidFromTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.ValidFromTime, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Ticket.ValidFromTime, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ticket.CustomerGivenName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.CustomerGivenName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ticket.CustomerGivenName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-                    @Html.LabelFor(model => model.Ticket.CustomerLastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Ticket.CustomerLastName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Ticket.CustomerLastName, "", new { @class = "text-danger" })
-                    </div>
+        <div id="hidden-div" class="hidden">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ticket.ValidFromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ticket.ValidFromDate, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Ticket.ValidFromDate, "", new {@class = "text-danger"})
                 </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ticket.CustomerNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticket.CustomerNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ticket.CustomerNumber, "", new { @class = "text-danger" })
             </div>
-        </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ticket.ValidFromTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ticket.ValidFromTime, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Ticket.ValidFromTime, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ticket.CustomerGivenName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ticket.CustomerGivenName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ticket.CustomerGivenName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ticket.CustomerLastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ticket.CustomerLastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ticket.CustomerLastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ticket.CustomerNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ticket.CustomerNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ticket.CustomerNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="btn-submit" type="submit" value="Bestill" class="btn btn-primary" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btn-submit" type="submit" value="Bestill" class="btn btn-primary" />
+                </div>
             </div>
         </div>
     </div>
