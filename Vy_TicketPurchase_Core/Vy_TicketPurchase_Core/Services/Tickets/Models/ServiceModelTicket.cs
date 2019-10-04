@@ -12,11 +12,11 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Frastasjon må velges")]
-        [DisplayName("Fra")]
+        [Display(Name="Fra", Prompt = "Hvor vil du reise fra?")]  
         public string FromStation { get; set; }
 
         [Required(ErrorMessage = "Tilstasjon må velges")]
-        [DisplayName("Til")]
+        [Display(Name="Til", Prompt = "Hvor vil du reise til?")]        
         public string ToStation { get; set; }
         
         [Required(ErrorMessage = "Dato må velges")]
@@ -33,16 +33,16 @@ namespace Vy_TicketPurchase_Core.Services.Tickets.Models
         public int Price { get; set; }
         
         [Required(ErrorMessage ="Navn må fylles ut")]
-        [DisplayName("Fornavn")]
+        [Display(Name="Fornavn", Prompt = "Fornavn")]  
         public string CustomerGivenName { get; set; }
         
         [Required(ErrorMessage ="Navn må fylles ut")]
-        [DisplayName("Etternavn")]
+        [Display(Name="Etternavn", Prompt = "Etternavn")]  
         public string CustomerLastName { get; set; }
 
         [RegularExpression(@"[0-9]{8}", ErrorMessage = "Telefonnummer må inneholde 8 siffer")]
         [Required(ErrorMessage = "Telefonnummer må oppgis")]
-        [DisplayName("Telefonnummer")]
+        [Display(Name="Telefonnummer", Prompt = "Telefonnummer (8 siffer)")]  
         public string CustomerNumber { get; set; }
     }
 }
