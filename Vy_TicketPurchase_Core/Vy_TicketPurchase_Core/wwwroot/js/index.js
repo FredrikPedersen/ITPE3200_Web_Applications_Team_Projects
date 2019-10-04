@@ -16,23 +16,23 @@ to.addEventListener('click', showElements);
 hideButton.addEventListener('click', hideDiv);
 
 //Checks input in from and to text boxes and stops the submittion procces if the contents are equal
-    function checkInput(e) {
-        var fromInput = from.value;
-     var toInput = to.value;
-        if(fromInput === toInput) {
+function checkInput(e) {
+    var fromInput = from.value;
+    var toInput = to.value;
+    if(fromInput === toInput) {
         e.preventDefault();
         errMsg.classList.add('error');
         errMsg.innerHTML = "Du må velge to forskjellige stasjoner!"
-        }
-    }    
-    
-    function showElements() {
-        console.log("click");
-        hiddenDiv.classList.remove('hidden');
-        hideButton.classList.remove('hidden');
     }
+}    
     
-   function hideDiv() {
-        hiddenDiv.classList.add('hidden');
-        hideButton.classList.add('hidden');
+function showElements() {
+    console.log("click");
+    hiddenDiv.classList.remove('hidden');
+    hideButton.classList.remove('hidden');
+}
+    
+function hideDiv() {
+    hiddenDiv.classList.add('hidden');
+    hideButton.classList.add('hidden');
     }
