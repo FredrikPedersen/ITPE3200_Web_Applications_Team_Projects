@@ -25,9 +25,10 @@
         </div>
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group" >
+        <div class="form-group">
             @Html.LabelFor(model => model.Ticket.FromStation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.ValidationMessageFor(m => m.Stations)
                 @Html.EditorFor(model => model.Ticket.FromStation, new { htmlAttributes = new { placeholder="Hvor vil du reise fra?", @class = "form-control autocomplete", id = "from" } })
                 @Html.ValidationMessageFor(model => model.Ticket.FromStation, "", new { @class = "text-danger" })
             </div>
