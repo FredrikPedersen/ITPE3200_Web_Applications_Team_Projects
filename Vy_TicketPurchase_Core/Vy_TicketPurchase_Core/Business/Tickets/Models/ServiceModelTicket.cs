@@ -1,10 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Stations.Models;
 
-namespace Vy_TicketPurchase_Core.Services.Tickets.Models
+namespace Vy_TicketPurchase_Core.Business.Tickets.Models
 {
     public class ServiceModelTicket
     {

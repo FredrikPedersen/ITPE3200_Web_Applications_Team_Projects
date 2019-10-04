@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Vy_TicketPurchase_Core.Services.Stations.Models;
-using Vy_TicketPurchase_Core.Services.Tickets.Models;
+using Vy_TicketPurchase_Core.Business.Stations.Models;
+using Vy_TicketPurchase_Core.Business.Tickets.Models;
 
-namespace Vy_TicketPurchase_Core.Models.ViewModels
+namespace Vy_TicketPurchase_Core.ViewModels
 {
     public class IndexModel
     {

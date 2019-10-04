@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vy_TicketPurchase_Core.Services.Tickets.Models
+namespace Vy_TicketPurchase_Core.Business.Tickets.Models
 {
     public class ServiceModelCustomer
     {

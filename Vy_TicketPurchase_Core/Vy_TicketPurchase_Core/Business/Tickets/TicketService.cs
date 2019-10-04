@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Stations.Models;
-using Vy_TicketPurchase_Core.Services.Tickets.Models;
+using Vy_TicketPurchase_Core.Business.Tickets.Models;
+using Vy_TicketPurchase_Core.Repository;
+using Vy_TicketPurchase_Core.Repository.DBModels;
 
-namespace Vy_TicketPurchase_Core.Services.Tickets
+namespace Vy_TicketPurchase_Core.Business.Tickets
 {
     public class TicketService
     {

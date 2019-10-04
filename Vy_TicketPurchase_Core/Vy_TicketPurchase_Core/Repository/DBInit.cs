@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Vy_TicketPurchase_Core.Repository.DBModels;
 
-namespace Vy_TicketPurchase_Core.Models.DBModels
+namespace Vy_TicketPurchase_Core.Repository
 {
     public class DbInit
     {

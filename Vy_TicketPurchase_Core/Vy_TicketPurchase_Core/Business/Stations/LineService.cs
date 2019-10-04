@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Vy_TicketPurchase_Core.Models.DBModels;
+using Vy_TicketPurchase_Core.Repository;
+using Vy_TicketPurchase_Core.Repository.DBModels;
 
-namespace Vy_TicketPurchase_Core.Services.Stations
+namespace Vy_TicketPurchase_Core.Business.Stations
 {
     public class LineService
     {

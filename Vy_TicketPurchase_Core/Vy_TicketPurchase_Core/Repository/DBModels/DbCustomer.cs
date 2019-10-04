@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vy_TicketPurchase_Core.Models.DBModels
+namespace Vy_TicketPurchase_Core.Repository.DBModels
 {
     public class DbCustomer
     {
