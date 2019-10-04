@@ -50,23 +50,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
         [HttpPost]
         public List<string> ServiceAutocompleteTo(string input, string from)
         {
-            var result = new List<string>();
-            var fromStation = from
-                var fromStationId =
-
-
-            using (_databaseContext)
-            {
-                var stationList = (from trainline in _databaseContext.TrainLines where trainline.Id == idT select trainline.stations);
-                foreach (var VARIABLE in stationList)
-                {
-                    foreach (var stasjon in VARIABLE)
-                    {
-                        result.Add(stasjon.StationName);
-                    }
-                }
-            }
-            return result;
+            return null;
         }
 
 
