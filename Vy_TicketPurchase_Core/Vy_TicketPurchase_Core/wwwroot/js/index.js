@@ -14,11 +14,7 @@ hideButton.addEventListener('click', hideDiv);
 
 //Checks input in from and to text boxes and stops the submit process if the contents are equal
 function checkInput(event) {
-    var fromInput = from.value;
-    var toInput = to.value;
-    var stringComparison = toInput.toString().localeCompare(fromInput.toString());
-    var booleanComparison = stringComparison === 0;
-    if(booleanComparison) {
+    if(from.value === to.value) {
         event.preventDefault();
         errMsg.classList.add('error');
         errMsg.innerHTML = "Du må velge to forskjellige stasjoner!";
