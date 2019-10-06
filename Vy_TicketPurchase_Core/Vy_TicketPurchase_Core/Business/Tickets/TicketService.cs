@@ -45,7 +45,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 ToStation = ticket.ToStation,
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
                 DbCustomer = customer,
-                Price = randomPrice()
+                Price = RandomPrice()
             };
             try
             {
@@ -57,28 +57,32 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             {
                 return false;
             }
-           
         }
 
+        //Method for converting strings with date and time data to a DateTime object. Used when creating a DbTicket from a ServiceModelTicket
         private static DateTime StringsToDateTime(String date, String time)
         {
-            var DateAndTime = date + " " + time;
-            return Convert.ToDateTime(DateAndTime);
+            var dateAndTime = date + " " + time;
+            return Convert.ToDateTime(dateAndTime);
         }
 
+        //Separates the given name from a string with a full name. Used when creating a ServiceModelTicket from a DbTicket
         private static string SeparateGivenName(string name)
         {
             var nameSplit = name.Split(" ");
             return nameSplit[0];
         }
 
+        //Separates the surname from a string with a full name. Used when creating a ServiceModelTicket from a DbTicket
         private string SeparateLastName(string name)
         {
             var nameSplit = name.Split(" ");
             return nameSplit[nameSplit.Length-1];
             
         }
-        private static int randomPrice()
+        
+        //Method fro generating a random price for a ticket
+        private static int RandomPrice() //TODO stop using a random price and generate a price depending on factors like travel time, stations passed etc.
         {
             var rnd = new Random();
             return rnd.Next(39, 500);

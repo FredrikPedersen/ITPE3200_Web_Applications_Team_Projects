@@ -41,7 +41,7 @@ namespace Vy_TicketPurchase_Core.Business.Stations
             };
         }
         
-        //Method that gets information for the "From" text box in the Index View
+        //Method that gets information for the "From" autocomplete in the Index View
         [HttpPost]
         public List<string> ServiceAutocomplete(string input)
         {
@@ -51,7 +51,8 @@ namespace Vy_TicketPurchase_Core.Business.Stations
                 return result;
             }
         }
-        //Method that gets information for the "To" text box in the Index View depending on content of the "From" text box
+        
+        //Method that gets information for the "To" autocomplete in the Index View depending on content of the "From" text box
         [HttpPost]
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {

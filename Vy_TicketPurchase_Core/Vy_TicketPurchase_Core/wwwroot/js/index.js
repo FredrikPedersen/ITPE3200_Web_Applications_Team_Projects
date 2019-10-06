@@ -20,7 +20,7 @@ function checkInput(event) {
         errMsg.innerHTML = "Du må velge to forskjellige stasjoner!";
     }
 }    
-    
+
 function showElements() {
     hiddenDiv.classList.remove('hidden');
     hideButton.classList.remove('hidden');
