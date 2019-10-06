@@ -48,7 +48,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                     return RedirectToAction("List", "List");
                 }
             }
-            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke");
+            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             return View();
         }
 
