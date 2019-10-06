@@ -13,14 +13,14 @@ body {
     padding-right: 15px;
 }
 
-.responsiveImage {
+.navbarImage {
     width: 100%;
     max-width: 15em;
     height: auto;
 }
 
 .bodyMargin {
-    padding-top: 10em;
+    padding-top: 8em;
 }
 
 .navbarElement {
