@@ -40,3 +40,27 @@ body {
 .error {
     color: red;
 }
+
+.img-row {
+    display: flex;
+    padding-top: 3em;
+}
+
+.img-900-600 {
+    display: flex;
+    flex: calc(900/600);
+    padding: 5px;
+}
+
+.img-1488-992 {
+    display: flex;
+    flex: calc(1488/992);
+    padding: 5px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
