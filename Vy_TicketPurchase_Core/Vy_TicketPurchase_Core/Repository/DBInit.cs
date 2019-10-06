@@ -39,8 +39,7 @@ namespace Vy_TicketPurchase_Core.Repository
 
         private static void SeedTrainLines(DatabaseContext dbContext)
         {
-            using (var reader = new StreamReader(@".\Models\DBModels\SeedData\lines.csv"))
-            {
+            using (var reader = new StreamReader(@".\Repository\DBModels\SeedData\lines.csv")) {
                 while (!reader.EndOfStream)
                 {
                     
