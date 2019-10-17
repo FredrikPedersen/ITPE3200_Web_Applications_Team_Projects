@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
@@ -9,7 +10,6 @@ namespace Vy_TicketPurchase_Core.Controllers
     public class VyController : Controller
     {
         private readonly StationService _stationService;
-
         private readonly TicketService _ticketService;
 
         public VyController(TicketService ticketService, StationService stationService)
@@ -49,8 +49,8 @@ namespace Vy_TicketPurchase_Core.Controllers
                 }
                 if (isValidToStation && isValidFromStation)
                 {
-                    _ticketService.SaveTicket(ticket);
-                    return RedirectToAction("selectTrip", "Vy", ticket);
+                    _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+                    return RedirectToAction("List", "List");
                 }
             }
 
@@ -70,5 +70,11 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
         }
+
+        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
+        {
+            return _stationService.GetStationsFromNames(toStation, fromStation);
+        }
+        
     }
 }
