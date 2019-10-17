@@ -13,30 +13,27 @@
     
     <br/>
     
-    
-    @foreach (var ticket in Model.Tickets)
-    {
         <div class="ticket">
             
             <div>
                 <label>Reise: </label>
-                @Html.DisplayFor(model => ticket.FromStation) - @Html.DisplayFor(model => ticket.ToStation) <br/>
+                @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].FromStation) - @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].ToStation) <br/>
 
                 <label>Gyldig Fra: </label>
-                @Html.DisplayFor(model => ticket.ValidFromDate) @Html.DisplayFor(model => ticket.ValidFromTime) <br/>
+                @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].ValidFromDate) @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].ValidFromTime) <br/>
                 
                 <label>Pris: </label>
-                @Html.DisplayFor(model => ticket.Price),- <br/>
+                @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].Price),- <br/>
                 
                 <label>Navn: </label>
-                @Html.DisplayFor(model => ticket.CustomerGivenName) @Html.DisplayFor(model => ticket.CustomerLastName) <br/>
+                @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].CustomerGivenName) @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].CustomerLastName) <br/>
                 
                 <label>Tlf Nummer: </label>
-                @Html.DisplayFor(model => ticket.CustomerNumber)
+                @Html.DisplayFor(model => model.Tickets[(Model.Tickets.Count-1)].CustomerNumber)
             </div>
            
         </div>
         <br/>
-    }
+    
     </body>
 </html>
