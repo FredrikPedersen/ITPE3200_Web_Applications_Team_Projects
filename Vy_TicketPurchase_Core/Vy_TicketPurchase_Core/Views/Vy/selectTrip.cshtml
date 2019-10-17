@@ -1,0 +1,79 @@
+﻿@model Vy_TicketPurchase_Core.Business.Tickets.Models.ServiceModelTicket
+@{
+    ViewData["Title"] = "selectTrip";
+    Layout = "_Layout";
+}
+@section scripts {
+    <script src="~/js/selectTrip.js" type="text/javascript"></script>
+}
+
+<h2>Velg reise: </h2>
+@using (Html.BeginForm())
+{
+    <div class="ticket">
+        <label>Reise: </label>
+        @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
+
+        <label>Gyldig Fra: </label>
+        <div id="1">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        <label>Pris: </label>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+        </div>
+    </div>
+    <br>
+}
+@using (Html.BeginForm())
+{
+    <div class="ticket">
+
+        <label>Reise: </label>
+        @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
+
+        <label>Gyldig Fra: </label>
+        <div id="2">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        <label>Pris: </label>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+        </div>
+    </div>
+    <br>
+}
+@using (Html.BeginForm())
+{
+    <div class="ticket">
+        <label>Reise: </label>
+        @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
+
+        <label>Gyldig Fra: </label>
+        <div id="3">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        <label>Pris: </label>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+        </div>
+    </div>
+    <br>
+}
+@using (Html.BeginForm())
+{
+    <div class="ticket">
+        <label>Reise: </label>
+        @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
+
+        <label>Gyldig Fra: </label>
+        <div id="4">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        <label>Pris: </label>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+        </div>
+    </div>
+    <br>
+}
