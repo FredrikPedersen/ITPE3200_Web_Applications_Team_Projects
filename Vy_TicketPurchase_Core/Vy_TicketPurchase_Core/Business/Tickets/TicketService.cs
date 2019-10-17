@@ -82,17 +82,23 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             
         }
 
-        private static int GeneratePrice(ServiceModelStation fromStation, ServiceModelStation toStation)
+        private static int GeneratePrice()
         {
-            //TODO NOT FINISHED
+            //TODO Have to pass stations as objects before it is possible to use this
+            /* 
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
-            var pricePrStation = 15;
+            var price = 0;
             if (start > end)
             {
-                
+                price = (start - end) * 15;
+            }
+            else
+            {
+                price = (end - start) * 15;
             }
 
+            return price; */
             return 0;
         }
     }
