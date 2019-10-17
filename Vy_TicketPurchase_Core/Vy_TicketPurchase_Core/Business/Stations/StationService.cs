@@ -42,6 +42,26 @@ namespace Vy_TicketPurchase_Core.Business.Stations
                 TrainLine = dbStation.TrainLine
             };
         }
+
+        public List<DbStation> GetStationsFromNames(string fromStation, string toStation)
+        {
+            List<DbStation> stations = new List<DbStation>();
+            DbStation fromStationObject = null;
+            DbStation toStationObject = null;
+            
+            foreach (var station in _databaseContext.Stations)
+            {
+                if (fromStation.Equals(station.StationName))
+                    fromStationObject = station;
+
+                if (toStation.Equals(station.StationName))
+                    toStationObject = station;
+            }
+
+            stations.Add(fromStationObject);
+            stations.Add(toStationObject);
+            return stations;
+        }
         
         //Method that gets information for the "From" autocomplete in the Index View
         [HttpPost]
@@ -77,9 +97,5 @@ namespace Vy_TicketPurchase_Core.Business.Stations
             }
             return result;
         }
-
-        
-        
-
     }
 }
