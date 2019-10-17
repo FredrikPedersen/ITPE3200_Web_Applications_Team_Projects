@@ -26,6 +26,7 @@ namespace Vy_TicketPurchase_Core.Business.Stations
             return _databaseContext.Stations.Select(s => new ServiceModelStation
             {
                 Id = s.Id,
+                NumberOnLine = s.NumberOnLine,
                 StationName = s.StationName,
                 TrainLine = s.TrainLine
             }).ToList();
@@ -36,6 +37,7 @@ namespace Vy_TicketPurchase_Core.Business.Stations
             return new ServiceModelStation
             {
                 Id = dbStation.Id,
+                NumberOnLine = dbStation.NumberOnLine,
                 StationName = dbStation.StationName,
                 TrainLine = dbStation.TrainLine
             };

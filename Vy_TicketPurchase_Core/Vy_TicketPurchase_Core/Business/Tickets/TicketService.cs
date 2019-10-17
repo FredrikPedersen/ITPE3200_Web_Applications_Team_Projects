@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Vy_TicketPurchase_Core.Business.Stations.Models;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Repository;
 using Vy_TicketPurchase_Core.Repository.DBModels;
@@ -45,7 +46,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 ToStation = ticket.ToStation,
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
                 DbCustomer = customer,
-                Price = RandomPrice()
+                Price = GeneratePrice()
             };
             try
             {
@@ -80,12 +81,19 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             return nameSplit[nameSplit.Length-1];
             
         }
-        
-        //Method fro generating a random price for a ticket
-        private static int RandomPrice() //TODO stop using a random price and generate a price depending on factors like travel time, stations passed etc.
+
+        private static int GeneratePrice(ServiceModelStation fromStation, ServiceModelStation toStation)
         {
-            var rnd = new Random();
-            return rnd.Next(39, 500);
+            //TODO NOT FINISHED
+            var start = fromStation.NumberOnLine;
+            var end = toStation.NumberOnLine;
+            var pricePrStation = 15;
+            if (start > end)
+            {
+                
+            }
+
+            return 0;
         }
     }
 }

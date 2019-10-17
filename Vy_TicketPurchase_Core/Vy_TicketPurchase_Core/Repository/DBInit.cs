@@ -21,17 +21,20 @@ namespace Vy_TicketPurchase_Core.Repository
         
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
         {
-            var stationNames = stations.Split(",");
+            var stationNames = stations.Split(", ");
+            var numberOnLine = 1;
             List<DbStation> staionList = new List<DbStation>();
 
             foreach (var stationName in stationNames)
             {
                 var stationFromFile = new DbStation
                 {
-                    StationName = stationName
+                    StationName = stationName,
+                    NumberOnLine = numberOnLine
                 };
                 dbContext.Add(stationFromFile);
                 staionList.Add(stationFromFile);
+                numberOnLine++;
             }
             dbContext.SaveChanges();
             return staionList;

@@ -96,15 +96,7 @@ _[Ss]cripts
 **/.idea/**/modules.xml
 
 #Specific files
-/Vy_TicketPurchase/.vs/Vy_TicketPurchase/config/applicationhost.config
-/Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide
-/Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-shm
-/Vy_TicketPurchase/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-wal
-
-Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase_Core/v16/Server/sqlite3/storage.ide-shm
-
-Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase_Core/v16/Server/sqlite3/storage.ide-wal
-
-Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase_Core/DesignTimeBuild/.dtbcache
-
-Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase_Core/v16/Server/sqlite3/storage.ide
+/Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase/config/applicationhost.config
+/Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide
+/Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-shm
+/Vy_TicketPurchase_Core/.vs/Vy_TicketPurchase/v16/Server/sqlite3/storage.ide-wal
