@@ -15,7 +15,7 @@
         @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
 
         <label>Gyldig Fra: </label>
-        <div id="1">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        @Html.DisplayFor(model => model.ValidFromTime, new { htmlAttributes = new { id = "en" } }) <br />
         <label>Pris: </label>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -33,7 +33,7 @@
         @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
 
         <label>Gyldig Fra: </label>
-        <div id="2">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        @Html.DisplayFor(model => model.ValidFromTime, new { htmlAttributes = new { id = "to" } })<br />
         <label>Pris: </label>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -50,7 +50,7 @@
         @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
 
         <label>Gyldig Fra: </label>
-        <div id="3">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        @Html.DisplayFor(model => model.ValidFromTime, new { htmlAttributes = new { id = "tre" } }) <br />
         <label>Pris: </label>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -67,7 +67,7 @@
         @Html.DisplayFor(model => model.FromStation) - @Html.DisplayFor(model => model.ToStation) <br />
 
         <label>Gyldig Fra: </label>
-        <div id="4">@Html.DisplayFor(model => model.ValidFromTime)</div> <br />
+        @Html.DisplayFor(model => model.ValidFromTime, new { htmlAttributes = new { id = "fire" } })<br />
         <label>Pris: </label>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
