@@ -50,7 +50,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                 if (isValidToStation && isValidFromStation)
                 {
                     _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-                    return RedirectToAction("List", "List");
+                    return RedirectToAction("selectTrip", "Vy", ticket);
                 }
             }
 
@@ -75,6 +75,5 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             return _stationService.GetStationsFromNames(toStation, fromStation);
         }
-        
     }
 }
