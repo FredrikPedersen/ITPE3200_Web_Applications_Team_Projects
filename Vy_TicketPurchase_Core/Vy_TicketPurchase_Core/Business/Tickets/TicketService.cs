@@ -100,5 +100,15 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
 
             return price;
         }
+        
+        //temporarty method, must be moved into separate service
+        public List<DbPassengerType> GetAllPassengerTypes()
+        {
+            return _databaseContext.PassengerTypes.Select(t => new DbPassengerType
+            {
+                Id = t.Id,
+                Type = t.Type
+            }).ToList();
+        }
     }
 }

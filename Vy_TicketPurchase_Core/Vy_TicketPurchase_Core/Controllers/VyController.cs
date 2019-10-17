@@ -75,5 +75,11 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             return _stationService.GetStationsFromNames(toStation, fromStation);
         }
+        
+
+        public JsonResult GetPassengerTypes()
+        {
+            return Json(_ticketService.GetAllPassengerTypes());
+        }
     }
 }

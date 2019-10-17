@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\DBModels\SeedData" />
+    <Folder Include="wwwroot\images" />
   </ItemGroup>
 
   <ItemGroup>

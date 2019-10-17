@@ -29,4 +29,28 @@ function showElements() {
 function hideDiv() {
     hiddenDiv.classList.add('hidden');
     hideButton.classList.add('hidden');
+    }
+    
+    $(function () {
+        $.ajax({
+            url: '/Vy/GetPassengerTypes',
+            type: 'GET',
+            dataType: 'json',
+            success: function (jsPassengerTypes) {
+                showDropDown(jsPassengerTypes);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    });
+
+function showDropDown(jsPassengerTypes) {
+    var output = "";
+    for (var i in jsPassengerTypes) {
+        console.log(jsPassengerTypes[i].type);
+        output += "<option value='" + jsPassengerTypes[i].id + "'>"+jsPassengerTypes[i].type +"</option>";
+    }
+    $("#drop").append(output);
 }
+

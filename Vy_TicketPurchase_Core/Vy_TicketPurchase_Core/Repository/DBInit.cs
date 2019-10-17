@@ -17,6 +17,12 @@ namespace Vy_TicketPurchase_Core.Repository
             {
                 SeedTrainLines(dbContext);
             }
+
+            if (!dbContext.PassengerTypes.Any())
+            {
+                SeedPassengerTypes(dbContext);
+            }
+            
         }
         
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
@@ -61,5 +67,21 @@ namespace Vy_TicketPurchase_Core.Repository
             }
             dbContext.SaveChanges();
         }
+
+        private static void SeedPassengerTypes(DatabaseContext dbContext)
+        {
+            var typeAdult = new DbPassengerType{ Type = "Adult" };
+            var typeSenior = new DbPassengerType {Type = "Senior"};
+            var typeStudent = new DbPassengerType {Type = "Student"};
+
+            dbContext.Add(typeAdult);
+            dbContext.Add(typeSenior);
+            dbContext.Add(typeStudent);
+
+            dbContext.SaveChanges();
+
+        }
+        
+
     }
 }
