@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Stations.Models;
+using Microsoft.AspNetCore.Mvc;
+using Vy_TicketPurchase_Core.Business.Stations.Models;
+using Vy_TicketPurchase_Core.Repository;
+using Vy_TicketPurchase_Core.Repository.DBModels;
 
-namespace Vy_TicketPurchase_Core.Services.Stations
+namespace Vy_TicketPurchase_Core.Business.Stations
 {
     public class StationService
     {
@@ -41,7 +41,7 @@ namespace Vy_TicketPurchase_Core.Services.Stations
             };
         }
         
-        //Method that gets information for the "From" text box in the Index View
+        //Method that gets information for the "From" autocomplete in the Index View
         [HttpPost]
         public List<string> ServiceAutocomplete(string input)
         {
@@ -51,7 +51,8 @@ namespace Vy_TicketPurchase_Core.Services.Stations
                 return result;
             }
         }
-        //Method that gets information for the "To" text box in the Index View depending on content of the "From" text box
+        
+        //Method that gets information for the "To" autocomplete in the Index View depending on content of the "From" text box
         [HttpPost]
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {

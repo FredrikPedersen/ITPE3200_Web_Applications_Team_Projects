@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Stations;
-using Vy_TicketPurchase_Core.Services.Stations.Models;
-using Vy_TicketPurchase_Core.Services.Tickets;
-using Vy_TicketPurchase_Core.Services.Tickets.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vy_TicketPurchase_Core.Business.Stations;
+using Vy_TicketPurchase_Core.Business.Tickets;
+using Vy_TicketPurchase_Core.Business.Tickets.Models;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {
@@ -29,8 +25,9 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket)
         {
-            bool isValidFromStation = false;
-            bool isValidToStation = false;
+            var isValidFromStation = false;
+            var isValidToStation = false;
+            
             if (ModelState.IsValid)
             {
                 foreach (var station in _stationService.GetAllStations())
@@ -50,7 +47,9 @@ namespace Vy_TicketPurchase_Core.Controllers
                     return RedirectToAction("List", "List");
                 }
             }
-            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke");
+            
+            //If the user inputs a station that does not exist, show an error message
+            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             return View();
         }
 

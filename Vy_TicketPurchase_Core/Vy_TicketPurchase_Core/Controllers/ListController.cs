@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Vy_TicketPurchase_Core.Models.ViewModels;
-using Vy_TicketPurchase_Core.Services.Stations;
-using Vy_TicketPurchase_Core.Services.Tickets;
-using Vy_TicketPurchase_Core.Services.Tickets.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vy_TicketPurchase_Core.Business.Tickets;
+using Vy_TicketPurchase_Core.ViewModels;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {

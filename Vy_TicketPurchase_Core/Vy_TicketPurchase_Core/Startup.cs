@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Vy_TicketPurchase_Core.Models.DBModels;
-using Vy_TicketPurchase_Core.Services.Stations;
-using Vy_TicketPurchase_Core.Services.Tickets;
+using Vy_TicketPurchase_Core.Business.Stations;
+using Vy_TicketPurchase_Core.Business.Tickets;
+using Vy_TicketPurchase_Core.Repository;
 
 namespace Vy_TicketPurchase_Core
 {

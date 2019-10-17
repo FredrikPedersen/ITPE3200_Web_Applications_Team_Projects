@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vy_TicketPurchase_Core.Services.Tickets.Models
+namespace Vy_TicketPurchase_Core.Repository.DBModels
 {
-    public class ServiceModelCustomer
+    public class DbCustomer
     {
         [Key]
         public int Id { get; set; }
