@@ -14,18 +14,18 @@ hideButton.addEventListener('click', hideDiv);
 
 //Checks input in from and to text boxes and stops the submit process if the contents are equal
 function checkInput(event) {
-    if(from.value === to.value) {
+    if (from.value === to.value) {
         event.preventDefault();
         errMsg.classList.add('error');
         errMsg.innerHTML = "Du må velge to forskjellige stasjoner!";
     }
-}    
+}
 
 function showElements() {
     hiddenDiv.classList.remove('hidden');
     hideButton.classList.remove('hidden');
 }
-    
+
 function hideDiv() {
     hiddenDiv.classList.add('hidden');
     hideButton.classList.add('hidden');
