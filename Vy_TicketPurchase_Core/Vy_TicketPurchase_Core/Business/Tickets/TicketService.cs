@@ -22,8 +22,8 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             return _databaseContext.Tickets.Select(t => new ServiceModelTicket
             {
                 Id = t.Id,
-                FromStation = t.FromStation,
-                ToStation = t.ToStation,
+                FromStation = t.FromStation.StationName,
+                ToStation = t.ToStation.StationName,
                 CustomerGivenName = SeparateGivenName(t.DbCustomer.Name),
                 CustomerLastName = SeparateLastName(t.DbCustomer.Name),
                 CustomerNumber = t.DbCustomer.Phonenumber,
@@ -33,7 +33,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             }).ToList();
         }
         
-        public bool SaveTicket(ServiceModelTicket ticket) {
+        public bool SaveTicket(ServiceModelTicket ticket, List<DbStation> stationsFromName) {
             DbCustomer customer = new DbCustomer
             {
                 Name = ticket.CustomerGivenName + " " + ticket.CustomerLastName,
@@ -42,12 +42,13 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             
             DbTicket newTicket = new DbTicket
             {
-                FromStation = ticket.FromStation,
-                ToStation = ticket.ToStation,
+                FromStation = stationsFromName[0],
+                ToStation = stationsFromName[1],
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
                 DbCustomer = customer,
-                Price = GeneratePrice()
+                Price = GeneratePrice(stationsFromName[0], stationsFromName[1])
             };
+            
             try
             {
                 _databaseContext.Tickets.Add(newTicket);
@@ -82,10 +83,9 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             
         }
 
-        private static int GeneratePrice()
+        private static int GeneratePrice(DbStation fromStation, DbStation toStation)
         {
-            //TODO Have to pass stations as objects before it is possible to use this
-            /* 
+            //TODO Ta høyde for billettype også
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
             var price = 0;
@@ -98,8 +98,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 price = (end - start) * 15;
             }
 
-            return price; */
-            return 0;
+            return price;
         }
         
         //temporarty method, must be moved into separate service
