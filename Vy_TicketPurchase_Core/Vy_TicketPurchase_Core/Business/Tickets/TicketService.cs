@@ -83,10 +83,9 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             
         }
 
-        private static int GeneratePrice()
+        private static int GeneratePrice(DbStation fromStation, DbStation toStation)
         {
-            //TODO Have to pass stations as objects before it is possible to use this
-            /* 
+            //TODO Ta høyde for billettype også
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
             var price = 0;
@@ -99,8 +98,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 price = (end - start) * 15;
             }
 
-            return price; */
-            return 0;
+            return price;
         }
     }
 }
