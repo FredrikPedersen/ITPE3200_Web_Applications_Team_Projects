@@ -64,5 +64,10 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
         }
+
+        public JsonResult GetPassengerTypes()
+        {
+            return Json(_ticketService.GetAllPassengerTypes());
+        }
     }
 }

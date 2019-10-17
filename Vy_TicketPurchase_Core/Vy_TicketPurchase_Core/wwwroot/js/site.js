@@ -18,7 +18,6 @@ var from = document.querySelector('#from');
                         response($.map(data, function (item) {
                             return { label: item, value: item };
                         }))
-
                     }
                 })
             },
