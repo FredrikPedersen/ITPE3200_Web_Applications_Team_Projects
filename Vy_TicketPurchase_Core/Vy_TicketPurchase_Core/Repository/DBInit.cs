@@ -22,9 +22,8 @@ namespace Vy_TicketPurchase_Core.Repository
             {
                 SeedPassengerTypes(dbContext);
             }
-            
         }
-        
+
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
         {
             var stationNames = stations.Split(", ");
@@ -48,10 +47,10 @@ namespace Vy_TicketPurchase_Core.Repository
 
         private static void SeedTrainLines(DatabaseContext dbContext)
         {
-            using (var reader = new StreamReader(@".\Repository\DBModels\SeedData\lines.csv")) {
+            using (var reader = new StreamReader(@".\Repository\DBModels\SeedData\lines.csv"))
+            {
                 while (!reader.EndOfStream)
                 {
-                    
                     var line = reader.ReadLine();
                     if (line != null)
                     {
@@ -70,18 +69,40 @@ namespace Vy_TicketPurchase_Core.Repository
 
         private static void SeedPassengerTypes(DatabaseContext dbContext)
         {
-            var typeAdult = new DbPassengerType{ Type = "Adult" };
-            var typeSenior = new DbPassengerType {Type = "Senior"};
-            var typeStudent = new DbPassengerType {Type = "Student"};
+            var typeAdult = new DbPassengerType { Type = "Adult" };
+            var typeSenior = new DbPassengerType { Type = "Senior" };
+            var typeStudent = new DbPassengerType { Type = "Student" };
 
             dbContext.Add(typeAdult);
             dbContext.Add(typeSenior);
             dbContext.Add(typeStudent);
 
             dbContext.SaveChanges();
-
         }
-        
 
+        private static void seedDepartures(DatabaseContext dbContext)
+        {
+            var departure1 = new DBDepartures { departureTime = "11.00" };
+            var departure2 = new DBDepartures { departureTime = "12.00" };
+            var departure3 = new DBDepartures { departureTime = "13.00" };
+            var departure4 = new DBDepartures { departureTime = "14.00" };
+            var departure5 = new DBDepartures { departureTime = "15.00" };
+            var departure6 = new DBDepartures { departureTime = "16.00" };
+            var departure7 = new DBDepartures { departureTime = "17.00" };
+            var departure8 = new DBDepartures { departureTime = "18.00" };
+            var departure9 = new DBDepartures { departureTime = "19.00" };
+
+            dbContext.Add(departure1);
+            dbContext.Add(departure2);
+            dbContext.Add(departure3);
+            dbContext.Add(departure4);
+            dbContext.Add(departure5);
+            dbContext.Add(departure6);
+            dbContext.Add(departure7);
+            dbContext.Add(departure8);
+            dbContext.Add(departure9);
+
+            dbContext.SaveChanges();
+        }
     }
 }
