@@ -18,7 +18,7 @@ namespace Vy_TicketPurchase_Core.Repository.DBModels
         //Kan potensielt legge inn stasjoner og linjer i tillegg her for å få egenspesifiserte avgangstider per stasjon ved utvidelse
         //Har en seedmetode som putter inn i databasen, kan endre til å seede inn fra fil
         //Departures er lagt inn i databasen, og oppdatert startup
-        //Må lage metode i DepartureService klasse under business
+        //Må lage metode i DepartureService klasse under business som henter ut kun billetter etter gitt tidspunkt
         //Trenger kun servicemodelDeparture for å redigere avganger i et eget view til innlevering 2
         //Fra forrige view, får inn en servicemodelticket, oppdaterer tid og dato verdiene og sender videre for å opprette objektet i kontrolleren.
     }
