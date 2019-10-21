@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Vy_TicketPurchase_Core.Business;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
-using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Repository.DBModels;
+using Vy_TicketPurchase_Core.ViewModels;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {
@@ -24,24 +24,12 @@ namespace Vy_TicketPurchase_Core.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View();
         }
 
-        public ActionResult TestSelectTrip()
-        {
-            List<DbDepartures> departures = _departureService.GetAllDepartures();
-            return View(departures);
-        }
-
         [HttpPost]
-        public ActionResult TestSelectTrip(ServiceModelTicket ticket)
-        {
-            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-            return RedirectToAction("List", "List", ticket);
-        }
-
-        [HttpPost]
-        public ActionResult Index(ServiceModelTicket ticket)
+        public ActionResult Index(IndexModel model)
         {
             var isValidFromStation = false;
             var isValidToStation = false;
@@ -50,21 +38,26 @@ namespace Vy_TicketPurchase_Core.Controllers
             {
                 foreach (var station in _stationService.GetAllStations())
                 {
-                    if (ticket.FromStation == station.StationName)
+                    if (model.Ticket.FromStation == station.StationName)
                     {
                         isValidFromStation = true;
                     }
-                    if (ticket.ToStation == station.StationName)
+                    if (model.Ticket.ToStation == station.StationName)
                     {
                         isValidToStation = true;
                     }
                 }
+                
                 if (isValidToStation && isValidFromStation)
                 {
-                    List<DbDepartures> departures = _departureService.GetAllDepartures();
-                    //   _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-                    ViewBag.ticket = ticket;
-                    return View("testSelectTrip", departures);
+
+                    SelectTripModel selectTripModel = new SelectTripModel
+                    {
+                        departures = _departureService.GetAllDepartures(),
+                        ticket = model.Ticket
+                    };
+                    
+                    return View("SelectTrip", selectTripModel);
                 }
             }
 
@@ -85,14 +78,22 @@ namespace Vy_TicketPurchase_Core.Controllers
             return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
         }
 
-        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
-        {
-            return _stationService.GetStationsFromNames(toStation, fromStation);
-        }
-
         public JsonResult GetPassengerTypes()
         {
             return Json(_ticketService.GetAllPassengerTypes());
+        }
+
+        private SelectList PassengerTypesForDropdown()
+        {
+            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
+            string[] typeNames = new string[types.Capacity-1];
+            
+            for (var i = 0; i < types.Capacity-1; i++)
+            {
+                typeNames[i] = types[i].Type;
+            }
+            
+            return new SelectList(typeNames);
         }
     }
 }

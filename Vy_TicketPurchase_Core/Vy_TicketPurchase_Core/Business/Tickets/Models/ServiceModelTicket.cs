@@ -27,7 +27,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets.Models
         public string ValidFromTime { get; set; }
         
         [DisplayName("Pris")]
-        public int Price { get; set; }
+        public double Price { get; set; }
         
         [Required(ErrorMessage ="Navn må fylles ut")]
         [Display(Name="Fornavn", Prompt = "Fornavn")]  

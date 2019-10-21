@@ -73,9 +73,21 @@ namespace Vy_TicketPurchase_Core.Repository
 
         private static void SeedPassengerTypes(DatabaseContext dbContext)
         {
-            var typeAdult = new DbPassengerType{ TypeName = "Adult" };
-            var typeSenior = new DbPassengerType {TypeName = "Senior"};
-            var typeStudent = new DbPassengerType {TypeName = "Student"};
+            var typeAdult = new DbPassengerType
+            {
+                Type = "Adult",
+                PriceMultiplier = 1.0
+            };
+            var typeSenior = new DbPassengerType
+            {
+                Type = "Senior",
+                PriceMultiplier = 0.5
+            };
+            var typeStudent = new DbPassengerType
+            {
+                Type = "Student",
+                PriceMultiplier = 0.7
+            };
 
             dbContext.Add(typeAdult);
             dbContext.Add(typeSenior);

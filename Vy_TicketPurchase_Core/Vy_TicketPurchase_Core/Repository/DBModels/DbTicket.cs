@@ -13,6 +13,6 @@ namespace Vy_TicketPurchase_Core.Repository.DBModels
         public DbCustomer DbCustomer { get; set; }
         
         public DbPassengerType PassengerType { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
     }
 }

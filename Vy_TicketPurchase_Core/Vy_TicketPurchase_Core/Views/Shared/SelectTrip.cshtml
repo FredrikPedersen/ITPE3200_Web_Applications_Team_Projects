@@ -1,0 +1,45 @@
+﻿@model Vy_TicketPurchase_Core.ViewModels.SelectTripModel
+
+@{
+    ViewData["Title"] = "testSelectTrip";
+    Layout = "_Layout";
+}
+
+<h2>testSelectTrip</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Model.ticket.FromStation
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.departures)
+        {
+            <tr>
+                <td class="row">
+                    @using (Html.BeginForm("SelectTrip", "SelectTrip", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="col-6">
+                            @Html.DisplayFor(modelItem => item.departureTime)
+                            @Html.Hidden("ValidFromTime", item.departureTime)
+                            @Html.Hidden("FromStation", Model.ticket.FromStation)
+                            @Html.Hidden("ToStation", Model.ticket.ToStation)
+                            @Html.Hidden("ValidFromDate", Model.ticket.ValidFromDate)
+                            @Html.Hidden("Price", Model.ticket.Price)
+                            @Html.Hidden("CustomerGivenName", Model.ticket.CustomerGivenName)
+                            @Html.Hidden("CustomerLastNAme", Model.ticket.CustomerLastName)
+                            @Html.Hidden("CustomerNumber", Model.ticket.CustomerNumber)
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

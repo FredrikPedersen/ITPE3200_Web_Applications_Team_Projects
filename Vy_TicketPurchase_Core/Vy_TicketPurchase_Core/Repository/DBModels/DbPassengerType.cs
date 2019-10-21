@@ -6,7 +6,7 @@ namespace Vy_TicketPurchase_Core.Repository.DBModels
     {
         [Key] 
         public int Id { get; set; }
-        public string TypeName { get; set; }
+        public string Type { get; set; }
         
         public double PriceMultiplier { get; set; }
     }
