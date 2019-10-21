@@ -70,16 +70,11 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult SelectTrip(SelectTripModel model)
         {
+            //TODO Noe jævla rart skjer her. Modellen som returneres er ikke null, men får ikke noen verdier i seg.
+            //TODO Prøv eventuelt å revertere til Oles måte å gjøre det på i morgen. IKKE RØR FØR FREDRIK FÅR TESTA!
             
-            //TODO Problemet ligger i å passere viewmodellen fra en controller til en annen. Forklarer tanken her når vi møtes - Fredrik
-            //TODO En annen løsning kan være å passere Ticket som en sesjonsvariabel, og kun hente ut valgt Avgang, også legge til i billetten her.
-            SelectTripModel tempModel = (SelectTripModel) TempData["selecTrip"];
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAA");
-            Console.WriteLine(tempModel.ticket.PasengerType);
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
             _ticketService.SaveTicket(model.ticket, GetStationsFromNames(model.ticket.FromStation, model.ticket.ToStation));
-            return RedirectToAction("List", "List", model.ticket);
+                return RedirectToAction("List", "List", model.ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
