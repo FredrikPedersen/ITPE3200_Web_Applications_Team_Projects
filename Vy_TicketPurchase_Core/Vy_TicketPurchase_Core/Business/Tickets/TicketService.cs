@@ -29,7 +29,9 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 CustomerNumber = t.DbCustomer.Phonenumber,
                 ValidFromDate = t.ValidFrom.ToShortDateString(),
                 ValidFromTime = t.ValidFrom.ToShortTimeString(),
-                Price = t.Price
+                Price = t.Price,
+                PasengerType = t.PassengerType.TypeName
+                
             }).ToList();
         }
         
@@ -107,7 +109,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             return _databaseContext.PassengerTypes.Select(t => new DbPassengerType
             {
                 Id = t.Id,
-                Type = t.Type
+                TypeName = t.TypeName
             }).ToList();
         }
     }

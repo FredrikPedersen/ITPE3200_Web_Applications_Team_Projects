@@ -41,5 +41,9 @@ namespace Vy_TicketPurchase_Core.Business.Tickets.Models
         [Required(ErrorMessage = "Telefonnummer må oppgis")]
         [Display(Name="Telefonnummer", Prompt = "Telefonnummer (8 siffer)")]  
         public string CustomerNumber { get; set; }
+        
+        [Required(ErrorMessage = "Billettype må oppgis!")]
+        [Display(Name="Billettype", Prompt = "Velg billettype")]
+        public string PasengerType { get; set; }
     }
 }
