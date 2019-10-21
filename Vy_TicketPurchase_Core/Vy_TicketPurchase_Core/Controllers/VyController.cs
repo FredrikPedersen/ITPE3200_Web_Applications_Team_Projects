@@ -27,11 +27,6 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
 
-        public ActionResult SelectTrip(ServiceModelTicket ticket)
-        {
-            return View(ticket);
-        }
-
         public ActionResult TestSelectTrip()
         {
             List<DbDepartures> departures = _departureService.GetAllDepartures();
