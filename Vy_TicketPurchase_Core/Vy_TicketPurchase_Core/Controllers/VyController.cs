@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Vy_TicketPurchase_Core.Business;
@@ -65,6 +66,21 @@ namespace Vy_TicketPurchase_Core.Controllers
             ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             return View();
         }
+        
+        [HttpPost]
+        public ActionResult SelectTrip(SelectTripModel model)
+        {
+            
+            //TODO Problemet ligger i å passere viewmodellen fra en controller til en annen. Forklarer tanken her når vi møtes - Fredrik
+            //TODO En annen løsning kan være å passere Ticket som en sesjonsvariabel, og kun hente ut valgt Avgang, også legge til i billetten her.
+            SelectTripModel tempModel = (SelectTripModel) TempData["selecTrip"];
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAA");
+            Console.WriteLine(tempModel.ticket.PasengerType);
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+            _ticketService.SaveTicket(model.ticket, GetStationsFromNames(model.ticket.FromStation, model.ticket.ToStation));
+            return RedirectToAction("List", "List", model.ticket);
+        }
 
         //Calls autocomplete method for "From" text box in Index View
         public JsonResult Autocomplete(string input)
@@ -94,6 +110,11 @@ namespace Vy_TicketPurchase_Core.Controllers
             }
             
             return new SelectList(typeNames);
+        }
+        
+        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
+        {
+            return _stationService.GetStationsFromNames(toStation, fromStation);
         }
     }
 }
