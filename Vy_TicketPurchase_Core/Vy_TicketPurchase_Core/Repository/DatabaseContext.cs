@@ -13,6 +13,6 @@ namespace Vy_TicketPurchase_Core.Repository
         public DbSet<DbStation> Stations { get; set; }
         public DbSet<DbTrainLine> TrainLines { get; set; }
         public DbSet<DbPassengerType> PassengerTypes { get; set; }
-        public DbSet<DBDepartures> Departures { get; set; }
+        public DbSet<DbDepartures> Departures { get; set; }
     }
 }

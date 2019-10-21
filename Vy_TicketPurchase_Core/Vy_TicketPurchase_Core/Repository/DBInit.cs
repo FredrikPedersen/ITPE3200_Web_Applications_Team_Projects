@@ -22,6 +22,10 @@ namespace Vy_TicketPurchase_Core.Repository
             {
                 SeedPassengerTypes(dbContext);
             }
+            if (!dbContext.Departures.Any())
+            {
+                seedDepartures(dbContext);
+            }
         }
 
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
@@ -82,15 +86,15 @@ namespace Vy_TicketPurchase_Core.Repository
 
         private static void seedDepartures(DatabaseContext dbContext)
         {
-            var departure1 = new DBDepartures { departureTime = "11.00" };
-            var departure2 = new DBDepartures { departureTime = "12.00" };
-            var departure3 = new DBDepartures { departureTime = "13.00" };
-            var departure4 = new DBDepartures { departureTime = "14.00" };
-            var departure5 = new DBDepartures { departureTime = "15.00" };
-            var departure6 = new DBDepartures { departureTime = "16.00" };
-            var departure7 = new DBDepartures { departureTime = "17.00" };
-            var departure8 = new DBDepartures { departureTime = "18.00" };
-            var departure9 = new DBDepartures { departureTime = "19.00" };
+            var departure1 = new DbDepartures { departureTime = "11:00" };
+            var departure2 = new DbDepartures { departureTime = "12:00" };
+            var departure3 = new DbDepartures { departureTime = "13:00" };
+            var departure4 = new DbDepartures { departureTime = "14:00" };
+            var departure5 = new DbDepartures { departureTime = "15:00" };
+            var departure6 = new DbDepartures { departureTime = "16:00" };
+            var departure7 = new DbDepartures { departureTime = "17:00" };
+            var departure8 = new DbDepartures { departureTime = "18:00" };
+            var departure9 = new DbDepartures { departureTime = "19:00" };
 
             dbContext.Add(departure1);
             dbContext.Add(departure2);
