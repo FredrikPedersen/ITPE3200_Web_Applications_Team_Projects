@@ -29,6 +29,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             
             //TODO Problemet ligger i å passere viewmodellen fra en controller til en annen. Forklarer tanken her når vi møtes - Fredrik
+            //TODO En annen løsning kan være å passere Ticket som en sesjonsvariabel, og kun hente ut valgt Avgang, også legge til i billetten her.
             SelectTripModel tempModel = (SelectTripModel) TempData["selecTrip"];
             Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAA");
             Console.WriteLine(tempModel.ticket.PasengerType);
