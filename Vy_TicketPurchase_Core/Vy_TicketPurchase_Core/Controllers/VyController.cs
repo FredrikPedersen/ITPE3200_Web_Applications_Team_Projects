@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Vy_TicketPurchase_Core.Business;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
@@ -11,11 +13,13 @@ namespace Vy_TicketPurchase_Core.Controllers
     {
         private readonly StationService _stationService;
         private readonly TicketService _ticketService;
+        private readonly DepartureService _departureService;
 
-        public VyController(TicketService ticketService, StationService stationService)
+        public VyController(TicketService ticketService, StationService stationService, DepartureService departureService)
         {
             _ticketService = ticketService;
             _stationService = stationService;
+            _departureService = departureService;
         }
 
         public ActionResult Index()
@@ -23,9 +27,17 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
 
-        public ActionResult selectTrip(ServiceModelTicket ticket)
+        public ActionResult TestSelectTrip()
         {
-            return View(ticket);
+            List<DbDepartures> departures = _departureService.GetAllDepartures();
+            return View(departures);
+        }
+
+        [HttpPost]
+        public ActionResult TestSelectTrip(ServiceModelTicket ticket)
+        {
+            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+            return RedirectToAction("List", "List", ticket);
         }
 
         [HttpPost]
@@ -49,8 +61,10 @@ namespace Vy_TicketPurchase_Core.Controllers
                 }
                 if (isValidToStation && isValidFromStation)
                 {
-                    _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-                    return RedirectToAction("selectTrip", "Vy", ticket);
+                    List<DbDepartures> departures = _departureService.GetAllDepartures();
+                    //   _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+                    ViewBag.ticket = ticket;
+                    return View("testSelectTrip", departures);
                 }
             }
 
@@ -75,7 +89,6 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             return _stationService.GetStationsFromNames(toStation, fromStation);
         }
-        
 
         public JsonResult GetPassengerTypes()
         {
