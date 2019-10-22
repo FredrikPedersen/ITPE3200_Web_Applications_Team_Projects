@@ -49,14 +49,11 @@ namespace Vy_TicketPurchase_Core.Controllers
                     }
                 }
                 
-
                 if (isValidToStation && isValidFromStation)
                 {
-                    List <DbDepartures> departures = _departureService.GetAllDepartures();
                     List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
                     
-
                     return View("SelectTrip", departures);
                 }
             }
@@ -92,7 +89,6 @@ namespace Vy_TicketPurchase_Core.Controllers
 
         private SelectList PassengerTypesForDropdown()
         {
-            
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
             List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
             string[] typeNames = new string[4];
