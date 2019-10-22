@@ -40,6 +40,11 @@ namespace Vy_TicketPurchase_Core.Controllers
             return RedirectToAction("List", "List", ticket);
         }
 
+        public ActionResult ToAdmin()
+        {
+            return RedirectToAction("Admin", "Admin");
+        }
+
         [HttpPost]
         public ActionResult Index(ServiceModelTicket ticket)
         {

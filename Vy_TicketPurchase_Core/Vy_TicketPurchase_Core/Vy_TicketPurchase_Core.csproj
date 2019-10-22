@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Business\Customers\Models" />
+    <Folder Include="Business\Departures\Models" />
+    <Folder Include="Business\PassengerType\Models" />
     <Folder Include="wwwroot\images" />
   </ItemGroup>
 
