@@ -30,20 +30,21 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 ValidFromDate = t.ValidFrom.ToShortDateString(),
                 ValidFromTime = t.ValidFrom.ToShortTimeString(),
                 Price = t.Price,
-                PasengerType = t.PassengerType.Type
+                PassengerType = t.PassengerType.Type
                 
             }).ToList();
         }
         
         public bool SaveTicket(ServiceModelTicket ticket, List<DbStation> stationsFromName) {
+            
             DbTicket newTicket = new DbTicket
             {
                 FromStation = stationsFromName[0],
                 ToStation = stationsFromName[1],
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
                 DbCustomer = CreateNewCustomerFromInput(ticket),
-                PassengerType = FindTicketPassengerType(ticket.PasengerType),
-                Price = GeneratePrice(stationsFromName[0], stationsFromName[1], FindTicketPassengerType(ticket.PasengerType))
+                PassengerType = FindTicketPassengerType(ticket.PassengerType),
+                Price = GeneratePrice(stationsFromName[0], stationsFromName[1], FindTicketPassengerType(ticket.PassengerType))
             };
             
             try
@@ -82,7 +83,6 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
 
         private static double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
         {
-            //TODO Ta høyde for billettype også
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
             var price = 0.0;
@@ -114,9 +114,10 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             foreach (DbPassengerType passengerType in passengerTypes)
             {
                 if (passengerTypeName.Equals(passengerType.Type))
+                {
                     return passengerType;
+                }
             }
-
             return passengerTypes[0]; //This outcome should never happen, but sets passengerType to Adult if it does.
         }
         

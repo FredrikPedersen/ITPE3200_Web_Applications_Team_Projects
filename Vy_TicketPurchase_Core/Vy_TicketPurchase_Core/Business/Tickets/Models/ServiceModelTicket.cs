@@ -44,6 +44,6 @@ namespace Vy_TicketPurchase_Core.Business.Tickets.Models
         
         [Required(ErrorMessage = "Billettype må oppgis!")]
         [Display(Name="Billettype", Prompt = "Velg billettype")]
-        public string PasengerType { get; set; }
+        public string PassengerType { get; set; }
     }
 }
