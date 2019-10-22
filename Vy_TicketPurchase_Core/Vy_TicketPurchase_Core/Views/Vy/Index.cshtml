@@ -14,7 +14,7 @@
 
 <h4 id="same-station-err"></h4>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Vy", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -88,10 +88,10 @@
                 <label class = "control-label col-md-2" >Reisende</label>    
                 <div id="dropDown" class="col-md-10">
                     <!-- Dropdown list for passenger type *AJAX call* -->
-                      <select id="drop" class="form-control"></select>
+                    @Html.DropDownListFor(model => model.Ticket.PasengerType, (SelectList)ViewBag.PassengerTypes, new {@class = "form-control"})
                 </div>
-                
             </div>
+            
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

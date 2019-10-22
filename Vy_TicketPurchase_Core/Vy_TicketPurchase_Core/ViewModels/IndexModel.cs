@@ -7,7 +7,6 @@ namespace Vy_TicketPurchase_Core.ViewModels
     public class IndexModel
     {
         public List<ServiceModelStation> Stations { get; set; }
-
         public ServiceModelTicket Ticket { get; set; }
     }
 }

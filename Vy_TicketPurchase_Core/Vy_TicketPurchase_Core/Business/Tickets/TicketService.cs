@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vy_TicketPurchase_Core.Business.Stations.Models;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Repository;
 using Vy_TicketPurchase_Core.Repository.DBModels;
@@ -10,13 +9,14 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
 {
     public class TicketService
     {
+        
         private readonly DatabaseContext _databaseContext;
 
         public TicketService(DatabaseContext dbContext)
         {
             _databaseContext = dbContext;
         }
-        
+
         public List<ServiceModelTicket> GetAllTickets()
         {
             return _databaseContext.Tickets.Select(t => new ServiceModelTicket
@@ -29,24 +29,21 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
                 CustomerNumber = t.DbCustomer.Phonenumber,
                 ValidFromDate = t.ValidFrom.ToShortDateString(),
                 ValidFromTime = t.ValidFrom.ToShortTimeString(),
-                Price = t.Price
+                Price = t.Price,
+                PasengerType = t.PassengerType.Type
+                
             }).ToList();
         }
         
         public bool SaveTicket(ServiceModelTicket ticket, List<DbStation> stationsFromName) {
-            DbCustomer customer = new DbCustomer
-            {
-                Name = ticket.CustomerGivenName + " " + ticket.CustomerLastName,
-                Phonenumber = ticket.CustomerNumber
-            };
-            
             DbTicket newTicket = new DbTicket
             {
                 FromStation = stationsFromName[0],
                 ToStation = stationsFromName[1],
                 ValidFrom = StringsToDateTime(ticket.ValidFromDate, ticket.ValidFromTime),
-                DbCustomer = customer,
-                Price = GeneratePrice(stationsFromName[0], stationsFromName[1])
+                DbCustomer = CreateNewCustomerFromInput(ticket),
+                PassengerType = FindTicketPassengerType(ticket.PasengerType),
+                Price = GeneratePrice(stationsFromName[0], stationsFromName[1], FindTicketPassengerType(ticket.PasengerType))
             };
             
             try
@@ -83,31 +80,54 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             
         }
 
-        private static int GeneratePrice(DbStation fromStation, DbStation toStation)
+        private static double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
         {
             //TODO Ta høyde for billettype også
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
-            var price = 0;
+            var price = 0.0;
             if (start > end)
             {
-                price = (start - end) * 15;
+                price = (start - end) * passengerType.PriceMultiplier;
             }
             else
             {
-                price = (end - start) * 15;
+                price = (end - start) * passengerType.PriceMultiplier;
             }
 
             return price;
         }
+
+        private DbCustomer CreateNewCustomerFromInput(ServiceModelTicket ticket)
+        {
+            return new DbCustomer
+            {
+                Name = ticket.CustomerGivenName + " " + ticket.CustomerLastName,
+                Phonenumber = ticket.CustomerNumber
+            };
+        }
+
+        private DbPassengerType FindTicketPassengerType(string passengerTypeName)
+        {
+            List <DbPassengerType> passengerTypes = GetAllPassengerTypes();
+
+            foreach (DbPassengerType passengerType in passengerTypes)
+            {
+                if (passengerTypeName.Equals(passengerType.Type))
+                    return passengerType;
+            }
+
+            return passengerTypes[0]; //This outcome should never happen, but sets passengerType to Adult if it does.
+        }
         
-        //temporarty method, must be moved into separate service
+        //temporary method, must be moved into separate service
         public List<DbPassengerType> GetAllPassengerTypes()
         {
             return _databaseContext.PassengerTypes.Select(t => new DbPassengerType
             {
                 Id = t.Id,
-                Type = t.Type
+                Type = t.Type,
+                PriceMultiplier = t.PriceMultiplier
             }).ToList();
         }
     }
