@@ -52,7 +52,6 @@ namespace Vy_TicketPurchase_Core.Controllers
                 
                 if (isValidToStation && isValidFromStation)
                 {
-
                     List <DbDepartures> departures = _departureService.GetAllDepartures();
                     ViewBag.ticket = ticket;
                     
@@ -68,9 +67,6 @@ namespace Vy_TicketPurchase_Core.Controllers
         [HttpPost]
         public ActionResult SelectTrip(ServiceModelTicket ticket)
         {
-            //TODO Noe jævla rart skjer her. Modellen som returneres er ikke null, men får ikke noen verdier i seg.
-            //TODO Prøv eventuelt å revertere til Oles måte å gjøre det på i morgen. IKKE RØR FØR FREDRIK FÅR TESTA!
-
             _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
             return RedirectToAction("List", "List", ticket);
         }
