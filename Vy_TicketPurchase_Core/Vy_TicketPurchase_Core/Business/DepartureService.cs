@@ -26,22 +26,19 @@ namespace Vy_TicketPurchase_Core.Business
 
         public List<DbDepartures> GetDeparturesLater(string departureTime)
         {
+            DateTime date1 = Convert.ToDateTime(departureTime);
             List<DbDepartures> departures = GetAllDepartures();
             List<DbDepartures> returnlist = new List<DbDepartures>();
-            var splitArray = new string[2];
-            splitArray = departureTime.Split(":");
-            Console.WriteLine(splitArray[0]);
-            Console.WriteLine(splitArray[1]);
+
             foreach (DbDepartures departure in departures)
             {
-                //if ()
+                DateTime date2 = Convert.ToDateTime(departure.departureTime);
+                if (date2 >= date1)
                 {
                     returnlist.Add(departure);
                 }
             }
             return returnlist;
         }
-
-        //Metode for å hente ut alle filer i avgangdatabasen til avganger med knapp for å velge avgang, som er etter valgt tidspunkt
     }
 }

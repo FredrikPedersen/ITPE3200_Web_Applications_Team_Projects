@@ -49,11 +49,14 @@ namespace Vy_TicketPurchase_Core.Controllers
                     }
                 }
                 
+
                 if (isValidToStation && isValidFromStation)
                 {
                     List <DbDepartures> departures = _departureService.GetAllDepartures();
+                    List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
                     
+
                     return View("SelectTrip", departures);
                 }
             }
@@ -62,7 +65,7 @@ namespace Vy_TicketPurchase_Core.Controllers
             ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult SelectTrip(ServiceModelTicket ticket)
         {
@@ -98,10 +101,10 @@ namespace Vy_TicketPurchase_Core.Controllers
             {
                 typeNames[i] = types[i].Type;
             }
-            
+
             return new SelectList(typeNames);
         }
-        
+
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
             return _stationService.GetStationsFromNames(toStation, fromStation);
