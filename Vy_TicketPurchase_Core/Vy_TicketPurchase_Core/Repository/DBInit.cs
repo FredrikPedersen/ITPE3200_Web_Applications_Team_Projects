@@ -22,6 +22,7 @@ namespace Vy_TicketPurchase_Core.Repository
             {
                 SeedPassengerTypes(dbContext);
             }
+
             if (!dbContext.Departures.Any())
             {
                 seedDepartures(dbContext);

@@ -112,13 +112,16 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
             var passengerTypes = GetAllPassengerTypes();
 
-            foreach (var passengerType in passengerTypes.Where(passengerType => passengerTypeName.Equals(passengerType.Type)))
+            foreach (var passengerType in passengerTypes)
             {
-                return new DbPassengerType
+                if (passengerType.Type == passengerTypeName)
                 {
-                    PriceMultiplier = passengerType.PriceMultiplier,
-                    Type = passengerType.Type
-                };
+                    return new DbPassengerType
+                    {
+                        PriceMultiplier = passengerType.PriceMultiplier,
+                        Type = passengerType.Type
+                    };
+                }
             }
             return passengerTypes[0]; //This outcome should never happen, but sets passengerType to Adult if it does.
         }
