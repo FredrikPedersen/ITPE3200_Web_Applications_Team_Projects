@@ -1,4 +1,4 @@
-﻿@model Vy_TicketPurchase_Core.ViewModels.SelectTripModel
+﻿@model List<Vy_TicketPurchase_Core.Repository.DBModels.DbDepartures>
 
 @{
     ViewData["Title"] = "testSelectTrip";
@@ -11,12 +11,12 @@
     <thead>
         <tr>
             <th>
-                @Model.ticket.FromStation
+                @ViewBag.ticket.FromStation
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.departures)
+        @foreach (var item in Model)
         {
             <tr>
                 <td class="row">
@@ -26,13 +26,13 @@
                         <div class="col-6">
                             @Html.DisplayFor(modelItem => item.departureTime)
                             @Html.Hidden("ValidFromTime", item.departureTime)
-                            @Html.Hidden("FromStation", Model.ticket.FromStation)
-                            @Html.Hidden("ToStation", Model.ticket.ToStation)
-                            @Html.Hidden("ValidFromDate", Model.ticket.ValidFromDate)
-                            @Html.Hidden("Price", Model.ticket.Price)
-                            @Html.Hidden("CustomerGivenName", Model.ticket.CustomerGivenName)
-                            @Html.Hidden("CustomerLastNAme", Model.ticket.CustomerLastName)
-                            @Html.Hidden("CustomerNumber", Model.ticket.CustomerNumber)
+                            @Html.Hidden("FromStation", (object)ViewBag.ticket.FromStation)
+                            @Html.Hidden("ToStation", (object)ViewBag.ticket.ToStation)
+                            @Html.Hidden("ValidFromDate", (object)ViewBag.ticket.ValidFromDate)
+                            @Html.Hidden("Price", (object)ViewBag.ticket.Price)
+                            @Html.Hidden("CustomerGivenName", (object)ViewBag.ticket.CustomerGivenName)
+                            @Html.Hidden("CustomerLastNAme", (object)ViewBag.ticket.CustomerLastName)
+                            @Html.Hidden("CustomerNumber", (object)ViewBag.ticket.CustomerNumber)
                         </div>
                         <div class="col-6">
                             <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>

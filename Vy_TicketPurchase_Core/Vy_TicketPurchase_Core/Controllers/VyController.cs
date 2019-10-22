@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Vy_TicketPurchase_Core.Business;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
+using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Repository.DBModels;
 using Vy_TicketPurchase_Core.ViewModels;
 
@@ -52,13 +53,10 @@ namespace Vy_TicketPurchase_Core.Controllers
                 if (isValidToStation && isValidFromStation)
                 {
 
-                    SelectTripModel selectTripModel = new SelectTripModel
-                    {
-                        departures = _departureService.GetAllDepartures(),
-                        ticket = model.Ticket
-                    };
+                    List <DbDepartures> departures = _departureService.GetAllDepartures();
+                    ViewBag.ticket = model.Ticket;
                     
-                    return View("SelectTrip", selectTripModel);
+                    return View("SelectTrip", departures);
                 }
             }
 
@@ -68,13 +66,13 @@ namespace Vy_TicketPurchase_Core.Controllers
         }
         
         [HttpPost]
-        public ActionResult SelectTrip(SelectTripModel model)
+        public ActionResult SelectTrip(ServiceModelTicket ticket)
         {
             //TODO Noe jævla rart skjer her. Modellen som returneres er ikke null, men får ikke noen verdier i seg.
             //TODO Prøv eventuelt å revertere til Oles måte å gjøre det på i morgen. IKKE RØR FØR FREDRIK FÅR TESTA!
             
-            _ticketService.SaveTicket(model.ticket, GetStationsFromNames(model.ticket.FromStation, model.ticket.ToStation));
-                return RedirectToAction("List", "List", model.ticket);
+            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+                return RedirectToAction("List", "List", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
