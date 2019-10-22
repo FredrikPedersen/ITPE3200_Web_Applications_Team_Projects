@@ -31,7 +31,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(IndexModel model)
+        public ActionResult Index(ServiceModelTicket ticket)
         {
             var isValidFromStation = false;
             var isValidToStation = false;
@@ -40,11 +40,11 @@ namespace Vy_TicketPurchase_Core.Controllers
             {
                 foreach (var station in _stationService.GetAllStations())
                 {
-                    if (model.Ticket.FromStation == station.StationName)
+                    if (ticket.FromStation == station.StationName)
                     {
                         isValidFromStation = true;
                     }
-                    if (model.Ticket.ToStation == station.StationName)
+                    if (ticket.ToStation == station.StationName)
                     {
                         isValidToStation = true;
                     }
@@ -54,7 +54,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                 {
 
                     List <DbDepartures> departures = _departureService.GetAllDepartures();
-                    ViewBag.ticket = model.Ticket;
+                    ViewBag.ticket = ticket;
                     
                     return View("SelectTrip", departures);
                 }
@@ -70,9 +70,9 @@ namespace Vy_TicketPurchase_Core.Controllers
         {
             //TODO Noe jævla rart skjer her. Modellen som returneres er ikke null, men får ikke noen verdier i seg.
             //TODO Prøv eventuelt å revertere til Oles måte å gjøre det på i morgen. IKKE RØR FØR FREDRIK FÅR TESTA!
-            
+
             _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-                return RedirectToAction("List", "List", ticket);
+            return RedirectToAction("List", "List", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
