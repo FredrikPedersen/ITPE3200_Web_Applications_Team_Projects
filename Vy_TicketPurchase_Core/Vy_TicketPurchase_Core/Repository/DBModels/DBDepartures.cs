@@ -9,6 +9,7 @@ namespace Vy_TicketPurchase_Core.Repository.DBModels
 {
     public class DbDepartures
     {
+        [Key]
         public int Id { get; set; }
 
         [Display(Name = "Avgangstid")]
