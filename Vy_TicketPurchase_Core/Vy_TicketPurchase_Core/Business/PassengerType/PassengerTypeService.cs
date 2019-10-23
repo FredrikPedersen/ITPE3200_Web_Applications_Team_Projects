@@ -47,6 +47,7 @@ namespace Vy_TicketPurchase_Core.Business.PassengerType
             DbPassengerType passengerType = _databaseContext.PassengerTypes.Find(id);
             passengerType.PriceMultiplier = pt.PriceMultiplier;
             _databaseContext.PassengerTypes.Update(passengerType);
+            _databaseContext.SaveChanges();
             return true;
         }
     }

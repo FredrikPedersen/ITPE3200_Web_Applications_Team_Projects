@@ -50,7 +50,7 @@
                         @Html.DisplayFor(model => model.Types[i].Type)
                         <br/>
 
-                        @Html.ActionLink("Endre Type", "EditStation", "Admin",
+                        @Html.ActionLink("Endre Type", "EditPassengerType", "Admin",
                             new {id = Model.Types[i].Id}, new {@class = "btn btn-primary"})
 
                     </div>
@@ -68,7 +68,7 @@
                         @Html.DisplayFor(model => model.Departures[i].departureTime)
                         <br/>
 
-                        @Html.ActionLink("Edit Avreise", "EditStation", "Admin",
+                        @Html.ActionLink("Edit Avreise", "EditDeparture", "Admin",
                             new {id = Model.Departures[i].Id}, new {@class = "btn btn-primary"})
 
                     </div>

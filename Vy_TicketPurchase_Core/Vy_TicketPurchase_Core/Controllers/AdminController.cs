@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Business;
 using Vy_TicketPurchase_Core.Business.Departures;
+using Vy_TicketPurchase_Core.Business.Departures.Models;
 using Vy_TicketPurchase_Core.Business.PassengerType;
+using Vy_TicketPurchase_Core.Business.PassengerType.Models;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Stations.Models;
 using Vy_TicketPurchase_Core.Business.Tickets;
@@ -19,8 +21,8 @@ namespace Vy_TicketPurchase_Core.Controllers
 
 
         public AdminController(StationService stationService, TicketService tickedService,
-            DepartureService departureService,PassengerTypeService passengerTypeService
-            )
+            DepartureService departureService, PassengerTypeService passengerTypeService
+        )
         {
             _stationService = stationService;
             _tickedService = tickedService;
@@ -37,27 +39,23 @@ namespace Vy_TicketPurchase_Core.Controllers
                 Departures = _departureService.GetAllDepartures(),
                 Types = _passengerTypeService.GetAllPT()
             };
-            
+
             return View(model);
         }
 
         public ActionResult EditStation(int id)
         {
-
             var Station = _stationService.GetStationById(id);
-            
-            ViewBag.station = _stationService.GetStationById(id);
+
+            //ViewBag.station = _stationService.GetStationById(id);
             return View(Station);
         }
+
         [HttpPost]
         public ActionResult EditStation(ServiceModelStation stationIn)
         {
-            
             if (ModelState.IsValid)
             {
-                Console.WriteLine(stationIn.StationName + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                Console.WriteLine(stationIn.NumberOnLine + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                Console.WriteLine(stationIn.Id + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 _stationService.UpdateStation(stationIn.Id, stationIn);
                 return RedirectToAction("Admin", "Admin");
             }
@@ -65,5 +63,40 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
 
+        public ActionResult EditPassengerType(int id)
+        {
+            var Type = _passengerTypeService.GetPassengerTypeTypeById(id);
+            return View(Type);
+        }
+
+        [HttpPost]
+        public ActionResult EditPassengerType(ServiceModelPassengerType type)
+        {
+            if (ModelState.IsValid)
+            {
+                _passengerTypeService.UpdatePT(type.Id, type);
+                return RedirectToAction("Admin", "Admin");
+            }
+
+            return View();
+        }
+
+        public ActionResult EditDeparture(int id)
+        {
+            var departure = _departureService.GetDepartureByID(id);
+            return View(departure);
+        }
+
+        [HttpPost]
+        public ActionResult EditDeparture(ServiceModelDepartures departure)
+        {
+            if (ModelState.IsValid)
+            {
+                _departureService.UpdateDeparture(departure.Id, departure);
+                return RedirectToAction("Admin", "Admin");
+            }
+
+            return View();
+        }
     }
 }

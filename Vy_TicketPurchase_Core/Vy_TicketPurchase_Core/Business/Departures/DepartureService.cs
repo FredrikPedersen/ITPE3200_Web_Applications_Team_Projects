@@ -71,6 +71,7 @@ namespace Vy_TicketPurchase_Core.Business.Departures
             DbDepartures departures = _databaseContext.Departures.Find(id);
             departures.departureTime = departure.departureTime;
             _databaseContext.Departures.Update(departures);
+            _databaseContext.SaveChanges();
             return true;
         }
     }
