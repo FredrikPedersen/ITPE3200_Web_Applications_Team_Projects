@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,17 @@ namespace Vy_TicketPurchase_Core
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+                {
+                    options.IdleTimeout = TimeSpan.FromSeconds(10);
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.IsEssential = true;
+                }
+            );
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+
             var connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
             services.AddScoped<StationService>();
@@ -57,6 +70,11 @@ namespace Vy_TicketPurchase_Core
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSession();
+            app.UseMvc();
+            
 
             app.UseMvc(routes =>
             {

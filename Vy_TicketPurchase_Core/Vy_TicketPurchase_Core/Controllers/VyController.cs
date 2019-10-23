@@ -11,7 +11,6 @@ using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Business.Users;
 using Vy_TicketPurchase_Core.Business.Users.Model;
 using Vy_TicketPurchase_Core.Repository.DBModels;
-using System.Web.Http
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
 
@@ -23,6 +22,9 @@ namespace Vy_TicketPurchase_Core.Controllers
         private readonly TicketService _ticketService;
         private readonly DepartureService _departureService;
         private readonly UserService _userService;
+
+        public const string SessionKey = "_Key";
+        public string Session_Status { get; private set; }
 
         public VyController(TicketService ticketService, StationService stationService,
             DepartureService departureService, UserService userService)
@@ -41,10 +43,29 @@ namespace Vy_TicketPurchase_Core.Controllers
 
         public ActionResult ToAdmin(ServiceModelUser user)
         {
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey)))
+            {
+                string logged = HttpContext.Session.GetString(SessionKey);
+                if (logged.Equals("Logged"))
+                {
+                    return RedirectToAction("Admin", "Admin");
+                }
+            }
+            
+            return View("Index");
+        }
+
+        public ActionResult LoggInn(ServiceModelUser user)
+        {
             if (_userService.CheckUser(user))
             {
-                Session["LoggedIn"] = true;
-                return RedirectToAction("Admin", "Admin");
+                HttpContext.Session.SetString(SessionKey, "Logged");
+                ViewBag.Logged = false;
+            }
+            else
+            {
+                HttpContext.Session.SetString(Session_Status, "NotLogged");
+                ViewBag.Logged = true;
             }
 
             return View("Index");
@@ -123,6 +144,8 @@ namespace Vy_TicketPurchase_Core.Controllers
 
             return new SelectList(typeNames);
         }
+        
+        
 
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
