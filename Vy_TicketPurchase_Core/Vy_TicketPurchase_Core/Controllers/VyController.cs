@@ -52,10 +52,11 @@ namespace Vy_TicketPurchase_Core.Controllers
                     return RedirectToAction("Admin", "Admin");
                 }
             }
-            
+            ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
-
+        
+        [HttpPost]
         public ActionResult LogInn(ServiceModelUser user)
         {
             Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
@@ -69,9 +70,11 @@ namespace Vy_TicketPurchase_Core.Controllers
             {
                 Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAANONONONONOONONONa");
                 HttpContext.Session.SetString(SessionKey, "NotLogged");
+                
                 ViewBag.Logged = true;
             }
-
+            
+            ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
 
@@ -138,7 +141,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         private SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
-            List<DbPassengerType> types = _ticketService.GetAllPassengerTypes();
+            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
             string[] typeNames = new string[4];
 
             for (var i = 0; i < 4; i++)
