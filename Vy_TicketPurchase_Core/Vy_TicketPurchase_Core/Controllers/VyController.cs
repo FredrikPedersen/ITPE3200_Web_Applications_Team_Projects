@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Vy_TicketPurchase_Core.Business;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
@@ -24,20 +25,8 @@ namespace Vy_TicketPurchase_Core.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View();
-        }
-
-        public ActionResult TestSelectTrip()
-        {
-            List<DbDepartures> departures = _departureService.GetAllDepartures();
-            return View(departures);
-        }
-
-        [HttpPost]
-        public ActionResult TestSelectTrip(ServiceModelTicket ticket)
-        {
-            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-            return RedirectToAction("List", "List", ticket);
         }
 
         public ActionResult ToAdmin()
@@ -64,18 +53,26 @@ namespace Vy_TicketPurchase_Core.Controllers
                         isValidToStation = true;
                     }
                 }
+                
                 if (isValidToStation && isValidFromStation)
                 {
-                    List<DbDepartures> departures = _departureService.GetAllDepartures();
-                    //   _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+                    List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
-                    return View("testSelectTrip", departures);
+                    
+                    return View("SelectTrip", departures);
                 }
             }
 
             //If the user inputs a station that does not exist, show an error message
             ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SelectTrip(ServiceModelTicket ticket)
+        {
+            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+            return RedirectToAction("List", "List", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
@@ -90,14 +87,28 @@ namespace Vy_TicketPurchase_Core.Controllers
             return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
         }
 
-        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
-        {
-            return _stationService.GetStationsFromNames(toStation, fromStation);
-        }
-
         public JsonResult GetPassengerTypes()
         {
             return Json(_ticketService.GetAllPassengerTypes());
+        }
+
+        private SelectList PassengerTypesForDropdown()
+        {
+            //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
+            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
+            string[] typeNames = new string[4];
+
+            for (var i = 0; i < 4; i++)
+            {
+                typeNames[i] = types[i].Type;
+            }
+
+            return new SelectList(typeNames);
+        }
+
+        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
+        {
+            return _stationService.GetStationsFromNames(toStation, fromStation);
         }
     }
 }

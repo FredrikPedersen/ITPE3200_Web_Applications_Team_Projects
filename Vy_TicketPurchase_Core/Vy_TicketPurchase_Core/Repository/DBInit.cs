@@ -22,6 +22,7 @@ namespace Vy_TicketPurchase_Core.Repository
             {
                 SeedPassengerTypes(dbContext);
             }
+
             if (!dbContext.Departures.Any())
             {
                 seedDepartures(dbContext);
@@ -73,13 +74,31 @@ namespace Vy_TicketPurchase_Core.Repository
 
         private static void SeedPassengerTypes(DatabaseContext dbContext)
         {
-            var typeAdult = new DbPassengerType { Type = "Adult" };
-            var typeSenior = new DbPassengerType { Type = "Senior" };
-            var typeStudent = new DbPassengerType { Type = "Student" };
+            var typeAdult = new DbPassengerType
+            {
+                Type = "Voksen",
+                PriceMultiplier = 1.0
+            };
+            var typeSenior = new DbPassengerType
+            {
+                Type = "Honør",
+                PriceMultiplier = 0.5
+            };
+            var typeStudent = new DbPassengerType
+            {
+                Type = "Student",
+                PriceMultiplier = 0.7
+            };
+            var typeChild = new DbPassengerType
+            {
+                Type = "Barn",
+                PriceMultiplier = 0.5
+            };
 
             dbContext.Add(typeAdult);
             dbContext.Add(typeSenior);
             dbContext.Add(typeStudent);
+            dbContext.Add(typeChild);
 
             dbContext.SaveChanges();
         }

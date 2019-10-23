@@ -20,7 +20,7 @@
         {
             <tr>
                 <td class="row">
-                    @using (Html.BeginForm("testSelectTrip", "Vy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("SelectTrip", "Vy", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="col-6">
@@ -33,6 +33,7 @@
                             @Html.Hidden("CustomerGivenName", (object)ViewBag.ticket.CustomerGivenName)
                             @Html.Hidden("CustomerLastNAme", (object)ViewBag.ticket.CustomerLastName)
                             @Html.Hidden("CustomerNumber", (object)ViewBag.ticket.CustomerNumber)
+                            @Html.Hidden("PassengerType", (object)ViewBag.ticket.PassengerType)
                         </div>
                         <div class="col-6">
                             <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>

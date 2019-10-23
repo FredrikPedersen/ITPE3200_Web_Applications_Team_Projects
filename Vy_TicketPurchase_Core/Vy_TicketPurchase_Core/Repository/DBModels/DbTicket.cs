@@ -11,6 +11,7 @@ namespace Vy_TicketPurchase_Core.Repository.DBModels
         public DbStation ToStation { get; set; }
         public DateTime ValidFrom { get; set; }
         public DbCustomer DbCustomer { get; set; }
-        public int Price { get; set; }
+        public DbPassengerType PassengerType { get; set; }
+        public double Price { get; set; }
     }
 }

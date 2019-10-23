@@ -27,7 +27,7 @@ namespace Vy_TicketPurchase_Core.Business.Tickets.Models
         public string ValidFromTime { get; set; }
         
         [DisplayName("Pris")]
-        public int Price { get; set; }
+        public double Price { get; set; }
         
         [Required(ErrorMessage ="Navn må fylles ut")]
         [Display(Name="Fornavn", Prompt = "Fornavn")]  
@@ -42,6 +42,8 @@ namespace Vy_TicketPurchase_Core.Business.Tickets.Models
         [Display(Name="Telefonnummer", Prompt = "Telefonnummer (8 siffer)")]  
         public string CustomerNumber { get; set; }
         
-        
+        [Required(ErrorMessage = "Billettype må oppgis!")]
+        [Display(Name="Billettype", Prompt = "Velg billettype")]
+        public string PassengerType { get; set; }
     }
 }
