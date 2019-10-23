@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vy_TicketPurchase_Core.Business.PassengerType.Models;
 using Vy_TicketPurchase_Core.Business.Stations.Models;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Repository.DBModels;
@@ -13,8 +14,8 @@ namespace Vy_TicketPurchase_Core.ViewModels
         public List<ServiceModelTicket> Tickets { get; set; }
         public ServiceModelTicket Ticket { get; set; }
         
-        public List<DbPassengerType> Types  { get; set; }
-        public  DbPassengerType Type  { get; set; }
+        public List<ServiceModelPassengerType> Types  { get; set; }
+        public  ServiceModelPassengerType Type  { get; set; }
         
         public List<DbTrainLine> Lines  { get; set; }
         public DbTrainLine Line  { get; set; }

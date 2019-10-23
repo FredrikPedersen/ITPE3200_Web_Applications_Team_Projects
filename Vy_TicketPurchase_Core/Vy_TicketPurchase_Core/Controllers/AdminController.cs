@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Business;
+using Vy_TicketPurchase_Core.Business.PassengerType;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Stations.Models;
 using Vy_TicketPurchase_Core.Business.Tickets;
@@ -13,13 +14,15 @@ namespace Vy_TicketPurchase_Core.Controllers
         private readonly StationService _stationService;
         private readonly TicketService _tickedService;
         private readonly DepartureService _departureService;
+        private readonly PassengerTypeService _passengerTypeService;
 
 
-        public AdminController(StationService stationService, TicketService tickedService, DepartureService departureService)
+        public AdminController(StationService stationService, TicketService tickedService, DepartureService departureService,PassengerTypeService passengerTypeService)
         {
             _stationService = stationService;
             _tickedService = tickedService;
             _departureService = departureService;
+            _passengerTypeService = passengerTypeService;
         }
 
         public ActionResult Admin()
@@ -29,7 +32,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                 Stations = _stationService.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureService.GetAllDepartures(),
-                Types = _tickedService.GetAllPassengerTypes(),
+                Types = _passengerTypeService.GetAllPT()
             };
             
             return View(model);

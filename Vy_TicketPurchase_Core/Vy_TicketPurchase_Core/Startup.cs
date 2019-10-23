@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vy_TicketPurchase_Core.Business;
+using Vy_TicketPurchase_Core.Business.PassengerType;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
 using Vy_TicketPurchase_Core.Repository;
@@ -35,6 +36,7 @@ namespace Vy_TicketPurchase_Core
             services.AddScoped<StationService>();
             services.AddScoped<TicketService>();
             services.AddScoped<DepartureService>();
+            services.AddScoped<PassengerTypeService>();
             services.AddMvc();
         }
 
