@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Vy_TicketPurchase_Core.Business;
+using Vy_TicketPurchase_Core.Business.Departures;
 using Vy_TicketPurchase_Core.Business.PassengerType;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Stations.Models;
@@ -17,7 +18,9 @@ namespace Vy_TicketPurchase_Core.Controllers
         private readonly PassengerTypeService _passengerTypeService;
 
 
-        public AdminController(StationService stationService, TicketService tickedService, DepartureService departureService,PassengerTypeService passengerTypeService)
+        public AdminController(StationService stationService, TicketService tickedService,
+            DepartureService departureService,PassengerTypeService passengerTypeService
+            )
         {
             _stationService = stationService;
             _tickedService = tickedService;

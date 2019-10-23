@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vy_TicketPurchase_Core.Business;
+using Vy_TicketPurchase_Core.Business.Departures;
 using Vy_TicketPurchase_Core.Business.PassengerType;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
