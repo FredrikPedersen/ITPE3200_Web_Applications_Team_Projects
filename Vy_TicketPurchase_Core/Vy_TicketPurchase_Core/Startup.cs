@@ -9,6 +9,7 @@ using Vy_TicketPurchase_Core.Business.Departures;
 using Vy_TicketPurchase_Core.Business.PassengerType;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
+using Vy_TicketPurchase_Core.Business.Users;
 using Vy_TicketPurchase_Core.Repository;
 
 namespace Vy_TicketPurchase_Core
@@ -37,6 +38,7 @@ namespace Vy_TicketPurchase_Core
             services.AddScoped<StationService>();
             services.AddScoped<TicketService>();
             services.AddScoped<DepartureService>();
+            services.AddScoped<UserService>();
             services.AddScoped<PassengerTypeService>();
             services.AddMvc();
         }

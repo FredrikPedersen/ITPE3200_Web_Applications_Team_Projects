@@ -14,5 +14,7 @@ namespace Vy_TicketPurchase_Core.Repository
         public DbSet<DbTrainLine> TrainLines { get; set; }
         public DbSet<DbPassengerType> PassengerTypes { get; set; }
         public DbSet<DbDepartures> Departures { get; set; }
+        
+        public DbSet<DbUser> Users { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Vy_TicketPurchase_Core.Business;
@@ -7,7 +8,12 @@ using Vy_TicketPurchase_Core.Business.Departures;
 using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
+using Vy_TicketPurchase_Core.Business.Users;
+using Vy_TicketPurchase_Core.Business.Users.Model;
 using Vy_TicketPurchase_Core.Repository.DBModels;
+using System.Web.Http
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {
@@ -16,12 +22,15 @@ namespace Vy_TicketPurchase_Core.Controllers
         private readonly StationService _stationService;
         private readonly TicketService _ticketService;
         private readonly DepartureService _departureService;
+        private readonly UserService _userService;
 
-        public VyController(TicketService ticketService, StationService stationService, DepartureService departureService)
+        public VyController(TicketService ticketService, StationService stationService,
+            DepartureService departureService, UserService userService)
         {
             _ticketService = ticketService;
             _stationService = stationService;
             _departureService = departureService;
+            _userService = userService;
         }
 
         public ActionResult Index()
@@ -30,9 +39,15 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
 
-        public ActionResult ToAdmin()
+        public ActionResult ToAdmin(ServiceModelUser user)
         {
-            return RedirectToAction("Admin", "Admin");
+            if (_userService.CheckUser(user))
+            {
+                Session["LoggedIn"] = true;
+                return RedirectToAction("Admin", "Admin");
+            }
+
+            return View("Index");
         }
 
         [HttpPost]
@@ -49,23 +64,25 @@ namespace Vy_TicketPurchase_Core.Controllers
                     {
                         isValidFromStation = true;
                     }
+
                     if (ticket.ToStation == station.StationName)
                     {
                         isValidToStation = true;
                     }
                 }
-                
+
                 if (isValidToStation && isValidFromStation)
                 {
                     List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
-                    
+
                     return View("SelectTrip", departures);
                 }
             }
 
             //If the user inputs a station that does not exist, show an error message
-            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
+            ModelState.AddModelError("Stations",
+                "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             return View();
         }
 
@@ -96,7 +113,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         private SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
-            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
+            List<DbPassengerType> types = _ticketService.GetAllPassengerTypes();
             string[] typeNames = new string[4];
 
             for (var i = 0; i < 4; i++)
@@ -110,6 +127,49 @@ namespace Vy_TicketPurchase_Core.Controllers
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
             return _stationService.GetStationsFromNames(toStation, fromStation);
+        }
+
+        //________________________________________________________________________________________
+        //Innlogging
+
+        public static byte[] CreateHash(string password, byte[] salt)
+        {
+            const int keyLenght = 24;
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 1000);
+            return pbkdf2.GetBytes(keyLenght);
+        }
+
+        public static byte[] CreateSalt()
+        {
+            var csprng = new RNGCryptoServiceProvider();
+            var salt = new byte[24];
+            csprng.GetBytes(salt);
+            return salt;
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(ServiceModelUser user)
+        {
+            try
+            {
+                var newUser = new DbUser();
+                byte[] salt = CreateSalt();
+                byte[] hash = CreateHash(user.Password, salt);
+                newUser.UserName = user.UserName;
+                newUser.Password = hash;
+                newUser.Salt = salt;
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return View();
+            }
         }
     }
 }
