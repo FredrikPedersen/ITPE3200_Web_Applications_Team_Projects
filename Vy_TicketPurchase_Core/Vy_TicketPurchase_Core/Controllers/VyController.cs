@@ -24,7 +24,6 @@ namespace Vy_TicketPurchase_Core.Controllers
         private readonly UserService _userService;
 
         public const string SessionKey = "_Key";
-        public string Session_Status { get; private set; }
 
         public VyController(TicketService ticketService, StationService stationService,
             DepartureService departureService, UserService userService)
@@ -41,10 +40,12 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View();
         }
 
-        public ActionResult ToAdmin(ServiceModelUser user)
+        public ActionResult ToAdmin()
         {
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey)))
             {
+                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAa");
+                Console.WriteLine(HttpContext.Session.GetString(SessionKey));
                 string logged = HttpContext.Session.GetString(SessionKey);
                 if (logged.Equals("Logged"))
                 {
@@ -55,16 +56,19 @@ namespace Vy_TicketPurchase_Core.Controllers
             return View("Index");
         }
 
-        public ActionResult LoggInn(ServiceModelUser user)
+        public ActionResult LogInn(ServiceModelUser user)
         {
+            Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
             if (_userService.CheckUser(user))
             {
+                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAYEYEYEYYEYEYEYEEYEYAa");
                 HttpContext.Session.SetString(SessionKey, "Logged");
                 ViewBag.Logged = false;
             }
             else
             {
-                HttpContext.Session.SetString(Session_Status, "NotLogged");
+                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAANONONONONOONONONa");
+                HttpContext.Session.SetString(SessionKey, "NotLogged");
                 ViewBag.Logged = true;
             }
 
@@ -186,6 +190,7 @@ namespace Vy_TicketPurchase_Core.Controllers
                 newUser.UserName = user.UserName;
                 newUser.Password = hash;
                 newUser.Salt = salt;
+                _userService.AddUser(newUser);
                 return RedirectToAction("Index");
             }
             catch (Exception e)

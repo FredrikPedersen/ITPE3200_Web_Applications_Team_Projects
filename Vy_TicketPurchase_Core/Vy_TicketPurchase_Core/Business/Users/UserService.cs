@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Vy_TicketPurchase_Core.Business.Users.Model;
 using Vy_TicketPurchase_Core.Controllers;
 using Vy_TicketPurchase_Core.Repository;
@@ -15,19 +16,29 @@ namespace Vy_TicketPurchase_Core.Business.Users
             _databaseContext = databaseContext;
         }
 
-        public bool CheckUser(ServiceModelUser user)
+        public void AddUser(DbUser user)
         {
+            _databaseContext.Users.Add(user);
+            _databaseContext.SaveChanges();
+        }
+
+        public bool CheckUser(ServiceModelUser user)
+        { 
+            Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
             DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
+
             if (dbUser != null)
             {
+                Console.WriteLine(dbUser.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
+
                 byte[] userPassword = VyController.CreateHash(user.Password, dbUser.Salt);
                 bool result = dbUser.Password.SequenceEqual(userPassword);
                 return result;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
+        
+        
     }
 }
