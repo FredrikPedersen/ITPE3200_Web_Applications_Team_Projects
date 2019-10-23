@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Vy_TicketPurchase_Core.Business.Stations.Models;
 using Vy_TicketPurchase_Core.Repository;
 using Vy_TicketPurchase_Core.Repository.DBModels;
@@ -96,6 +98,16 @@ namespace Vy_TicketPurchase_Core.Business.Stations
                 }
             }
             return result;
+        }
+
+        public bool UpdateStation(int id, ServiceModelStation stationIn)
+        {
+            DbStation station = _databaseContext.Stations.Find(id);
+
+            station.StationName = stationIn.StationName;
+            _databaseContext.Stations.Update(station);
+            _databaseContext.SaveChanges();
+            return true;
         }
     }
 }

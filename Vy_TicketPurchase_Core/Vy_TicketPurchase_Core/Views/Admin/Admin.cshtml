@@ -14,25 +14,64 @@
 </head>
 <body>
 
-@foreach (var station in Model.Stations)
-{
-    <div class="ticket">
-        <div>
-            <label>ID: </label>
-            @Html.DisplayFor(model => station.Id)
-            <br/>
-            <label>Stasjons navn: </label>
-            @Html.DisplayFor(model => station.StationName)
-            <br/>
-            
-            <button class="btn btn-primary">
-                @Html.ActionLink("Edit Station", "EditStation","Admin", new { id = station.Id})
-            </button>
-        </div>
-    </div>
-    
-    <br/>
-}
+<table>
+    <thead>
+    <th scope="col">Stations</th>
+    <th scope="col">Types"</th>
+    <th scope="col">Last</th>
+    <th scope="col">Handle</th>
+    </thead>
+    <tbody>
+    <tr>
+        @foreach (var station in Model.Stations)
+        {
+            <td>
+                <div>
+                    <div class="ticket">
+                        <div>
+                            <label>ID: </label>
+                            @Html.DisplayFor(model => station.Id)
+                            <br/>
+                            <label>Stasjons navn: </label>
+                            @Html.DisplayFor(model => station.StationName)
+                            <br/>
+
+                            <button class="btn btn-primary">
+                                @Html.ActionLink("Edit Station", "EditStation", "Admin", new {id = station.Id})
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        }
+    </tr>
+    <tr>
+        @foreach (var type in Model.Types)
+        {
+            <td>
+                <div>
+                    <div class="ticket">
+                        <div>
+                            <label>ID: </label>
+                            @Html.DisplayFor(model => type.Id)
+                            <br/>
+                            <label>Stasjons navn: </label>
+                            @Html.DisplayFor(model => type.Type)
+                            <br/>
+        
+                            <button class="btn btn-primary">
+                                @Html.ActionLink("Edit Station", "EditStation", "Admin", new {id = type.Id})
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        }
+    </tr>
+    </tbody>
+
+
+</table>
 
 </body>
 </html>
