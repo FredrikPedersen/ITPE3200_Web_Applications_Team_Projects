@@ -1,10 +1,10 @@
-﻿using Purchase.Model.DBModels;
-using Purchase.Model.RepositoryModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model.DBModels;
+using Model.RepositoryModels;
 
-namespace Purchase.Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories
 {
     public class DepartureRepository : IDepartureRepository
     {

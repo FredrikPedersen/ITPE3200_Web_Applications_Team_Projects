@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Purchase.Model.DBModels;
+using Model.DBModels;
 
-namespace Purchase.Data.Access.Layer
+namespace Data.Access.Layer
 {
     public class DatabaseContext : DbContext
     {

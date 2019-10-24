@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Purchase.Model.DBModels;
 using Purchase.Model.RepositoryModels;
 
-namespace Purchase.Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories
 {
     public class StationRepository
     {

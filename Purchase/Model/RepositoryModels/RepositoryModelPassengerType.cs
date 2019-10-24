@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Purchase.Model.RepositoryModels
+namespace Model.RepositoryModels
 {
     public class RepositoryModelPassengerType
     {

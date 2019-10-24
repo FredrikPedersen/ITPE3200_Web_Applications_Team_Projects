@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Data.Access.Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Purchase.Data.Access.Layer.Repositories;
-using Purchase.Model.RepositoryModels;
-using Purchase.Model.ViewModels;
+using Model.RepositoryModels;
+using Model.ViewModels;
 
-namespace Purchase.MVC.Controllers
+namespace MVC.Controllers
 
 {
     public class AdminController : Controller

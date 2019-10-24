@@ -1,8 +1,8 @@
-﻿using Purchase.Model.DBModels;
-using Purchase.Model.RepositoryModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Model.DBModels;
+using Model.RepositoryModels;
 
-namespace Purchase.Model.ViewModels
+namespace Model.ViewModels
 {
     public class AdminModel
     {
