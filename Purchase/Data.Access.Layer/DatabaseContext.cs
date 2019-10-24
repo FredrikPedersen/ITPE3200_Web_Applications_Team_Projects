@@ -1,0 +1,20 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Purchase.Model.DBModels;
+
+namespace Purchase.Data.Access.Layer
+{
+    public class DatabaseContext : DbContext
+    {
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        {
+        }
+
+        public DbSet<DbTicket> Tickets { get; set; }
+        public DbSet<DbStation> Stations { get; set; }
+        public DbSet<DbTrainLine> TrainLines { get; set; }
+        public DbSet<DbPassengerType> PassengerTypes { get; set; }
+        public DbSet<DbDepartures> Departures { get; set; }
+        
+        public DbSet<DbUser> Users { get; set; }
+    }
+}
