@@ -52,7 +52,7 @@ namespace Purchase.Data.Access.Layer
 
         private static void SeedTrainLines(DatabaseContext dbContext)
         {
-            using (var reader = new StreamReader(@".\Repository\DBModels\SeedData\lines.csv"))
+            using (var reader = new StreamReader(@".\Files\SeedData\lines.csv"))
             {
                 while (!reader.EndOfStream)
                 {

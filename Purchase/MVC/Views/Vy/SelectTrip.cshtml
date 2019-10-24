@@ -1,0 +1,46 @@
+﻿@model List<Purchase.Model.DBModels.DbDepartures>
+
+@{
+    ViewData["Title"] = "testSelectTrip";
+    Layout = "_Layout";
+}
+
+<h2>testSelectTrip</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @ViewBag.ticket.FromStation
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="row">
+                    @using (Html.BeginForm("SelectTrip", "Vy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="col-6">
+                            @Html.DisplayFor(modelItem => item.departureTime)
+                            @Html.Hidden("ValidFromTime", item.departureTime)
+                            @Html.Hidden("FromStation", (object)ViewBag.ticket.FromStation)
+                            @Html.Hidden("ToStation", (object)ViewBag.ticket.ToStation)
+                            @Html.Hidden("ValidFromDate", (object)ViewBag.ticket.ValidFromDate)
+                            @Html.Hidden("Price", (object)ViewBag.ticket.Price)
+                            @Html.Hidden("CustomerGivenName", (object)ViewBag.ticket.CustomerGivenName)
+                            @Html.Hidden("CustomerLastNAme", (object)ViewBag.ticket.CustomerLastName)
+                            @Html.Hidden("CustomerNumber", (object)ViewBag.ticket.CustomerNumber)
+                            @Html.Hidden("PassengerType", (object)ViewBag.ticket.PassengerType)
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary" id="btn-submit">Bestill <span class="glyphicon glyphicon-ok"></span></button>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

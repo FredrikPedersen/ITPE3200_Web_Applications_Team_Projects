@@ -25,8 +25,8 @@ namespace Purchase.Data.Access.Layer.Services
             Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
             DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
 
-            //TODO REMOVE COMMENT HERE
-           /* if (dbUser != null)
+            //TODO MOVE HASHING TO DATA ACCESS LAYER
+            /* if (dbUser != null)
             {
                 Console.WriteLine(dbUser.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
 
