@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Model.DBModels;
-using Model.RepositoryModels;
+using System.Web.Mvc;
+using Purchase.Model.DBModels;
+using Purchase.Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories
 {
