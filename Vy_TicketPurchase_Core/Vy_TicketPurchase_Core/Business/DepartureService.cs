@@ -6,7 +6,7 @@ using Vy_TicketPurchase_Core.Repository.DBModels;
 
 namespace Vy_TicketPurchase_Core.Business
 {
-    public class DepartureService
+    public class DepartureService : IDepartureService
     {
         public readonly DatabaseContext _databaseContext;
 
