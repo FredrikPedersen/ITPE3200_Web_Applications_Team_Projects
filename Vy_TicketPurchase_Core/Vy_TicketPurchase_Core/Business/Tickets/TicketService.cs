@@ -109,24 +109,27 @@ namespace Vy_TicketPurchase_Core.Business.Tickets
 
         private DbPassengerType FindTicketPassengerType(string passengerTypeName)
         {
-            List <DbPassengerType> passengerTypes = GetAllPassengerTypes();
+            //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
+            var passengerTypes = GetAllPassengerTypes();
 
-            foreach (DbPassengerType passengerType in passengerTypes)
+            foreach (var passengerType in passengerTypes)
             {
-                if (passengerTypeName.Equals(passengerType.Type))
+                if (passengerType.Type == passengerTypeName)
                 {
-                    return passengerType;
+                    return new DbPassengerType
+                    {
+                        PriceMultiplier = passengerType.PriceMultiplier,
+                        Type = passengerType.Type
+                    };
                 }
             }
             return passengerTypes[0]; //This outcome should never happen, but sets passengerType to Adult if it does.
         }
-        
-        //temporary method, must be moved into separate service
+
         public List<DbPassengerType> GetAllPassengerTypes()
         {
             return _databaseContext.PassengerTypes.Select(t => new DbPassengerType
             {
-                Id = t.Id,
                 Type = t.Type,
                 PriceMultiplier = t.PriceMultiplier
             }).ToList();
