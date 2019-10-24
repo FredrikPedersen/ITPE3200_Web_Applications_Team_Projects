@@ -57,7 +57,7 @@ namespace Vy_TicketPurchase_Core.Controllers
         }
         
         [HttpPost]
-        public ActionResult LogInn(ServiceModelUser user)
+        public ActionResult LogIn(ServiceModelUser user)
         {
             Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
             if (_userService.CheckUser(user))

@@ -32,7 +32,7 @@ namespace Vy_TicketPurchase_Core.Controllers
 
         public ActionResult Admin()
         {
-            var model = new AdminModel
+            var model = new AdminModel()
             {
                 Stations = _stationService.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
