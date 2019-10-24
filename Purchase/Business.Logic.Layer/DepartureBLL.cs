@@ -1,6 +1,6 @@
-﻿using Purchase.Data.Access.Layer.Repositories;
-using Purchase.Model.DBModels;
-using Purchase.Model.RepositoryModels;
+﻿using Model.DBModels;
+using Model.RepositoryModels;
+using Purchase.Data.Access.Layer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +22,7 @@ namespace Business.Logic.Layer
 
             public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
             {
-                return _departureRepository.DbtoServiceDeparture(departure);
+            return _departureRepository.DbtoServiceDeparture(departure);
             }
 
             public List<RepositoryModelDepartures> GetAllDepartures()

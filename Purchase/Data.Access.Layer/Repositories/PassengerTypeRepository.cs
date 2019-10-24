@@ -5,7 +5,7 @@ using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories
 {
-    public class PassengerTypeRepository
+    public class PassengerTypeRepository : IPassengerTypeRepository
     {
         private readonly DatabaseContext _databaseContext;
 
