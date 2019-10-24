@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Business.Logic.Layer
+namespace Business.Access.Layer
 {
-    class Class1
+    public class Class1
     {
     }
 }

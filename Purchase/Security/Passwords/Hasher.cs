@@ -1,8 +1,8 @@
 ﻿using System.Security.Cryptography;
 
-namespace Security
+namespace Security.Passwords
 {
-    class Hasher
+    public class Hasher
     {
         public static byte[] CreateHash(string password, byte[] salt)
         {
