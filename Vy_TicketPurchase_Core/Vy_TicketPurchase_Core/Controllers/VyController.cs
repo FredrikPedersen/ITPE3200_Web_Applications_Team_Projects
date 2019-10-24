@@ -7,7 +7,6 @@ using Vy_TicketPurchase_Core.Business.Stations;
 using Vy_TicketPurchase_Core.Business.Tickets;
 using Vy_TicketPurchase_Core.Business.Tickets.Models;
 using Vy_TicketPurchase_Core.Repository.DBModels;
-using Vy_TicketPurchase_Core.ViewModels;
 
 namespace Vy_TicketPurchase_Core.Controllers
 {
@@ -49,12 +48,12 @@ namespace Vy_TicketPurchase_Core.Controllers
                         isValidToStation = true;
                     }
                 }
-
+                
                 if (isValidToStation && isValidFromStation)
                 {
                     List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
-
+                    
                     return View("SelectTrip", departures);
                 }
             }
@@ -90,10 +89,11 @@ namespace Vy_TicketPurchase_Core.Controllers
 
         private SelectList PassengerTypesForDropdown()
         {
-            List<DbPassengerType> types = _ticketService.GetAllPassengerTypes();
-            string[] typeNames = new string[types.Capacity - 1];
+            //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
+            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
+            string[] typeNames = new string[4];
 
-            for (var i = 0; i < types.Capacity - 1; i++)
+            for (var i = 0; i < 4; i++)
             {
                 typeNames[i] = types[i].Type;
             }
