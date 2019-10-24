@@ -7,22 +7,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{5
 	ProjectSection(ProjectDependencies) = postProject
 		{F0C8A31B-7E67-443E-A35A-2C8B45E39E70} = {F0C8A31B-7E67-443E-A35A-2C8B45E39E70}
 		{30F1175F-24A9-432F-A044-CB9CF461C9DD} = {30F1175F-24A9-432F-A044-CB9CF461C9DD}
+		{040AF985-B07C-45D0-AEEF-49A0772CF793} = {040AF985-B07C-45D0-AEEF-49A0772CF793}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Access.Layer", "Data.Access.Layer\Data.Access.Layer.csproj", "{708B1119-433E-41EE-8280-E167ABFF13E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Access.Layer", "Data.Access.Layer\Data.Access.Layer.csproj", "{708B1119-433E-41EE-8280-E167ABFF13E5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{30F1175F-24A9-432F-A044-CB9CF461C9DD} = {30F1175F-24A9-432F-A044-CB9CF461C9DD}
+		{040AF985-B07C-45D0-AEEF-49A0772CF793} = {040AF985-B07C-45D0-AEEF-49A0772CF793}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Logic.Layer", "Business.Logic.Layer\Business.Logic.Layer.csproj", "{F0C8A31B-7E67-443E-A35A-2C8B45E39E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Logic.Layer", "Business.Logic.Layer\Business.Logic.Layer.csproj", "{F0C8A31B-7E67-443E-A35A-2C8B45E39E70}"
 	ProjectSection(ProjectDependencies) = postProject
 		{708B1119-433E-41EE-8280-E167ABFF13E5} = {708B1119-433E-41EE-8280-E167ABFF13E5}
 		{30F1175F-24A9-432F-A044-CB9CF461C9DD} = {30F1175F-24A9-432F-A044-CB9CF461C9DD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{30F1175F-24A9-432F-A044-CB9CF461C9DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{30F1175F-24A9-432F-A044-CB9CF461C9DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit.Testing", "Unit.Testing\Unit.Testing.csproj", "{723269B3-A143-439B-83CF-620B4A0CC834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit.Testing", "Unit.Testing\Unit.Testing.csproj", "{723269B3-A143-439B-83CF-620B4A0CC834}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Security\Security.csproj", "{040AF985-B07C-45D0-AEEF-49A0772CF793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,10 @@ Global
 		{723269B3-A143-439B-83CF-620B4A0CC834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{723269B3-A143-439B-83CF-620B4A0CC834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{723269B3-A143-439B-83CF-620B4A0CC834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{040AF985-B07C-45D0-AEEF-49A0772CF793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040AF985-B07C-45D0-AEEF-49A0772CF793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040AF985-B07C-45D0-AEEF-49A0772CF793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040AF985-B07C-45D0-AEEF-49A0772CF793}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

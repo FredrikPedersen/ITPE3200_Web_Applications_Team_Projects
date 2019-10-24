@@ -1,7 +1,7 @@
-﻿using Purchase.Model.DBModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Model.DBModels;
 
-namespace Purchase.Model.RepositoryModels
+namespace Model.RepositoryModels
 {
     public class RepositoryModelStation
     {

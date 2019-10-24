@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Purchase.Model.DBModels
+namespace Model.DBModels
 {
     public class DbTicket
     {

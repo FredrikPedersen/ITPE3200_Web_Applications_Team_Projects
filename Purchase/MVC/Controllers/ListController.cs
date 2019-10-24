@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Purchase.Data.Access.Layer.Repositories;
-using Purchase.Model.ViewModels;
+﻿using Data.Access.Layer.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Model.ViewModels;
 
-namespace Purchase.MVC.Controllers
+namespace MVC.Controllers
 {
     public class ListController : Controller
     {

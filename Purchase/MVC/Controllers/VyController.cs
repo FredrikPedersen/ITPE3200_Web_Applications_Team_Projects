@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using Data.Access.Layer.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Session;
-using Purchase.Data.Access.Layer.Repositories;
-using Purchase.Model.RepositoryModels;
-using Purchase.Model.DBModels;
+using Model.DBModels;
+using Model.RepositoryModels;
 
-namespace Purchase.MVC.Controllers
+namespace MVC.Controllers
 {
     public class VyController : Controller
     {
@@ -155,22 +153,6 @@ namespace Purchase.MVC.Controllers
         }
 
         //________________________________________________________________________________________
-        //Innlogging
-
-        public static byte[] CreateHash(string password, byte[] salt)
-        {
-            const int keyLenght = 24;
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 1000);
-            return pbkdf2.GetBytes(keyLenght);
-        }
-
-        public static byte[] CreateSalt()
-        {
-            var csprng = new RNGCryptoServiceProvider();
-            var salt = new byte[24];
-            csprng.GetBytes(salt);
-            return salt;
-        }
 
         public ActionResult Register()
         {
@@ -183,8 +165,8 @@ namespace Purchase.MVC.Controllers
             try
             {
                 var newUser = new DbUser();
-                byte[] salt = CreateSalt();
-                byte[] hash = CreateHash(user.Password, salt);
+                byte[] salt = Hasher.CreateSalt();
+                byte[] hash = Hasher.CreateHash(user.Password, salt);
                 newUser.UserName = user.UserName;
                 newUser.Password = hash;
                 newUser.Salt = salt;

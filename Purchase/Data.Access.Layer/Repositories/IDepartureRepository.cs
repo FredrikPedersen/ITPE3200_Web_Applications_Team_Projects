@@ -1,4 +1,4 @@
-﻿namespace Purchase.Data.Access.Layer.Repositories
+﻿namespace Data.Access.Layer.Repositories
 {
     public interface IDepartureRepository
     {

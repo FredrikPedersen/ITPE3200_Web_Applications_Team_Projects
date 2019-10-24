@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Purchase.Model.DBModels;
-using Purchase.Model.RepositoryModels;
+using Model.DBModels;
+using Model.RepositoryModels;
 
-namespace Purchase.Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories
 {
     public class StationRepository
     {
