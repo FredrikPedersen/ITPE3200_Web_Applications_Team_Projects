@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Business.Access.Layer
+namespace Business.Logic.Layer
 {
     public class Class1
     {

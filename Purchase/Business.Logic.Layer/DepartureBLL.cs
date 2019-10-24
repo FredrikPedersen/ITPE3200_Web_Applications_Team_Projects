@@ -1,9 +1,9 @@
-﻿using Purchase.Data.Access.Layer.Repositories;
-using Purchase.Model.DBModels;
-using Purchase.Model.RepositoryModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories;
+using Model.DBModels;
+using Model.RepositoryModels;
 
 namespace Business.Logic.Layer
 {

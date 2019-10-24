@@ -1,8 +1,8 @@
-﻿using Purchase.Model.DBModels;
-using Purchase.Model.RepositoryModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Model.DBModels;
+using Model.RepositoryModels;
 
-namespace Purchase.Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories
 {
     public interface IDepartureRepository
     {
