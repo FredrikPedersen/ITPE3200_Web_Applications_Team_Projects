@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
-using Purchase.Data.Access.Layer.Services;
-using Purchase.Model.ServiceModels;
+using Purchase.Data.Access.Layer.Repositories;
+using Purchase.Model.RepositoryModels;
 using Purchase.Model.DBModels;
 
 namespace Purchase.MVC.Controllers
 {
     public class VyController : Controller
     {
-        private readonly StationService _stationService;
-        private readonly TicketService _ticketService;
-        private readonly DepartureService _departureService;
-        private readonly UserService _userService;
+        private readonly StationRepository _stationService;
+        private readonly TicketRepository _ticketService;
+        private readonly DepartureRepository _departureService;
+        private readonly UserRepository _userService;
 
         public const string SessionKey = "_Key";
 
-        public VyController(TicketService ticketService, StationService stationService,
-            DepartureService departureService, UserService userService)
+        public VyController(TicketRepository ticketService, StationRepository stationService,
+            DepartureRepository departureService, UserRepository userService)
         {
             _ticketService = ticketService;
             _stationService = stationService;
@@ -52,7 +52,7 @@ namespace Purchase.MVC.Controllers
         }
         
         [HttpPost]
-        public ActionResult LogIn(ServiceModelUser user)
+        public ActionResult LogIn(RepositoryModelUser user)
         {
             Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
             if (_userService.CheckUser(user))
@@ -74,7 +74,7 @@ namespace Purchase.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ServiceModelTicket ticket)
+        public ActionResult Index(RepositoryModelTicket ticket)
         {
             var isValidFromStation = false;
             var isValidToStation = false;
@@ -110,7 +110,7 @@ namespace Purchase.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectTrip(ServiceModelTicket ticket)
+        public ActionResult SelectTrip(RepositoryModelTicket ticket)
         {
             _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
             return RedirectToAction("List", "List", ticket);
@@ -178,7 +178,7 @@ namespace Purchase.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(ServiceModelUser user)
+        public ActionResult Register(RepositoryModelUser user)
         {
             try
             {

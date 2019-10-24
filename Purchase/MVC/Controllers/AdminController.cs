@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Purchase.Data.Access.Layer.Services;
-using Purchase.Model.ServiceModels;
+using Purchase.Data.Access.Layer.Repositories;
+using Purchase.Model.RepositoryModels;
 using Purchase.Model.ViewModels;
 
 namespace Purchase.MVC.Controllers
@@ -9,14 +9,14 @@ namespace Purchase.MVC.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly StationService _stationService;
-        private readonly TicketService _tickedService;
-        private readonly DepartureService _departureService;
-        private readonly PassengerTypeService _passengerTypeService;
+        private readonly StationRepository _stationService;
+        private readonly TicketRepository _tickedService;
+        private readonly DepartureRepository _departureService;
+        private readonly PassengerTypeRepository _passengerTypeService;
 
 
-        public AdminController(StationService stationService, TicketService tickedService,
-            DepartureService departureService, PassengerTypeService passengerTypeService
+        public AdminController(StationRepository stationService, TicketRepository tickedService,
+            DepartureRepository departureService, PassengerTypeRepository passengerTypeService
         )
         {
             _stationService = stationService;
@@ -47,7 +47,7 @@ namespace Purchase.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditStation(ServiceModelStation stationIn)
+        public ActionResult EditStation(RepositoryModelStation stationIn)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Purchase.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPassengerType(ServiceModelPassengerType type)
+        public ActionResult EditPassengerType(RepositoryModelPassengerType type)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace Purchase.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditDeparture(ServiceModelDepartures departure)
+        public ActionResult EditDeparture(RepositoryModelDepartures departure)
         {
             if (ModelState.IsValid)
             {

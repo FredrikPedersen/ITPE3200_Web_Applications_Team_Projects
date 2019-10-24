@@ -5,27 +5,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Purchase.Data.Access.Layer;
 using Purchase.Model.DBModels;
-using Purchase.Model.ServiceModels;
+using Purchase.Model.RepositoryModels;
 
-namespace Purchase.Data.Access.Layer.Services
+namespace Purchase.Data.Access.Layer.Repositories
 {
-    public class StationService
+    public class StationRepository
     {
         private readonly DatabaseContext _databaseContext;
 
-        public StationService(DatabaseContext dbContext)
+        public StationRepository(DatabaseContext dbContext)
         {
             _databaseContext = dbContext;
         }
 
-        public ServiceModelStation GetStationById(int id)
+        public RepositoryModelStation GetStationById(int id)
         {
             return DbToServiceStation(_databaseContext.Stations.FirstOrDefault(r => r.Id == id));
         }
         
-        public List<ServiceModelStation> GetAllStations()
+        public List<RepositoryModelStation> GetAllStations()
         {
-            return _databaseContext.Stations.Select(s => new ServiceModelStation
+            return _databaseContext.Stations.Select(s => new RepositoryModelStation
             {
                 Id = s.Id,
                 NumberOnLine = s.NumberOnLine,
@@ -34,9 +34,9 @@ namespace Purchase.Data.Access.Layer.Services
             }).ToList();
         }
 
-        private ServiceModelStation DbToServiceStation(DbStation dbStation)
+        private RepositoryModelStation DbToServiceStation(DbStation dbStation)
         {
-            return new ServiceModelStation
+            return new RepositoryModelStation
             {
                 Id = dbStation.Id,
                 NumberOnLine = dbStation.NumberOnLine,
@@ -100,7 +100,7 @@ namespace Purchase.Data.Access.Layer.Services
             return result;
         }
 
-        public bool UpdateStation(int id, ServiceModelStation stationIn)
+        public bool UpdateStation(int id, RepositoryModelStation stationIn)
         {
             DbStation station = _databaseContext.Stations.Find(id);
 

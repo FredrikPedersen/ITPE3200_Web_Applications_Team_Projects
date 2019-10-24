@@ -1,15 +1,15 @@
 ﻿using Purchase.Model.DBModels;
-using Purchase.Model.ServiceModels;
+using Purchase.Model.RepositoryModels;
 using System;
 using System.Linq;
 
-namespace Purchase.Data.Access.Layer.Services
+namespace Purchase.Data.Access.Layer.Repositories
 {
-    public class UserService
+    public class UserRepository
     {
         private readonly DatabaseContext _databaseContext;
 
-        public UserService(DatabaseContext databaseContext)
+        public UserRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
@@ -20,7 +20,7 @@ namespace Purchase.Data.Access.Layer.Services
             _databaseContext.SaveChanges();
         }
 
-        public bool CheckUser(ServiceModelUser user)
+        public bool CheckUser(RepositoryModelUser user)
         { 
             Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
             DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);

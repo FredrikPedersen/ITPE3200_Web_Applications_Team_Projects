@@ -1,37 +1,37 @@
 ﻿using Purchase.Model.DBModels;
-using Purchase.Model.ServiceModels;
+using Purchase.Model.RepositoryModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Purchase.Data.Access.Layer.Services
+namespace Purchase.Data.Access.Layer.Repositories
 {
-    public class DepartureService : IDepartureService
+    public class DepartureRepository : IDepartureRepository
     {
         private readonly DatabaseContext _databaseContext;
 
-        public DepartureService(DatabaseContext databaseContext)
+        public DepartureRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
 
-        public ServiceModelDepartures GetDepartureByID(int id)
+        public RepositoryModelDepartures GetDepartureByID(int id)
         {
             return DbtoServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
         }
 
-        public ServiceModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
         {
-            return new ServiceModelDepartures()
+            return new RepositoryModelDepartures()
             {
                 Id = departure.Id,
                 departureTime = departure.departureTime
             };
         }
 
-        public List<ServiceModelDepartures> GetAllDepartures()
+        public List<RepositoryModelDepartures> GetAllDepartures()
         {
-            return _databaseContext.Departures.Select(d => new ServiceModelDepartures()
+            return _databaseContext.Departures.Select(d => new RepositoryModelDepartures()
             {
                 Id = d.Id,
                 departureTime = d.departureTime
@@ -65,7 +65,7 @@ namespace Purchase.Data.Access.Layer.Services
             return returnlist;
         }
 
-        public bool UpdateDeparture(int id, ServiceModelDepartures departure)
+        public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
         {
             DbDepartures departures = _databaseContext.Departures.Find(id);
             departures.departureTime = departure.departureTime;

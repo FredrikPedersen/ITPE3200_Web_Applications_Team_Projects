@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Purchase.Model.ServiceModels
+namespace Purchase.Model.RepositoryModels
 {
-    public class ServiceModelTicket
+    public class RepositoryModelTicket
     {
         [Key]
         public int Id { get; set; }

@@ -1,27 +1,27 @@
 ﻿using Purchase.Model.DBModels;
-using Purchase.Model.ServiceModels;
+using Purchase.Model.RepositoryModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Purchase.Data.Access.Layer.Services
+namespace Purchase.Data.Access.Layer.Repositories
 {
-    public class PassengerTypeService
+    public class PassengerTypeRepository
     {
         private readonly DatabaseContext _databaseContext;
 
-        public PassengerTypeService(DatabaseContext databaseContext)
+        public PassengerTypeRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
 
-        public ServiceModelPassengerType GetPassengerTypeTypeById(int id)
+        public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)
         {
             return DbToServicePT(_databaseContext.PassengerTypes.FirstOrDefault(r => r.Id == id));
         }
 
-        public ServiceModelPassengerType DbToServicePT(DbPassengerType dbPassengerType)
+        public RepositoryModelPassengerType DbToServicePT(DbPassengerType dbPassengerType)
         {
-            return new ServiceModelPassengerType()
+            return new RepositoryModelPassengerType()
             {
                 Id = dbPassengerType.Id,
                 Type = dbPassengerType.Type,
@@ -30,9 +30,9 @@ namespace Purchase.Data.Access.Layer.Services
 
         }
 
-        public List<ServiceModelPassengerType> GetAllPT()
+        public List<RepositoryModelPassengerType> GetAllPT()
         {
-            return _databaseContext.PassengerTypes.Select(t => new ServiceModelPassengerType()
+            return _databaseContext.PassengerTypes.Select(t => new RepositoryModelPassengerType()
             {
                 Id = t.Id,
                 Type = t.Type,
@@ -40,7 +40,7 @@ namespace Purchase.Data.Access.Layer.Services
             }).ToList();
         }
 
-        public bool UpdatePT(int id, ServiceModelPassengerType pt)
+        public bool UpdatePT(int id, RepositoryModelPassengerType pt)
         {
             DbPassengerType passengerType = _databaseContext.PassengerTypes.Find(id);
             passengerType.PriceMultiplier = pt.PriceMultiplier;

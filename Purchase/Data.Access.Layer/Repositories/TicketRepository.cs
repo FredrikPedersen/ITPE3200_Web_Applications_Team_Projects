@@ -1,24 +1,24 @@
 ﻿using Purchase.Model.DBModels;
-using Purchase.Model.ServiceModels;
+using Purchase.Model.RepositoryModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Purchase.Data.Access.Layer.Services
+namespace Purchase.Data.Access.Layer.Repositories
 {
-    public class TicketService
+    public class TicketRepository
     {
         
         private readonly DatabaseContext _databaseContext;
 
-        public TicketService(DatabaseContext dbContext)
+        public TicketRepository(DatabaseContext dbContext)
         {
             _databaseContext = dbContext;
         }
 
-        public List<ServiceModelTicket> GetAllTickets()
+        public List<RepositoryModelTicket> GetAllTickets()
         {
-            return _databaseContext.Tickets.Select(t => new ServiceModelTicket
+            return _databaseContext.Tickets.Select(t => new RepositoryModelTicket
             {
                 Id = t.Id,
                 FromStation = t.FromStation.StationName,
@@ -34,7 +34,7 @@ namespace Purchase.Data.Access.Layer.Services
             }).ToList();
         }
         
-        public bool SaveTicket(ServiceModelTicket ticket, List<DbStation> stationsFromName) {
+        public bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName) {
             
             DbTicket newTicket = new DbTicket
             {
@@ -97,7 +97,7 @@ namespace Purchase.Data.Access.Layer.Services
             return price;
         }
 
-        private DbCustomer CreateNewCustomerFromInput(ServiceModelTicket ticket)
+        private DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket)
         {
             return new DbCustomer
             {

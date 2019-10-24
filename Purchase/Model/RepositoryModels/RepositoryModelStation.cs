@@ -1,9 +1,9 @@
 ﻿using Purchase.Model.DBModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace Purchase.Model.ServiceModels
+namespace Purchase.Model.RepositoryModels
 {
-    public class ServiceModelStation
+    public class RepositoryModelStation
     {
         [Key]
         public int Id { get; set; }

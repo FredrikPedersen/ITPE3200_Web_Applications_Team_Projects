@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Purchase.Data.Access.Layer;
-using Purchase.Data.Access.Layer.Services;
+using Purchase.Data.Access.Layer.Repositories;
 
 namespace MVC
 {
@@ -48,11 +48,11 @@ namespace MVC
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<StationService>();
-            services.AddScoped<TicketService>();
-            services.AddScoped<DepartureService>();
-            services.AddScoped<UserService>();
-            services.AddScoped<PassengerTypeService>();
+            services.AddScoped<StationRepository>();
+            services.AddScoped<TicketRepository>();
+            services.AddScoped<DepartureRepository>();
+            services.AddScoped<UserRepository>();
+            services.AddScoped<PassengerTypeRepository>();
             services.AddMvc();
         }
 

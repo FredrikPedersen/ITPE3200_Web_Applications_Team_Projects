@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Purchase.Model.ServiceModels
+namespace Purchase.Model.RepositoryModels
 {
-    public class ServiceModelPassengerType
+    public class RepositoryModelPassengerType
     {
         [Key]
         public int Id { get; set; }

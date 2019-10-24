@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Purchase.Data.Access.Layer.Services;
+using Purchase.Data.Access.Layer.Repositories;
 using Purchase.Model.ViewModels;
 
 namespace Purchase.MVC.Controllers
 {
     public class ListController : Controller
     {
-        private readonly TicketService _ticketService;
+        private readonly TicketRepository _ticketService;
 
-        public ListController(TicketService ticketService)
+        public ListController(TicketRepository ticketService)
         {
             _ticketService = ticketService;
         }
