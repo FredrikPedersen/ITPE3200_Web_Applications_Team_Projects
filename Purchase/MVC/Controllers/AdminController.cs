@@ -77,12 +77,15 @@ namespace MVC.Controllers
             return View();
         }
 
+        
+        //EDIT
         public ActionResult EditDeparture(int id)
         {
             var departure = _departureService.GetDepartureByID(id);
             return View(departure);
         }
 
+        //EDIT POST
         [HttpPost]
         public ActionResult EditDeparture(RepositoryModelDepartures departure)
         {
@@ -92,6 +95,12 @@ namespace MVC.Controllers
                 return RedirectToAction("Admin", "Admin");
             }
 
+            return View();
+        }
+
+        //ADD
+        public ActionResult EditDeparture()
+        {
             return View();
         }
     }
