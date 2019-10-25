@@ -7,19 +7,25 @@
 
 
 @Html.AntiForgeryToken()
+
+@Html.ActionLink("Tilbake", "Admin", "Admin", new {},new {@class = "btn btn-primary"})
+
+
 <table class="table">
     <thead>
     <th scope="col">Stasjoner</th>
     </thead>
-    <tr><th>
-        @using (Html.BeginForm("AddStation", "Admin", FormMethod.Post, new
-        {
-            enctype = "multipart/form-data"
-        }))
-        {
-            @Html.ActionLink("Add Stasjon", "AddStation", "Admin", new {id = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
-        }
-    </th></tr>
+    <tr>
+        <th>
+            @using (Html.BeginForm("AddStation", "Admin", FormMethod.Post, new
+            {
+                enctype = "multipart/form-data"
+            }))
+            {
+                @Html.ActionLink("Add Stasjon", "AddStation", "Admin", new {id = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
+            }
+        </th>
+    </tr>
     <tbody>
     @foreach (var station in Model.Line.Stations)
     {
