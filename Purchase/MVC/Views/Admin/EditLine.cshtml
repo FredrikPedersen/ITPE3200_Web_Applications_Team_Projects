@@ -23,7 +23,7 @@
     <tbody>
     @foreach (var station in Model.Line.Stations)
     {
-        @using (Html.BeginForm("EditStation", "Admin", FormMethod.Post, new
+        @using (Html.BeginForm("EditStation", "Admin", new
         {
             enctype = "multipart/form-data"
         }))
@@ -37,7 +37,7 @@
                             @Html.DisplayFor(model => station.StationName)
                             <br/>
                             @Html.ActionLink("Endre Stasjon", "EditStation", "Admin",
-                                new {id = station.Id}, new {@class = "btn btn-primary"})
+                                new {id = station.Id, line = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
                             @Html.ActionLink("Slett Stasjon", "DeleteStation", "Admin",
                                 new {id = station.Id}, new {@class = "btn btn-danger"})
                         </div>

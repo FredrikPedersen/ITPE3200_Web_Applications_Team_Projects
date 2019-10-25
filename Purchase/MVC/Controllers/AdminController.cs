@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity.Core.Common.CommandTrees;
+using System.Threading.Tasks;
 using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
 using Data.Access.Layer.Repositories.Repository;
@@ -78,56 +80,81 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult AddStation(AdminModel modelIn)
         {
-            var stationIn = modelIn.Station;
             var lineIn = _lineBll.GetLineById(modelIn.Line.Id);
+
+            var stationInDb = new DbStation()
+            {
+                StationName = modelIn.Station.StationName,
+                NumberOnLine = modelIn.Station.NumberOnLine,
+                TrainLine = lineIn
+            };
             
+            var stationIn = new RepositoryModelStation()
+            {
+                StationName = modelIn.Station.StationName,
+                NumberOnLine = modelIn.Station.NumberOnLine,
+                TrainLine = lineIn
+            };
             
-            
+            _stationBll.AddStation(stationIn);
+
+            lineIn.Stations.Add(stationInDb);
+            _lineBll.UpdateLine(lineIn);
+
             return View();
         }
         
 
-        public ActionResult EditStation(int id)
+        public ActionResult EditStation(int id, int line)
         {
             var model = new AdminModel()
             {
-                Station = _stationBll.GetStationById(id)
+                Station = _stationBll.GetStationById(id),
+                Line = _lineBll.GetLineById(line)
             };
            
             return View(model);
         }
         
         [HttpPost]
-        public ActionResult EditStation(AdminModel model)
+        public ActionResult EditStation(AdminModel modelIn)
         {
-            var stationIn = model.Station;
-            var lineIn = model.Line;
-            var dbLine = new DbTrainLine()
-            {
-                Id = ViewBag.Trainline.Id,
-                Name = ViewBag.Trainline.Name,
-                Stations = ViewBag.Trainline.Stations
-            };
+            var lineIn = _lineBll.GetLineById(modelIn.Line.Id);
 
-            stationIn.TrainLine = dbLine;
-
-            if (ModelState.IsValid)
-            {
-                if (stationIn.Id != 0)
+                var stationInDb = new DbStation()
                 {
-                    _stationBll.UpdateStation(stationIn.Id, stationIn);
-                    return RedirectToAction("EditLine", "Admin");
-                }
-                else
+                    Id = modelIn.Station.Id,
+                    StationName = modelIn.Station.StationName,
+                    NumberOnLine = modelIn.Station.NumberOnLine,
+                    TrainLine = lineIn
+                };
+            
+                var stationIn = new RepositoryModelStation()
                 {
-                    _stationBll.AddStation(stationIn);
-                    return RedirectToAction("EditLine", "Admin");
+                    Id = modelIn.Station.Id,
+                    StationName = modelIn.Station.StationName,
+                    NumberOnLine = modelIn.Station.NumberOnLine,
+                    TrainLine = lineIn
+                };
+            
+                var result = _stationBll.UpdateStation(stationIn.Id, stationIn);
+                
+                
+                for (int i = 0; i < lineIn.Stations.Count; i++)
+                {
+                    if (lineIn.Stations[i].Id == stationInDb.Id)
+                    {
+                        lineIn.Stations[i].StationName = stationInDb.StationName;
+                        lineIn.Stations[i].NumberOnLine = stationInDb.NumberOnLine;
+                    }
                 }
-            }
+                _lineBll.UpdateLine(lineIn);
 
-            return View();
+                
+                return View();
         }
-
+        
+        
         public ActionResult DeleteStation(int id)
         {
             Console.WriteLine(id + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");

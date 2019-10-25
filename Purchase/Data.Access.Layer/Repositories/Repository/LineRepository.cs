@@ -48,5 +48,14 @@ namespace Data.Access.Layer.Repositories
                 Stations = l.Stations
             }).ToList();
         }
+
+        public bool UpdateLine(DbTrainLine trainLineIn)
+        {
+            var line = GetLineById(trainLineIn.Id);
+            line.Stations = trainLineIn.Stations;
+            _databaseContext.TrainLines.Update(line);
+            _databaseContext.SaveChanges();
+            return true;
+        }
     }
 }

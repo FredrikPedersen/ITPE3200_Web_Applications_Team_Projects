@@ -97,14 +97,14 @@ namespace Data.Access.Layer.Repositories.Repository
             return result;
         }
 
-        public bool UpdateStation(int id, RepositoryModelStation stationIn)
+        public int UpdateStation(int id, RepositoryModelStation stationIn)
         {
             DbStation station = _databaseContext.Stations.Find(id);
 
             station.StationName = stationIn.StationName;
             _databaseContext.Stations.Update(station);
             _databaseContext.SaveChanges();
-            return true;
+            return 1;
         }
 
         public bool AddStation(RepositoryModelStation station)

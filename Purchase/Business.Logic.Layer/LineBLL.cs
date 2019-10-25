@@ -23,5 +23,10 @@ namespace Business.Logic.Layer
         {
             return _lineRepository.GetAllLines();
         }
+
+        public bool UpdateLine(DbTrainLine trainLineIn)
+        {
+            return _lineRepository.UpdateLine(trainLineIn);
+        }
     }
 }
