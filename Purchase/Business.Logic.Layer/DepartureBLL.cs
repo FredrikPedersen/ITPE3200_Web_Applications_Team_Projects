@@ -29,7 +29,7 @@ namespace Business.Logic.Layer
             return _departureRepository.GetDepartureByID(id);
         }
 
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
         {
             return _departureRepository.DbToServiceDeparture(departure);
         }
