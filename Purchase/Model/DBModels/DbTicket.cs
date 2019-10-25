@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Audit.EntityFramework;
 
 namespace Model.DBModels
 {
-    [TrackChanges]
+    [AuditInclude]
     public class DbTicket
     {
         [Key]
