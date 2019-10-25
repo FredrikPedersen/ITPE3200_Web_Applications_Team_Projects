@@ -13,13 +13,13 @@ namespace MVC.Controllers
     public class VyController : Controller
     {
         private const string SessionKey = "_Key";
-        private readonly TicketBLL _ticketBll;
-        private readonly DepartureBLL _departureBll;
-        private readonly StationBLL _stationBll;
-        private readonly UserBLL _userBll;
+        private readonly TicketBLL _ticketBLL;
+        private readonly DepartureBLL _departureBLL;
+        private readonly StationBLL _stationBLL;
+        private readonly UserBLL _userBLL;
 
-        public VyController(TicketBLL ticketBll, StationBLL stationBll,
-           DepartureBLL departureBll, UserBLL userBll)
+        public VyController(TicketBLL ticketBLL, StationBLL stationBLL,
+           DepartureBLL departureBLL, UserBLL userBLL)
         {
             _ticketBll = ticketBll;
             _stationBll = stationBll;

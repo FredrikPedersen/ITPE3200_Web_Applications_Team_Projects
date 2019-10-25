@@ -11,17 +11,11 @@ namespace Business.Logic.Layer
 {
     public class TicketBLL
     {
-        private readonly ITicketRepository _ticketRepositoryStub;
-        private readonly TicketRepository _ticketRepository;
-
-        public TicketBLL(TicketRepository ticketRepository)
-        {
-            _ticketRepository = ticketRepository;
-        }
+        private readonly ITicketRepository _ticketRepository;
 
         public TicketBLL(ITicketRepository ticketRepository)
         {
-            _ticketRepositoryStub = ticketRepository;
+            _ticketRepository = ticketRepository;
         }
 
         public List<RepositoryModelTicket> GetAllTickets()
