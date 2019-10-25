@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,8 @@ namespace Data.Access.Layer
 
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
         {
-            var stationNames = stations.Split(',');
+            String[] separator = {", "};
+            String[] stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             var numberOnLine = 1;
             List<DbStation> staionList = new List<DbStation>();
 
