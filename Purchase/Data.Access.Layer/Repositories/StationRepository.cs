@@ -3,8 +3,6 @@ using Model.RepositoryModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Model.DBModels;
-using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories
 {
@@ -21,7 +19,7 @@ namespace Data.Access.Layer.Repositories
         {
             return DbToServiceStation(_databaseContext.Stations.FirstOrDefault(r => r.Id == id));
         }
-        
+
         public List<RepositoryModelStation> GetAllStations()
         {
             return _databaseContext.Stations.Select(s => new RepositoryModelStation
@@ -49,7 +47,7 @@ namespace Data.Access.Layer.Repositories
             List<DbStation> stations = new List<DbStation>();
             DbStation fromStationObject = null;
             DbStation toStationObject = null;
-            
+
             foreach (var station in _databaseContext.Stations)
             {
                 if (fromStation.Equals(station.StationName))
@@ -63,7 +61,7 @@ namespace Data.Access.Layer.Repositories
             stations.Add(toStationObject);
             return stations;
         }
-        
+
         //Method that gets information for the "From" autocomplete in the Index View
         [HttpPost]
         public List<string> ServiceAutocomplete(string input)
@@ -74,17 +72,17 @@ namespace Data.Access.Layer.Repositories
                 return result;
             }
         }
-        
+
         //Method that gets information for the "To" autocomplete in the Index View depending on content of the "From" text box
         [HttpPost]
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {
             var lineList = (from station in _databaseContext.Stations
-                where station.StationName == fromStation
-                select station.TrainLine.Id).ToList();
+                            where station.StationName == fromStation
+                            select station.TrainLine.Id).ToList();
 
             var result = new List<string>();
-            
+
             foreach (var line in lineList)
             {
                 var tempList = new List<string>(from station in _databaseContext.Stations where station.StationName.Contains(input) && station.TrainLine.Id == line select station.StationName).Distinct().ToList();
