@@ -2,13 +2,13 @@
 
 namespace Utilities.Passwords
 {
-    public class Hasher
+    public static class Hasher
     {
         public static byte[] CreateHash(string password, byte[] salt)
         {
-            const int keyLenght = 24;
+            const int keyLength = 24;
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 1000);
-            return pbkdf2.GetBytes(keyLenght);
+            return pbkdf2.GetBytes(keyLength);
         }
 
         public static byte[] CreateSalt()
