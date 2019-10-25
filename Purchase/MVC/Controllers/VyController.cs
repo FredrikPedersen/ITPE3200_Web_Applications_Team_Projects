@@ -17,7 +17,7 @@ namespace MVC.Controllers
         private readonly DepartureRepository _departureService;
         private readonly UserRepository _userService;
 
-        public const string SessionKey = "_Key";
+        private const string SessionKey = "_Key";
 
         public VyController(TicketRepository ticketService, StationRepository stationService,
             DepartureRepository departureService, UserRepository userService)

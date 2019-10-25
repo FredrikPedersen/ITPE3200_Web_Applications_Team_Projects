@@ -4,6 +4,7 @@ using Data.Access.Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Model.RepositoryModels;
 using Model.ViewModels;
+using Unit.Testing;
 
 namespace MVC.Controllers
 
@@ -11,6 +12,11 @@ namespace MVC.Controllers
     public class AdminController : Controller
     {
         private Class1 _class1; //DO NOT REMOVE THIS BEFORE WE MAKE ACTUAL USE OF THE BLL!!! NBNB!NB!NB!!!!!
+        private Class2 _class2; //DO NOT REMOVE THIS BEFORE WE MAKE ACTUAL USE OF THE Unit.Testing!!! NBNB!NB!NB!!!!!
+        private readonly StationRepository _stationService;
+        private readonly TicketRepository _tickedService;
+        private readonly DepartureRepository _departureService;
+        private readonly PassengerTypeRepository _passengerTypeService;
         private readonly DepartureBLL _departureBll;
         private readonly StationBLL _stationBll;
         private readonly TicketBLL _ticketBll;
