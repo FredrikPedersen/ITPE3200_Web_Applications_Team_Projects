@@ -9,10 +9,15 @@ namespace Data.Access.Layer.Repositories
     public interface IStationRepository
     {
         RepositoryModelStation GetStationById(int id);
+
         List<RepositoryModelStation> GetAllStations();
+
         RepositoryModelStation DbToServiceStation(DbStation dbStation);
+
         List<DbStation> GetStationsFromNames(string fromStation, string toStation);
+
         bool UpdateStation(int id, RepositoryModelStation stationIn);
+
         //TODO ActionResult?
     }
 }

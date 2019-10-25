@@ -7,6 +7,7 @@ namespace Model.DBModels
     {
         [Key]
         public int Id { get; set; }
+
         public string Name { get; set; }
         public List<DbStation> Stations { get; set; }
     }
