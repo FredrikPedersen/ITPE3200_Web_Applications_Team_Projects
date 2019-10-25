@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Model.DBModels;
+using Model.RepositoryModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model.DBModels;
-using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories
 {
-    public class TicketRepository
+    public class TicketRepository : ITicketRepository
     {
-        
         private readonly DatabaseContext _databaseContext;
 
         public TicketRepository(DatabaseContext dbContext)
@@ -30,12 +29,11 @@ namespace Data.Access.Layer.Repositories
                 ValidFromTime = t.ValidFrom.ToShortTimeString(),
                 Price = t.Price,
                 PassengerType = t.PassengerType.Type
-                
             }).ToList();
         }
-        
-        public bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName) {
-            
+
+        public bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName)
+        {
             DbTicket newTicket = new DbTicket
             {
                 FromStation = stationsFromName[0],
@@ -45,7 +43,7 @@ namespace Data.Access.Layer.Repositories
                 PassengerType = FindTicketPassengerType(ticket.PassengerType),
                 Price = GeneratePrice(stationsFromName[0], stationsFromName[1], FindTicketPassengerType(ticket.PassengerType))
             };
-            
+
             try
             {
                 _databaseContext.Tickets.Add(newTicket);
@@ -59,28 +57,27 @@ namespace Data.Access.Layer.Repositories
         }
 
         //Method for converting strings with date and time data to a DateTime object. Used when creating a DbTicket from a ServiceModelTicket
-        private static DateTime StringsToDateTime(String date, String time)
+        public static DateTime StringsToDateTime(String date, String time)
         {
             var dateAndTime = date + " " + time;
             return Convert.ToDateTime(dateAndTime);
         }
 
         //Separates the given name from a string with a full name. Used when creating a ServiceModelTicket from a DbTicket
-        private static string SeparateGivenName(string name)
+        public static string SeparateGivenName(string name)
         {
             var nameSplit = name.Split(' ');
             return nameSplit[0];
         }
 
         //Separates the surname from a string with a full name. Used when creating a ServiceModelTicket from a DbTicket
-        private string SeparateLastName(string name)
+        public string SeparateLastName(string name)
         {
             var nameSplit = name.Split(' ');
-            return nameSplit[nameSplit.Length-1];
-            
+            return nameSplit[nameSplit.Length - 1];
         }
 
-        private static double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
+        public static double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
         {
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
@@ -97,7 +94,7 @@ namespace Data.Access.Layer.Repositories
             return price;
         }
 
-        private DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket)
+        public DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket)
         {
             return new DbCustomer
             {
@@ -106,7 +103,7 @@ namespace Data.Access.Layer.Repositories
             };
         }
 
-        private DbPassengerType FindTicketPassengerType(string passengerTypeName)
+        public DbPassengerType FindTicketPassengerType(string passengerTypeName)
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
             var passengerTypes = GetAllPassengerTypes();
