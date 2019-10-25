@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Audit.EntityFramework;
 
 namespace Model.DBModels
 {
-    [AuditInclude]
     public class DbCustomer
     {
         [Key]
