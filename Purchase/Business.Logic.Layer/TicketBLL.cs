@@ -11,9 +11,9 @@ namespace Business.Logic.Layer
 {
     public class TicketBLL
     {
-        private readonly TicketRepository _ticketRepository;
+        private readonly ITicketRepository _ticketRepository;
 
-        public TicketBLL(TicketRepository ticketRepository)
+        public TicketBLL(ITicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }

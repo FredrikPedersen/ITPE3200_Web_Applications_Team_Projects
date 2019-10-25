@@ -2,6 +2,7 @@
 using Business.Logic.Layer;
 using Data.Access.Layer;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Interfaces;
 using Data.Access.Layer.Repositories.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +21,8 @@ namespace MVC
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration {
+        public IConfiguration Configuration
+        {
             get;
         }
 
@@ -49,6 +51,7 @@ namespace MVC
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
             services.AddScoped<StationRepository>();
             services.AddScoped<TicketRepository>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<DepartureRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<PassengerTypeRepository>();
@@ -78,7 +81,6 @@ namespace MVC
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvc();
-
 
             app.UseMvc(routes =>
             {
