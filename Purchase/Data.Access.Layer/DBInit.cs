@@ -33,7 +33,7 @@ namespace Data.Access.Layer
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
         {
             string[] separator = {", "};
-            string[] stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            var stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             var numberOnLine = 1;
             List<DbStation> stationList = new List<DbStation>();
 
