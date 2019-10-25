@@ -19,23 +19,6 @@ namespace MVC.Controllers
         private readonly DepartureBLL _departureBLL;
         private readonly StationBLL _stationBLL;
         private readonly UserBLL _userBLL;
-        // private readonly PassengerTypeBLL passengerTypeBLL; denne brukes ikke?
-
-        //TODO disse skal slettes
-        /* private readonly StationRepository _stationService;
-
-         private readonly TicketRepository _ticketService;
-         private readonly DepartureRepository _departureService;
-         private readonly UserRepository _userService;
-
-         public VyController(TicketRepository ticketService, StationRepository stationService,
-             DepartureRepository departureService, UserRepository userService)
-         {
-             _ticketService = ticketService;
-             _stationService = stationService;
-             _departureService = departureService;
-             _userService = userService;
-         }*/
 
         public VyController(TicketBLL ticketBLL, StationBLL stationBLL,
            DepartureBLL departureBLL, UserBLL userBLL)
@@ -56,7 +39,6 @@ namespace MVC.Controllers
         {
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey)))
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAa");
                 Console.WriteLine(HttpContext.Session.GetString(SessionKey));
                 string logged = HttpContext.Session.GetString(SessionKey);
                 if (logged.Equals("Logged"))
@@ -71,16 +53,13 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult LogIn(RepositoryModelUser user)
         {
-            Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
             if (_userBLL.CheckUser(user))
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAYEYEYEYYEYEYEYEEYEYAa");
                 HttpContext.Session.SetString(SessionKey, "Logged");
                 ViewBag.Logged = false;
             }
             else
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAANONONONONOONONONa");
                 HttpContext.Session.SetString(SessionKey, "NotLogged");
 
                 ViewBag.Logged = true;
