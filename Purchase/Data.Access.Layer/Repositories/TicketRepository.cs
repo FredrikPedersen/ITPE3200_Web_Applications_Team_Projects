@@ -57,14 +57,14 @@ namespace Data.Access.Layer.Repositories
         }
 
         //Method for converting strings with date and time data to a DateTime object. Used when creating a DbTicket from a ServiceModelTicket
-        public static DateTime StringsToDateTime(String date, String time)
+        public DateTime StringsToDateTime(String date, String time)
         {
             var dateAndTime = date + " " + time;
             return Convert.ToDateTime(dateAndTime);
         }
 
         //Separates the given name from a string with a full name. Used when creating a ServiceModelTicket from a DbTicket
-        public static string SeparateGivenName(string name)
+        public string SeparateGivenName(string name)
         {
             var nameSplit = name.Split(' ');
             return nameSplit[0];
@@ -77,7 +77,7 @@ namespace Data.Access.Layer.Repositories
             return nameSplit[nameSplit.Length - 1];
         }
 
-        public static double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
+        public double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
         {
             var start = fromStation.NumberOnLine;
             var end = toStation.NumberOnLine;
