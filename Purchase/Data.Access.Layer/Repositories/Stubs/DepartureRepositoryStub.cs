@@ -23,11 +23,6 @@ namespace Data.Access.Layer.Repositories.Stubs
             };
         }
 
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool AddDeparture(RepositoryModelDepartures departure)
         {
             throw new NotImplementedException();

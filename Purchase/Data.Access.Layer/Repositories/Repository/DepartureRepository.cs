@@ -20,10 +20,10 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public RepositoryModelDepartures GetDepartureByID(int id)
         {
-            return DbtoServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
+            return DbToServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
         }
 
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
         {
             return new RepositoryModelDepartures()
             {
@@ -52,7 +52,7 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public List<DbDepartures> GetDeparturesLater(string departureTime)
         {
-            String[] departureTimeSplit = departureTime.Split(':');
+            var departureTimeSplit = departureTime.Split(':');
             int[] departureTimeValues =
                 {Convert.ToInt32(departureTimeSplit[0]), Convert.ToInt32(departureTimeSplit[1])};
 

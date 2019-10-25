@@ -31,7 +31,7 @@ namespace Business.Logic.Layer
 
         public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
         {
-            return _departureRepository.DbtoServiceDeparture(departure);
+            return _departureRepository.DbToServiceDeparture(departure);
         }
 
         public List<RepositoryModelDepartures> GetAllDepartures()
