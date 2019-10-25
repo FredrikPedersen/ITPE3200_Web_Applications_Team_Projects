@@ -6,8 +6,12 @@ using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class TicketRepositoryStub : ITicketRepository
+    public class TicketRepositoryStub : ITicketRepository
     {
+        public TicketRepositoryStub()
+        {
+        }
+
         public DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket)
         {
             if (ticket == null) return null;

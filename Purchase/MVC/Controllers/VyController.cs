@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Stubs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,20 +14,36 @@ namespace MVC.Controllers
 {
     public class VyController : Controller
     {
-        private readonly StationRepository _stationService;
-        private readonly TicketRepository _ticketService;
-        private readonly DepartureRepository _departureService;
-        private readonly UserRepository _userService;
-
         private const string SessionKey = "_Key";
+        private readonly TicketBLL _ticketBLL;
+        private readonly DepartureBLL _departureBLL;
+        private readonly StationBLL _stationBLL;
+        private readonly UserBLL _userBLL;
+        // private readonly PassengerTypeBLL passengerTypeBLL; denne brukes ikke?
 
-        public VyController(TicketRepository ticketService, StationRepository stationService,
-            DepartureRepository departureService, UserRepository userService)
+        //TODO disse skal slettes
+        /* private readonly StationRepository _stationService;
+
+         private readonly TicketRepository _ticketService;
+         private readonly DepartureRepository _departureService;
+         private readonly UserRepository _userService;
+
+         public VyController(TicketRepository ticketService, StationRepository stationService,
+             DepartureRepository departureService, UserRepository userService)
+         {
+             _ticketService = ticketService;
+             _stationService = stationService;
+             _departureService = departureService;
+             _userService = userService;
+         }*/
+
+        public VyController(TicketBLL ticketBLL, StationBLL stationBLL,
+           DepartureBLL departureBLL, UserBLL userBLL)
         {
-            _ticketService = ticketService;
-            _stationService = stationService;
-            _departureService = departureService;
-            _userService = userService;
+            _ticketBLL = ticketBLL;
+            _stationBLL = stationBLL;
+            _departureBLL = departureBLL;
+            _userBLL = userBLL;
         }
 
         public ActionResult Index()
@@ -49,12 +67,12 @@ namespace MVC.Controllers
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
-        
+
         [HttpPost]
         public ActionResult LogIn(RepositoryModelUser user)
         {
             Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
-            if (_userService.CheckUser(user))
+            if (_userBLL.CheckUser(user))
             {
                 Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAYEYEYEYYEYEYEYEEYEYAa");
                 HttpContext.Session.SetString(SessionKey, "Logged");
@@ -64,10 +82,10 @@ namespace MVC.Controllers
             {
                 Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAANONONONONOONONONa");
                 HttpContext.Session.SetString(SessionKey, "NotLogged");
-                
+
                 ViewBag.Logged = true;
             }
-            
+
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
@@ -80,7 +98,7 @@ namespace MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach (var station in _stationService.GetAllStations())
+                foreach (var station in _stationBLL.GetAllStations())
                 {
                     if (ticket.FromStation == station.StationName)
                     {
@@ -95,7 +113,7 @@ namespace MVC.Controllers
 
                 if (isValidToStation && isValidFromStation)
                 {
-                    List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
+                    List<DbDepartures> departures = _departureBLL.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
 
                     return View("SelectTrip", departures);
@@ -111,31 +129,31 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult SelectTrip(RepositoryModelTicket ticket)
         {
-            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+            _ticketBLL.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
             return RedirectToAction("List", "List", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
         public JsonResult Autocomplete(string input)
         {
-            return Json(_stationService.ServiceAutocomplete(input));
+            return Json(_stationBLL.ServiceAutocomplete(input));
         }
 
         //Calls autocomplete method for "To" text box in Index View
         public JsonResult AutocompleteTo(string input, string fromStation)
         {
-            return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
+            return Json(_stationBLL.ServiceAutocompleteTo(input, fromStation));
         }
 
         public JsonResult GetPassengerTypes()
         {
-            return Json(_ticketService.GetAllPassengerTypes());
+            return Json(_ticketBLL.GetAllPassengerTypes());
         }
 
         private SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
-            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
+            List<DbPassengerType> types = _ticketBLL.GetAllPassengerTypes();
             string[] typeNames = new string[4];
 
             for (var i = 0; i < 4; i++)
@@ -145,12 +163,10 @@ namespace MVC.Controllers
 
             return new SelectList(typeNames);
         }
-        
-        
 
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
-            return _stationService.GetStationsFromNames(toStation, fromStation);
+            return _stationBLL.GetStationsFromNames(toStation, fromStation);
         }
 
         //________________________________________________________________________________________
@@ -171,7 +187,7 @@ namespace MVC.Controllers
                 newUser.UserName = user.UserName;
                 newUser.Password = hash;
                 newUser.Salt = salt;
-                _userService.AddUser(newUser);
+                _userBLL.AddUser(newUser);
                 return RedirectToAction("Index");
             }
             catch (Exception e)

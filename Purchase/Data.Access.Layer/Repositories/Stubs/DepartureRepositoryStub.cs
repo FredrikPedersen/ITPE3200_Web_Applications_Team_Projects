@@ -6,8 +6,12 @@ using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class DepartureRepositoryStubs : IDepartureRepository
+    public class DepartureRepositoryStub : IDepartureRepository
     {
+        public DepartureRepositoryStub()
+        {
+        }
+
         public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
         {
             if (departure == null) return null;

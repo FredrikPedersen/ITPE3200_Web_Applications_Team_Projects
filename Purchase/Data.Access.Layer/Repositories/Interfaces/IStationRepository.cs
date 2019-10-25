@@ -18,6 +18,8 @@ namespace Data.Access.Layer.Repositories
 
         bool UpdateStation(int id, RepositoryModelStation stationIn);
 
-        //TODO ActionResult?
+        List<string> ServiceAutocomplete(string input);
+
+        List<string> ServiceAutocompleteTo(string input, string fromStation);
     }
 }

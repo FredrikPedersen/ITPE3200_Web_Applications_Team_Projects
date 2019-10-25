@@ -6,8 +6,12 @@ using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class UserRepositoryStub : IUserRepository
+    public class UserRepositoryStub : IUserRepository
     {
+        public UserRepositoryStub()
+        {
+        }
+
         public void AddUser(DbUser user)
         {
             if (user == null)
