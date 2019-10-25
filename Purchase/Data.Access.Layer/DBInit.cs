@@ -32,10 +32,10 @@ namespace Data.Access.Layer
 
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
         {
-            String[] separator = {", "};
-            String[] stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            string[] separator = {", "};
+            string[] stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             var numberOnLine = 1;
-            List<DbStation> staionList = new List<DbStation>();
+            List<DbStation> stationList = new List<DbStation>();
 
             foreach (var stationName in stationNames)
             {
@@ -45,11 +45,11 @@ namespace Data.Access.Layer
                     NumberOnLine = numberOnLine
                 };
                 dbContext.Add(stationFromFile);
-                staionList.Add(stationFromFile);
+                stationList.Add(stationFromFile);
                 numberOnLine++;
             }
             dbContext.SaveChanges();
-            return staionList;
+            return stationList;
         }
 
         private static void SeedTrainLines(DatabaseContext dbContext)
