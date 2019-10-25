@@ -9,11 +9,17 @@ namespace Business.Logic.Layer
 {
     public class StationBLL
     {
-        private readonly IStationRepository _stationRepository;
+        private readonly IStationRepository _stationRepositoryStub;
+        private readonly StationRepository _stationRepository;
+
+        public StationBLL(StationRepository stationRepository)
+        {
+            _stationRepository = stationRepository;
+        }
 
         public StationBLL(IStationRepository stationRepository)
         {
-            _stationRepository = stationRepository;
+            _stationRepositoryStub = stationRepository;
         }
 
         public RepositoryModelStation GetStationById(int id)
@@ -25,12 +31,7 @@ namespace Business.Logic.Layer
         {
             return _stationRepository.GetAllStations();
         }
-
-        public RepositoryModelStation DbToServiceStation(DbStation dbStation)
-        {
-            return _stationRepository.DbToServiceStation(dbStation);
-        }
-
+        
         public List<DbStation> GetStationsFromNames(string fromStation, string toStation)
         {
             return _stationRepository.GetStationsFromNames(fromStation, toStation);
