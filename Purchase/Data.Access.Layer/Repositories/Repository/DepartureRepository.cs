@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Data.Access.Layer.Repositories;
 
 namespace Data.Access.Layer.Repositories
 {
@@ -70,6 +69,18 @@ namespace Data.Access.Layer.Repositories
             DbDepartures departures = _databaseContext.Departures.Find(id);
             departures.departureTime = departure.departureTime;
             _databaseContext.Departures.Update(departures);
+            _databaseContext.SaveChanges();
+            return true;
+        }
+
+        public bool AddDeparture(RepositoryModelDepartures departure)
+        {
+            DbDepartures dbDeparture = new DbDepartures()
+            {
+                departureTime = departure.departureTime
+            };
+            
+            _databaseContext.Departures.Add(dbDeparture);
             _databaseContext.SaveChanges();
             return true;
         }
