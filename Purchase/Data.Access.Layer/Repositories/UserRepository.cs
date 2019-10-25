@@ -2,6 +2,7 @@
 using System.Linq;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Security.Passwords;
 
 namespace Data.Access.Layer.Repositories
 {
@@ -25,8 +26,8 @@ namespace Data.Access.Layer.Repositories
             Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
             DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
 
-            if (dbUser != null)
-            {
+           if (dbUser != null)
+           {
                 Console.WriteLine(dbUser.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
 
                 byte[] userPassword = Hasher.CreateHash(user.Password, dbUser.Salt);

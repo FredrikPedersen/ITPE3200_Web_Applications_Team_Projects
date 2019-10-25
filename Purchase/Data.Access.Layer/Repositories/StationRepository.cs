@@ -3,6 +3,8 @@ using Model.RepositoryModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Model.DBModels;
+using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories
 {
