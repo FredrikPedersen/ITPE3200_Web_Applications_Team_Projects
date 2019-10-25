@@ -2,7 +2,7 @@
 using System.Linq;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Security.Passwords;
+using Utilities.Passwords;
 
 namespace Data.Access.Layer.Repositories
 {

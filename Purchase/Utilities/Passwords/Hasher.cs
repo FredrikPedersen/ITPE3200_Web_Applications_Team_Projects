@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Security.Passwords
+namespace Utilities.Passwords
 {
     public class Hasher
     {

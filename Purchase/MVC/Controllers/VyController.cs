@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Security.Passwords;
+using Utilities.Passwords;
 
 namespace MVC.Controllers
 {
