@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Utilities.Logging;
 using Utilities.Passwords;
 
 namespace MVC.Controllers
@@ -14,18 +13,18 @@ namespace MVC.Controllers
     public class VyController : Controller
     {
         private const string SessionKey = "_Key";
-        private readonly TicketBLL _ticketBLL;
-        private readonly DepartureBLL _departureBLL;
-        private readonly StationBLL _stationBLL;
-        private readonly UserBLL _userBLL;
+        private readonly TicketBLL _ticketBll;
+        private readonly DepartureBLL _departureBll;
+        private readonly StationBLL _stationBll;
+        private readonly UserBLL _userBll;
 
-        public VyController(TicketBLL ticketBLL, StationBLL stationBLL,
-           DepartureBLL departureBLL, UserBLL userBLL)
+        public VyController(TicketBLL ticketBll, StationBLL stationBll,
+           DepartureBLL departureBll, UserBLL userBll)
         {
-            _ticketBLL = ticketBLL;
-            _stationBLL = stationBLL;
-            _departureBLL = departureBLL;
-            _userBLL = userBLL;
+            _ticketBll = ticketBll;
+            _stationBll = stationBll;
+            _departureBll = departureBll;
+            _userBll = userBll;
         }
 
         public ActionResult Index()
@@ -39,7 +38,7 @@ namespace MVC.Controllers
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey)))
             {
                 Console.WriteLine(HttpContext.Session.GetString(SessionKey));
-                string logged = HttpContext.Session.GetString(SessionKey);
+                var logged = HttpContext.Session.GetString(SessionKey);
                 if (logged.Equals("Logged"))
                 {
                     return RedirectToAction("Admin", "Admin");
@@ -52,7 +51,7 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult LogIn(RepositoryModelUser user)
         {
-            if (_userBLL.CheckUser(user))
+            if (_userBll.CheckUser(user))
             {
                 HttpContext.Session.SetString(SessionKey, "Logged");
                 ViewBag.Logged = false;
@@ -60,7 +59,6 @@ namespace MVC.Controllers
             else
             {
                 HttpContext.Session.SetString(SessionKey, "NotLogged");
-
                 ViewBag.Logged = true;
             }
 
@@ -76,7 +74,7 @@ namespace MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach (var station in _stationBLL.GetAllStations())
+                foreach (var station in _stationBll.GetAllStations())
                 {
                     if (ticket.FromStation == station.StationName)
                     {
@@ -91,48 +89,48 @@ namespace MVC.Controllers
 
                 if (isValidToStation && isValidFromStation)
                 {
-                    List<DbDepartures> departures = _departureBLL.GetDeparturesLater(ticket.ValidFromTime);
+                    var departures = _departureBll.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
 
                     return View("SelectTrip", departures);
                 }
             }
-
+            
+            //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             //If the user inputs a station that does not exist, show an error message
-            ModelState.AddModelError("Stations",
-                "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
+            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); 
             return View();
         }
 
         [HttpPost]
         public ActionResult SelectTrip(RepositoryModelTicket ticket)
         {
-            _ticketBLL.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+            _ticketBll.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
             return RedirectToAction("List", "List", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
         public JsonResult Autocomplete(string input)
         {
-            return Json(_stationBLL.ServiceAutocomplete(input));
+            return Json(_stationBll.ServiceAutocomplete(input));
         }
 
         //Calls autocomplete method for "To" text box in Index View
         public JsonResult AutocompleteTo(string input, string fromStation)
         {
-            return Json(_stationBLL.ServiceAutocompleteTo(input, fromStation));
+            return Json(_stationBll.ServiceAutocompleteTo(input, fromStation));
         }
 
         public JsonResult GetPassengerTypes()
         {
-            return Json(_ticketBLL.GetAllPassengerTypes());
+            return Json(_ticketBll.GetAllPassengerTypes());
         }
 
         private SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
-            List<DbPassengerType> types = _ticketBLL.GetAllPassengerTypes();
-            string[] typeNames = new string[4];
+            var types = _ticketBll.GetAllPassengerTypes();
+            var typeNames = new string[4];
 
             for (var i = 0; i < 4; i++)
             {
@@ -144,7 +142,7 @@ namespace MVC.Controllers
 
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
-            return _stationBLL.GetStationsFromNames(toStation, fromStation);
+            return _stationBll.GetStationsFromNames(toStation, fromStation);
         }
 
         //________________________________________________________________________________________
@@ -160,12 +158,12 @@ namespace MVC.Controllers
             try
             {
                 var newUser = new DbUser();
-                byte[] salt = Hasher.CreateSalt();
-                byte[] hash = Hasher.CreateHash(user.Password, salt);
+                var salt = Hasher.CreateSalt();
+                var hash = Hasher.CreateHash(user.Password, salt);
                 newUser.UserName = user.UserName;
                 newUser.Password = hash;
                 newUser.Salt = salt;
-                _userBLL.AddUser(newUser);
+                _userBll.AddUser(newUser);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
