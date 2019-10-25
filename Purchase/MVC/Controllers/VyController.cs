@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using Data.Access.Layer.Repositories;
+using Business.Logic.Layer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Security.Passwords;
+using Utilities.Passwords;
 
 namespace MVC.Controllers
 {
     public class VyController : Controller
     {
-        private readonly StationRepository _stationService;
-        private readonly TicketRepository _ticketService;
-        private readonly DepartureRepository _departureService;
-        private readonly UserRepository _userService;
-
         private const string SessionKey = "_Key";
+        private readonly TicketBLL _ticketBll;
+        private readonly DepartureBLL _departureBll;
+        private readonly StationBLL _stationBll;
+        private readonly UserBLL _userBll;
 
-        public VyController(TicketRepository ticketService, StationRepository stationService,
-            DepartureRepository departureService, UserRepository userService)
+        public VyController(TicketBLL ticketBll, StationBLL stationBll,
+           DepartureBLL departureBll, UserBLL userBll)
         {
-            _ticketService = ticketService;
-            _stationService = stationService;
-            _departureService = departureService;
-            _userService = userService;
+            _ticketBll = ticketBll;
+            _stationBll = stationBll;
+            _departureBll = departureBll;
+            _userBll = userBll;
         }
 
         public ActionResult Index()
@@ -38,9 +37,8 @@ namespace MVC.Controllers
         {
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey)))
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAa");
                 Console.WriteLine(HttpContext.Session.GetString(SessionKey));
-                string logged = HttpContext.Session.GetString(SessionKey);
+                var logged = HttpContext.Session.GetString(SessionKey);
                 if (logged.Equals("Logged"))
                 {
                     return RedirectToAction("Admin", "Admin");
@@ -49,25 +47,21 @@ namespace MVC.Controllers
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
-        
+
         [HttpPost]
         public ActionResult LogIn(RepositoryModelUser user)
         {
-            Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
-            if (_userService.CheckUser(user))
+            if (_userBll.CheckUser(user))
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAYEYEYEYYEYEYEYEEYEYAa");
                 HttpContext.Session.SetString(SessionKey, "Logged");
                 ViewBag.Logged = false;
             }
             else
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAANONONONONOONONONa");
                 HttpContext.Session.SetString(SessionKey, "NotLogged");
-                
                 ViewBag.Logged = true;
             }
-            
+
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
@@ -80,7 +74,7 @@ namespace MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach (var station in _stationService.GetAllStations())
+                foreach (var station in _stationBll.GetAllStations())
                 {
                     if (ticket.FromStation == station.StationName)
                     {
@@ -95,48 +89,48 @@ namespace MVC.Controllers
 
                 if (isValidToStation && isValidFromStation)
                 {
-                    List<DbDepartures> departures = _departureService.GetDeparturesLater(ticket.ValidFromTime);
+                    var departures = _departureBll.GetDeparturesLater(ticket.ValidFromTime);
                     ViewBag.ticket = ticket;
 
                     return View("SelectTrip", departures);
                 }
             }
-
+            
+            //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             //If the user inputs a station that does not exist, show an error message
-            ModelState.AddModelError("Stations",
-                "En av stasjonene du har skrevet inn finnes ikke"); //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
+            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); 
             return View();
         }
 
         [HttpPost]
         public ActionResult SelectTrip(RepositoryModelTicket ticket)
         {
-            _ticketService.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
+            _ticketBll.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
             return RedirectToAction("List", "List", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
         public JsonResult Autocomplete(string input)
         {
-            return Json(_stationService.ServiceAutocomplete(input));
+            return Json(_stationBll.ServiceAutocomplete(input));
         }
 
         //Calls autocomplete method for "To" text box in Index View
         public JsonResult AutocompleteTo(string input, string fromStation)
         {
-            return Json(_stationService.ServiceAutocompleteTo(input, fromStation));
+            return Json(_stationBll.ServiceAutocompleteTo(input, fromStation));
         }
 
         public JsonResult GetPassengerTypes()
         {
-            return Json(_ticketService.GetAllPassengerTypes());
+            return Json(_ticketBll.GetAllPassengerTypes());
         }
 
         private SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
-            List <DbPassengerType> types = _ticketService.GetAllPassengerTypes();
-            string[] typeNames = new string[4];
+            var types = _ticketBll.GetAllPassengerTypes();
+            var typeNames = new string[4];
 
             for (var i = 0; i < 4; i++)
             {
@@ -145,12 +139,10 @@ namespace MVC.Controllers
 
             return new SelectList(typeNames);
         }
-        
-        
 
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
-            return _stationService.GetStationsFromNames(toStation, fromStation);
+            return _stationBll.GetStationsFromNames(toStation, fromStation);
         }
 
         //________________________________________________________________________________________
@@ -166,12 +158,12 @@ namespace MVC.Controllers
             try
             {
                 var newUser = new DbUser();
-                byte[] salt = Hasher.CreateSalt();
-                byte[] hash = Hasher.CreateHash(user.Password, salt);
+                var salt = Hasher.CreateSalt();
+                var hash = Hasher.CreateHash(user.Password, salt);
                 newUser.UserName = user.UserName;
                 newUser.Password = hash;
                 newUser.Salt = salt;
-                _userService.AddUser(newUser);
+                _userBll.AddUser(newUser);
                 return RedirectToAction("Index");
             }
             catch (Exception e)

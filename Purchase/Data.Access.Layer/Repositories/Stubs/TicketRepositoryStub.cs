@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class TicketRepositoryStub : ITicketRepository
+    public class TicketRepositoryStub : ITicketRepository
     {
+        public TicketRepositoryStub()
+        {
+        }
+
         public DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket)
         {
             if (ticket == null) return null;

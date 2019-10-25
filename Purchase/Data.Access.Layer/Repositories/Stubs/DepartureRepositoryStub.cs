@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class DepartureRepositoryStubs : IDepartureRepository
+    public class DepartureRepositoryStub : IDepartureRepository
     {
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public DepartureRepositoryStub()
+        {
+        }
+
+        public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
         {
             if (departure == null) return null;
             return new RepositoryModelDepartures()

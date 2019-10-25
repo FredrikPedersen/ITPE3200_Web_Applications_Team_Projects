@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Interfaces;
+using Data.Access.Layer.Repositories.Repository;
 using Model.DBModels;
 using Model.RepositoryModels;
 
@@ -27,9 +29,9 @@ namespace Business.Logic.Layer
             return _departureRepository.GetDepartureByID(id);
         }
 
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
         {
-            return _departureRepository.DbtoServiceDeparture(departure);
+            return _departureRepository.DbToServiceDeparture(departure);
         }
 
         public List<RepositoryModelDepartures> GetAllDepartures()

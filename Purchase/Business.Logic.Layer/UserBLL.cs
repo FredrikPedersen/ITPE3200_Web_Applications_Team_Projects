@@ -4,6 +4,8 @@ using Model.RepositoryModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories.Interfaces;
+using Data.Access.Layer.Repositories.Repository;
 
 namespace Business.Logic.Layer
 {
@@ -16,18 +18,18 @@ namespace Business.Logic.Layer
         {
             _userRepository = userRepository;
         }
-        
+
         public UserBLL(IUserRepository userRepository)
         {
             _userRepositoryStub = userRepository;
         }
 
-        private void AddUser(DbUser user)
+        public void AddUser(DbUser user)
         {
             _userRepository.AddUser(user);
         }
 
-        private bool CheckUser(RepositoryModelUser user)
+        public bool CheckUser(RepositoryModelUser user)
         {
             return _userRepository.CheckUser(user);
         }

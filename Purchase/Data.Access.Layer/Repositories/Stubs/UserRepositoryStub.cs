@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class UserRepositoryStub : IUserRepository
+    public class UserRepositoryStub : IUserRepository
     {
+        public UserRepositoryStub()
+        {
+        }
+
         public void AddUser(DbUser user)
         {
             if (user == null)

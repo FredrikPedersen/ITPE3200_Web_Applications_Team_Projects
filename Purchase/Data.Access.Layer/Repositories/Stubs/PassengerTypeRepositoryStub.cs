@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class PassengerTypeRepositoryStub : IPassengerTypeRepository
+    public class PassengerTypeRepositoryStub : IPassengerTypeRepository
     {
+        public PassengerTypeRepositoryStub()
+        {
+        }
+
         public RepositoryModelPassengerType DbToServicePT(DbPassengerType dbPassengerType)
         {
             if (dbPassengerType == null) return null;

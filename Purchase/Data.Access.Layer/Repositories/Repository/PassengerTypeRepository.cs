@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Repository
 {
     public class PassengerTypeRepository : IPassengerTypeRepository
     {

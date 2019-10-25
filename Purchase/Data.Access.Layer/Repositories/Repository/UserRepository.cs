@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Security.Passwords;
+using Utilities.Passwords;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Repository
 {
     public class UserRepository : IUserRepository
     {

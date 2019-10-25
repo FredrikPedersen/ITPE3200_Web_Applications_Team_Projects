@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.Access.Layer.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Utilities.Logging;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Repository
 {
     public class DepartureRepository : IDepartureRepository
     {
@@ -17,10 +20,10 @@ namespace Data.Access.Layer.Repositories
 
         public RepositoryModelDepartures GetDepartureByID(int id)
         {
-            return DbtoServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
+            return DbToServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
         }
 
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
         {
             return new RepositoryModelDepartures()
             {
@@ -49,37 +52,58 @@ namespace Data.Access.Layer.Repositories
 
         public List<DbDepartures> GetDeparturesLater(string departureTime)
         {
-            DateTime date1 = Convert.ToDateTime(departureTime);
+            var departureTimeSplit = departureTime.Split(':');
+            int[] departureTimeValues =
+                {Convert.ToInt32(departureTimeSplit[0]), Convert.ToInt32(departureTimeSplit[1])};
+
             List<DbDepartures> departures = GetAllDeparturesDB();
-            List<DbDepartures> returnlist = new List<DbDepartures>();
+            List<DbDepartures> departuresAfter = new List<DbDepartures>();
 
             foreach (DbDepartures departure in departures)
             {
-                DateTime date2 = Convert.ToDateTime(departure.departureTime);
-                if (date2 >= date1)
+                String[] dbDepartureSplit = departure.departureTime.Split(':');
+                int[] dbDepartureValues = {Convert.ToInt32(dbDepartureSplit[0]), Convert.ToInt32(dbDepartureSplit[1])};
+
+                if (dbDepartureValues[0] > departureTimeValues[0])
                 {
-                    returnlist.Add(departure);
+                    departuresAfter.Add(departure);
+                }
+                else if (dbDepartureValues[0] == departureTimeValues[0])
+                {
+                    if (dbDepartureValues[1] > departureTimeValues[1])
+                        departuresAfter.Add(departure);
                 }
             }
-            return returnlist;
+
+            var sortedDepartures = departuresAfter.OrderBy(d => d.departureTime).ToList();
+            return sortedDepartures;
         }
 
         public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
         {
-            DbDepartures departures = _databaseContext.Departures.Find(id);
+            var departures = _databaseContext.Departures.Find(id);
             departures.departureTime = departure.departureTime;
-            _databaseContext.Departures.Update(departures);
-            _databaseContext.SaveChanges();
-            return true;
+
+            try
+            {
+                _databaseContext.Departures.Update(departures);
+                _databaseContext.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                ErrorLogger.LogError(ex);
+                return false;
+            }
         }
 
         public bool AddDeparture(RepositoryModelDepartures departure)
         {
-            DbDepartures dbDeparture = new DbDepartures()
+            var dbDeparture = new DbDepartures()
             {
                 departureTime = departure.departureTime
             };
-            
+
             _databaseContext.Departures.Add(dbDeparture);
             _databaseContext.SaveChanges();
             return true;
