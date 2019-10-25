@@ -73,5 +73,17 @@ namespace Data.Access.Layer.Repositories
             _databaseContext.SaveChanges();
             return true;
         }
+
+        public bool AddDeparture(RepositoryModelDepartures departure)
+        {
+            DbDepartures dbDeparture = new DbDepartures()
+            {
+                departureTime = departure.departureTime
+            };
+            
+            _databaseContext.Departures.Add(dbDeparture);
+            _databaseContext.SaveChanges();
+            return true;
+        }
     }
 }

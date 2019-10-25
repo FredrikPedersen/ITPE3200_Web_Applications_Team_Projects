@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Business.Logic.Layer
 {
-    internal class StationBLL
+    public class StationBLL
     {
         private readonly IStationRepository _stationRepository;
 

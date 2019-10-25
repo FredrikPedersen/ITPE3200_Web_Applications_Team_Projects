@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Business.Logic.Layer
 {
-    internal class TicketBLL
+    public class TicketBLL
     {
         private readonly ITicketRepository _ticketRepository;
 

@@ -7,45 +7,55 @@ using Model.RepositoryModels;
 
 namespace Business.Logic.Layer
 {
-    class DepartureBLL
+    public class DepartureBLL
     {
-        private readonly IDepartureRepository _departureRepository;
+        private readonly IDepartureRepository _departureRepositoryStub;
+        private readonly DepartureRepository _departureRepository;
 
-        public DepartureBLL(IDepartureRepository departureRepo)
+        public DepartureBLL(IDepartureRepository departureRepositoryStub)
         {
-            _departureRepository = departureRepo;
+            //_departureRepositoryStub = departureStub;
         }
-           public RepositoryModelDepartures GetDepartureByID(int id)
-            {
+        
+        public DepartureBLL(DepartureRepository departureRepository)
+        {
+            _departureRepository = departureRepository;
+        }
+
+        public RepositoryModelDepartures GetDepartureByID(int id)
+        {
             return _departureRepository.GetDepartureByID(id);
-            }
+        }
 
-            public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
-            {
+        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        {
             return _departureRepository.DbtoServiceDeparture(departure);
-            }
+        }
 
-            public List<RepositoryModelDepartures> GetAllDepartures()
-            {
+        public List<RepositoryModelDepartures> GetAllDepartures()
+        {
             return _departureRepository.GetAllDepartures();
+        }
 
-            }
-
-            public List<DbDepartures> GetAllDeparturesDB()
-            {
+        public List<DbDepartures> GetAllDeparturesDB()
+        {
             return _departureRepository.GetAllDeparturesDB();
-            }   
+        }
 
-            public List<DbDepartures> GetDeparturesLater(string departureTime)
-            {
-           
+        public List<DbDepartures> GetDeparturesLater(string departureTime)
+        {
             return _departureRepository.GetDeparturesLater(departureTime);
         }
 
-            public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
-            {
-           
+        public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
+        {
             return _departureRepository.UpdateDeparture(id, departure);
         }
+
+        public bool AddDeparture(RepositoryModelDepartures departure)
+        {
+            return _departureRepository.AddDeparture(departure);
+        }
+
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Business.Logic.Layer
 {
-    class PassengerTypeBLL
+    public class PassengerTypeBLL
     {
         private readonly IPassengerTypeRepository _passangerTypeRepository;
 
