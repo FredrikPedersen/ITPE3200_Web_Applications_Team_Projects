@@ -1,8 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Data.Access.Layer.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Utilities.Logging;
 using Utilities.Passwords;
 
 namespace Data.Access.Layer.Repositories.Repository
@@ -16,27 +17,30 @@ namespace Data.Access.Layer.Repositories.Repository
             _databaseContext = databaseContext;
         }
 
-        public void AddUser(DbUser user)
+        public bool AddUser(DbUser user)
         {
-            _databaseContext.Users.Add(user);
-            _databaseContext.SaveChanges();
+            try
+            {
+                _databaseContext.Users.Add(user);
+                _databaseContext.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                ErrorLogger.LogError(ex);
+                return false;
+            }
         }
 
         public bool CheckUser(RepositoryModelUser user)
         {
-            Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
-            DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
+            var dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
 
-            if (dbUser != null)
-            {
-                Console.WriteLine(dbUser.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
+            if (dbUser == null) return false;
 
-                byte[] userPassword = Hasher.CreateHash(user.Password, dbUser.Salt);
-                bool result = dbUser.Password.SequenceEqual(userPassword);
-                return result;
-            }
-
-            return false;
+            var userPassword = Hasher.CreateHash(user.Password, dbUser.Salt);
+            var result = dbUser.Password.SequenceEqual(userPassword);
+            return result;
         }
     }
 }

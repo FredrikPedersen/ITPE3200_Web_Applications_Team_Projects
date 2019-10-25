@@ -11,7 +11,7 @@ namespace Data.Access.Layer.Repositories.Interfaces
 
         bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName);
 
-        DateTime StringsToDateTime(String date, String time);
+        DateTime StringsToDateTime(string date, string time);
 
         string SeparateGivenName(string name);
 

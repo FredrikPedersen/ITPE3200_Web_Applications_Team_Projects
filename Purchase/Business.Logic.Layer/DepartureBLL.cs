@@ -26,7 +26,7 @@ namespace Business.Logic.Layer
 
         public RepositoryModelDepartures GetDepartureByID(int id)
         {
-            return _departureRepository.GetDepartureByID(id);
+            return _departureRepository.GetDepartureById(id);
         }
 
         public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
@@ -41,7 +41,7 @@ namespace Business.Logic.Layer
 
         public List<DbDepartures> GetAllDeparturesDB()
         {
-            return _departureRepository.GetAllDeparturesDB();
+            return _departureRepository.GetAllDeparturesDb();
         }
 
         public List<DbDepartures> GetDeparturesLater(string departureTime)

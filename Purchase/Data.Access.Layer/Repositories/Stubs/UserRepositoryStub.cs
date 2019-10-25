@@ -9,22 +9,21 @@ namespace Data.Access.Layer.Repositories.Stubs
 {
     public class UserRepositoryStub : IUserRepository
     {
-        public UserRepositoryStub()
-        {
-        }
+        public UserRepositoryStub() { }
 
-        public void AddUser(DbUser user)
+        public bool AddUser(DbUser user)
         {
             if (user == null)
             {
                 throw new Exception("Brukeren du sender inn er tom");
             }
+
+            return true;
         }
 
         public bool CheckUser(RepositoryModelUser user)
         {
-            if (user == null) return false;
-            else return true;
+            return user != null;
         }
     }
 }

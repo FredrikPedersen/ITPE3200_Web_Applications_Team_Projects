@@ -31,17 +31,17 @@ namespace Business.Logic.Layer
 
         public RepositoryModelPassengerType DbToServicePT(DbPassengerType dbPassengerType)
         {
-            return _passengerTypeRepository.DbToServicePT(dbPassengerType);
+            return _passengerTypeRepository.DbToServicePt(dbPassengerType);
         }
 
         public List<RepositoryModelPassengerType> GetAllPT()
         {
-            return _passengerTypeRepository.GetAllPT();
+            return _passengerTypeRepository.GetAllPt();
         }
 
         public bool UpdatePT(int id, RepositoryModelPassengerType pt)
         {
-            return _passengerTypeRepository.UpdatePT(id, pt);
+            return _passengerTypeRepository.UpdatePt(id, pt);
         }
     }
 }

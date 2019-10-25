@@ -9,9 +9,7 @@ namespace Data.Access.Layer.Repositories.Stubs
 {
     public class StationRepositoryStub : IStationRepository
     {
-        public StationRepositoryStub()
-        {
-        }
+        public StationRepositoryStub() { }
 
         public RepositoryModelStation DbToServiceStation(DbStation dbStation)
         {
@@ -56,7 +54,7 @@ namespace Data.Access.Layer.Repositories.Stubs
         public List<DbStation> GetStationsFromNames(string fromStation, string toStation)
         {
             if (fromStation.Equals("")) return null;
-            else if (toStation.Equals("")) return null;
+            if (toStation.Equals("")) return null;
             var list = new List<DbStation>();
             var dbStation = new DbStation()
             {
@@ -84,8 +82,7 @@ namespace Data.Access.Layer.Repositories.Stubs
         public bool UpdateStation(int id, RepositoryModelStation stationIn)
         {
             if (id == 0) return false;
-            if (stationIn == null) return false;
-            else return true;
+            return stationIn != null;
         }
     }
 }

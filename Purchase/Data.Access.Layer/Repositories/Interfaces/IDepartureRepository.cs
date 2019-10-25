@@ -6,11 +6,11 @@ namespace Data.Access.Layer.Repositories.Interfaces
 {
     public interface IDepartureRepository
     {
-        RepositoryModelDepartures GetDepartureByID(int id);
+        RepositoryModelDepartures GetDepartureById(int id);
 
         List<RepositoryModelDepartures> GetAllDepartures();
 
-        List<DbDepartures> GetAllDeparturesDB();
+        List<DbDepartures> GetAllDeparturesDb();
 
         List<DbDepartures> GetDeparturesLater(string departureTime);
 

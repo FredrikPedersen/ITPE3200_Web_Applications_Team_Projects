@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data.Access.Layer.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Utilities.Logging;
 
 namespace Data.Access.Layer.Repositories.Repository
 {
@@ -35,7 +37,7 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName)
         {
-            DbTicket newTicket = new DbTicket
+            var newTicket = new DbTicket
             {
                 FromStation = stationsFromName[0],
                 ToStation = stationsFromName[1],
@@ -51,14 +53,15 @@ namespace Data.Access.Layer.Repositories.Repository
                 _databaseContext.SaveChanges();
                 return true;
             }
-            catch
+            catch (DbUpdateException ex)
             {
+                ErrorLogger.LogError(ex);
                 return false;
             }
         }
 
         //Method for converting strings with date and time data to a DateTime object. Used when creating a DbTicket from a ServiceModelTicket
-        public DateTime StringsToDateTime(String date, String time)
+        public DateTime StringsToDateTime(string date, string time)
         {
             var dateAndTime = date + " " + time;
             return Convert.ToDateTime(dateAndTime);

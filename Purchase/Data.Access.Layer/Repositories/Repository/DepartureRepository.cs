@@ -18,7 +18,7 @@ namespace Data.Access.Layer.Repositories.Repository
             _databaseContext = databaseContext;
         }
 
-        public RepositoryModelDepartures GetDepartureByID(int id)
+        public RepositoryModelDepartures GetDepartureById(int id)
         {
             return DbToServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
         }
@@ -41,7 +41,7 @@ namespace Data.Access.Layer.Repositories.Repository
             }).ToList();
         }
 
-        public List<DbDepartures> GetAllDeparturesDB()
+        public List<DbDepartures> GetAllDeparturesDb()
         {
             return _databaseContext.Departures.Select(t => new DbDepartures
             {
@@ -56,12 +56,12 @@ namespace Data.Access.Layer.Repositories.Repository
             int[] departureTimeValues =
                 {Convert.ToInt32(departureTimeSplit[0]), Convert.ToInt32(departureTimeSplit[1])};
 
-            List<DbDepartures> departures = GetAllDeparturesDB();
-            List<DbDepartures> departuresAfter = new List<DbDepartures>();
+            var departures = GetAllDeparturesDb();
+            var departuresAfter = new List<DbDepartures>();
 
-            foreach (DbDepartures departure in departures)
+            foreach (var departure in departures)
             {
-                String[] dbDepartureSplit = departure.departureTime.Split(':');
+                var dbDepartureSplit = departure.departureTime.Split(':');
                 int[] dbDepartureValues = {Convert.ToInt32(dbDepartureSplit[0]), Convert.ToInt32(dbDepartureSplit[1])};
 
                 if (dbDepartureValues[0] > departureTimeValues[0])
@@ -104,9 +104,17 @@ namespace Data.Access.Layer.Repositories.Repository
                 departureTime = departure.departureTime
             };
 
-            _databaseContext.Departures.Add(dbDeparture);
-            _databaseContext.SaveChanges();
-            return true;
+            try
+            {
+                _databaseContext.Departures.Add(dbDeparture);
+                _databaseContext.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                ErrorLogger.LogError(ex);
+                return false;
+            }
         }
     }
 }
