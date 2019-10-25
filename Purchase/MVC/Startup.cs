@@ -51,6 +51,11 @@ namespace MVC
             services.AddScoped<DepartureRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<PassengerTypeRepository>();
+            services.AddScoped<StationBLL>();
+            services.AddScoped<TicketBLL>();
+            services.AddScoped<DepartureBLL>();
+            services.AddScoped<UserBLL>();
+            services.AddScoped<PassengerTypeBLL>();
             services.AddMvc();
         }
 
