@@ -49,12 +49,12 @@ namespace MVC
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<StationRepository>();
-            services.AddScoped<TicketRepository>();
+
             services.AddScoped<ITicketRepository, TicketRepository>();
-            services.AddScoped<DepartureRepository>();
-            services.AddScoped<UserRepository>();
-            services.AddScoped<PassengerTypeRepository>();
+            services.AddScoped<IDepartureRepository, DepartureRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPassengerTypeRepository, PassengerTypeRepository>();
+            services.AddScoped<IStationRepository, StationRepository>();
             services.AddScoped<StationBLL>();
             services.AddScoped<TicketBLL>();
             services.AddScoped<DepartureBLL>();

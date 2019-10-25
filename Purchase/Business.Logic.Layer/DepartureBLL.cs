@@ -11,15 +11,9 @@ namespace Business.Logic.Layer
 {
     public class DepartureBLL
     {
-        private readonly IDepartureRepository _departureRepositoryStub;
-        private readonly DepartureRepository _departureRepository;
+        private readonly IDepartureRepository _departureRepository;
 
-        public DepartureBLL(IDepartureRepository departureRepositoryStub)
-        {
-            //_departureRepositoryStub = departureStub;
-        }
-        
-        public DepartureBLL(DepartureRepository departureRepository)
+        public DepartureBLL(IDepartureRepository departureRepository)
         {
             _departureRepository = departureRepository;
         }
@@ -58,6 +52,5 @@ namespace Business.Logic.Layer
         {
             return _departureRepository.AddDeparture(departure);
         }
-
     }
 }

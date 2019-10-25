@@ -11,17 +11,11 @@ namespace Business.Logic.Layer
 {
     public class PassengerTypeBLL
     {
-        private readonly IPassengerTypeRepository _passengerTypeRepositoryStub;
-        private readonly PassengerTypeRepository _passengerTypeRepository;
-
-        public PassengerTypeBLL(PassengerTypeRepository passengerTypeRepository)
-        {
-            _passengerTypeRepository = passengerTypeRepository;
-        }
+        private readonly IPassengerTypeRepository _passengerTypeRepository;
 
         public PassengerTypeBLL(IPassengerTypeRepository passengerTypeRepository)
         {
-            _passengerTypeRepositoryStub = passengerTypeRepository;
+            _passengerTypeRepository = passengerTypeRepository;
         }
 
         public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)

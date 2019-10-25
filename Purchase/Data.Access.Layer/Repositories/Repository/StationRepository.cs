@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Repository
 {
-    public class StationRepository
+    public class StationRepository : IStationRepository
     {
         private readonly DatabaseContext _databaseContext;
 
@@ -31,7 +32,7 @@ namespace Data.Access.Layer.Repositories.Repository
             }).ToList();
         }
 
-        private RepositoryModelStation DbToServiceStation(DbStation dbStation)
+        public RepositoryModelStation DbToServiceStation(DbStation dbStation)
         {
             return new RepositoryModelStation
             {
