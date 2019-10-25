@@ -49,19 +49,31 @@ namespace Data.Access.Layer.Repositories
 
         public List<DbDepartures> GetDeparturesLater(string departureTime)
         {
-            DateTime date1 = Convert.ToDateTime(departureTime);
+            String[] departureTimeSplit = departureTime.Split(':');
+            int[] departureTimeValues =
+                {Convert.ToInt32(departureTimeSplit[0]), Convert.ToInt32(departureTimeSplit[1])};
+
             List<DbDepartures> departures = GetAllDeparturesDB();
-            List<DbDepartures> returnlist = new List<DbDepartures>();
+            List<DbDepartures> departuresAfter = new List<DbDepartures>();
 
             foreach (DbDepartures departure in departures)
             {
-                DateTime date2 = Convert.ToDateTime(departure.departureTime);
-                if (date2 >= date1)
+                String[] dbDepartureSplit = departure.departureTime.Split(':');
+                int[] dbDepartureValues = {Convert.ToInt32(dbDepartureSplit[0]), Convert.ToInt32(dbDepartureSplit[1])};
+
+                if (dbDepartureValues[0] > departureTimeValues[0])
                 {
-                    returnlist.Add(departure);
+                    departuresAfter.Add(departure);
+                }
+                else if (dbDepartureValues[0] == departureTimeValues[0])
+                {
+                    if (dbDepartureValues[1] > departureTimeValues[1])
+                        departuresAfter.Add(departure);
                 }
             }
-            return returnlist;
+
+            List<DbDepartures> sortedDepartures = departuresAfter.OrderBy(d => d.departureTime).ToList();
+            return sortedDepartures;
         }
 
         public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
@@ -79,7 +91,7 @@ namespace Data.Access.Layer.Repositories
             {
                 departureTime = departure.departureTime
             };
-            
+
             _databaseContext.Departures.Add(dbDeparture);
             _databaseContext.SaveChanges();
             return true;
