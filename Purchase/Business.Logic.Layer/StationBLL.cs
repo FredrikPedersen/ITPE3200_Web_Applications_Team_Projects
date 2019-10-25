@@ -31,7 +31,7 @@ namespace Business.Logic.Layer
         {
             return _stationRepository.GetAllStations();
         }
-        
+
         public List<DbStation> GetStationsFromNames(string fromStation, string toStation)
         {
             return _stationRepository.GetStationsFromNames(fromStation, toStation);
@@ -40,6 +40,16 @@ namespace Business.Logic.Layer
         public bool UpdateStation(int id, RepositoryModelStation stationIn)
         {
             return _stationRepository.UpdateStation(id, stationIn);
+        }
+
+        public List<string> ServiceAutocomplete(string input)
+        {
+            return _stationRepository.ServiceAutocomplete(input);
+        }
+
+        public List<string> ServiceAutocompleteTo(string input, string fromStation)
+        {
+            return _stationRepository.ServiceAutocompleteTo(input, fromStation);
         }
     }
 }

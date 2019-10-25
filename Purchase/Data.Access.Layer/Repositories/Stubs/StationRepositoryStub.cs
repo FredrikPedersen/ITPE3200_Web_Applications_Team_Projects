@@ -6,8 +6,12 @@ using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Stubs
 {
-    internal class StationRepositoryStub : IStationRepository
+    public class StationRepositoryStub : IStationRepository
     {
+        public StationRepositoryStub()
+        {
+        }
+
         public RepositoryModelStation DbToServiceStation(DbStation dbStation)
         {
             if (dbStation == null) return null;
@@ -64,6 +68,16 @@ namespace Data.Access.Layer.Repositories.Stubs
             list.Add(dbStation);
 
             return list;
+        }
+
+        public List<string> ServiceAutocomplete(string input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> ServiceAutocompleteTo(string input, string fromStation)
+        {
+            throw new NotImplementedException();
         }
 
         public bool UpdateStation(int id, RepositoryModelStation stationIn)
