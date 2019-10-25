@@ -2,7 +2,7 @@
 using Model.DBModels;
 using Model.RepositoryModels;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Interfaces
 {
     public interface IDepartureRepository
     {
@@ -16,7 +16,7 @@ namespace Data.Access.Layer.Repositories
 
         bool UpdateDeparture(int id, RepositoryModelDepartures departure);
 
-        RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure);
+        RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure);
 
         bool AddDeparture(RepositoryModelDepartures departure);
     }

@@ -26,16 +26,16 @@ namespace Data.Access.Layer
 
             if (!dbContext.Departures.Any())
             {
-                seedDepartures(dbContext);
+                SeedDepartures(dbContext);
             }
         }
 
         private static List<DbStation> SeedStations(DatabaseContext dbContext, string stations)
         {
-            String[] separator = {", "};
-            String[] stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            string[] separator = {", "};
+            var stationNames = stations.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             var numberOnLine = 1;
-            List<DbStation> staionList = new List<DbStation>();
+            List<DbStation> stationList = new List<DbStation>();
 
             foreach (var stationName in stationNames)
             {
@@ -45,11 +45,11 @@ namespace Data.Access.Layer
                     NumberOnLine = numberOnLine
                 };
                 dbContext.Add(stationFromFile);
-                staionList.Add(stationFromFile);
+                stationList.Add(stationFromFile);
                 numberOnLine++;
             }
             dbContext.SaveChanges();
-            return staionList;
+            return stationList;
         }
 
         private static void SeedTrainLines(DatabaseContext dbContext)
@@ -105,58 +105,23 @@ namespace Data.Access.Layer
             dbContext.SaveChanges();
         }
 
-        private static void seedDepartures(DatabaseContext dbContext)
+        private static void SeedDepartures(DatabaseContext dbContext)
         {
+            for (var i = 0; i < 23; i++)
+            {
+                var time = i + ":00";
 
-            var departures0 = new DbDepartures {departureTime = "00:00"};
-            var departures1 = new DbDepartures {departureTime = "01:00"};
-            var departures2 = new DbDepartures {departureTime = "02:00"};
-            var departures3 = new DbDepartures {departureTime = "03:00"};
-            var departures4 = new DbDepartures {departureTime = "04:00"};
-            var departures5 = new DbDepartures {departureTime = "05:00"};
-            var departures6 = new DbDepartures {departureTime = "06:00"};
-            var departures7 = new DbDepartures {departureTime = "07:00"};
-            var departures8 = new DbDepartures {departureTime = "08:00"};
-            var departures9 = new DbDepartures {departureTime = "09:00"};
-            var departures10 = new DbDepartures {departureTime = "10:00"};
-            var departures11 = new DbDepartures {departureTime = "11:00"};
-            var departures12 = new DbDepartures {departureTime = "12:00"};
-            var departures13 = new DbDepartures {departureTime = "13:00"};
-            var departures14 = new DbDepartures {departureTime = "14:00"};
-            var departures15 = new DbDepartures {departureTime = "15:00"};
-            var departures16 = new DbDepartures {departureTime = "16:00"};
-            var departures17 = new DbDepartures {departureTime = "17:00"};
-            var departures18 = new DbDepartures {departureTime = "18:00"};
-            var departures19 = new DbDepartures {departureTime = "19:00"};
-            var departures20 = new DbDepartures {departureTime = "20:00"};
-            var departures21 = new DbDepartures {departureTime = "21:00"};
-            var departures22 = new DbDepartures {departureTime = "22:00"};
-            var departures23 = new DbDepartures {departureTime = "23:00"};
-            
-            dbContext.Add(departures0);
-            dbContext.Add(departures1);
-            dbContext.Add(departures2);
-            dbContext.Add(departures3);
-            dbContext.Add(departures4);
-            dbContext.Add(departures5);
-            dbContext.Add(departures6);
-            dbContext.Add(departures7);
-            dbContext.Add(departures8);
-            dbContext.Add(departures9);
-            dbContext.Add(departures10);
-            dbContext.Add(departures11);
-            dbContext.Add(departures12);
-            dbContext.Add(departures13);
-            dbContext.Add(departures14);
-            dbContext.Add(departures15);
-            dbContext.Add(departures16);
-            dbContext.Add(departures17);
-            dbContext.Add(departures18);
-            dbContext.Add(departures19);
-            dbContext.Add(departures20);
-            dbContext.Add(departures21);
-            dbContext.Add(departures22);
-            dbContext.Add(departures23);
+                if (i < 10)
+                {
+                    time = "0" + time;
+                }
+                
+                var newDeparture = new DbDepartures
+                {
+                    departureTime = time
+                };
+                dbContext.Add(newDeparture);
+            }
             
             dbContext.SaveChanges();
         }

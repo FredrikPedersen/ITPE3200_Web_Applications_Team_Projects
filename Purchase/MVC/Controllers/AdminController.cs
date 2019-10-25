@@ -1,6 +1,7 @@
 ﻿using System;
 using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Model.RepositoryModels;
 using Model.ViewModels;
@@ -10,7 +11,6 @@ namespace MVC.Controllers
 {
     public class AdminController : Controller
     {
-        private Class1 _class1; //DO NOT REMOVE THIS BEFORE WE MAKE ACTUAL USE OF THE BLL!!! NBNB!NB!NB!!!!!
         private readonly StationRepository _stationService;
         private readonly TicketRepository _tickedService;
         private readonly DepartureRepository _departureService;

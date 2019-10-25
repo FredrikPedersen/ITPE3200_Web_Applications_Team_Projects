@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
