@@ -51,5 +51,15 @@ namespace Data.Access.Layer.Repositories.Stubs
             else if (pt == null) return false;
             else return true;
         }
+
+        public bool AddPT(RepositoryModelPassengerType passengerType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePT(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

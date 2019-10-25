@@ -1,0 +1,35 @@
+﻿@model Model.DBModels.DbTrainLine
+
+@{
+    Layout = "_Layout";
+}
+
+@Html.AntiForgeryToken()
+<table class="table">
+    <thead>
+    <th scope="col">Stasjoner</th>
+    </thead>
+    <tr><th> @Html.ActionLink("Add Stasjon", "AddStation", "Admin", new {@class = "btn btn-primary"})</th></tr>
+    <tbody>
+    @foreach (var station in Model.Stations)
+    {
+        <tr>
+            <th class="w-25">
+
+                <div class="ticket">
+                    <div>
+                        <label>Stasjons navn: </label>
+                        @Html.DisplayFor(model => station.StationName)
+                        <br/>
+                        @Html.ActionLink("Endre Stasjon", "EditStation", "Admin",
+                            new {id = station.Id}, new {@class = "btn btn-primary"})
+                        @Html.ActionLink("Slett Stasjon", "DeleteStation", "Admin",
+                                                    new {id = station.Id}, new {@class = "btn btn-danger"})
+                    </div>
+                </div>
+
+            </th>
+        </tr>
+    }
+    </tbody>
+</table>

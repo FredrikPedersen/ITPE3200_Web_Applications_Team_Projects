@@ -19,5 +19,7 @@ namespace Data.Access.Layer.Repositories
         RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure);
 
         bool AddDeparture(RepositoryModelDepartures departure);
+
+        bool DeleteDeparture(int id);
     }
 }

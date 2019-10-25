@@ -41,5 +41,15 @@ namespace Business.Logic.Layer
         {
             return _stationRepository.UpdateStation(id, stationIn);
         }
+
+        public bool AddStation(RepositoryModelStation station)
+        {
+            return _stationRepository.AddStation(station);
+        }
+
+        public bool DeleteStation(int id)
+        {
+            return _stationRepository.DeleteStation(id);
+        }
     }
 }

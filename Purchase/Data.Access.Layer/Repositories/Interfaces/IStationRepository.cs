@@ -18,6 +18,10 @@ namespace Data.Access.Layer.Repositories
 
         bool UpdateStation(int id, RepositoryModelStation stationIn);
 
+        bool AddStation(RepositoryModelStation station);
+
+        bool DeleteStation(int id);
+
         //TODO ActionResult?
     }
 }

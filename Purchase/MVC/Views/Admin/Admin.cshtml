@@ -7,35 +7,40 @@
 @Html.AntiForgeryToken()
 <table class="table">
     <thead>
-    <th scope="col">Stasjoner</th>
+    <th scope="col">Linjer</th>
     <th scope="col">Pasasjer Typer</th>
     <th scope="col">Avreiser</th>
-    <th scope="col">Handle</th>
     </thead>
     <tbody>
     <tr>
-        <th>Add Stasjon</th>
-        <th>Add Type</th>
-        <th>Add Avgang 
+        <th>
+        </th>
+        <th>
+            @Html.ActionLink("Add Type", "AddPT", "Admin",
+                            new {@class = "btn btn-primary"})</th>
+        <th >
             @Html.ActionLink("Add Avgang", "AddDeparture", "Admin",
                 new {@class = "btn btn-primary"})</th>
     </tr>
-    @for (int i = 0; i < Model.Stations.Count; i++)
+    @for (int i = 0; i < Model.Departures.Count; i++)
     {
         <tr>
             <th class="w-25">
-                <div class="ticket">
-                    <div>
-                        <label>ID: </label>
-                        @Html.DisplayFor(model => model.Stations[i].Id)
-                        <br/>
-                        <label>Stasjons navn: </label>
-                        @Html.DisplayFor(model => model.Stations[i].StationName)
-                        <br/>
-                        @Html.ActionLink("Endre Stasjon", "EditStation", "Admin",
-                            new {id = Model.Stations[i].Id}, new {@class = "btn btn-primary"})
-                    </div>
-                </div>
+                 @if (i < @Model.Lines.Count)
+                 {
+                     <div class="ticket">
+                         <div>
+                             <label>ID: </label>
+                             @Html.DisplayFor(model => model.Lines[i].Id)
+                             <br/>
+                             <label>Stasjons navn: </label>
+                             @Html.DisplayFor(model => model.Lines[i].Name)
+                             <br/>
+                             @Html.ActionLink("Endre Linje", "EditLine", "Admin",
+                                 new {id = Model.Lines[i].Id}, new {@class = "btn btn-primary"})
+                         </div>
+                     </div>
+                 }
             </th>
             <th class="w-25">
                 @if (i < @Model.Types.Count)
@@ -50,6 +55,9 @@
 
                         @Html.ActionLink("Endre Type", "EditPassengerType", "Admin",
                             new {id = Model.Types[i].Id}, new {@class = "btn btn-primary"})
+                        
+                        @Html.ActionLink("Slett Type", "DeletePT", "Admin",
+                                                                            new {id = Model.Types[i].Id}, new {@class = "btn btn-primary"})
 
                     </div>
                 }
@@ -68,6 +76,9 @@
 
                         @Html.ActionLink("Endre Avreise", "EditDeparture", "Admin",
                             new {id = Model.Departures[i].Id}, new {@class = "btn btn-primary"})
+                        
+                        @Html.ActionLink("Slett Avgang", "DeleteDeparture", "Admin",
+                                                                            new {id = Model.Departures[i].Id}, new {@class = "btn btn-primary"})
 
                     </div>
                 }

@@ -57,5 +57,10 @@ namespace Business.Logic.Layer
             return _departureRepository.AddDeparture(departure);
         }
 
+        public bool DeleteDeparture(int id)
+        {
+            return _departureRepository.DeleteDeparture(id);
+        }
+
     }
 }

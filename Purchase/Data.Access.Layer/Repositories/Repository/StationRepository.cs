@@ -106,5 +106,29 @@ namespace Data.Access.Layer.Repositories
             _databaseContext.SaveChanges();
             return true;
         }
+
+        public bool AddStation(RepositoryModelStation station)
+        {
+            var dbStation = new DbStation()
+            {
+                StationName = station.StationName,
+                TrainLine = null,
+                NumberOnLine = 3254
+                
+            };
+
+            _databaseContext.Add(dbStation);
+            _databaseContext.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteStation(int id)
+        {
+            DbStation station = _databaseContext.Stations.FirstOrDefault(r => r.Id == id);
+            _databaseContext.Stations.Remove(station);
+            _databaseContext.SaveChanges();
+            return true;
+        }
+        
     }
 }

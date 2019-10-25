@@ -2,6 +2,7 @@
 using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Model.DBModels;
 using Model.RepositoryModels;
 using Model.ViewModels;
 using Unit.Testing;
@@ -22,10 +23,11 @@ namespace MVC.Controllers
         private readonly TicketBLL _ticketBll;
         private readonly UserBLL _userBll;
         private readonly PassengerTypeBLL _passengerTypeBll;
+        private readonly LineBLL _lineBll;
 
 
         public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll,
-            PassengerTypeBLL passengerTypeBll 
+            PassengerTypeBLL passengerTypeBll, LineBLL lineBll
         )
         {
             _departureBll = departureBll;
@@ -33,45 +35,82 @@ namespace MVC.Controllers
             _ticketBll = ticketBll;
             _userBll = userBll;
             _passengerTypeBll = passengerTypeBll;
+            _lineBll = lineBll;
         }
 
         public ActionResult Admin()
         {
+            
             var model = new AdminModel()
             {
                 Stations = _stationBll.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureBll.GetAllDepartures(),
-                Types = _passengerTypeBll.GetAllPT()
+                Types = _passengerTypeBll.GetAllPT(),
+                Lines = _lineBll.GetAllLines()
             };
 
             return View(model);
         }
 
-        public ActionResult AddStation()
+        public ActionResult EditLine(int id)
         {
-            var station = new RepositoryModelStation();
+            var line = _lineBll.GetLineById(id);
+            return View(line);
+        }
+
+        public ActionResult AddStation(int line)
+        {
+            var tempLine = _lineBll.GetLineById(line);
             return View("EditStation");
         }
-        
+
         public ActionResult EditStation(int id)
         {
             var Station = _stationBll.GetStationById(id);
-
-            //ViewBag.station = _stationService.GetStationById(id);
             return View(Station);
         }
 
         [HttpPost]
         public ActionResult EditStation(RepositoryModelStation stationIn)
         {
+            var dbLine = new DbTrainLine()
+            {
+                Id = ViewBag.Trainline.Id,
+                Name = ViewBag.Trainline.Name,
+                Stations = ViewBag.Trainline.Stations
+            };
+
+            stationIn.TrainLine = dbLine;
+
             if (ModelState.IsValid)
             {
-                _stationBll.UpdateStation(stationIn.Id, stationIn);
-                return RedirectToAction("Admin", "Admin");
+                if (stationIn.Id != 0)
+                {
+                    _stationBll.UpdateStation(stationIn.Id, stationIn);
+                    return RedirectToAction("EditLine", "Admin");
+                }
+                else
+                {
+                    _stationBll.AddStation(stationIn);
+                    return RedirectToAction("EditLine", "Admin");
+                }
             }
 
             return View();
+        }
+
+        public ActionResult DeleteStation(int id)
+        {
+            Console.WriteLine(id + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            _stationBll.DeleteStation(id);
+            return RedirectToAction("Admin", "Admin");
+        }
+
+        public ActionResult AddPT()
+        {
+            var pt = new RepositoryModelPassengerType();
+            return View("EditPassengerType", pt);
         }
 
         public ActionResult EditPassengerType(int id)
@@ -85,11 +124,25 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _passengerTypeBll.UpdatePT(type.Id, type);
-                return RedirectToAction("Admin", "Admin");
+                if (type.Id != 0)
+                {
+                    _passengerTypeBll.UpdatePT(type.Id, type);
+                    return RedirectToAction("Admin", "Admin");
+                }
+                else
+                {
+                    _passengerTypeBll.AddPT(type);
+                    return RedirectToAction("Admin", "Admin");
+                }
             }
 
             return View();
+        }
+
+        public ActionResult DeletePT(int id)
+        {
+            _passengerTypeBll.DeletePT(id);
+            return RedirectToAction("Admin", "Admin");
         }
 
         //ADD
@@ -121,14 +174,16 @@ namespace MVC.Controllers
                 {
                     _departureBll.AddDeparture(departure);
                     return RedirectToAction("Admin", "Admin");
-
                 }
             }
 
             return View();
         }
 
-        
-        
+        public ActionResult DeleteDeparture(int id)
+        {
+            _departureBll.DeleteDeparture(id);
+            return RedirectToAction("Admin", "Admin");
+        }
     }
 }

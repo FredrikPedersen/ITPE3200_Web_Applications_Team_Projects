@@ -48,5 +48,26 @@ namespace Data.Access.Layer.Repositories
             _databaseContext.SaveChanges();
             return true;
         }
+
+        public bool AddPT(RepositoryModelPassengerType passengerType)
+        {
+            var dbPt = new DbPassengerType()
+            {
+                Type = "Test",//passengerType.Type,
+                PriceMultiplier = passengerType.PriceMultiplier
+            };
+
+            _databaseContext.PassengerTypes.Add(dbPt);
+            _databaseContext.SaveChanges();
+            return true;
+        }
+
+        public bool DeletePT(int id)
+        {
+            DbPassengerType dbPt = _databaseContext.PassengerTypes.FirstOrDefault(r => r.Id == id);
+            _databaseContext.PassengerTypes.Remove(dbPt);
+            _databaseContext.SaveChanges();
+            return true;
+        }
     }
 }

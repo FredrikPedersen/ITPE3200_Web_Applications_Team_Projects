@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Model.DBModels;
 
-namespace Model.DBModels
+namespace Model.RepositoryModels
 {
-    [TrackChanges]
-    public class DbTrainLine
+    public class RepositoryModelTrainLine
     {
-        [Key]
         public int Id { get; set; }
+
         public string Name { get; set; }
+        
         public List<DbStation> Stations { get; set; }
     }
 }

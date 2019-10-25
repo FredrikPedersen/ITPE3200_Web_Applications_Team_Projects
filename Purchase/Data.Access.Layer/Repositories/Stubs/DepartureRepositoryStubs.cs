@@ -23,6 +23,11 @@ namespace Data.Access.Layer.Repositories.Stubs
             throw new NotImplementedException();
         }
 
+        public bool DeleteDeparture(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<RepositoryModelDepartures> GetAllDepartures()
         {
             var departureList = new List<RepositoryModelDepartures>();
