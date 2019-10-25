@@ -16,6 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Business.Logic.Layer\Business.Logic.Layer.csproj" />
     <ProjectReference Include="..\Data.Access.Layer\Data.Access.Layer.csproj" />
-    <ProjectReference Include="..\Security\Security.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 </Project>

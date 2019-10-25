@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Access.Layer", "Data.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{30F1175F-24A9-432F-A044-CB9CF461C9DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Security.csproj", "{FCBBE58A-5672-4F08-8C71-C61785343C88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{FCBBE58A-5672-4F08-8C71-C61785343C88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Logic.Layer", "Business.Logic.Layer\Business.Logic.Layer.csproj", "{772D23BA-759C-4301-94DB-5D0C361CA385}"
 EndProject
