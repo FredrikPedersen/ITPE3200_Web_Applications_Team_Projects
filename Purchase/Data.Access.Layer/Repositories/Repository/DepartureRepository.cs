@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Model.DBModels;
 using Model.RepositoryModels;
 
@@ -9,10 +10,12 @@ namespace Data.Access.Layer.Repositories
     public class DepartureRepository : IDepartureRepository
     {
         private readonly DatabaseContext _databaseContext;
+        private readonly ILogger _logger;
 
-        public DepartureRepository(DatabaseContext databaseContext)
+        public DepartureRepository(DatabaseContext databaseContext, ILogger logger)
         {
             _databaseContext = databaseContext;
+            _logger = logger;
         }
 
         public RepositoryModelDepartures GetDepartureByID(int id)
@@ -27,6 +30,7 @@ namespace Data.Access.Layer.Repositories
                 Id = departure.Id,
                 departureTime = departure.departureTime
             };
+            _logger.LogInformation("jhgjhg");
         }
 
         public List<RepositoryModelDepartures> GetAllDepartures()

@@ -4,6 +4,7 @@ using Data.Access.Layer.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using Model.DBModels;
 using Model.RepositoryModels;
 using Utilities.Passwords;
@@ -12,6 +13,7 @@ namespace MVC.Controllers
 {
     public class VyController : Controller
     {
+        private readonly ILogger<VyController> _logger;
         private readonly StationRepository _stationService;
         private readonly TicketRepository _ticketService;
         private readonly DepartureRepository _departureService;
@@ -19,9 +21,9 @@ namespace MVC.Controllers
 
         private const string SessionKey = "_Key";
 
-        public VyController(TicketRepository ticketService, StationRepository stationService,
-            DepartureRepository departureService, UserRepository userService)
+        public VyController(ILogger<VyController> logger, TicketRepository ticketService, StationRepository stationService, DepartureRepository departureService, UserRepository userService)
         {
+            _logger = logger;
             _ticketService = ticketService;
             _stationService = stationService;
             _departureService = departureService;
@@ -30,6 +32,7 @@ namespace MVC.Controllers
 
         public ActionResult Index()
         {
+            _logger.LogInformation("Index page says hello!");
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View();
         }
@@ -38,7 +41,6 @@ namespace MVC.Controllers
         {
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey)))
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAa");
                 Console.WriteLine(HttpContext.Session.GetString(SessionKey));
                 string logged = HttpContext.Session.GetString(SessionKey);
                 if (logged.Equals("Logged"))
@@ -53,16 +55,13 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult LogIn(RepositoryModelUser user)
         {
-            Console.WriteLine(user.UserName + "LOGGGGGGGGGGGGGGGGGGGGGGGGG");
             if (_userService.CheckUser(user))
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAYEYEYEYYEYEYEYEEYEYAa");
                 HttpContext.Session.SetString(SessionKey, "Logged");
                 ViewBag.Logged = false;
             }
             else
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAANONONONONOONONONa");
                 HttpContext.Session.SetString(SessionKey, "NotLogged");
                 
                 ViewBag.Logged = true;
@@ -146,8 +145,6 @@ namespace MVC.Controllers
             return new SelectList(typeNames);
         }
         
-        
-
         private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
             return _stationService.GetStationsFromNames(toStation, fromStation);
