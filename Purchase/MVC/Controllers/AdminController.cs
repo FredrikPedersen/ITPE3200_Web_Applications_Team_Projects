@@ -1,6 +1,7 @@
 ﻿using System;
 using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Model.RepositoryModels;
 using Model.ViewModels;

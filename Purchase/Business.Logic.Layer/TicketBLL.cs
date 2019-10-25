@@ -4,6 +4,8 @@ using Model.RepositoryModels;
 using System;
 using System.Collections.Generic;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Interfaces;
+using Data.Access.Layer.Repositories.Repository;
 
 namespace Business.Logic.Layer
 {

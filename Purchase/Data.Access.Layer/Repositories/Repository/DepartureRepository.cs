@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.Access.Layer.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Utilities.Logging;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Repository
 {
     public class DepartureRepository : IDepartureRepository
     {
@@ -72,22 +75,31 @@ namespace Data.Access.Layer.Repositories
                 }
             }
 
-            List<DbDepartures> sortedDepartures = departuresAfter.OrderBy(d => d.departureTime).ToList();
+            var sortedDepartures = departuresAfter.OrderBy(d => d.departureTime).ToList();
             return sortedDepartures;
         }
 
         public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
         {
-            DbDepartures departures = _databaseContext.Departures.Find(id);
+            var departures = _databaseContext.Departures.Find(id);
             departures.departureTime = departure.departureTime;
-            _databaseContext.Departures.Update(departures);
-            _databaseContext.SaveChanges();
-            return true;
+
+            try
+            {
+                _databaseContext.Departures.Update(departures);
+                _databaseContext.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                ErrorLogger.LogError(ex);
+                return false;
+            }
         }
 
         public bool AddDeparture(RepositoryModelDepartures departure)
         {
-            DbDepartures dbDeparture = new DbDepartures()
+            var dbDeparture = new DbDepartures()
             {
                 departureTime = departure.departureTime
             };

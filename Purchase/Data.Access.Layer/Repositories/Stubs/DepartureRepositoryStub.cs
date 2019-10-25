@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
@@ -12,7 +13,7 @@ namespace Data.Access.Layer.Repositories.Stubs
         {
         }
 
-        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
         {
             if (departure == null) return null;
             return new RepositoryModelDepartures()
@@ -20,6 +21,11 @@ namespace Data.Access.Layer.Repositories.Stubs
                 Id = departure.Id,
                 departureTime = departure.departureTime
             };
+        }
+
+        public RepositoryModelDepartures DbtoServiceDeparture(DbDepartures departure)
+        {
+            throw new NotImplementedException();
         }
 
         public bool AddDeparture(RepositoryModelDepartures departure)

@@ -1,10 +1,9 @@
-﻿using Model.DBModels;
-using Model.RepositoryModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Model.DBModels;
+using Model.RepositoryModels;
 
-namespace Data.Access.Layer
+namespace Data.Access.Layer.Repositories.Interfaces
 {
     public interface ITicketRepository
     {

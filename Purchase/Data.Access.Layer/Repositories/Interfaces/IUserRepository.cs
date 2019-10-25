@@ -1,10 +1,7 @@
 ﻿using Model.DBModels;
 using Model.RepositoryModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Interfaces
 {
     public interface IUserRepository
     {
