@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Utilities.Logging
 {
-    public class ErrorLogger
+    public static class ErrorLogger
     {
         private const string FilePath = @".\Files\Logs\errors.txt";
 
