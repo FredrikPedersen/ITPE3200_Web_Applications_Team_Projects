@@ -74,6 +74,7 @@ namespace MVC.Controllers
                 Line = _lineBll.GetLineById(id)
             };
             
+            ViewBag.line = _lineBll.GetLineById(line);
             return View(model);
         }
         
@@ -101,6 +102,7 @@ namespace MVC.Controllers
             lineIn.Stations.Add(stationInDb);
             _lineBll.UpdateLine(lineIn);
 
+            ViewBag.line = lineIn;
             return View();
         }
         
