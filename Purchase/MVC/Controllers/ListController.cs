@@ -1,5 +1,4 @@
-﻿using Data.Access.Layer.Repositories;
-using Data.Access.Layer.Repositories.Repository;
+﻿using Business.Logic.Layer;
 using Microsoft.AspNetCore.Mvc;
 using Model.ViewModels;
 
@@ -7,18 +6,18 @@ namespace MVC.Controllers
 {
     public class ListController : Controller
     {
-        private readonly TicketRepository _ticketService;
+        private readonly TicketBLL _ticketBll;
 
-        public ListController(TicketRepository ticketService)
+        public ListController(TicketBLL ticketBll)
         {
-            _ticketService = ticketService;
+            _ticketBll = ticketBll;
         }
         
         public IActionResult List()
         {
             var model = new ListModel
             {
-                Tickets = _ticketService.GetAllTickets()
+                Tickets = _ticketBll.GetAllTickets()
             };
 
             return View(model);
