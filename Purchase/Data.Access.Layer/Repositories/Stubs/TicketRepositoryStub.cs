@@ -65,9 +65,11 @@ namespace Data.Access.Layer.Repositories.Stubs
             var list = new List<DbPassengerType>();
             var passengerType = new DbPassengerType
             {
+                Id = 1,
                 Type = "Adult",
                 PriceMultiplier = 3.0
             };
+            list.Add(passengerType);
             list.Add(passengerType);
             list.Add(passengerType);
             list.Add(passengerType);

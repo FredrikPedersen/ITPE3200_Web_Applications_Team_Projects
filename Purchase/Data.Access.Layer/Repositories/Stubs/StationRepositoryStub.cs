@@ -31,11 +31,19 @@ namespace Data.Access.Layer.Repositories.Stubs
             {
                 Id = 1,
                 NumberOnLine = 1,
-                StationName = "StasjonsNavn1"
+                StationName = "Lillestrøm"
             };
+            var repositoryModelStation2 = new RepositoryModelStation()
+            {
+                Id = 1,
+                NumberOnLine = 1,
+                StationName = "Oslo S"
+            };
+
             list.Add(repositoryModelStation);
+            list.Add(repositoryModelStation2);
             list.Add(repositoryModelStation);
-            list.Add(repositoryModelStation);
+            list.Add(repositoryModelStation2);
 
             return list;
         }

@@ -12,17 +12,18 @@ namespace Unit.Testing
     {
         private VyController controller;
 
-     /*   [SetUp]
+        [SetUp]
         public void SetUp()
         {
             controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()), new UserBLL(new UserRepositoryStub()));
-        } */
+        }
 
         [Test]
         public void show_Index_View()
         {
+            var controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()), new UserBLL(new UserRepositoryStub()));
             var resultat = (ViewResult)controller.Index();
-            Assert.AreEqual(resultat.ViewName, "");
+            Assert.AreEqual(resultat.ViewName, null);
         }
 
         [Test]
@@ -69,14 +70,14 @@ namespace Unit.Testing
             var ticket = new RepositoryModelTicket()
             {
                 Id = 1,
-                FromStation = "Frastasjon",
-                ToStation = "TilStasjon",
+                FromStation = "Lillestrøm",
+                ToStation = "Lillestrøm",
                 ValidFromDate = "12.12.20",
                 ValidFromTime = "10:30",
                 Price = 100,
                 CustomerGivenName = "Fornavn",
                 CustomerLastName = "Etternavn",
-                CustomerNumber = "number",
+                CustomerNumber = "99999999",
                 PassengerType = "Type"
             };
             var result = (ViewResult)controller.Index(ticket);
@@ -91,8 +92,8 @@ namespace Unit.Testing
             controller.ViewData.ModelState.AddModelError("FraStasjon", "Ikke oppgitt frastasjon");
             var resultat = (ViewResult)controller.Index(ticket);
 
-            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1);
-            Assert.AreEqual(resultat.ViewName, "");
+            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1); //kan fikses med større eller lik 1 men vet ikk om det er riktig
+            Assert.AreEqual(resultat.ViewName, null);
         }
 
         [Test]
@@ -102,7 +103,7 @@ namespace Unit.Testing
             ticket.ToStation = "bnjm";
             ticket.FromStation = "fghj";
             var result = (ViewResult)controller.Index(ticket);
-            Assert.AreEqual(result.ViewName, "");
+            Assert.AreEqual(result.ViewName, null);
         }
 
         [Test]
@@ -121,8 +122,8 @@ namespace Unit.Testing
                 CustomerNumber = "number",
                 PassengerType = "Type"
             };
-            var resultat = (RedirectToRouteResult)controller.SelectTrip(ticket);
-            Assert.AreEqual(resultat.RouteName, "");
+            var resultat = (RedirectToActionResult)controller.SelectTrip(ticket);
+            Assert.AreEqual(resultat.ActionName, "");
             Assert.AreEqual(resultat.RouteValues.Values.First(), "List");
         }
 

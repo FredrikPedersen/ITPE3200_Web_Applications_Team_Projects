@@ -70,7 +70,6 @@ namespace MVC.Controllers
         {
             var isValidFromStation = false;
             var isValidToStation = false;
-
             if (ModelState.IsValid)
             {
                 foreach (var station in _stationBll.GetAllStations())
@@ -94,10 +93,10 @@ namespace MVC.Controllers
                     return View("SelectTrip", departures);
                 }
             }
-            
+
             //TODO This should be displayed in the same fashion as the error message for choosing the same to and from station!
             //If the user inputs a station that does not exist, show an error message
-            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke"); 
+            ModelState.AddModelError("Stations", "En av stasjonene du har skrevet inn finnes ikke");
             return View();
         }
 
