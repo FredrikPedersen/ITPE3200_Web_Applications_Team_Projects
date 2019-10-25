@@ -4,16 +4,7 @@
     ViewBag.Title = "Admin";
     Layout = "_Layout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>title</title>
-</head>
-<body>
-
+@Html.AntiForgeryToken()
 <table class="table">
     <thead>
     <th scope="col">Stasjoner</th>
@@ -78,6 +69,3 @@
     }
     </tbody>
 </table>
-
-</body>
-</html>
