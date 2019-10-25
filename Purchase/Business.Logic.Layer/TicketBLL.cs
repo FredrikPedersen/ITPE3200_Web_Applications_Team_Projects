@@ -3,7 +3,6 @@ using Model.DBModels;
 using Model.RepositoryModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Logic.Layer
 {
@@ -26,11 +25,25 @@ namespace Business.Logic.Layer
             return _ticketRepository.SaveTicket(ticket, stationsFromName);
         }
 
-        //Må disse være med her?
-        //TODO må denne her? static DateTime StringsToDateTime(String date, String time);
-        //TODO static string SeparateGivenName(string name)
-        //TODO string SeparateLastName(string name);
-        //TODO double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType);
+        private DateTime StringsToDateTime(String date, String time)
+        {
+            return _ticketRepository.StringsToDateTime(date, time);
+        }
+
+        private string SeparateGivenName(string name)
+        {
+            return _ticketRepository.SeparateGivenName(name);
+        }
+
+        private string SeparateLastName(string name)
+        {
+            return _ticketRepository.SeparateLastName(name);
+        }
+
+        private double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType)
+        {
+            return _ticketRepository.GeneratePrice(fromStation, toStation, passengerType);
+        }
 
         public DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket)
         {

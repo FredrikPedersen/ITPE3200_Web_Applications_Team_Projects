@@ -12,11 +12,13 @@ namespace Data.Access.Layer
 
         bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName);
 
-        //Statiske metoder går ikke an å ha i interface?
-        //TODO må denne her? static DateTime StringsToDateTime(String date, String time);
-        //TODO static string SeparateGivenName(string name)
-        //TODO string SeparateLastName(string name);
-        //TODO double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType);
+        DateTime StringsToDateTime(String date, String time);
+
+        string SeparateGivenName(string name);
+
+        string SeparateLastName(string name);
+
+        double GeneratePrice(DbStation fromStation, DbStation toStation, DbPassengerType passengerType);
 
         DbCustomer CreateNewCustomerFromInput(RepositoryModelTicket ticket);
 
