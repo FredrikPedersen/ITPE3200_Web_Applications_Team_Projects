@@ -2,6 +2,7 @@
 
 namespace Model.DBModels
 {
+    [TrackChanges]
     public class DbUser
     {
         [Key]

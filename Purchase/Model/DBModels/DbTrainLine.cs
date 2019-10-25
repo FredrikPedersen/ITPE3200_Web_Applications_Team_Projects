@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Model.DBModels
 {
+    [TrackChanges]
     public class DbTrainLine
     {
         [Key]
