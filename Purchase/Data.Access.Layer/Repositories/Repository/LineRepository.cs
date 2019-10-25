@@ -17,7 +17,16 @@ namespace Data.Access.Layer.Repositories
 
         public DbTrainLine GetLineById(int id)
         {
-            return _databaseContext.TrainLines.FirstOrDefault(r => r.Id == id);
+            var trainLines = GetAllLines();//_databaseContext.TrainLines.FirstOrDefault(r => r.Id == id);
+            var wantedTrainline = new DbTrainLine();
+            foreach (var trainline in trainLines)
+            {
+                if (trainline.Id == id)
+                {
+                    wantedTrainline = trainline;
+                }
+            }
+            return wantedTrainline;
         }
 
         private RepositoryModelTrainLine DbLineToRepository(DbTrainLine dbTrainLine)

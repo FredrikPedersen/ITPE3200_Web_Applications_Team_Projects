@@ -56,6 +56,7 @@ namespace MVC.Controllers
         public ActionResult EditLine(int id)
         {
             var line = _lineBll.GetLineById(id);
+            Console.WriteLine(line.Name);
             return View(line);
         }
 
