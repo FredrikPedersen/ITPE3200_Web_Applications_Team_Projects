@@ -118,7 +118,7 @@ namespace Data.Access.Layer
                 
                 var newDeparture = new DbDepartures
                 {
-                    departureTime = time
+                    DepartureTime = time
                 };
                 dbContext.Add(newDeparture);
             }

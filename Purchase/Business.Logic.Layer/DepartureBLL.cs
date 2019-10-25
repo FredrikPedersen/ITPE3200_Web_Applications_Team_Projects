@@ -24,9 +24,9 @@ namespace Business.Logic.Layer
             _departureRepository = departureRepository;
         }
 
-        public RepositoryModelDepartures GetDepartureByID(int id)
+        public RepositoryModelDepartures GetDepartureById(int id)
         {
-            return _departureRepository.GetDepartureByID(id);
+            return _departureRepository.GetDepartureById(id);
         }
 
         public RepositoryModelDepartures DbToServiceDeparture(DbDepartures departure)
@@ -39,7 +39,7 @@ namespace Business.Logic.Layer
             return _departureRepository.GetAllDepartures();
         }
 
-        public List<DbDepartures> GetAllDeparturesDB()
+        public List<DbDepartures> GetAllDeparturesDb()
         {
             return _departureRepository.GetAllDeparturesDB();
         }

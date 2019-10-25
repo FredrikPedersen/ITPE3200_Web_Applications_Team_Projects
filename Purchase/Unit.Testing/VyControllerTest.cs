@@ -12,12 +12,11 @@ namespace Unit.Testing
     {
         private VyController controller;
 
-        [SetUp]
+     /*   [SetUp]
         public void SetUp()
         {
-            controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new StationBLL(new StationRepositoryStub()),
-                new DepartureBLL(new DepartureRepositoryStub()), new UserBLL(new UserRepositoryStub()));
-        }
+            controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()), new UserBLL(new UserRepositoryStub()));
+        } */
 
         [Test]
         public void show_Index_View()

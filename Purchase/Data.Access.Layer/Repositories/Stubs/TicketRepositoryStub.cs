@@ -62,21 +62,21 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public List<DbPassengerType> GetAllPassengerTypes()
         {
-            var liste = new List<DbPassengerType>();
+            var list = new List<DbPassengerType>();
             var passengerType = new DbPassengerType
             {
                 Type = "Adult",
                 PriceMultiplier = 3.0
             };
-            liste.Add(passengerType);
-            liste.Add(passengerType);
-            liste.Add(passengerType);
-            return liste;
+            list.Add(passengerType);
+            list.Add(passengerType);
+            list.Add(passengerType);
+            return list;
         }
 
         public List<RepositoryModelTicket> GetAllTickets()
         {
-            var liste = new List<RepositoryModelTicket>();
+            var list = new List<RepositoryModelTicket>();
             var ticket = new RepositoryModelTicket
             {
                 Id = 1,
@@ -90,28 +90,25 @@ namespace Data.Access.Layer.Repositories.Stubs
                 Price = 40,
                 PassengerType = "Type"
             };
-            liste.Add(ticket);
-            liste.Add(ticket);
-            liste.Add(ticket);
-            return liste;
+            list.Add(ticket);
+            list.Add(ticket);
+            list.Add(ticket);
+            return list;
         }
 
         public bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName)
         {
-            if (ticket == null || stationsFromName == null) return false;
-            else return true;
+            return ticket != null && stationsFromName != null;
         }
 
         public string SeparateGivenName(string name)
         {
-            if (name.Equals("")) return null;
-            else return name;
+            return name.Equals("") ? null : name;
         }
 
         public string SeparateLastName(string name)
         {
-            if (name.Equals("")) return null;
-            else return name;
+            return name.Equals("") ? null : name;
         }
 
         public DateTime StringsToDateTime(string date, string time)

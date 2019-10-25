@@ -18,7 +18,7 @@ namespace Data.Access.Layer.Repositories.Repository
             _databaseContext = databaseContext;
         }
 
-        public RepositoryModelDepartures GetDepartureByID(int id)
+        public RepositoryModelDepartures GetDepartureById(int id)
         {
             return DbToServiceDeparture(_databaseContext.Departures.FirstOrDefault(d => d.Id == id));
         }
@@ -28,7 +28,7 @@ namespace Data.Access.Layer.Repositories.Repository
             return new RepositoryModelDepartures()
             {
                 Id = departure.Id,
-                departureTime = departure.departureTime
+                DepartureTime = departure.DepartureTime
             };
         }
 
@@ -37,7 +37,7 @@ namespace Data.Access.Layer.Repositories.Repository
             return _databaseContext.Departures.Select(d => new RepositoryModelDepartures()
             {
                 Id = d.Id,
-                departureTime = d.departureTime
+                DepartureTime = d.DepartureTime
             }).ToList();
         }
 
@@ -46,7 +46,7 @@ namespace Data.Access.Layer.Repositories.Repository
             return _databaseContext.Departures.Select(t => new DbDepartures
             {
                 Id = t.Id,
-                departureTime = t.departureTime
+                DepartureTime = t.DepartureTime
             }).ToList();
         }
 
@@ -56,12 +56,12 @@ namespace Data.Access.Layer.Repositories.Repository
             int[] departureTimeValues =
                 {Convert.ToInt32(departureTimeSplit[0]), Convert.ToInt32(departureTimeSplit[1])};
 
-            List<DbDepartures> departures = GetAllDeparturesDB();
-            List<DbDepartures> departuresAfter = new List<DbDepartures>();
+            var departures = GetAllDeparturesDB();
+            var departuresAfter = new List<DbDepartures>();
 
-            foreach (DbDepartures departure in departures)
+            foreach (var departure in departures)
             {
-                String[] dbDepartureSplit = departure.departureTime.Split(':');
+                String[] dbDepartureSplit = departure.DepartureTime.Split(':');
                 int[] dbDepartureValues = {Convert.ToInt32(dbDepartureSplit[0]), Convert.ToInt32(dbDepartureSplit[1])};
 
                 if (dbDepartureValues[0] > departureTimeValues[0])
@@ -75,14 +75,14 @@ namespace Data.Access.Layer.Repositories.Repository
                 }
             }
 
-            var sortedDepartures = departuresAfter.OrderBy(d => d.departureTime).ToList();
+            var sortedDepartures = departuresAfter.OrderBy(d => d.DepartureTime).ToList();
             return sortedDepartures;
         }
 
         public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
         {
             var departures = _databaseContext.Departures.Find(id);
-            departures.departureTime = departure.departureTime;
+            departures.DepartureTime = departure.DepartureTime;
 
             try
             {
@@ -101,7 +101,7 @@ namespace Data.Access.Layer.Repositories.Repository
         {
             var dbDeparture = new DbDepartures()
             {
-                departureTime = departure.departureTime
+                DepartureTime = departure.DepartureTime
             };
 
             _databaseContext.Departures.Add(dbDeparture);

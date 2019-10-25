@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
@@ -56,7 +55,7 @@ namespace Data.Access.Layer.Repositories.Stubs
         public List<DbStation> GetStationsFromNames(string fromStation, string toStation)
         {
             if (fromStation.Equals("")) return null;
-            else if (toStation.Equals("")) return null;
+            if (toStation.Equals("")) return null;
             var list = new List<DbStation>();
             var dbStation = new DbStation()
             {
@@ -84,8 +83,7 @@ namespace Data.Access.Layer.Repositories.Stubs
         public bool UpdateStation(int id, RepositoryModelStation stationIn)
         {
             if (id == 0) return false;
-            if (stationIn == null) return false;
-            else return true;
+            return stationIn != null;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Data.Access.Layer.Repositories.Stubs
             return new RepositoryModelDepartures()
             {
                 Id = departure.Id,
-                departureTime = departure.departureTime
+                DepartureTime = departure.DepartureTime
             };
         }
 
@@ -34,7 +34,7 @@ namespace Data.Access.Layer.Repositories.Stubs
             var repositoryModelDeparture = new RepositoryModelDepartures()
             {
                 Id = 1,
-                departureTime = "12:00"
+                DepartureTime = "12:00"
             };
             departureList.Add(repositoryModelDeparture);
             departureList.Add(repositoryModelDeparture);
@@ -48,7 +48,7 @@ namespace Data.Access.Layer.Repositories.Stubs
             var dbDepartures = new DbDepartures()
             {
                 Id = 1,
-                departureTime = "12:00"
+                DepartureTime = "12:00"
             };
             departureList.Add(dbDepartures);
             departureList.Add(dbDepartures);
@@ -56,13 +56,13 @@ namespace Data.Access.Layer.Repositories.Stubs
             return departureList;
         }
 
-        public RepositoryModelDepartures GetDepartureByID(int id)
+        public RepositoryModelDepartures GetDepartureById(int id)
         {
             if (id == 0) return null;
             var repositoryModelDeparture = new RepositoryModelDepartures()
             {
                 Id = id,
-                departureTime = "12:00"
+                DepartureTime = "12:00"
             };
 
             return repositoryModelDeparture;
@@ -71,31 +71,25 @@ namespace Data.Access.Layer.Repositories.Stubs
         public List<DbDepartures> GetDeparturesLater(string departureTime)
         {
             if (departureTime.Equals("")) return null;
-            DateTime dateTime = DateTime.ParseExact(departureTime, "HH:mm", null);
+            var dateTime = DateTime.ParseExact(departureTime, "HH:mm", null);
             var departureList = new List<DbDepartures>();
             var dbDepartures = new DbDepartures()
             {
                 Id = 1,
-                departureTime = "16:00"
+                DepartureTime = "16:00"
             };
-            if (DateTime.ParseExact(dbDepartures.departureTime, "HH:mm", null) > dateTime)
-            {
-                departureList.Add(dbDepartures);
-                departureList.Add(dbDepartures);
-                departureList.Add(dbDepartures);
-                return departureList;
-            }
-            else
-            {
-                return null;
-            }
+            if (DateTime.ParseExact(dbDepartures.DepartureTime, "HH:mm", null) <= dateTime) return null;
+            departureList.Add(dbDepartures);
+            departureList.Add(dbDepartures);
+            departureList.Add(dbDepartures);
+            return departureList;
+
         }
 
         public bool UpdateDeparture(int id, RepositoryModelDepartures departure)
         {
             if (id == 0) return false;
-            else if (departure == null) return false;
-            else return true;
+            return departure != null;
         }
     }
 }
