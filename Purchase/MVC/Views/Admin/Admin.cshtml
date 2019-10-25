@@ -13,6 +13,13 @@
     <th scope="col">Handle</th>
     </thead>
     <tbody>
+    <tr>
+        <th>Add Stasjon</th>
+        <th>Add Type</th>
+        <th>Add Avgang 
+            @Html.ActionLink("Add Avgang", "AddDeparture", "Admin",
+                new {@class = "btn btn-primary"})</th>
+    </tr>
     @for (int i = 0; i < Model.Stations.Count; i++)
     {
         <tr>
@@ -47,7 +54,7 @@
                     </div>
                 }
             </th>
-            
+
             <th>
                 @if (i < @Model.Departures.Count)
                 {

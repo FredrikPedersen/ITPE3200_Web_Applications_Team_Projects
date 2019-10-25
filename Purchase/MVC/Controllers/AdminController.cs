@@ -1,4 +1,5 @@
-﻿using Business.Logic.Layer;
+﻿using System;
+using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Model.RepositoryModels;
@@ -41,6 +42,12 @@ namespace MVC.Controllers
             return View(model);
         }
 
+        public ActionResult AddStation()
+        {
+            var station = new RepositoryModelStation();
+            return View("EditStation");
+        }
+        
         public ActionResult EditStation(int id)
         {
             var Station = _stationBll.GetStationById(id);
@@ -80,11 +87,11 @@ namespace MVC.Controllers
         }
 
         //ADD
-        public ActionResult EditDeparture()
+        public ActionResult AddDeparture()
         {
-            return View();
+            var departure = new RepositoryModelDepartures();
+            return View("EditDeparture");
         }
-
 
         //EDIT
         public ActionResult EditDeparture(int id)
@@ -99,7 +106,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (departure.Id != null)
+                if (departure.Id != 0)
                 {
                     _departureBll.UpdateDeparture(departure.Id, departure);
                     return RedirectToAction("Admin", "Admin");
@@ -114,5 +121,8 @@ namespace MVC.Controllers
 
             return View();
         }
+
+        
+        
     }
 }
