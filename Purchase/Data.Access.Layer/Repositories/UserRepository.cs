@@ -6,7 +6,7 @@ using Security.Passwords;
 
 namespace Data.Access.Layer.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DatabaseContext _databaseContext;
 
@@ -22,12 +22,12 @@ namespace Data.Access.Layer.Repositories
         }
 
         public bool CheckUser(RepositoryModelUser user)
-        { 
+        {
             Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
             DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
 
-           if (dbUser != null)
-           {
+            if (dbUser != null)
+            {
                 Console.WriteLine(dbUser.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
 
                 byte[] userPassword = Hasher.CreateHash(user.Password, dbUser.Salt);
@@ -37,7 +37,5 @@ namespace Data.Access.Layer.Repositories
 
             return false;
         }
-        
-        
     }
 }

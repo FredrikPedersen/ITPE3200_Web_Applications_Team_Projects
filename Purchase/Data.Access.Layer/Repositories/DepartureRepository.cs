@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Data.Access.Layer.Repositories;
 
 namespace Data.Access.Layer.Repositories
 {
@@ -35,10 +36,9 @@ namespace Data.Access.Layer.Repositories
             {
                 Id = d.Id,
                 departureTime = d.departureTime
-                
             }).ToList();
         }
-        
+
         public List<DbDepartures> GetAllDeparturesDB()
         {
             return _databaseContext.Departures.Select(t => new DbDepartures
