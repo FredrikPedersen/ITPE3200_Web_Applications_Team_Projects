@@ -3,16 +3,23 @@ using Model.DBModels;
 using Model.RepositoryModels;
 using System;
 using System.Collections.Generic;
+using Data.Access.Layer.Repositories;
 
 namespace Business.Logic.Layer
 {
-    internal class TicketBLL
+    public class TicketBLL
     {
-        private readonly ITicketRepository _ticketRepository;
+        private readonly ITicketRepository _ticketRepositoryStub;
+        private readonly TicketRepository _ticketRepository;
+
+        public TicketBLL(TicketRepository ticketRepository)
+        {
+            _ticketRepository = ticketRepository;
+        }
 
         public TicketBLL(ITicketRepository ticketRepository)
         {
-            _ticketRepository = ticketRepository;
+            _ticketRepositoryStub = ticketRepository;
         }
 
         public List<RepositoryModelTicket> GetAllTickets()

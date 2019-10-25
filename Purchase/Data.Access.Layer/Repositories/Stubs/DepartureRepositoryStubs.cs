@@ -18,6 +18,11 @@ namespace Data.Access.Layer.Repositories.Stubs
             };
         }
 
+        public bool AddDeparture(RepositoryModelDepartures departure)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<RepositoryModelDepartures> GetAllDepartures()
         {
             var departureList = new List<RepositoryModelDepartures>();

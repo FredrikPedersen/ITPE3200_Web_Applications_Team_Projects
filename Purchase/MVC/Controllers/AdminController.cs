@@ -10,30 +10,32 @@ namespace MVC.Controllers
     public class AdminController : Controller
     {
         private Class1 _class1; //DO NOT REMOVE THIS BEFORE WE MAKE ACTUAL USE OF THE BLL!!! NBNB!NB!NB!!!!!
-        private readonly StationRepository _stationService;
-        private readonly TicketRepository _tickedService;
-        private readonly DepartureRepository _departureService;
-        private readonly PassengerTypeRepository _passengerTypeService;
+        private readonly DepartureBLL _departureBll;
+        private readonly StationBLL _stationBll;
+        private readonly TicketBLL _ticketBll;
+        private readonly UserBLL _userBll;
+        private readonly PassengerTypeBLL _passengerTypeBll;
 
 
-        public AdminController(StationRepository stationService, TicketRepository tickedService,
-            DepartureRepository departureService, PassengerTypeRepository passengerTypeService
+        public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll,
+            PassengerTypeBLL passengerTypeBll 
         )
         {
-            _stationService = stationService;
-            _tickedService = tickedService;
-            _departureService = departureService;
-            _passengerTypeService = passengerTypeService;
+            _departureBll = departureBll;
+            _stationBll = stationBll;
+            _ticketBll = ticketBll;
+            _userBll = userBll;
+            _passengerTypeBll = passengerTypeBll;
         }
 
         public ActionResult Admin()
         {
             var model = new AdminModel()
             {
-                Stations = _stationService.GetAllStations(),
+                Stations = _stationBll.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
-                Departures = _departureService.GetAllDepartures(),
-                Types = _passengerTypeService.GetAllPT()
+                Departures = _departureBll.GetAllDepartures(),
+                Types = _passengerTypeBll.GetAllPT()
             };
 
             return View(model);
@@ -41,7 +43,7 @@ namespace MVC.Controllers
 
         public ActionResult EditStation(int id)
         {
-            var Station = _stationService.GetStationById(id);
+            var Station = _stationBll.GetStationById(id);
 
             //ViewBag.station = _stationService.GetStationById(id);
             return View(Station);
@@ -52,7 +54,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _stationService.UpdateStation(stationIn.Id, stationIn);
+                _stationBll.UpdateStation(stationIn.Id, stationIn);
                 return RedirectToAction("Admin", "Admin");
             }
 
@@ -61,7 +63,7 @@ namespace MVC.Controllers
 
         public ActionResult EditPassengerType(int id)
         {
-            var Type = _passengerTypeService.GetPassengerTypeTypeById(id);
+            var Type = _passengerTypeBll.GetPassengerTypeTypeById(id);
             return View(Type);
         }
 
@@ -70,26 +72,44 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _passengerTypeService.UpdatePT(type.Id, type);
+                _passengerTypeBll.UpdatePT(type.Id, type);
                 return RedirectToAction("Admin", "Admin");
             }
 
             return View();
         }
 
+        //ADD
+        public ActionResult EditDeparture()
+        {
+            return View();
+        }
+
+
+        //EDIT
         public ActionResult EditDeparture(int id)
         {
-            var departure = _departureService.GetDepartureByID(id);
+            var departure = _departureBll.GetDepartureByID(id);
             return View(departure);
         }
 
+        //ADD+EDIT POST
         [HttpPost]
         public ActionResult EditDeparture(RepositoryModelDepartures departure)
         {
             if (ModelState.IsValid)
             {
-                _departureService.UpdateDeparture(departure.Id, departure);
-                return RedirectToAction("Admin", "Admin");
+                if (departure.Id != null)
+                {
+                    _departureBll.UpdateDeparture(departure.Id, departure);
+                    return RedirectToAction("Admin", "Admin");
+                }
+                else
+                {
+                    _departureBll.AddDeparture(departure);
+                    return RedirectToAction("Admin", "Admin");
+
+                }
             }
 
             return View();

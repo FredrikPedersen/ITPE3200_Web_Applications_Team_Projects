@@ -7,33 +7,39 @@ using System.Text;
 
 namespace Business.Logic.Layer
 {
-    internal class PassengerTypeBLL
+    public class PassengerTypeBLL
     {
-        private readonly IPassengerTypeRepository _passangerTypeRepository;
+        private readonly IPassengerTypeRepository _passengerTypeRepositoryStub;
+        private readonly PassengerTypeRepository _passengerTypeRepository;
+
+        public PassengerTypeBLL(PassengerTypeRepository passengerTypeRepository)
+        {
+            _passengerTypeRepository = passengerTypeRepository;
+        }
 
         public PassengerTypeBLL(IPassengerTypeRepository passengerTypeRepository)
         {
-            _passangerTypeRepository = passengerTypeRepository;
+            _passengerTypeRepositoryStub = passengerTypeRepository;
         }
 
         public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)
         {
-            return _passangerTypeRepository.GetPassengerTypeTypeById(id);
+            return _passengerTypeRepository.GetPassengerTypeTypeById(id);
         }
 
         public RepositoryModelPassengerType DbToServicePT(DbPassengerType dbPassengerType)
         {
-            return _passangerTypeRepository.DbToServicePT(dbPassengerType);
+            return _passengerTypeRepository.DbToServicePT(dbPassengerType);
         }
 
         public List<RepositoryModelPassengerType> GetAllPT()
         {
-            return _passangerTypeRepository.GetAllPT();
+            return _passengerTypeRepository.GetAllPT();
         }
 
         public bool UpdatePT(int id, RepositoryModelPassengerType pt)
         {
-            return _passangerTypeRepository.UpdatePT(id, pt);
+            return _passengerTypeRepository.UpdatePT(id, pt);
         }
     }
 }

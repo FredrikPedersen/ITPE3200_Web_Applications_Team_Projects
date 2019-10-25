@@ -7,13 +7,19 @@ using System.Text;
 
 namespace Business.Logic.Layer
 {
-    internal class UserBLL
+    public class UserBLL
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepository _userRepositoryStub;
+        private readonly UserRepository _userRepository;
 
-        public UserBLL(IUserRepository userRepository)
+        public UserBLL(UserRepository userRepository)
         {
             _userRepository = userRepository;
+        }
+        
+        public UserBLL(IUserRepository userRepository)
+        {
+            _userRepositoryStub = userRepository;
         }
 
         private void AddUser(DbUser user)

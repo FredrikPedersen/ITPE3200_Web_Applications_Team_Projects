@@ -1,4 +1,5 @@
 ﻿using System;
+using Business.Logic.Layer;
 using Data.Access.Layer;
 using Data.Access.Layer.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -50,6 +51,11 @@ namespace MVC
             services.AddScoped<DepartureRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<PassengerTypeRepository>();
+            services.AddScoped<StationBLL>();
+            services.AddScoped<TicketBLL>();
+            services.AddScoped<DepartureBLL>();
+            services.AddScoped<UserBLL>();
+            services.AddScoped<PassengerTypeBLL>();
             services.AddMvc();
         }
 

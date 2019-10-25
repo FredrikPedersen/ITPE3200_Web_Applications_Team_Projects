@@ -7,13 +7,19 @@ using Model.RepositoryModels;
 
 namespace Business.Logic.Layer
 {
-    internal class DepartureBLL
+    public class DepartureBLL
     {
-        private readonly IDepartureRepository _departureRepository;
+        private readonly IDepartureRepository _departureRepositoryStub;
+        private readonly DepartureRepository _departureRepository;
 
-        public DepartureBLL(IDepartureRepository departureRepo)
+        public DepartureBLL(IDepartureRepository departureRepositoryStub)
         {
-            _departureRepository = departureRepo;
+            //_departureRepositoryStub = departureStub;
+        }
+        
+        public DepartureBLL(DepartureRepository departureRepository)
+        {
+            _departureRepository = departureRepository;
         }
 
         public RepositoryModelDepartures GetDepartureByID(int id)
@@ -45,5 +51,11 @@ namespace Business.Logic.Layer
         {
             return _departureRepository.UpdateDeparture(id, departure);
         }
+
+        public bool AddDeparture(RepositoryModelDepartures departure)
+        {
+            return _departureRepository.AddDeparture(departure);
+        }
+
     }
 }
