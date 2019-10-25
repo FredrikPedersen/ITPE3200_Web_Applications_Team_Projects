@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Model.DBModels;
 using Model.RepositoryModels;
 using Model.ViewModels;
+using ActionResult = Microsoft.AspNetCore.Mvc.ActionResult;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace MVC.Controllers
 
@@ -47,32 +49,59 @@ namespace MVC.Controllers
                 Types = _passengerTypeBll.GetAllPT(),
                 Lines = _lineBll.GetAllLines()
             };
-
+    
             return View(model);
         }
 
         public ActionResult EditLine(int id)
         {
-            var line = _lineBll.GetLineById(id);
-            Console.WriteLine(line.Name);
-            return View(line);
+            var model = new AdminModel()
+            {
+                Line = _lineBll.GetLineById(id)
+            };
+            ViewBag.line = _lineBll.GetLineById(id);
+            return View(model);
         }
 
-        public ActionResult AddStation(int line)
+        
+        public ActionResult AddStation(int id)
         {
-            var tempLine = _lineBll.GetLineById(line);
-            return View("EditStation");
+            var line = id;
+            var model = new AdminModel()
+            {
+                Line = _lineBll.GetLineById(id)
+            };
+            
+            return View(model);
         }
+        
+        [HttpPost]
+        public ActionResult AddStation(AdminModel modelIn)
+        {
+            var stationIn = modelIn.Station;
+            var lineIn = _lineBll.GetLineById(modelIn.Line.Id);
+            
+            
+            
+            return View();
+        }
+        
 
         public ActionResult EditStation(int id)
         {
-            var Station = _stationBll.GetStationById(id);
-            return View(Station);
+            var model = new AdminModel()
+            {
+                Station = _stationBll.GetStationById(id)
+            };
+           
+            return View(model);
         }
-
+        
         [HttpPost]
-        public ActionResult EditStation(RepositoryModelStation stationIn)
+        public ActionResult EditStation(AdminModel model)
         {
+            var stationIn = model.Station;
+            var lineIn = model.Line;
             var dbLine = new DbTrainLine()
             {
                 Id = ViewBag.Trainline.Id,
