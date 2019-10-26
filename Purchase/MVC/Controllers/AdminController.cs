@@ -23,19 +23,15 @@ namespace MVC.Controllers
         public readonly StationBLL _stationBll;
         public readonly TicketBLL _ticketBll;
         public readonly UserBLL _userBll;
-        public readonly PassengerTypeBLL _passengerTypeBll;
         public readonly LineBLL _lineBll;
 
 
-        public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll,
-            PassengerTypeBLL passengerTypeBll, LineBLL lineBll
-        )
+        public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll, LineBLL lineBll)
         {
             _departureBll = departureBll;
             _stationBll = stationBll;
             _ticketBll = ticketBll;
             _userBll = userBll;
-            _passengerTypeBll = passengerTypeBll;
             _lineBll = lineBll;
         }
 
@@ -47,7 +43,6 @@ namespace MVC.Controllers
                 Stations = _stationBll.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureBll.GetAllDepartures(),
-                Types = _passengerTypeBll.GetAllPt(),
                 Lines = _lineBll.GetAllLines()
             };
     
@@ -159,12 +154,6 @@ namespace MVC.Controllers
         public ActionResult DeleteStation(int id)
         {
             _stationBll.DeleteStation(id);
-            return RedirectToAction("Admin", "Admin");
-        }
-
-        public ActionResult DeletePT(int id)
-        {
-            _passengerTypeBll.DeletePT(id);
             return RedirectToAction("Admin", "Admin");
         }
 

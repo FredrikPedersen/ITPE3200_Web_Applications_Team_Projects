@@ -21,7 +21,7 @@ namespace Unit.Testing
         public void SetUp()
         {
             _controller = new AdminController(new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()),
-                new TicketBLL(new TicketRepositoryStub()), new UserBLL(new UserRepositoryStub()), new PassengerTypeBLL(new PassengerTypeRepositoryStub()),
+                new TicketBLL(new TicketRepositoryStub()), new UserBLL(new UserRepositoryStub()),
                 new LineBLL(new LineRepositoryStub()));
         }
 
@@ -33,7 +33,6 @@ namespace Unit.Testing
             {
                 Stations = _controller._stationBll.GetAllStations(),
                 Departures = _controller._departureBll.GetAllDepartures(),
-                Types = _controller._passengerTypeBll.GetAllPt(),
                 Lines = _controller._lineBll.GetAllLines()
             };
 
@@ -42,7 +41,6 @@ namespace Unit.Testing
             
             Assert.AreEqual(viewResult.ViewName, null);
             Assert.AreEqual(model.Departures.Count, resultModel.Departures.Count);
-            Assert.AreEqual(model.Types.Count, resultModel.Types.Count);
             Assert.AreEqual(model.Lines.Count, resultModel.Lines.Count);
             Assert.AreEqual(model.Stations.Count, resultModel.Stations.Count);
 
@@ -122,13 +120,6 @@ namespace Unit.Testing
         public void DeleteStation()
         {
             var viewResult = (RedirectToActionResult) _controller.DeleteStation(1);
-            Assert.AreEqual(viewResult.ActionName, "Admin");
-        }
-
-        [Test]
-        public void DeletePT()
-        {
-            var viewResult = (RedirectToActionResult) _controller.DeletePT(1);
             Assert.AreEqual(viewResult.ActionName, "Admin");
         }
 
