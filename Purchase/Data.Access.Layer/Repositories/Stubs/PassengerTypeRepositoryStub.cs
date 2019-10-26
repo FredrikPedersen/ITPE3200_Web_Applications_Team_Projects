@@ -37,6 +37,7 @@ namespace Data.Access.Layer.Repositories.Stubs
             list.Add(repo);
             return list;
         }
+        
 
         public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)
         {

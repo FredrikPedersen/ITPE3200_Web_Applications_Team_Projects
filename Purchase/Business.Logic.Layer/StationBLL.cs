@@ -33,7 +33,7 @@ namespace Business.Logic.Layer
             return _stationRepository.GetStationsFromNames(fromStation, toStation);
         }
 
-        public int UpdateStation(int id, RepositoryModelStation stationIn)
+        public bool UpdateStation(int id, RepositoryModelStation stationIn)
         {
             return _stationRepository.UpdateStation(id, stationIn);
         }

@@ -58,6 +58,7 @@ namespace MVC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPassengerTypeRepository, PassengerTypeRepository>();
             services.AddScoped<IStationRepository, StationRepository>();
+            services.AddScoped<ILineRepository, LineRepository>();
             services.AddScoped<StationBLL>();
             services.AddScoped<TicketBLL>();
             services.AddScoped<DepartureBLL>();

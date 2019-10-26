@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity.Core.Common.CommandTrees;
 using System.Threading.Tasks;
 using Business.Logic.Layer;
 using Data.Access.Layer.Repositories;
@@ -48,7 +47,7 @@ namespace MVC.Controllers
                 Stations = _stationBll.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureBll.GetAllDepartures(),
-                Types = _passengerTypeBll.GetAllPT(),
+                Types = _passengerTypeBll.GetAllPt(),
                 Lines = _lineBll.GetAllLines()
             };
     
@@ -183,7 +182,7 @@ namespace MVC.Controllers
             {
                 if (type.Id != 0)
                 {
-                    _passengerTypeBll.UpdatePT(type.Id, type);
+                    _passengerTypeBll.UpdatePt(type.Id, type);
                     return RedirectToAction("Admin", "Admin");
                 }
                 else
@@ -212,7 +211,7 @@ namespace MVC.Controllers
         //EDIT
         public ActionResult EditDeparture(int id)
         {
-            var departure = _departureBll.GetDepartureByID(id);
+            var departure = _departureBll.GetDepartureById(id);
             return View(departure);
         }
 

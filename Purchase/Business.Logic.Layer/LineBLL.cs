@@ -2,14 +2,16 @@
 using Data.Access.Layer.Repositories;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Data.Access.Layer.Repositories.Interfaces;
+
 
 namespace Business.Logic.Layer
 {
     public class LineBLL
     {
-        private readonly LineRepository _lineRepository;
+        private readonly ILineRepository _lineRepository;
 
-        public LineBLL(LineRepository lineRepository)
+        public LineBLL(ILineRepository lineRepository)
         {
             _lineRepository = lineRepository;
         }

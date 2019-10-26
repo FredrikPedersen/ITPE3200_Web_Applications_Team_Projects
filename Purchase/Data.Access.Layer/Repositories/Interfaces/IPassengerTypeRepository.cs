@@ -12,8 +12,6 @@ namespace Data.Access.Layer.Repositories.Interfaces
 
         List<RepositoryModelPassengerType> GetAllPt();
 
-        bool UpdatePT(int id, RepositoryModelPassengerType pt);
-
         bool AddPT(RepositoryModelPassengerType passengerType);
 
         bool DeletePT(int id);

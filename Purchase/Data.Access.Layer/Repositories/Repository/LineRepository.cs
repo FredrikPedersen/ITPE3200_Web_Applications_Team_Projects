@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
-namespace Data.Access.Layer.Repositories
+namespace Data.Access.Layer.Repositories.Repository
 {
-    public class LineRepository
+    public class LineRepository : ILineRepository
     {
         private readonly DatabaseContext _databaseContext;
 
@@ -29,7 +30,7 @@ namespace Data.Access.Layer.Repositories
             return wantedTrainline;
         }
 
-        private RepositoryModelTrainLine DbLineToRepository(DbTrainLine dbTrainLine)
+        public RepositoryModelTrainLine DbLineToRepository(DbTrainLine dbTrainLine)
         {
             return new RepositoryModelTrainLine()
             {
