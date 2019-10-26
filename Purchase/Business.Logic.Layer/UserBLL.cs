@@ -18,11 +18,6 @@ namespace Business.Logic.Layer
             _userRepository = userRepository;
         }
 
-        public void AddUser(DbUser user)
-        {
-            _userRepository.AddUser(user);
-        }
-
         public bool CheckUser(RepositoryModelUser user)
         {
             return _userRepository.CheckUser(user);
