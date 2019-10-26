@@ -77,6 +77,12 @@ namespace MVC.Controllers
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
+        
+        public ActionResult LogOut()
+        {
+            HttpContext.Session.SetString(SessionKey, "NotLogged");
+            return View("Index");
+        }
 
         [HttpPost]
         public ActionResult Index(RepositoryModelTicket ticket)
