@@ -88,7 +88,6 @@ namespace Data.Access.Layer.Repositories.Stubs
             departureList.Add(dbDepartures);
             departureList.Add(dbDepartures);
             return departureList;
-
         }
 
         public bool UpdateDeparture(int id, RepositoryModelDepartures departure)

@@ -1,10 +1,13 @@
 ﻿using Business.Logic.Layer;
 using Data.Access.Layer.Repositories.Stubs;
 using Microsoft.AspNetCore.Mvc;
+using Model.DBModels;
 using Model.RepositoryModels;
 using MVC.Controllers;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
+using Utilities.Passwords;
 
 namespace Unit.Testing
 {
@@ -69,7 +72,7 @@ namespace Unit.Testing
             var ticket = new RepositoryModelTicket()
             {
                 Id = 1,
-                FromStation = "Lillestrøm",
+                FromStation = "Oslo S",
                 ToStation = "Lillestrøm",
                 ValidFromDate = "12.12.20",
                 ValidFromTime = "10:30",
@@ -77,22 +80,20 @@ namespace Unit.Testing
                 CustomerGivenName = "Fornavn",
                 CustomerLastName = "Etternavn",
                 CustomerNumber = "99999999",
-                PassengerType = "Type"
+                PassengerType = "Adult"
             };
             var result = (ViewResult)controller.Index(ticket);
-            Assert.AreEqual(result.ViewName, "");
-            Assert.AreEqual(result.ViewData.Values.First(), "SelectTrip");
+            Assert.AreEqual(result.ViewData.Values.First(), ticket);
         }
 
         [Test]
         public void Index_post_validationFail()
         {
             var ticket = new RepositoryModelTicket();
-            controller.ViewData.ModelState.AddModelError("FraStasjon", "Ikke oppgitt frastasjon");
-            var resultat = (ViewResult)controller.Index(ticket);
+            controller.ModelState.AddModelError("test", "test");
+            var result = (ViewResult)controller.Index(ticket);
 
-            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1); //kan fikses med større eller lik 1 men vet ikk om det er riktig
-            Assert.AreEqual(resultat.ViewName, null);
+            Assert.AreEqual(result.ViewData.Values.FirstOrDefault(), null);
         }
 
         [Test]
@@ -106,7 +107,7 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void SelectTrip_test()
+        public void SelectTrip_test_post()
         {
             var ticket = new RepositoryModelTicket()
             {
@@ -122,34 +123,33 @@ namespace Unit.Testing
                 PassengerType = "Admin"
             };
             var resultat = (RedirectToActionResult)controller.SelectTrip(ticket);
-            Assert.AreEqual(resultat.ActionName, "");
-            Assert.AreEqual(resultat.RouteValues.Values.First(), "List");
+            Assert.AreEqual(resultat.ActionName, "List");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), 1);
         }
 
-        [Test]
+        /*[Test]
         public void TestAutocomplete()
         {
+            string input = "Oslo S";
+            var list = new List<string>();
+            list.Add(input);
+            JsonResult inputString = new JsonResult(list);
+            JsonResult json = controller.Autocomplete(input);
+            Assert.AreEqual(json, inputString);
         }
 
         [Test]
         public void TestAutocompleteTo()
         {
-        }
+        }*/
 
-        [Test]
-        public void GetPassengerTypesTest()
-        {
-        }
-
-        [Test]
+        /*[Test]
         public void GetStationsFromNamesTest()
         {
-        }
-
-        [Test]
-        public void GetPassengersForDropDownTest()
-        {
-        }
+            string toStation = "Oslo S";
+            string fromStation = "Lillestrøm";
+            controller.GetStationsFromNames(toStation, fromStation);
+        }*/
 
         [Test]
         public void RegisterTest()
@@ -160,6 +160,7 @@ namespace Unit.Testing
 
         public void RegisterPostTest()
         {
+            //Nikita
         }
     }
 }

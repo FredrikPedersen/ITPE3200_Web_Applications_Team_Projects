@@ -80,12 +80,21 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public List<string> ServiceAutocomplete(string input)
         {
-            throw new NotImplementedException();
+            if (input == "") return null;
+            var liste = new List<string>();
+            liste.Add(input);
+            return liste;
         }
 
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {
-            throw new NotImplementedException();
+            if (input == "") return null;
+            var liste = new List<string>();
+            liste.Add(input);
+            liste.Add(fromStation);
+            liste.Add(fromStation);
+            liste.Add(input);
+            return liste;
         }
 
         public bool UpdateStation(int id, RepositoryModelStation stationIn)
