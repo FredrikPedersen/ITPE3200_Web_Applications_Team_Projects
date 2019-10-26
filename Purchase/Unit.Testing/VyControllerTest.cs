@@ -1,5 +1,6 @@
 ﻿using Business.Logic.Layer;
 using Data.Access.Layer.Repositories.Stubs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.DBModels;
 using Model.RepositoryModels;
@@ -24,34 +25,25 @@ namespace Unit.Testing
         [Test]
         public void Show_Index_View()
         {
-            var resultat = (ViewResult)controller.Index();
-            Assert.AreEqual(resultat.ViewName, null);
+            var result = (Microsoft.AspNetCore.Mvc.ViewResult)controller.Index();
+            Assert.AreEqual(result.ViewName, null);
         }
 
-        [Test]
+        /*[Test]
         public void Show_ToAdmin()
         {
             var result = (RedirectToActionResult)controller.ToAdmin();
-            Assert.AreEqual(result.ActionName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "Admin");
+            Assert.AreEqual(result.ActionName, "Index");
         }
 
-        //TODO teste om ifene i toAdmin blir kjørt, hvordan tvinge feil?
-        /* [Test]
-         public void show_ToAdmin_error()
-         {
-             var controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new StationBLL(new StationRepositoryStub()),
-          new DepartureBLL(new DepartureRepositoryStub()), new UserBLL(new UserRepositoryStub()));
-         }*/
+        //More tests for toAdmins ifstatements
 
         [Test]
         public void LogIn_test()
         {
-            var user = new RepositoryModelUser()
-            {
-                UserName = "Brukernavn",
-                Password = "Passord"
-            };
+            var user = new RepositoryModelUser();
+            user.UserName = "uName";
+            user.Password = "pass";
             var result = (ViewResult)controller.LogIn(user);
             Assert.AreEqual(result.ViewName, "");
             Assert.AreEqual(result.ViewData.Values.First(), "Index");
@@ -64,7 +56,7 @@ namespace Unit.Testing
             var result = (ViewResult)controller.LogIn(user);
             Assert.AreEqual(result.ViewName, "");
             Assert.AreEqual(result.ViewData.Values.First(), "Index");
-        }
+        }*/
 
         [Test]
         public void Index_post()
@@ -123,25 +115,26 @@ namespace Unit.Testing
                 PassengerType = "Admin"
             };
             var resultat = (RedirectToActionResult)controller.SelectTrip(ticket);
-            Assert.AreEqual(resultat.ActionName, "List");
+            Assert.AreEqual(resultat.ActionName, "Ticket");
             Assert.AreEqual(resultat.RouteValues.Values.First(), 1);
         }
 
-        /*[Test]
+        [Test]
         public void TestAutocomplete()
         {
             string input = "Oslo S";
-            var list = new List<string>();
-            list.Add(input);
-            JsonResult inputString = new JsonResult(list);
             JsonResult json = controller.Autocomplete(input);
-            Assert.AreEqual(json, inputString);
+            Assert.IsNotNull(json);
         }
 
         [Test]
         public void TestAutocompleteTo()
         {
-        }*/
+            string input = "Oslo S";
+            string from = "Lillestrøm";
+            JsonResult json = controller.AutocompleteTo(input, from);
+            Assert.IsNotNull(json);
+        }
 
         [Test]
         public void GetStationsFromNamesTest()
@@ -151,6 +144,13 @@ namespace Unit.Testing
             List<DbStation> list = controller.GetStationsFromNames(toStation, fromStation);
             Assert.AreEqual(toStation, list[0].StationName);
             Assert.AreEqual(fromStation, list[1].StationName);
+        }
+
+        [Test]
+        public void test_getPassengertypes()
+        {
+            JsonResult json = controller.GetPassengerTypes();
+            Assert.IsNotNull(json);
         }
     }
 }

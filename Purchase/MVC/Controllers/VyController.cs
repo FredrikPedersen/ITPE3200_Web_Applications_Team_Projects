@@ -4,6 +4,7 @@ using Business.Logic.Layer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Session;
 using Model.DBModels;
 using Model.RepositoryModels;
 using Utilities.Passwords;
