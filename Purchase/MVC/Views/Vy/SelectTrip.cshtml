@@ -1,18 +1,18 @@
 ﻿@model List<Model.DBModels.DbDepartures>
 
 @{
-    ViewData["Title"] = "SelectTrip";
+    ViewData["Title"] = "Velg Avreise";
     Layout = "_Layout";
 }
 
 @Html.AntiForgeryToken()
-<h2>SelectTrip</h2>
+<h2>Velg Avreise Tidspunkt</h2>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @ViewBag.ticket.FromStation
+                <h3>@ViewBag.ticket.FromStation</h3>
             </th>
         </tr>
     </thead>
