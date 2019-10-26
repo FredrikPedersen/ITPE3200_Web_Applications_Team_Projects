@@ -4,6 +4,7 @@ using Business.Logic.Layer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Session;
 using Model.DBModels;
 using Model.RepositoryModels;
 using Utilities.Passwords;
@@ -127,7 +128,7 @@ namespace MVC.Controllers
             return Json(_ticketBll.GetAllPassengerTypes());
         }
 
-        private SelectList PassengerTypesForDropdown()
+        public SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
             var types = _ticketBll.GetAllPassengerTypes();
@@ -141,7 +142,7 @@ namespace MVC.Controllers
             return new SelectList(typeNames);
         }
 
-        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
+        public List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
             return _stationBll.GetStationsFromNames(toStation, fromStation);
         }
