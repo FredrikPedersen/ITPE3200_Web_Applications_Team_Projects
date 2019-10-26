@@ -12,6 +12,17 @@ namespace Data.Access.Layer.Repositories.Stubs
         {
         }
 
+        public RepositoryModelPassengerType DbToServicePt(DbPassengerType dbPassengerType)
+        {
+            if (dbPassengerType == null) return null;
+            return new RepositoryModelPassengerType()
+            {
+                Id = dbPassengerType.Id,
+                Type = dbPassengerType.Type,
+                PriceMultiplier = dbPassengerType.PriceMultiplier
+            };
+        }
+
         public List<RepositoryModelPassengerType> GetAllPt()
         {
             var list = new List<RepositoryModelPassengerType>();
@@ -25,6 +36,35 @@ namespace Data.Access.Layer.Repositories.Stubs
             list.Add(repo);
             list.Add(repo);
             return list;
+        }
+        
+
+        public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)
+        {
+            if (id == 0) return null;
+            var repositoryModelPassengerType = new RepositoryModelPassengerType()
+            {
+                Id = id,
+                Type = "Adult",
+                PriceMultiplier = 3.0
+            };
+            return repositoryModelPassengerType;
+        }
+
+        public bool UpdatePt(int id, RepositoryModelPassengerType pt)
+        {
+            if (id == 0) return false;
+            return pt != null;
+        }
+
+        public bool AddPT(RepositoryModelPassengerType passengerType)
+        {
+            return true;
+        }
+
+        public bool DeletePT(int id)
+        {
+            return true;
         }
     }
 }
