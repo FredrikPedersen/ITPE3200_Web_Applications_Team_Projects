@@ -143,24 +143,14 @@ namespace Unit.Testing
         {
         }*/
 
-        /*[Test]
+        [Test]
         public void GetStationsFromNamesTest()
         {
             string toStation = "Oslo S";
             string fromStation = "Lillestrøm";
-            controller.GetStationsFromNames(toStation, fromStation);
-        }*/
-
-        [Test]
-        public void RegisterTest()
-        {
-            var resultat = (ViewResult)controller.Register();
-            Assert.AreEqual(resultat.ViewName, null);
-        }
-
-        public void RegisterPostTest()
-        {
-            //Nikita
+            List<DbStation> list = controller.GetStationsFromNames(toStation, fromStation);
+            Assert.AreEqual(toStation, list[0].StationName);
+            Assert.AreEqual(fromStation, list[1].StationName);
         }
     }
 }

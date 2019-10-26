@@ -124,7 +124,7 @@ namespace MVC.Controllers
             return Json(_ticketBll.GetAllPassengerTypes());
         }
 
-        private SelectList PassengerTypesForDropdown()
+        public SelectList PassengerTypesForDropdown()
         {
             //TODO Vi får dobbeltlagring av passasjertyper. UNDERSØK SENERE!
             var types = _ticketBll.GetAllPassengerTypes();
@@ -138,7 +138,7 @@ namespace MVC.Controllers
             return new SelectList(typeNames);
         }
 
-        private List<DbStation> GetStationsFromNames(string toStation, string fromStation)
+        public List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
             return _stationBll.GetStationsFromNames(toStation, fromStation);
         }

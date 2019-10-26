@@ -69,10 +69,15 @@ namespace Data.Access.Layer.Repositories.Stubs
             {
                 Id = 1,
                 NumberOnLine = 1,
-                StationName = "StasjonsNavn1"
+                StationName = toStation
             };
-            list.Add(dbStation);
-            list.Add(dbStation);
+            var dbStation2 = new DbStation()
+            {
+                Id = 1,
+                NumberOnLine = 1,
+                StationName = fromStation
+            };
+            list.Add(dbStation2);
             list.Add(dbStation);
 
             return list;
