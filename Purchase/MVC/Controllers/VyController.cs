@@ -4,10 +4,8 @@ using Business.Logic.Layer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Session;
 using Model.DBModels;
 using Model.RepositoryModels;
-using Utilities.Passwords;
 
 namespace MVC.Controllers
 {
@@ -74,6 +72,13 @@ namespace MVC.Controllers
 
             HttpContext.Session.SetString(SessionKey, NotLogged);
             ViewBag.Logged = true;
+            ViewBag.PassengerTypes = PassengerTypesForDropdown();
+            return View("Index");
+        }
+        
+        public ActionResult LogOut()
+        {
+            HttpContext.Session.SetString(SessionKey, "NotLogged");
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
