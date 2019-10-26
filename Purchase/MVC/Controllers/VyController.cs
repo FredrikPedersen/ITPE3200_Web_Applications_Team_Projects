@@ -30,6 +30,11 @@ namespace MVC.Controllers
         public ActionResult Index()
         {
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
+            
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey))) {
+                HttpContext.Session.SetString("_Key", "NotLogged");
+            }
+            
             return View();
         }
 
@@ -55,13 +60,11 @@ namespace MVC.Controllers
             {
                 HttpContext.Session.SetString(SessionKey, "Logged");
                 ViewBag.Logged = false;
-            }
-            else
-            {
-                HttpContext.Session.SetString(SessionKey, "NotLogged");
-                ViewBag.Logged = true;
+                return RedirectToAction("ToAdmin", "Vy");
             }
 
+            HttpContext.Session.SetString(SessionKey, "NotLogged");
+            ViewBag.Logged = true;
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
