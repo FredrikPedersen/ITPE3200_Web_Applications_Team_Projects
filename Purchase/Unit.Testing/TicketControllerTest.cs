@@ -20,6 +20,7 @@ namespace Unit.Testing
         public void Ticket_ReturnsAViewResult()
         {
             var result = (ViewResult) _controller.Ticket();
+            
             Assert.AreEqual(result.ViewName, null);
         }
     }

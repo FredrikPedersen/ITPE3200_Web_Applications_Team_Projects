@@ -16,7 +16,6 @@ namespace MVC.Controllers
         
         public IActionResult Ticket()
         {
-
             var ticketList = TicketBll.GetAllTickets();
             RepositoryModelTicket model;
 
