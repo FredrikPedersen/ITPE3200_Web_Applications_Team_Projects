@@ -15,6 +15,7 @@ namespace MVC.Controllers
         private const string SessionKey = "_Key";
         private const string Logged = "Logged";
         private const string NotLogged = "NotLogged";
+        
         private readonly TicketBLL _ticketBll;
         private readonly DepartureBLL _departureBll;
         private readonly StationBLL _stationBll;
@@ -53,6 +54,12 @@ namespace MVC.Controllers
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
         }
+
+       //TODO REMEMBER TO PUT THIS BACK IN ORDER WHEN DONE DESIGNING THE ADMIN PAGE!
+       /* public ActionResult ToAdmin()
+       {
+           return RedirectToAction("Admin", "Admin");
+       } */
 
         [HttpPost]
         public ActionResult LogIn(RepositoryModelUser user)
