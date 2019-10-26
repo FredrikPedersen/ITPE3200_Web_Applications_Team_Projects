@@ -26,11 +26,11 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void Show_toAdmin()
+        public void Show_ToAdmin()
         {
-            var result = (RedirectToRouteResult)controller.ToAdmin();
-            Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "Admin", "Admin");
+            var result = (RedirectToActionResult)controller.ToAdmin();
+            Assert.AreEqual(result.ActionName, "");
+            Assert.AreEqual(result.RouteValues.Values.First(), "Admin");
         }
 
         //TODO teste om ifene i toAdmin blir kjørt, hvordan tvinge feil?
@@ -111,15 +111,15 @@ namespace Unit.Testing
             var ticket = new RepositoryModelTicket()
             {
                 Id = 1,
-                FromStation = "Frastasjon",
-                ToStation = "TilStasjon",
+                FromStation = "Oslo S",
+                ToStation = "Lillestrøm",
                 ValidFromDate = "12.12.20",
                 ValidFromTime = "10:30",
                 Price = 100,
                 CustomerGivenName = "Fornavn",
                 CustomerLastName = "Etternavn",
-                CustomerNumber = "number",
-                PassengerType = "Type"
+                CustomerNumber = "99999999",
+                PassengerType = "Admin"
             };
             var resultat = (RedirectToActionResult)controller.SelectTrip(ticket);
             Assert.AreEqual(resultat.ActionName, "");
@@ -127,11 +127,39 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void TestTest()
+        public void TestAutocomplete()
         {
-            string s1 = "Oslo S";
-            string s2 = "Oslo S";
-            Assert.AreEqual(s1, s2);
+        }
+
+        [Test]
+        public void TestAutocompleteTo()
+        {
+        }
+
+        [Test]
+        public void GetPassengerTypesTest()
+        {
+        }
+
+        [Test]
+        public void GetStationsFromNamesTest()
+        {
+        }
+
+        [Test]
+        public void GetPassengersForDropDownTest()
+        {
+        }
+
+        [Test]
+        public void RegisterTest()
+        {
+            var resultat = (ViewResult)controller.Register();
+            Assert.AreEqual(resultat.ViewName, null);
+        }
+
+        public void RegisterPostTest()
+        {
         }
     }
 }
