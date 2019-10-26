@@ -13,7 +13,7 @@
 
 <table class="table">
     <thead>
-    <th scope="col">Stasjoner</th>
+    <th scope="col" class="fontsetsize">Stasjoner</th>
     </thead>
     <tr>
         <th>
@@ -22,7 +22,7 @@
                 enctype = "multipart/form-data"
             }))
             {
-                @Html.ActionLink("Add Stasjon", "AddStation", "Admin", new {id = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
+                @Html.ActionLink("Add Stasjon", "AddStation", "Admin", new {id = @ViewBag.line.Id}, new {@class = "btn btn-success"})
             }
         </th>
     </tr>
@@ -37,7 +37,7 @@
             <tr>
                 <th class="w-25">
 
-                    <div class="ticket">
+                    <div class="adminpanel">
                         <div>
                             <label>Stasjons navn: </label>
                             @Html.DisplayFor(model => station.StationName)
