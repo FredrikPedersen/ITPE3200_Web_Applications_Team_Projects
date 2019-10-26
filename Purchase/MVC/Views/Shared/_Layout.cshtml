@@ -81,7 +81,7 @@
     <div class="container-fluid text-center text-md-left">
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3">
-                <p class="footer-text">
+                <p>
                     @if(Context.Session.GetString("_Key").Equals("NotLogged")) {
                         <h4><a href="#loginmodal" id="loginbtn" data-toggle="modal" data-loginmodal="true">Admin Tools</a></h4>
                     }
@@ -90,6 +90,9 @@
                         <h4>@Html.ActionLink("Admin Tools", "ToAdmin", "Vy", new {tom = ""})</h4>
                     }
                 </p>
+            </div>
+            <div class="col-md-0 mt-md-0 mt-3">
+                <p><h4>@Html.ActionLink("Admin Log Out", "LogOut", "Vy", new {tom = ""})</h4></p>
             </div>
         </div>
     </div>
