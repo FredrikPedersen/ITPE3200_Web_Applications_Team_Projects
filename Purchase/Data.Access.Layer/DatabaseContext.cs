@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Audit.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 using Model.DBModels;
 
 namespace Data.Access.Layer
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : AuditDbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

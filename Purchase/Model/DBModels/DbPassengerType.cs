@@ -2,7 +2,6 @@
 
 namespace Model.DBModels
 {
-    [TrackChanges]
     public class DbPassengerType
     {
         [Key] 

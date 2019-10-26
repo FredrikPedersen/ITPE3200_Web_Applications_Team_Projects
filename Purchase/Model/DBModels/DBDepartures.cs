@@ -2,7 +2,6 @@
 
 namespace Model.DBModels
 {
-    [TrackChanges]
     public class DbDepartures
     {
         [Key]

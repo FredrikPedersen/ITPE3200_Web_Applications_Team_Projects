@@ -42,12 +42,9 @@ namespace MVC
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
-            }
-            );
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
-
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            });
+            
+            const string connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
             services.AddScoped<ITicketRepository, TicketRepository>();
@@ -60,7 +57,7 @@ namespace MVC
             services.AddScoped<DepartureBLL>();
             services.AddScoped<UserBLL>();
             services.AddScoped<PassengerTypeBLL>();
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
