@@ -104,7 +104,7 @@ namespace MVC.Controllers
         public ActionResult SelectTrip(RepositoryModelTicket ticket)
         {
             _ticketBll.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-            return RedirectToAction("List", "List", ticket);
+            return RedirectToAction("Ticket", "Ticket", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View

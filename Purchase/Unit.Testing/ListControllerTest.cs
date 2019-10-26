@@ -2,25 +2,25 @@
 using Data.Access.Layer.Repositories.Stubs;
 using MVC.Controllers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ViewResult = Microsoft.AspNetCore.Mvc.ViewResult;
 
 namespace Unit.Testing
 {
     public class ListControllerTest
     {
-        private ListController controller;
+        private TicketController _controller;
 
         [SetUp]
         public void SetUp()
         {
-            controller = new ListController(new TicketBLL(new TicketRepositoryStub()));
+            _controller = new TicketController(new TicketBLL(new TicketRepositoryStub()));
         }
 
         [Test]
-        public void testNoe()
+        public void List_ReturnsAViewResult()
         {
+            var result = (ViewResult) _controller.Ticket();
+            Assert.AreEqual(result.ViewName, null);
         }
     }
 }
