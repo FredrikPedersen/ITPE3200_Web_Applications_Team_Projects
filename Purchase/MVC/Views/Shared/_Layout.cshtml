@@ -82,7 +82,13 @@
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3">
                 <p>
-                    @if(Context.Session.GetString("_Key").Equals("NotLogged")) {
+                    @if (string.IsNullOrEmpty(Context.Session.GetString("_Key")))
+                    {
+                        Context.Session.SetString("_Key", "NotLogged");
+                    }
+                    
+                    @if (Context.Session.GetString("_Key").Equals("NotLogged"))
+                    {
                         <h4><a href="#loginmodal" id="loginbtn" data-toggle="modal" data-loginmodal="true">Admin Tools</a></h4>
                     }
                     else
