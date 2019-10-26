@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Model.DBModels;
+using Utilities.Passwords;
 
 namespace Data.Access.Layer
 {
@@ -27,6 +28,11 @@ namespace Data.Access.Layer
             if (!dbContext.Departures.Any())
             {
                 SeedDepartures(dbContext);
+            }
+
+            if (!dbContext.Users.Any())
+            {
+                SeedAdminUser(dbContext);
             }
         }
 
@@ -123,6 +129,21 @@ namespace Data.Access.Layer
                 dbContext.Add(newDeparture);
             }
             
+            dbContext.SaveChanges();
+        }
+
+        private static void SeedAdminUser(DatabaseContext dbContext)
+        {
+            var salt = Hasher.CreateSalt();
+            var password = Hasher.CreateHash("admin", salt);
+            var admin = new DbUser
+            {
+                UserName = "admin",
+                Password = password,
+                Salt = salt
+                
+            };
+            dbContext.Add(admin);
             dbContext.SaveChanges();
         }
     }
