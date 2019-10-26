@@ -11,6 +11,8 @@
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <link href="~/css/mdb.min.css" rel="stylesheet">
+
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
@@ -72,11 +74,20 @@
 <div class="container body-content bodyMargin">
     @RenderBody()
     <hr/>
-    <footer>
-        <p>&copy; 2019 - Martina Førre, Fredrik Pedersen, Nikita Petrovs</p>
-        <p><a href="#loginmodal" id="loginbtn" data-toggle="modal" data-loginmodal="true">Admin Log In </a></p>
-    </footer>
 </div>
+
+<footer class="page-footer sticky-bottom-footer font-small elegant-color-dark pt-4">
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+                <p class="footer-text">
+                    <h4><a href="#loginmodal" id="loginbtn" data-toggle="modal" data-loginmodal="true">Admin Log In</a></h4>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center pt-3">© 2019 Copyright: Martina Førre, Fredrik Pedersen, Nikita Petrovs</div>
+</footer>
 
 @RenderSection("Scripts", required: false)
 </body>
