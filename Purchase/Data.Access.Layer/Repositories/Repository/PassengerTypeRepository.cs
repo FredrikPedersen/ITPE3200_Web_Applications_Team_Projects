@@ -54,7 +54,7 @@ namespace Data.Access.Layer.Repositories.Repository
         {
             var dbPt = new DbPassengerType()
             {
-                Type = "Test",//passengerType.Type,
+                Type = passengerType.Type,
                 PriceMultiplier = passengerType.PriceMultiplier
             };
 

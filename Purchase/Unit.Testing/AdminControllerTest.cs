@@ -124,48 +124,6 @@ namespace Unit.Testing
             var viewResult = (RedirectToActionResult) _controller.DeleteStation(1);
             Assert.AreEqual(viewResult.ActionName, "Admin");
         }
-        
-        [Test]
-        public void AddPT_show_EditPassengerType_View()
-        {
-            var viewResult = (ViewResult) _controller.AddPT();
-            Assert.AreEqual(viewResult.ViewName, "EditPassengerType");
-        }
-
-        [Test]
-        public void show_EditPassengerType_View()
-        {
-            var viewResult = (ViewResult) _controller.EditPassengerType(1);
-            Assert.AreEqual(viewResult.ViewName, null);
-
-        }
-
-        [Test]
-        public void EditPassengerType_post_Ok_id1()
-        {
-            var type = _controller._passengerTypeBll.GetPassengerTypeTypeById(1);
-            var viewResult = (RedirectToActionResult) _controller.EditPassengerType(type);
-            Assert.AreEqual(viewResult.ActionName, "Admin");
-            
-        }
-
-        [Test]
-        public void EditPassengerType_post_Ok_id0()
-        {
-            var type = new RepositoryModelPassengerType(){Id = 0,PriceMultiplier = 3};
-            var viewResult = (RedirectToActionResult) _controller.EditPassengerType(type);
-            Assert.AreEqual(viewResult.ActionName, "Admin");
-            
-        }
-        
-        [Test]
-        public void EditPassengerType_post_Fail()
-        {
-            var type = new RepositoryModelPassengerType();
-            _controller.ViewData.ModelState.AddModelError("Type", "No type name");
-            var viewResult = (ViewResult) _controller.EditPassengerType(type);
-            Assert.AreEqual(viewResult.ViewName, null);
-        }
 
         [Test]
         public void DeletePT()
@@ -203,16 +161,6 @@ namespace Unit.Testing
             var type = new RepositoryModelDepartures() {Id = 0, DepartureTime = "15:00"};
             var viewResult = (RedirectToActionResult) _controller.EditDeparture(type);
             Assert.AreEqual(viewResult.ActionName, "Admin");
-            
-        }
-        
-        [Test]
-        public void EditDeparture_post_Fail()
-        {
-            var type = new RepositoryModelPassengerType();
-            _controller.ViewData.ModelState.AddModelError("DepartureTime", "No departure time");
-            var viewResult = (ViewResult) _controller.EditPassengerType(type);
-            Assert.AreEqual(viewResult.ViewName, null);
             
         }
 

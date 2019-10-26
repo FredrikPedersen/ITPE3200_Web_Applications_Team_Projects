@@ -162,38 +162,6 @@ namespace MVC.Controllers
             return RedirectToAction("Admin", "Admin");
         }
 
-        public ActionResult AddPT()
-        {
-            var pt = new RepositoryModelPassengerType();
-            return View("EditPassengerType", pt);
-        }
-
-        public ActionResult EditPassengerType(int id)
-        {
-            var Type = _passengerTypeBll.GetPassengerTypeTypeById(id);
-            return View(Type);
-        }
-
-        [HttpPost]
-        public ActionResult EditPassengerType(RepositoryModelPassengerType type)
-        {
-            if (ModelState.IsValid)
-            {
-                if (type.Id != 0)
-                {
-                    _passengerTypeBll.UpdatePt(type.Id, type);
-                    return RedirectToAction("Admin", "Admin");
-                }
-                else
-                {
-                    _passengerTypeBll.AddPT(type);
-                    return RedirectToAction("Admin", "Admin");
-                }
-            }
-
-            return View();
-        }
-
         public ActionResult DeletePT(int id)
         {
             _passengerTypeBll.DeletePT(id);
@@ -203,7 +171,6 @@ namespace MVC.Controllers
         //ADD
         public ActionResult AddDeparture()
         {
-            var departure = new RepositoryModelDepartures();
             return View("EditDeparture");
         }
 
@@ -218,20 +185,16 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult EditDeparture(RepositoryModelDepartures departure)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View();
+            
+            if (departure.Id != 0)
             {
-                if (departure.Id != 0)
-                {
-                    _departureBll.UpdateDeparture(departure.Id, departure);
-                    return RedirectToAction("Admin", "Admin");
-                }
-                else
-                {
-                    _departureBll.AddDeparture(departure);
-                    return RedirectToAction("Admin", "Admin");
-                }
+                _departureBll.UpdateDeparture(departure.Id, departure);
+                return RedirectToAction("Admin", "Admin");
             }
-            return View();
+
+            _departureBll.AddDeparture(departure);
+            return RedirectToAction("Admin", "Admin");
         }
 
         public ActionResult DeleteDeparture(int id)
