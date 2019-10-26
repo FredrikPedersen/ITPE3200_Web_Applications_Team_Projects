@@ -142,33 +142,5 @@ namespace MVC.Controllers
         {
             return _stationBll.GetStationsFromNames(toStation, fromStation);
         }
-
-        //________________________________________________________________________________________
-
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Register(RepositoryModelUser user)
-        {
-            try
-            {
-                var newUser = new DbUser();
-                var salt = Hasher.CreateSalt();
-                var hash = Hasher.CreateHash(user.Password, salt);
-                newUser.UserName = user.UserName;
-                newUser.Password = hash;
-                newUser.Salt = salt;
-                _userBll.AddUser(newUser);
-                return RedirectToAction("Index");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return View();
-            }
-        }
     }
 }
