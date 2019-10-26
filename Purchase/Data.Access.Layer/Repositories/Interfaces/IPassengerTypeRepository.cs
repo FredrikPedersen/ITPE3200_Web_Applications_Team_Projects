@@ -8,10 +8,10 @@ namespace Data.Access.Layer.Repositories.Interfaces
     {
         RepositoryModelPassengerType GetPassengerTypeTypeById(int id);
 
-        RepositoryModelPassengerType DbToServicePT(DbPassengerType dbPassengerType);
+        RepositoryModelPassengerType DbToServicePt(DbPassengerType dbPassengerType);
 
-        List<RepositoryModelPassengerType> GetAllPT();
+        List<RepositoryModelPassengerType> GetAllPt();
 
-        bool UpdatePT(int id, RepositoryModelPassengerType pt);
+        bool UpdatePt(int id, RepositoryModelPassengerType pt);
     }
 }

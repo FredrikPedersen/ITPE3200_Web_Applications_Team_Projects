@@ -2,6 +2,7 @@
 using Business.Logic.Layer;
 using Data.Access.Layer;
 using Data.Access.Layer.Repositories;
+using Data.Access.Layer.Repositories.Interfaces;
 using Data.Access.Layer.Repositories.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +21,8 @@ namespace MVC
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration {
+        public IConfiguration Configuration
+        {
             get;
         }
 
@@ -40,24 +42,22 @@ namespace MVC
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
-            }
-            );
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
-
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            });
+            
+            const string connection = @"Server=(localdb)\mssqllocaldb;Database=TicketDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<StationRepository>();
-            services.AddScoped<TicketRepository>();
-            services.AddScoped<DepartureRepository>();
-            services.AddScoped<UserRepository>();
-            services.AddScoped<PassengerTypeRepository>();
+
+            services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IDepartureRepository, DepartureRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPassengerTypeRepository, PassengerTypeRepository>();
+            services.AddScoped<IStationRepository, StationRepository>();
             services.AddScoped<StationBLL>();
             services.AddScoped<TicketBLL>();
             services.AddScoped<DepartureBLL>();
             services.AddScoped<UserBLL>();
             services.AddScoped<PassengerTypeBLL>();
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +78,6 @@ namespace MVC
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvc();
-
 
             app.UseMvc(routes =>
             {

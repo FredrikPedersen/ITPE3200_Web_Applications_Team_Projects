@@ -39,7 +39,7 @@ namespace MVC.Controllers
                 Stations = _stationBll.GetAllStations(),
                 //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureBll.GetAllDepartures(),
-                Types = _passengerTypeBll.GetAllPT()
+                Types = _passengerTypeBll.GetAllPt()
             };
 
             return View(model);
@@ -82,7 +82,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _passengerTypeBll.UpdatePT(type.Id, type);
+                _passengerTypeBll.UpdatePt(type.Id, type);
                 return RedirectToAction("Admin", "Admin");
             }
 
@@ -99,7 +99,7 @@ namespace MVC.Controllers
         //EDIT
         public ActionResult EditDeparture(int id)
         {
-            var departure = _departureBll.GetDepartureByID(id);
+            var departure = _departureBll.GetDepartureById(id);
             return View(departure);
         }
 

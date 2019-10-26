@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
@@ -24,19 +23,14 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public bool CheckUser(RepositoryModelUser user)
         {
-            Console.WriteLine(user.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
-            DbUser dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
+            var dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == user.UserName);
 
-            if (dbUser != null)
-            {
-                Console.WriteLine(dbUser.UserName + "CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEl");
+            if (dbUser == null) return false;
 
-                byte[] userPassword = Hasher.CreateHash(user.Password, dbUser.Salt);
-                bool result = dbUser.Password.SequenceEqual(userPassword);
-                return result;
-            }
+            var userPassword = Hasher.CreateHash(user.Password, dbUser.Salt);
+            var result = dbUser.Password.SequenceEqual(userPassword);
+            return result;
 
-            return false;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public bool SaveTicket(RepositoryModelTicket ticket, List<DbStation> stationsFromName)
         {
-            DbTicket newTicket = new DbTicket
+            var newTicket = new DbTicket
             {
                 FromStation = stationsFromName[0],
                 ToStation = stationsFromName[1],
@@ -57,8 +57,9 @@ namespace Data.Access.Layer.Repositories.Repository
             }
         }
 
+        //TODO THESE HELPER METHODS SHOULD BE PRIVATE!
         //Method for converting strings with date and time data to a DateTime object. Used when creating a DbTicket from a ServiceModelTicket
-        public DateTime StringsToDateTime(String date, String time)
+        public DateTime StringsToDateTime(string date, string time)
         {
             var dateAndTime = date + " " + time;
             return Convert.ToDateTime(dateAndTime);

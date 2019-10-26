@@ -6,7 +6,7 @@ namespace Data.Access.Layer.Repositories.Interfaces
 {
     public interface IDepartureRepository
     {
-        RepositoryModelDepartures GetDepartureByID(int id);
+        RepositoryModelDepartures GetDepartureById(int id);
 
         List<RepositoryModelDepartures> GetAllDepartures();
 

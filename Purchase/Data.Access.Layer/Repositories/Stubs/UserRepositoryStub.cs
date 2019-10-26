@@ -23,8 +23,8 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public bool CheckUser(RepositoryModelUser user)
         {
-            if (user == null) return false;
-            else return true;
+            if (user.UserName == "") return false;
+            return user.Password != "";
         }
     }
 }
