@@ -13,6 +13,8 @@ namespace MVC.Controllers
     public class VyController : Controller
     {
         private const string SessionKey = "_Key";
+        private const string Logged = "Logged";
+        private const string NotLogged = "notLogged";
         private readonly TicketBLL _ticketBll;
         private readonly DepartureBLL _departureBll;
         private readonly StationBLL _stationBll;
@@ -31,7 +33,7 @@ namespace MVC.Controllers
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKey))) {
-                HttpContext.Session.SetString("_Key", "NotLogged");
+                HttpContext.Session.SetString("_Key", NotLogged);
             }
             
             return View();
@@ -43,7 +45,7 @@ namespace MVC.Controllers
             {
                 Console.WriteLine(HttpContext.Session.GetString(SessionKey));
                 var logged = HttpContext.Session.GetString(SessionKey);
-                if (logged.Equals("Logged"))
+                if (logged.Equals(Logged))
                 {
                     return RedirectToAction("Admin", "Admin");
                 }
@@ -57,12 +59,12 @@ namespace MVC.Controllers
         {
             if (_userBll.CheckUser(user))
             {
-                HttpContext.Session.SetString(SessionKey, "Logged");
+                HttpContext.Session.SetString(SessionKey, Logged);
                 ViewBag.Logged = false;
                 return RedirectToAction("ToAdmin", "Vy");
             }
 
-            HttpContext.Session.SetString(SessionKey, "NotLogged");
+            HttpContext.Session.SetString(SessionKey, NotLogged);
             ViewBag.Logged = true;
             ViewBag.PassengerTypes = PassengerTypesForDropdown();
             return View("Index");
