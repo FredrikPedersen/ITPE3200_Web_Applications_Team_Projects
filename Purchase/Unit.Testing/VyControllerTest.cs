@@ -21,7 +21,6 @@ namespace Unit.Testing
         [Test]
         public void show_Index_View()
         {
-            var controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()), new UserBLL(new UserRepositoryStub()));
             var resultat = (ViewResult)controller.Index();
             Assert.AreEqual(resultat.ViewName, null);
         }
