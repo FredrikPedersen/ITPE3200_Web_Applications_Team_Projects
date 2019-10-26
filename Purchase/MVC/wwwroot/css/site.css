@@ -80,8 +80,3 @@ footer.page-footer a {
 footer.page-footer a:hover {
     color: #FBFBF4;
 }
-
-.container-fluid {
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
