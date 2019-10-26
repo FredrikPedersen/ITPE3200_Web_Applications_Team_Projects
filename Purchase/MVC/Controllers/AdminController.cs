@@ -158,7 +158,6 @@ namespace MVC.Controllers
         
         public ActionResult DeleteStation(int id)
         {
-            Console.WriteLine(id + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             _stationBll.DeleteStation(id);
             return RedirectToAction("Admin", "Admin");
         }
@@ -232,7 +231,6 @@ namespace MVC.Controllers
                     return RedirectToAction("Admin", "Admin");
                 }
             }
-
             return View();
         }
 

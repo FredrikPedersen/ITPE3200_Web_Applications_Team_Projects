@@ -59,12 +59,12 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public bool AddPT(RepositoryModelPassengerType passengerType)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool DeletePT(int id)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
