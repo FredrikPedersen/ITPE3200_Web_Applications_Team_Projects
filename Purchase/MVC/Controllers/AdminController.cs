@@ -19,12 +19,12 @@ namespace MVC.Controllers
         private readonly TicketRepository _tickedService;
         private readonly DepartureRepository _departureService;
         private readonly PassengerTypeRepository _passengerTypeService;
-        private readonly DepartureBLL _departureBll;
-        private readonly StationBLL _stationBll;
-        private readonly TicketBLL _ticketBll;
-        private readonly UserBLL _userBll;
-        private readonly PassengerTypeBLL _passengerTypeBll;
-        private readonly LineBLL _lineBll;
+        public readonly DepartureBLL _departureBll;
+        public readonly StationBLL _stationBll;
+        public readonly TicketBLL _ticketBll;
+        public readonly UserBLL _userBll;
+        public readonly PassengerTypeBLL _passengerTypeBll;
+        public readonly LineBLL _lineBll;
 
 
         public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll,
