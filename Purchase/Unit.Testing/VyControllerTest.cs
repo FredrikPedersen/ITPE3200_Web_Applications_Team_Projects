@@ -19,14 +19,14 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void show_Index_View()
+        public void Show_Index_View()
         {
             var resultat = (ViewResult)controller.Index();
             Assert.AreEqual(resultat.ViewName, null);
         }
 
         [Test]
-        public void show_toAdmin()
+        public void Show_toAdmin()
         {
             var result = (RedirectToRouteResult)controller.ToAdmin();
             Assert.AreEqual(result.RouteName, "");
@@ -64,7 +64,7 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void index_post()
+        public void Index_post()
         {
             var ticket = new RepositoryModelTicket()
             {
@@ -85,7 +85,7 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void index_post_validationFail()
+        public void Index_post_validationFail()
         {
             var ticket = new RepositoryModelTicket();
             controller.ViewData.ModelState.AddModelError("FraStasjon", "Ikke oppgitt frastasjon");
@@ -96,7 +96,7 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void index_invalidStations()
+        public void Index_invalidStations()
         {
             RepositoryModelTicket ticket = new RepositoryModelTicket();
             ticket.ToStation = "bnjm";
@@ -106,7 +106,7 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void selectTrip_test()
+        public void SelectTrip_test()
         {
             var ticket = new RepositoryModelTicket()
             {
