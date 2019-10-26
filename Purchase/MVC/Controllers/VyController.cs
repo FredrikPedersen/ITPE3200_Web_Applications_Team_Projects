@@ -104,7 +104,7 @@ namespace MVC.Controllers
         public ActionResult SelectTrip(RepositoryModelTicket ticket)
         {
             _ticketBll.SaveTicket(ticket, GetStationsFromNames(ticket.FromStation, ticket.ToStation));
-            return RedirectToAction("List", "List", ticket);
+            return RedirectToAction("Ticket", "Ticket", ticket);
         }
 
         //Calls autocomplete method for "From" text box in Index View
@@ -141,34 +141,6 @@ namespace MVC.Controllers
         public List<DbStation> GetStationsFromNames(string toStation, string fromStation)
         {
             return _stationBll.GetStationsFromNames(toStation, fromStation);
-        }
-
-        //________________________________________________________________________________________
-
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Register(RepositoryModelUser user)
-        {
-            try
-            {
-                var newUser = new DbUser();
-                var salt = Hasher.CreateSalt();
-                var hash = Hasher.CreateHash(user.Password, salt);
-                newUser.UserName = user.UserName;
-                newUser.Password = hash;
-                newUser.Salt = salt;
-                _userBll.AddUser(newUser);
-                return RedirectToAction("Index");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return View();
-            }
         }
     }
 }
