@@ -14,7 +14,7 @@ namespace MVC.Controllers
     {
         private const string SessionKey = "_Key";
         private const string Logged = "Logged";
-        private const string NotLogged = "notLogged";
+        private const string NotLogged = "NotLogged";
         private readonly TicketBLL _ticketBll;
         private readonly DepartureBLL _departureBll;
         private readonly StationBLL _stationBll;
