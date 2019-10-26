@@ -1,10 +1,14 @@
 ﻿using Business.Logic.Layer;
 using Data.Access.Layer.Repositories.Stubs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.DBModels;
 using Model.RepositoryModels;
 using MVC.Controllers;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
+using Utilities.Passwords;
 
 namespace Unit.Testing
 {
@@ -19,36 +23,27 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void show_Index_View()
+        public void Show_Index_View()
         {
-            var resultat = (ViewResult)controller.Index();
-            Assert.AreEqual(resultat.ViewName, null);
+            var result = (Microsoft.AspNetCore.Mvc.ViewResult)controller.Index();
+            Assert.AreEqual(result.ViewName, null);
         }
 
-        [Test]
-        public void show_toAdmin()
+        /*[Test]
+        public void Show_ToAdmin()
         {
-            var result = (RedirectToRouteResult)controller.ToAdmin();
-            Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "Admin", "Admin");
+            var result = (RedirectToActionResult)controller.ToAdmin();
+            Assert.AreEqual(result.ActionName, "Index");
         }
 
-        //TODO teste om ifene i toAdmin blir kjørt, hvordan tvinge feil?
-        /* [Test]
-         public void show_ToAdmin_error()
-         {
-             var controller = new VyController(new TicketBLL(new TicketRepositoryStub()), new StationBLL(new StationRepositoryStub()),
-          new DepartureBLL(new DepartureRepositoryStub()), new UserBLL(new UserRepositoryStub()));
-         }*/
+        //More tests for toAdmins ifstatements
 
         [Test]
         public void LogIn_test()
         {
-            var user = new RepositoryModelUser()
-            {
-                UserName = "Brukernavn",
-                Password = "Passord"
-            };
+            var user = new RepositoryModelUser();
+            user.UserName = "uName";
+            user.Password = "pass";
             var result = (ViewResult)controller.LogIn(user);
             Assert.AreEqual(result.ViewName, "");
             Assert.AreEqual(result.ViewData.Values.First(), "Index");
@@ -61,15 +56,15 @@ namespace Unit.Testing
             var result = (ViewResult)controller.LogIn(user);
             Assert.AreEqual(result.ViewName, "");
             Assert.AreEqual(result.ViewData.Values.First(), "Index");
-        }
+        }*/
 
         [Test]
-        public void index_post()
+        public void Index_post()
         {
             var ticket = new RepositoryModelTicket()
             {
                 Id = 1,
-                FromStation = "Lillestrøm",
+                FromStation = "Oslo S",
                 ToStation = "Lillestrøm",
                 ValidFromDate = "12.12.20",
                 ValidFromTime = "10:30",
@@ -77,26 +72,24 @@ namespace Unit.Testing
                 CustomerGivenName = "Fornavn",
                 CustomerLastName = "Etternavn",
                 CustomerNumber = "99999999",
-                PassengerType = "Type"
+                PassengerType = "Adult"
             };
             var result = (ViewResult)controller.Index(ticket);
-            Assert.AreEqual(result.ViewName, "");
-            Assert.AreEqual(result.ViewData.Values.First(), "SelectTrip");
+            Assert.AreEqual(result.ViewData.Values.First(), ticket);
         }
 
         [Test]
-        public void index_post_validationFail()
+        public void Index_post_validationFail()
         {
             var ticket = new RepositoryModelTicket();
-            controller.ViewData.ModelState.AddModelError("FraStasjon", "Ikke oppgitt frastasjon");
-            var resultat = (ViewResult)controller.Index(ticket);
+            controller.ModelState.AddModelError("test", "test");
+            var result = (ViewResult)controller.Index(ticket);
 
-            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1); //kan fikses med større eller lik 1 men vet ikk om det er riktig
-            Assert.AreEqual(resultat.ViewName, null);
+            Assert.AreEqual(result.ViewData.Values.FirstOrDefault(), null);
         }
 
         [Test]
-        public void index_invalidStations()
+        public void Index_invalidStations()
         {
             RepositoryModelTicket ticket = new RepositoryModelTicket();
             ticket.ToStation = "bnjm";
@@ -106,32 +99,58 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void selectTrip_test()
+        public void SelectTrip_test_post()
         {
             var ticket = new RepositoryModelTicket()
             {
                 Id = 1,
-                FromStation = "Frastasjon",
-                ToStation = "TilStasjon",
+                FromStation = "Oslo S",
+                ToStation = "Lillestrøm",
                 ValidFromDate = "12.12.20",
                 ValidFromTime = "10:30",
                 Price = 100,
                 CustomerGivenName = "Fornavn",
                 CustomerLastName = "Etternavn",
-                CustomerNumber = "number",
-                PassengerType = "Type"
+                CustomerNumber = "99999999",
+                PassengerType = "Admin"
             };
             var resultat = (RedirectToActionResult)controller.SelectTrip(ticket);
-            Assert.AreEqual(resultat.ActionName, "");
-            Assert.AreEqual(resultat.RouteValues.Values.First(), "List");
+            Assert.AreEqual(resultat.ActionName, "Ticket");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), 1);
         }
 
         [Test]
-        public void TestTest()
+        public void TestAutocomplete()
         {
-            string s1 = "Oslo S";
-            string s2 = "Oslo S";
-            Assert.AreEqual(s1, s2);
+            string input = "Oslo S";
+            JsonResult json = controller.Autocomplete(input);
+            Assert.IsNotNull(json);
+        }
+
+        [Test]
+        public void TestAutocompleteTo()
+        {
+            string input = "Oslo S";
+            string from = "Lillestrøm";
+            JsonResult json = controller.AutocompleteTo(input, from);
+            Assert.IsNotNull(json);
+        }
+
+        [Test]
+        public void GetStationsFromNamesTest()
+        {
+            string toStation = "Oslo S";
+            string fromStation = "Lillestrøm";
+            List<DbStation> list = controller.GetStationsFromNames(toStation, fromStation);
+            Assert.AreEqual(toStation, list[0].StationName);
+            Assert.AreEqual(fromStation, list[1].StationName);
+        }
+
+        [Test]
+        public void test_getPassengertypes()
+        {
+            JsonResult json = controller.GetPassengerTypes();
+            Assert.IsNotNull(json);
         }
     }
 }

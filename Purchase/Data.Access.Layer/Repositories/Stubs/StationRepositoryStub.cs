@@ -69,10 +69,15 @@ namespace Data.Access.Layer.Repositories.Stubs
             {
                 Id = 1,
                 NumberOnLine = 1,
-                StationName = "StasjonsNavn1"
+                StationName = toStation
             };
-            list.Add(dbStation);
-            list.Add(dbStation);
+            var dbStation2 = new DbStation()
+            {
+                Id = 1,
+                NumberOnLine = 1,
+                StationName = fromStation
+            };
+            list.Add(dbStation2);
             list.Add(dbStation);
 
             return list;
@@ -80,12 +85,21 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public List<string> ServiceAutocomplete(string input)
         {
-            throw new NotImplementedException();
+            if (input == "") return null;
+            var liste = new List<string>();
+            liste.Add(input);
+            return liste;
         }
 
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {
-            throw new NotImplementedException();
+            if (input == "") return null;
+            var liste = new List<string>();
+            liste.Add(input);
+            liste.Add(fromStation);
+            liste.Add(fromStation);
+            liste.Add(input);
+            return liste;
         }
 
         public bool UpdateStation(int id, RepositoryModelStation stationIn)
@@ -96,12 +110,12 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public bool AddStation(RepositoryModelStation station)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool DeleteStation(int id)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
