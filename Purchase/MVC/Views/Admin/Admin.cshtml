@@ -16,56 +16,55 @@
     </thead>
 
     <tbody>
-    <tr>
-        <th></th>
-        <th>
-            <h4>@Html.ActionLink("Legg til Avgang", "AddDeparture", "Admin", null,
-                    new {@class = "btn btn-primary"})</h4>
-        </th>
-
-    </tr>
-    @for (var i = 0; i < Model.Departures.Count; i++)
-    {
         <tr>
-            <th class="w-25">
-                @if (i < @Model.Lines.Count)
-                {
-                    <div class="ticket">
-                        <div>
-                            <label>ID: </label>
-                            @Html.DisplayFor(model => model.Lines[i].Id)
-                            <br/>
-                            <label>Stasjons navn: </label>
-                            @Html.DisplayFor(model => model.Lines[i].Name)
-                            <br/>
-                            @Html.ActionLink("Endre Linje", "EditLine", "Admin",
-                                new {id = Model.Lines[i].Id}, new {@class = "btn btn-primary"})
-                        </div>
-                    </div>
-                }
-            </th>
-
+            <th></th>
             <th>
-                @if (i < @Model.Departures.Count)
-                {
-                    <div class="ticket">
-                        <label>ID: </label>
-                        @Html.DisplayFor(model => model.Departures[i].Id)
-                        <br/>
-                        <label>Avreise: </label>
-                        @Html.DisplayFor(model => model.Departures[i].DepartureTime)
-                        <br/>
-
-                        @Html.ActionLink("Endre Avreise", "EditDeparture", "Admin",
-                            new {id = Model.Departures[i].Id}, new {@class = "btn btn-primary"})
-
-                        @Html.ActionLink("Slett Avgang", "DeleteDeparture", "Admin",
-                            new {id = Model.Departures[i].Id}, new {@class = "btn btn-primary"})
-
-                    </div>
-                }
+                <h4>
+                    @Html.ActionLink("Legg til Avgang", "AddDeparture", "Admin", null,
+                    new { @class = "btn btn-success" })
+                </h4>
             </th>
         </tr>
-    }
+        @for (var i = 0; i < Model.Departures.Count; i++)
+        {
+            <tr>
+                <th class="w-25">
+                    @if (i < @Model.Lines.Count)
+                    {
+                        <div class="adminpanel">
+                            <div>
+                                <label>ID: </label>
+                                @Html.DisplayFor(model => model.Lines[i].Id)
+                                <br />
+                                <label>Stasjons navn: </label>
+                                @Html.DisplayFor(model => model.Lines[i].Name)
+                                <br />
+                                @Html.ActionLink("Endre Linje", "EditLine", "Admin",
+                                    new { id = Model.Lines[i].Id }, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    }
+                </th>
+
+                <th>
+                    @if (i < @Model.Departures.Count)
+                    {
+                        <div class="adminpanel">
+                            <label>ID: </label>
+                            @Html.DisplayFor(model => model.Departures[i].Id)
+                            <br />
+                            <label>Avreise: </label>
+                            @Html.DisplayFor(model => model.Departures[i].DepartureTime)
+                            <br />
+
+                            @Html.ActionLink("Endre Avreise", "EditDeparture", "Admin",
+                                new { id = Model.Departures[i].Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Slett Avgang", "DeleteDeparture", "Admin",
+                                new { id = Model.Departures[i].Id }, new { @class = "btn btn-danger" })
+                        </div>
+                    }
+                </th>
+            </tr>
+        }
     </tbody>
 </table>
