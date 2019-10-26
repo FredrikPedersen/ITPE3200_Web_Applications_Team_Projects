@@ -80,3 +80,8 @@ footer.page-footer a {
 footer.page-footer a:hover {
     color: #FBFBF4;
 }
+
+.modal-content {
+    padding-right: 1em;
+    padding-top: 1em;
+}
