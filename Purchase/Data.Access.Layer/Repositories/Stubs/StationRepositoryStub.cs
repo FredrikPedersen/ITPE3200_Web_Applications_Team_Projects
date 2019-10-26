@@ -96,12 +96,12 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public bool AddStation(RepositoryModelStation station)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool DeleteStation(int id)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

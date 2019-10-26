@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data.Access.Layer.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Model.DBModels;
 using Model.RepositoryModels;
+using Utilities.Logging;
 
 namespace Data.Access.Layer.Repositories.Repository
 {
@@ -54,9 +56,18 @@ namespace Data.Access.Layer.Repositories.Repository
         {
             var line = GetLineById(trainLineIn.Id);
             line.Stations = trainLineIn.Stations;
-            _databaseContext.TrainLines.Update(line);
-            _databaseContext.SaveChanges();
-            return true;
+
+            try
+            {
+                _databaseContext.TrainLines.Update(line);
+                _databaseContext.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                ErrorLogger.LogError(ex);
+                return false;
+            }
         }
     }
 }

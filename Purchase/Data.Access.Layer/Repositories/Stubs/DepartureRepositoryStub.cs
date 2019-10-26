@@ -25,12 +25,12 @@ namespace Data.Access.Layer.Repositories.Stubs
 
         public bool AddDeparture(RepositoryModelDepartures departure)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool DeleteDeparture(int id)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public List<RepositoryModelDepartures> GetAllDepartures()
