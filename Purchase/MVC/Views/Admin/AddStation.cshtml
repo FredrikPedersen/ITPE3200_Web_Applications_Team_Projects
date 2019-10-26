@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 
-@using (Html.BeginForm("EditStation", "Admin", FormMethod.Post, new
+@using (Html.BeginForm("AddStation", "Admin", FormMethod.Post, new
 {
     enctype = "multipart/form-data"
 }))
@@ -56,13 +56,12 @@
               
             </div>
         </div>
-        @Html.HiddenFor(model => model.Station.Id)
         @Html.HiddenFor(model => model.Line.Id)
         @Html.HiddenFor(model => model.Line.Stations)
         @Html.HiddenFor(model => model.Line.Name)
         <div class="form-group">
             <div class="col-md-10">
-                <button type="submit" class="btn btn-success" id="btn-submit">Lagre <span class="glyphicon glyphicon-ok"></span></button>
+                <button type="submit" class="btn btn-success" id="btn-submit">Lagre<span class="glyphicon glyphicon-ok"></span></button>
             </div>
         </div>
     </div>

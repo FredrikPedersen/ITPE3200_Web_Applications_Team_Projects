@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Access.Layer.Repositories;
 
 namespace Unit.Testing
 {
@@ -16,7 +17,8 @@ namespace Unit.Testing
         public void SetUp()
         {
             controller = new AdminController(new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()),
-                new TicketBLL(new TicketRepositoryStub()), new UserBLL(new UserRepositoryStub()), new PassengerTypeBLL(new PassengerTypeRepositoryStub()));
+                new TicketBLL(new TicketRepositoryStub()), new UserBLL(new UserRepositoryStub()), new PassengerTypeBLL(new PassengerTypeRepositoryStub()),
+                new LineBLL(new LineRepositoryStub()));
         }
 
         [Test]

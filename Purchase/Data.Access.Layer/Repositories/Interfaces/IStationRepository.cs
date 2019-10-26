@@ -16,6 +16,11 @@ namespace Data.Access.Layer.Repositories.Interfaces
 
         bool UpdateStation(int id, RepositoryModelStation stationIn);
 
+        bool AddStation(RepositoryModelStation station);
+
+        bool DeleteStation(int id);
+
+        //TODO ActionResult?
         List<string> ServiceAutocomplete(string input);
 
         List<string> ServiceAutocompleteTo(string input, string fromStation);

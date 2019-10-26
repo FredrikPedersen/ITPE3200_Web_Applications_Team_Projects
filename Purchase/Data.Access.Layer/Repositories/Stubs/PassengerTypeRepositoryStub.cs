@@ -37,6 +37,7 @@ namespace Data.Access.Layer.Repositories.Stubs
             list.Add(repo);
             return list;
         }
+        
 
         public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)
         {
@@ -54,6 +55,16 @@ namespace Data.Access.Layer.Repositories.Stubs
         {
             if (id == 0) return false;
             return pt != null;
+        }
+
+        public bool AddPT(RepositoryModelPassengerType passengerType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePT(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,6 +12,9 @@ namespace Data.Access.Layer.Repositories.Interfaces
 
         List<RepositoryModelPassengerType> GetAllPt();
 
+        bool AddPT(RepositoryModelPassengerType passengerType);
+
+        bool DeletePT(int id);
         bool UpdatePt(int id, RepositoryModelPassengerType pt);
     }
 }

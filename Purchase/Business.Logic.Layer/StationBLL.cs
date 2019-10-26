@@ -47,5 +47,15 @@ namespace Business.Logic.Layer
         {
             return _stationRepository.ServiceAutocompleteTo(input, fromStation);
         }
+
+        public bool AddStation(RepositoryModelStation station)
+        {
+            return _stationRepository.AddStation(station);
+        }
+
+        public bool DeleteStation(int id)
+        {
+            return _stationRepository.DeleteStation(id);
+        }
     }
 }

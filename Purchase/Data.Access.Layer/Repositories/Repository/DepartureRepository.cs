@@ -108,5 +108,13 @@ namespace Data.Access.Layer.Repositories.Repository
             _databaseContext.SaveChanges();
             return true;
         }
+
+        public bool DeleteDeparture(int id)
+        {
+            DbDepartures departure = _databaseContext.Departures.FirstOrDefault(d => d.Id == id);
+            _databaseContext.Departures.Remove(departure);
+            _databaseContext.SaveChanges();
+            return true;
+        }
     }
 }

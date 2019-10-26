@@ -1,0 +1,57 @@
+﻿@model Model.ViewModels.AdminModel
+
+@{
+    Layout = "_Layout";
+}
+
+
+
+@Html.AntiForgeryToken()
+
+@Html.ActionLink("Tilbake", "Admin", "Admin", new {},new {@class = "btn btn-primary"})
+
+
+<table class="table">
+    <thead>
+    <th scope="col">Stasjoner</th>
+    </thead>
+    <tr>
+        <th>
+            @using (Html.BeginForm("AddStation", "Admin", FormMethod.Post, new
+            {
+                enctype = "multipart/form-data"
+            }))
+            {
+                @Html.ActionLink("Add Stasjon", "AddStation", "Admin", new {id = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
+            }
+        </th>
+    </tr>
+    <tbody>
+    @foreach (var station in Model.Line.Stations)
+    {
+        @using (Html.BeginForm("EditStation", "Admin", new
+        {
+            enctype = "multipart/form-data"
+        }))
+        {
+            <tr>
+                <th class="w-25">
+
+                    <div class="ticket">
+                        <div>
+                            <label>Stasjons navn: </label>
+                            @Html.DisplayFor(model => station.StationName)
+                            <br/>
+                            @Html.ActionLink("Endre Stasjon", "EditStation", "Admin",
+                                new {id = station.Id, line = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
+                            @Html.ActionLink("Slett Stasjon", "DeleteStation", "Admin",
+                                new {id = station.Id}, new {@class = "btn btn-danger"})
+                        </div>
+                    </div>
+
+                </th>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

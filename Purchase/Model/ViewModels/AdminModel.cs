@@ -15,11 +15,11 @@ namespace Model.ViewModels
         public List<RepositoryModelPassengerType> Types  { get; set; }
         public RepositoryModelPassengerType Type  { get; set; }
         
-        public List<DbTrainLine> Lines  { get; set; }
-        public DbTrainLine Line  { get; set; }
-        
         public List<RepositoryModelDepartures> Departures { get; set; }
         public RepositoryModelDepartures Departure  { get; set; }
+        
+        public List<DbTrainLine> Lines { get; set; }
+        public DbTrainLine Line { get; set; }
         
     }
 }

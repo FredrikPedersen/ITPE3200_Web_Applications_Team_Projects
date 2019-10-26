@@ -37,5 +37,15 @@ namespace Business.Logic.Layer
         {
             return _passengerTypeRepository.UpdatePt(id, pt);
         }
+
+        public bool AddPT(RepositoryModelPassengerType pt)
+        {
+            return _passengerTypeRepository.AddPT(pt);
+        }
+
+        public bool DeletePT(int id)
+        {
+            return _passengerTypeRepository.DeletePT(id);
+        }
     }
 }

@@ -93,5 +93,15 @@ namespace Data.Access.Layer.Repositories.Stubs
             if (id == 0) return false;
             return stationIn != null;
         }
+
+        public bool AddStation(RepositoryModelStation station)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteStation(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
