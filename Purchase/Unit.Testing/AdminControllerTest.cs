@@ -75,7 +75,7 @@ namespace Unit.Testing
                 Line = _controller._lineBll.GetLineById(id)
             };
             
-            var viewResult = (ViewResult) _controller.EditLine(id);
+            var viewResult = (ViewResult) _controller.AddStation(id);
             var resultModel = (AdminModel) viewResult.Model;
 
             Assert.AreEqual(viewResult.ViewName, null);
@@ -86,10 +86,9 @@ namespace Unit.Testing
         [Test]
         public void AddStation_Post()
         {
-            var id = 123;
             var model = new AdminModel
             {
-                Line = _controller._lineBll.GetLineById(id),
+                Line = _controller._lineBll.GetLineById(123),
                 Station = _controller._stationBll.GetStationById(1)
             };
             
@@ -97,6 +96,26 @@ namespace Unit.Testing
             
             Assert.AreEqual(viewResult.ViewName, null);
 
+        }
+
+        [Test]
+        public void show_EditStation_View()
+        {
+            var viewResult = (ViewResult) _controller.EditStation(1,1);
+            Assert.AreEqual(viewResult.ViewName, null);
+
+        }
+
+        [Test]
+        public void EditStation_Post()
+        {
+            var model = new AdminModel
+            {
+                Line = _controller._lineBll.GetLineById(123),
+                Station = _controller._stationBll.GetStationById(1)
+            };
+            var viewResult = (ViewResult) _controller.EditStation(model);
+            Assert.AreEqual(viewResult.ViewName, null);
         }
 
         [Test]
@@ -122,9 +141,18 @@ namespace Unit.Testing
         }
 
         [Test]
-        public void EditPassengerType_post_Ok()
+        public void EditPassengerType_post_Ok_id1()
         {
             var type = _controller._passengerTypeBll.GetPassengerTypeTypeById(1);
+            var viewResult = (RedirectToActionResult) _controller.EditPassengerType(type);
+            Assert.AreEqual(viewResult.ActionName, "Admin");
+            
+        }
+
+        [Test]
+        public void EditPassengerType_post_Ok_id0()
+        {
+            var type = new RepositoryModelPassengerType(){Id = 0,PriceMultiplier = 3};
             var viewResult = (RedirectToActionResult) _controller.EditPassengerType(type);
             Assert.AreEqual(viewResult.ActionName, "Admin");
             
@@ -137,7 +165,6 @@ namespace Unit.Testing
             _controller.ViewData.ModelState.AddModelError("Type", "No type name");
             var viewResult = (ViewResult) _controller.EditPassengerType(type);
             Assert.AreEqual(viewResult.ViewName, null);
-            
         }
 
         [Test]
@@ -163,9 +190,17 @@ namespace Unit.Testing
         }
         
         [Test]
-        public void EditDeparture_post_Ok()
+        public void EditDeparture_post_Ok_id1()
         {
             var type = _controller._departureBll.GetDepartureById(1);
+            var viewResult = (RedirectToActionResult) _controller.EditDeparture(type);
+            Assert.AreEqual(viewResult.ActionName, "Admin");
+            
+        }
+        [Test]
+        public void EditDeparture_post_Ok_id0()
+        {
+            var type = new RepositoryModelDepartures() {Id = 0, DepartureTime = "15:00"};
             var viewResult = (RedirectToActionResult) _controller.EditDeparture(type);
             Assert.AreEqual(viewResult.ActionName, "Admin");
             
