@@ -2,13 +2,12 @@
 
 namespace Model.DBModels
 {
-    [TrackChanges]
     public class DbDepartures
     {
         [Key]
         public int Id { get; set; }
 
         [Display(Name = "Avgangstid")]
-        public string departureTime { get; set; }
+        public string DepartureTime { get; set; }
     }
 }

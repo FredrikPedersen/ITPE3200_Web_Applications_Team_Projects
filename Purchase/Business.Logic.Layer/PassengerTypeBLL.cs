@@ -11,17 +11,11 @@ namespace Business.Logic.Layer
 {
     public class PassengerTypeBLL
     {
-        private readonly IPassengerTypeRepository _passengerTypeRepositoryStub;
-        private readonly PassengerTypeRepository _passengerTypeRepository;
-
-        public PassengerTypeBLL(PassengerTypeRepository passengerTypeRepository)
-        {
-            _passengerTypeRepository = passengerTypeRepository;
-        }
+        private readonly IPassengerTypeRepository _passengerTypeRepository;
 
         public PassengerTypeBLL(IPassengerTypeRepository passengerTypeRepository)
         {
-            _passengerTypeRepositoryStub = passengerTypeRepository;
+            _passengerTypeRepository = passengerTypeRepository;
         }
 
         public RepositoryModelPassengerType GetPassengerTypeTypeById(int id)
@@ -29,19 +23,19 @@ namespace Business.Logic.Layer
             return _passengerTypeRepository.GetPassengerTypeTypeById(id);
         }
 
-        public RepositoryModelPassengerType DbToServicePT(DbPassengerType dbPassengerType)
+        public RepositoryModelPassengerType DbToServicePt(DbPassengerType dbPassengerType)
         {
-            return _passengerTypeRepository.DbToServicePT(dbPassengerType);
+            return _passengerTypeRepository.DbToServicePt(dbPassengerType);
         }
 
-        public List<RepositoryModelPassengerType> GetAllPT()
+        public List<RepositoryModelPassengerType> GetAllPt()
         {
-            return _passengerTypeRepository.GetAllPT();
+            return _passengerTypeRepository.GetAllPt();
         }
 
-        public bool UpdatePT(int id, RepositoryModelPassengerType pt)
+        public bool UpdatePt(int id, RepositoryModelPassengerType pt)
         {
-            return _passengerTypeRepository.UpdatePT(id, pt);
+            return _passengerTypeRepository.UpdatePt(id, pt);
         }
 
         public bool AddPT(RepositoryModelPassengerType pt)

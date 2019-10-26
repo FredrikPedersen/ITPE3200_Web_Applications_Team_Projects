@@ -8,7 +8,6 @@ namespace Model.RepositoryModels
         public int Id { get; set; }
 
         [Display(Name = "Avgangstid")]
-        //[DataType(DataType.Time)]
-        public string departureTime { get; set; }
+        public string DepartureTime { get; set; }
     }
 }

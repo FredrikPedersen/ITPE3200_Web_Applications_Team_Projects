@@ -11,17 +11,11 @@ namespace Business.Logic.Layer
 {
     public class StationBLL
     {
-        private readonly IStationRepository _stationRepositoryStub;
-        private readonly StationRepository _stationRepository;
-
-        public StationBLL(StationRepository stationRepository)
-        {
-            _stationRepository = stationRepository;
-        }
+        private readonly IStationRepository _stationRepository;
 
         public StationBLL(IStationRepository stationRepository)
         {
-            _stationRepositoryStub = stationRepository;
+            _stationRepository = stationRepository;
         }
 
         public RepositoryModelStation GetStationById(int id)

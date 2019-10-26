@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Data.Access.Layer.Repositories.Interfaces;
 using Model.DBModels;
 using Model.RepositoryModels;
 
 namespace Data.Access.Layer.Repositories.Repository
 {
-    public class StationRepository
+    public class StationRepository : IStationRepository
     {
         private readonly DatabaseContext _databaseContext;
 
@@ -31,7 +32,7 @@ namespace Data.Access.Layer.Repositories.Repository
             }).ToList();
         }
 
-        private RepositoryModelStation DbToServiceStation(DbStation dbStation)
+        public RepositoryModelStation DbToServiceStation(DbStation dbStation)
         {
             return new RepositoryModelStation
             {
@@ -44,7 +45,7 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public List<DbStation> GetStationsFromNames(string fromStation, string toStation)
         {
-            List<DbStation> stations = new List<DbStation>();
+            var stations = new List<DbStation>();
             DbStation fromStationObject = null;
             DbStation toStationObject = null;
 
@@ -63,6 +64,7 @@ namespace Data.Access.Layer.Repositories.Repository
         }
 
         //Method that gets information for the "From" autocomplete in the Index View
+        //TODO MOVE THIS TO BLL
         [HttpPost]
         public List<string> ServiceAutocomplete(string input)
         {
@@ -74,6 +76,7 @@ namespace Data.Access.Layer.Repositories.Repository
         }
 
         //Method that gets information for the "To" autocomplete in the Index View depending on content of the "From" text box
+        //TODO MOVE THIS TO BLL
         [HttpPost]
         public List<string> ServiceAutocompleteTo(string input, string fromStation)
         {
@@ -99,7 +102,7 @@ namespace Data.Access.Layer.Repositories.Repository
 
         public int UpdateStation(int id, RepositoryModelStation stationIn)
         {
-            DbStation station = _databaseContext.Stations.Find(id);
+            var station = _databaseContext.Stations.Find(id);
 
             station.StationName = stationIn.StationName;
             _databaseContext.Stations.Update(station);

@@ -11,17 +11,11 @@ namespace Business.Logic.Layer
 {
     public class UserBLL
     {
-        private readonly IUserRepository _userRepositoryStub;
-        private readonly UserRepository _userRepository;
-
-        public UserBLL(UserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        private readonly IUserRepository _userRepository;
 
         public UserBLL(IUserRepository userRepository)
         {
-            _userRepositoryStub = userRepository;
+            _userRepository = userRepository;
         }
 
         public void AddUser(DbUser user)

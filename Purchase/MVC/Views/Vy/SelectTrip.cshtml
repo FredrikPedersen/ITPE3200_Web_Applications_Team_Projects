@@ -25,8 +25,8 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="col-6">
-                            @Html.DisplayFor(modelItem => item.departureTime)
-                            @Html.Hidden("ValidFromTime", item.departureTime)
+                            @Html.DisplayFor(modelItem => item.DepartureTime)
+                            @Html.Hidden("ValidFromTime", item.DepartureTime)
                             @Html.Hidden("FromStation", (object)ViewBag.ticket.FromStation)
                             @Html.Hidden("ToStation", (object)ViewBag.ticket.ToStation)
                             @Html.Hidden("ValidFromDate", (object)ViewBag.ticket.ValidFromDate)
