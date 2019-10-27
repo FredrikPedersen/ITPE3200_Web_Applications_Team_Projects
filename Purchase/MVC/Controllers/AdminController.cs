@@ -89,7 +89,15 @@ namespace MVC.Controllers
             _lineBll.UpdateLine(lineIn);
 
             ViewBag.line = lineIn;
-            return View();
+            
+            var model = new AdminModel()
+            {
+                Line = lineIn
+            };
+            
+            ViewBag.line = lineIn;
+            
+            return View("EditLine", model);
         }
         
 
