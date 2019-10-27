@@ -15,23 +15,16 @@ namespace MVC.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly StationRepository _stationService;
-        private readonly TicketRepository _tickedService;
-        private readonly DepartureRepository _departureService;
-        private readonly PassengerTypeRepository _passengerTypeService;
+        
         public readonly DepartureBLL _departureBll;
         public readonly StationBLL _stationBll;
-        public readonly TicketBLL _ticketBll;
-        public readonly UserBLL _userBll;
         public readonly LineBLL _lineBll;
 
 
-        public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll, LineBLL lineBll)
+        public AdminController(DepartureBLL departureBll, StationBLL stationBll, LineBLL lineBll)
         {
             _departureBll = departureBll;
             _stationBll = stationBll;
-            _ticketBll = ticketBll;
-            _userBll = userBll;
             _lineBll = lineBll;
         }
 
