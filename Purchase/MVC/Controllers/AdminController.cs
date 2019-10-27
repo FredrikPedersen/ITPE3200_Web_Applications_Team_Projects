@@ -48,6 +48,7 @@ namespace MVC.Controllers
                 Line = _lineBll.GetLineById(id)
             };
             ViewBag.line = _lineBll.GetLineById(id);
+            ViewBag.added = "false";
             return View(model);
         }
 
@@ -96,7 +97,7 @@ namespace MVC.Controllers
             };
             
             ViewBag.line = lineIn;
-            
+            ViewBag.added = "true";
             return View("EditLine", model);
         }
         
@@ -162,6 +163,7 @@ namespace MVC.Controllers
             
             ViewBag.line = _lineBll.GetLineById(line);
             
+            ViewBag.added = "false";
             return View("EditLine", model);
         }
 

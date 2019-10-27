@@ -3,6 +3,16 @@
 @{
     Layout = "_Layout";
 }
+@section scripts {
+    @if (ViewBag.added.Equals("true"))
+    {
+        <script type="text/javascript">
+        window.scrollTo(1, document.body.scrollHeight)
+        </script>
+    }
+   
+
+}
 
 
 

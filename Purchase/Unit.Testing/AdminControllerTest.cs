@@ -91,7 +91,7 @@ namespace Unit.Testing
             
             var viewResult = (ViewResult) _controller.AddStation(model);
             
-            Assert.AreEqual(viewResult.ViewName, null);
+            Assert.AreEqual(viewResult.ViewName, "EditLine");
 
         }
 
