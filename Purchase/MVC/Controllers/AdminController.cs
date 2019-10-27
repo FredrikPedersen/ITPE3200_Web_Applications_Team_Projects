@@ -34,7 +34,6 @@ namespace MVC.Controllers
             var model = new AdminModel()
             {
                 Stations = _stationBll.GetAllStations(),
-                //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureBll.GetAllDepartures(),
                 Lines = _lineBll.GetAllLines()
             };
@@ -126,7 +125,7 @@ namespace MVC.Controllers
                     TrainLine = lineIn
                 };
             
-                var result = _stationBll.UpdateStation(stationIn.Id, stationIn);
+                _stationBll.UpdateStation(stationIn.Id, stationIn);
                 
                 
                 for (int i = 0; i < lineIn.Stations.Count; i++)
@@ -144,10 +143,18 @@ namespace MVC.Controllers
         }
         
         
-        public ActionResult DeleteStation(int id)
+        public ActionResult DeleteStation(int id, int line)
         {
             _stationBll.DeleteStation(id);
-            return RedirectToAction("Admin", "Admin");
+            
+            var model = new AdminModel()
+            {
+                Line = _lineBll.GetLineById(line)
+            };
+            
+            ViewBag.line = _lineBll.GetLineById(line);
+            
+            return View("EditLine", model);
         }
 
         //ADD
@@ -168,13 +175,11 @@ namespace MVC.Controllers
         public ActionResult EditDeparture(RepositoryModelDepartures departure)
         {
             if (!ModelState.IsValid) return View();
-            
             if (departure.Id != 0)
             {
                 _departureBll.UpdateDeparture(departure.Id, departure);
                 return RedirectToAction("Admin", "Admin");
             }
-
             _departureBll.AddDeparture(departure);
             return RedirectToAction("Admin", "Admin");
         }

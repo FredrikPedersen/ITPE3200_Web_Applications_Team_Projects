@@ -118,8 +118,8 @@ namespace Unit.Testing
         [Test]
         public void DeleteStation()
         {
-            var viewResult = (RedirectToActionResult) _controller.DeleteStation(1);
-            Assert.AreEqual(viewResult.ActionName, "Admin");
+            var viewResult = (ViewResult) _controller.DeleteStation(1,123);
+            Assert.AreEqual(viewResult.ViewName, "EditLine");
         }
 
         [Test]

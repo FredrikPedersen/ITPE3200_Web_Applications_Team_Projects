@@ -45,7 +45,7 @@
                             @Html.ActionLink("Endre Stasjon", "EditStation", "Admin",
                                 new {id = station.Id, line = @ViewBag.line.Id}, new {@class = "btn btn-primary"})
                             @Html.ActionLink("Slett Stasjon", "DeleteStation", "Admin",
-                                new {id = station.Id}, new {@class = "btn btn-danger"})
+                                new {id = station.Id, line = @ViewBag.line.Id}, new {@class = "btn btn-danger"})
                         </div>
                     </div>
 
