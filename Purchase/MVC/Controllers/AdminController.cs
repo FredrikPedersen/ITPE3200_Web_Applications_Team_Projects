@@ -15,23 +15,16 @@ namespace MVC.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly StationRepository _stationService;
-        private readonly TicketRepository _tickedService;
-        private readonly DepartureRepository _departureService;
-        private readonly PassengerTypeRepository _passengerTypeService;
+        
         public readonly DepartureBLL _departureBll;
         public readonly StationBLL _stationBll;
-        public readonly TicketBLL _ticketBll;
-        public readonly UserBLL _userBll;
         public readonly LineBLL _lineBll;
 
 
-        public AdminController(DepartureBLL departureBll, StationBLL stationBll, TicketBLL ticketBll, UserBLL userBll, LineBLL lineBll)
+        public AdminController(DepartureBLL departureBll, StationBLL stationBll, LineBLL lineBll)
         {
             _departureBll = departureBll;
             _stationBll = stationBll;
-            _ticketBll = ticketBll;
-            _userBll = userBll;
             _lineBll = lineBll;
         }
 
@@ -41,7 +34,6 @@ namespace MVC.Controllers
             var model = new AdminModel()
             {
                 Stations = _stationBll.GetAllStations(),
-                //Tickets = _tickedService.GetAllTickets(),
                 Departures = _departureBll.GetAllDepartures(),
                 Lines = _lineBll.GetAllLines()
             };
@@ -56,6 +48,7 @@ namespace MVC.Controllers
                 Line = _lineBll.GetLineById(id)
             };
             ViewBag.line = _lineBll.GetLineById(id);
+            ViewBag.added = "false";
             return View(model);
         }
 
@@ -97,7 +90,15 @@ namespace MVC.Controllers
             _lineBll.UpdateLine(lineIn);
 
             ViewBag.line = lineIn;
-            return View();
+            
+            var model = new AdminModel()
+            {
+                Line = lineIn
+            };
+            
+            ViewBag.line = lineIn;
+            ViewBag.added = "true";
+            return View("EditLine", model);
         }
         
 
@@ -133,7 +134,7 @@ namespace MVC.Controllers
                     TrainLine = lineIn
                 };
             
-                var result = _stationBll.UpdateStation(stationIn.Id, stationIn);
+                _stationBll.UpdateStation(stationIn.Id, stationIn);
                 
                 
                 for (int i = 0; i < lineIn.Stations.Count; i++)
@@ -151,10 +152,19 @@ namespace MVC.Controllers
         }
         
         
-        public ActionResult DeleteStation(int id)
+        public ActionResult DeleteStation(int id, int line)
         {
             _stationBll.DeleteStation(id);
-            return RedirectToAction("Admin", "Admin");
+            
+            var model = new AdminModel()
+            {
+                Line = _lineBll.GetLineById(line)
+            };
+            
+            ViewBag.line = _lineBll.GetLineById(line);
+            
+            ViewBag.added = "false";
+            return View("EditLine", model);
         }
 
         //ADD
@@ -175,13 +185,11 @@ namespace MVC.Controllers
         public ActionResult EditDeparture(RepositoryModelDepartures departure)
         {
             if (!ModelState.IsValid) return View();
-            
             if (departure.Id != 0)
             {
                 _departureBll.UpdateDeparture(departure.Id, departure);
                 return RedirectToAction("Admin", "Admin");
             }
-
             _departureBll.AddDeparture(departure);
             return RedirectToAction("Admin", "Admin");
         }

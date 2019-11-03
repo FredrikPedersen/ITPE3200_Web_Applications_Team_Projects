@@ -21,7 +21,6 @@ namespace Unit.Testing
         public void SetUp()
         {
             _controller = new AdminController(new DepartureBLL(new DepartureRepositoryStub()), new StationBLL(new StationRepositoryStub()),
-                new TicketBLL(new TicketRepositoryStub()), new UserBLL(new UserRepositoryStub()),
                 new LineBLL(new LineRepositoryStub()));
         }
 
@@ -92,7 +91,7 @@ namespace Unit.Testing
             
             var viewResult = (ViewResult) _controller.AddStation(model);
             
-            Assert.AreEqual(viewResult.ViewName, null);
+            Assert.AreEqual(viewResult.ViewName, "EditLine");
 
         }
 
@@ -119,8 +118,8 @@ namespace Unit.Testing
         [Test]
         public void DeleteStation()
         {
-            var viewResult = (RedirectToActionResult) _controller.DeleteStation(1);
-            Assert.AreEqual(viewResult.ActionName, "Admin");
+            var viewResult = (ViewResult) _controller.DeleteStation(1,123);
+            Assert.AreEqual(viewResult.ViewName, "EditLine");
         }
 
         [Test]
